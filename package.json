@@ -1,0 +1,33 @@
+{
+  "name": "zoom-image",
+  "private": true,
+  "repository": {
+    "type": "git"
+  },
+  "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "packages": "pnpm --filter=./packages/** -r",
+    "build-fast": "pnpm packages -- build-fast",
+    "build": "pnpm packages -- build",
+    "vanilla": "pnpm --filter \"./examples/vanilla-ts\"",
+    "vue": "pnpm --filter \"./examples/vue-ts\"",
+    "start-vanilla": "pnpm vanilla dev",
+    "start-vue": "pnpm vue dev",
+    "typecheck": "pnpm packages -- typecheck",
+    "prettier": "prettier --check **/*",
+    "prettier-fix": "prettier --write **/*",
+    "lint": "eslint packages --ext .ts"
+  },
+  "dependencies": {
+    "eslint": "8.36.0",
+    "eslint-config-prettier": "8.7.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-prettier": "4.2.1",
+    "prettier": "2.8.5",
+    "tsup": "6.7.0",
+    "tsx": "3.12.5",
+    "ts-morph": "^18.0.0",
+    "typescript": "5.0.2"
+  }
+}
