@@ -206,9 +206,13 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
     window.removeEventListener("scroll", handleScroll)
 
     container.removeChild(store.zoomLens)
-    store.zoomContainer.removeChild(store.zoomedImg)
 
-    return store
+    if (finalOptions.zoomTarget) {
+      finalOptions.zoomTarget.removeChild(store.zoomedImg)
+      return
+    }
+
+    store.zoomContainer.removeChild(store.zoomedImg)
   }
 }
 
