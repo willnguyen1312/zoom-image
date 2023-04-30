@@ -1,40 +1,19 @@
 type ZoomImageOptions = {
-  width?: number
-  height?: number
   customZoom?: { width: number; height: number }
   zoomImageSource?: string
-  offset?: { x?: number; y?: number }
-  zoomContainer?: HTMLElement
-  zoomStyle?: string
-  zoomLensStyle?: string
-  zoomAreaClass?: string
+  zoomLensClass?: string
   zoomImageClass?: string
 }
 
 type ZoomImageData = {
-  zoomPosition: string
   zoomContainer: HTMLElement
-  sourceImg: {
-    element: HTMLImageElement
-    width: number
-    height: number
-    naturalWidth: number
-    naturalHeight: number
-  }
-  zoomedImgOffset: {
-    vertical: number
-    horizontal: number
-  }
-  zoomedImg: {
-    element: HTMLDivElement
-    width: number
-    height: number
-  }
-  zoomLens: {
-    element: HTMLDivElement
-    width: number
-    height: number
-  }
+  sourceImg: HTMLImageElement
+  zoomedImg: HTMLDivElement
+  zoomLens: HTMLDivElement
+}
+
+function clamp(value: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, value))
 }
 
 function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {}) {
@@ -43,213 +22,121 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
   }
 
   const sourceImgElement = container.querySelector("img")
-
   if (!sourceImgElement) {
     throw new Error("Please place an image inside the container")
   }
 
   const finalOptions: Required<ZoomImageOptions> = {
-    width: options.width || sourceImgElement.width,
-    height: options.height || sourceImgElement.height,
     zoomImageSource: options.zoomImageSource || sourceImgElement.src,
-    offset: options.offset || { y: 0, x: 0 },
-    zoomContainer: options.zoomContainer || container,
-    zoomStyle: options.zoomStyle || "",
-    zoomLensStyle: options.zoomLensStyle || "",
-    zoomAreaClass: options.zoomAreaClass || "__zoom-area",
-    zoomImageClass: options.zoomImageClass || "__zoom-image",
+    zoomLensClass: options.zoomLensClass || "",
+    zoomImageClass: options.zoomImageClass || "",
     customZoom: options.customZoom || { width: 0, height: 0 },
   }
 
-  const div = document.createElement("div")
-  const lensDiv = document.createElement("div")
-
   const data: ZoomImageData = {
-    zoomPosition: "right",
     zoomContainer: container,
-    sourceImg: {
-      element: sourceImgElement,
-      width: 0,
-      height: 0,
-      naturalWidth: 0,
-      naturalHeight: 0,
-    },
-    zoomedImgOffset: {
-      vertical: 0,
-      horizontal: 0,
-    },
-    zoomedImg: {
-      element: container.appendChild(div),
-      width: 0,
-      height: 0,
-    },
-    zoomLens: {
-      element: container.appendChild(lensDiv),
-      width: 0,
-      height: 0,
-    },
+    sourceImg: sourceImgElement,
+    zoomedImg: container.appendChild(document.createElement("div")),
+    zoomLens: container.appendChild(document.createElement("div")),
   }
 
   let scaleX: number
   let scaleY: number
   let offset: { left: number; top: number }
 
-  data.zoomedImgOffset = {
-    vertical: finalOptions.offset && finalOptions.offset.y ? finalOptions.offset.y : 0,
-    horizontal: finalOptions.offset && finalOptions.offset.x ? finalOptions.offset.x : 0,
+  function getOffset(element: HTMLElement) {
+    const elRect = element.getBoundingClientRect()
+    return { left: elRect.left, top: elRect.top }
   }
 
-  data.zoomContainer = finalOptions.zoomContainer ? finalOptions.zoomContainer : container
-  function getOffset(el: HTMLElement) {
-    if (el) {
-      const elRect = el.getBoundingClientRect()
-      return { left: elRect.left, top: elRect.top }
-    }
-    return { left: 0, top: 0 }
+  function getLimitX(value: number) {
+    return sourceImgElement!.width - value
   }
 
-  function leftLimit(min: number) {
-    return finalOptions.width - min
-  }
-
-  function topLimit(min: number) {
-    return finalOptions.height - min
-  }
-
-  function clamp(val: number, min: number, max: number) {
-    if (val < min) {
-      return min
-    }
-
-    if (val > max) {
-      return max
-    }
-
-    return val
-  }
-
-  function getPosition(v: number, min: number, max: number) {
-    const value = clamp(v, min, max)
-    return value - min
+  function getLimitY(value: number) {
+    return sourceImgElement!.height - value
   }
 
   function zoomLensLeft(left: number) {
-    const leftMin = data.zoomLens.width / 2
-    return getPosition(left, leftMin, leftLimit(leftMin))
+    const minX = data.zoomLens.clientWidth / 2
+    return clamp(left, minX, getLimitX(minX)) - minX
   }
 
   function zoomLensTop(top: number) {
-    const topMin = data.zoomLens.height / 2
-    return getPosition(top, topMin, topLimit(topMin))
+    const minY = data.zoomLens.clientHeight / 2
+    return clamp(top, minY, getLimitY(minY)) - minY
   }
 
   function setZoomedImgSize() {
+    // Custom zoom available
     if (finalOptions.customZoom.width && finalOptions.customZoom.height) {
-      data.zoomedImg.element.style.width = finalOptions.customZoom.width + "px"
-      data.zoomedImg.element.style.height = finalOptions.customZoom.height + "px"
+      data.zoomedImg.style.width = finalOptions.customZoom.width + "px"
+      data.zoomedImg.style.height = finalOptions.customZoom.height + "px"
       return
     }
 
-    data.zoomedImg.element.style.width = data.sourceImg.element.width + "px"
-    data.zoomedImg.element.style.height = data.sourceImg.element.height + "px"
+    // Default zoom to source image size
+    data.zoomedImg.style.width = data.sourceImg.width + "px"
+    data.zoomedImg.style.height = data.sourceImg.height + "px"
   }
 
-  function onSourceImgLoad() {
+  function onSourceImageREady() {
     setZoomedImgSize()
+    offset = getOffset(data.sourceImg)
+    // Calculate scale and offset
+    scaleX = data.sourceImg.naturalWidth / sourceImgElement!.width
+    scaleY = data.sourceImg.naturalHeight / sourceImgElement!.height
 
-    data.sourceImg.naturalWidth = data.sourceImg.element.naturalWidth
-    data.sourceImg.naturalHeight = data.sourceImg.element.naturalHeight
-    data.zoomedImg.element.style.backgroundSize =
-      data.sourceImg.naturalWidth + "px " + data.sourceImg.naturalHeight + "px"
+    // Setup default zoom image style
+    data.zoomedImg.style.backgroundSize = data.sourceImg.naturalWidth + "px " + data.sourceImg.naturalHeight + "px"
+    data.zoomedImg.style.display = "block"
+    data.zoomedImg.style.display = "none"
 
-    if (finalOptions.zoomStyle) {
-      data.zoomedImg.element.style.cssText += finalOptions.zoomStyle
+    // Setup default zoom lens style
+    data.zoomLens.style.position = "absolute"
+
+    if (!finalOptions.zoomLensClass) {
+      data.zoomLens.style.background = "red"
+      data.zoomLens.style.opacity = "0.4"
+      data.zoomLens.style.cursor = "crosshair"
     }
-    if (finalOptions.zoomLensStyle) {
-      data.zoomLens.element.style.cssText += finalOptions.zoomLensStyle
-    } else {
-      data.zoomLens.element.style.background = "red"
-      data.zoomLens.element.style.opacity = "0.4"
-      data.zoomLens.element.style.cursor = "crosshair"
-    }
-
-    scaleX = data.sourceImg.naturalWidth / finalOptions.width
-    scaleY = data.sourceImg.naturalHeight / finalOptions.height
-    offset = getOffset(data.sourceImg.element)
 
     if (finalOptions.customZoom.width && finalOptions.customZoom.height) {
-      data.zoomLens.width = finalOptions.customZoom.width / scaleX
-      data.zoomLens.height = finalOptions.customZoom.height / scaleY
+      data.zoomLens.style.width = finalOptions.customZoom.width / scaleX + "px"
+      data.zoomLens.style.height = finalOptions.customZoom.height / scaleY + "px"
+      return
     }
 
-    // else read from the zoomedImg
-    else {
-      data.zoomedImg.element.style.display = "block"
-      data.zoomLens.width = data.sourceImg.element.clientWidth / scaleX
-      data.zoomLens.height = data.sourceImg.element.clientHeight / scaleY
-      data.zoomedImg.element.style.display = "none"
-    }
-
-    data.zoomLens.element.style.position = "absolute"
-    data.zoomLens.element.style.width = data.zoomLens.width + "px"
-    data.zoomLens.element.style.height = data.zoomLens.height + "px"
+    data.zoomLens.style.width = data.sourceImg.clientWidth / scaleX + "px"
+    data.zoomLens.style.height = data.sourceImg.clientHeight / scaleY + "px"
   }
 
   function setup() {
-    data.zoomLens.element = container.appendChild(lensDiv)
-    data.zoomLens.element.style.display = "none"
-    data.zoomLens.element.classList.add(finalOptions.zoomAreaClass)
+    data.zoomLens.style.display = "none"
 
-    data.zoomedImg.element = data.zoomContainer.appendChild(div)
-    data.zoomedImg.element.classList.add(finalOptions.zoomImageClass)
-    data.zoomedImg.element.style.backgroundImage = "url('" + finalOptions.zoomImageSource + "')"
-    data.zoomedImg.element.style.backgroundRepeat = "no-repeat"
-    data.zoomedImg.element.style.display = "none"
-
-    switch (data.zoomPosition) {
-      case "left":
-        data.zoomedImg.element.style.position = "absolute"
-        data.zoomedImg.element.style.top = data.zoomedImgOffset.vertical + "px"
-        data.zoomedImg.element.style.left = data.zoomedImgOffset.horizontal - data.zoomedImgOffset.horizontal * 2 + "px"
-        data.zoomedImg.element.style.transform = "translateX(-100%)"
-        break
-
-      case "top":
-        data.zoomedImg.element.style.position = "absolute"
-        data.zoomedImg.element.style.top = data.zoomedImgOffset.vertical - data.zoomedImgOffset.vertical * 2 + "px"
-        data.zoomedImg.element.style.left = "calc(50% + " + data.zoomedImgOffset.horizontal + "px)"
-        data.zoomedImg.element.style.transform = "translate3d(-50%, -100%, 0)"
-        break
-
-      case "bottom":
-        data.zoomedImg.element.style.position = "absolute"
-        data.zoomedImg.element.style.bottom = data.zoomedImgOffset.vertical - data.zoomedImgOffset.vertical * 2 + "px"
-        data.zoomedImg.element.style.left = "calc(50% + " + data.zoomedImgOffset.horizontal + "px)"
-        data.zoomedImg.element.style.transform = "translate3d(-50%, 100%, 0)"
-        break
-
-      case "original":
-        data.zoomedImg.element.style.position = "absolute"
-        data.zoomedImg.element.style.top = "0px"
-        data.zoomedImg.element.style.left = "0px"
-        break
-
-      // Right Position
-      default:
-        data.zoomedImg.element.style.position = "absolute"
-        data.zoomedImg.element.style.top = data.zoomedImgOffset.vertical + "px"
-        data.zoomedImg.element.style.right =
-          data.zoomedImgOffset.horizontal - data.zoomedImgOffset.horizontal * 2 + "px"
-        data.zoomedImg.element.style.transform = "translateX(100%)"
-        break
+    if (finalOptions.zoomLensClass) {
+      data.zoomLens.classList.add(finalOptions.zoomLensClass)
     }
+
+    if (finalOptions.zoomImageClass) {
+      data.zoomedImg.classList.add(finalOptions.zoomImageClass)
+    }
+
+    data.zoomedImg.style.backgroundImage = "url('" + finalOptions.zoomImageSource + "')"
+    data.zoomedImg.style.backgroundRepeat = "no-repeat"
+    data.zoomedImg.style.display = "none"
+
+    data.zoomedImg.style.position = "absolute"
+    data.zoomedImg.style.top = "0px"
+    data.zoomedImg.style.right = "0px"
+    data.zoomedImg.style.transform = "translateX(100%)"
 
     // setup event listeners
     container.addEventListener("pointermove", handlePointerMove, false)
     container.addEventListener("pointerenter", handlePointerEnter, false)
     container.addEventListener("pointerleave", handlePointerLeave, false)
-    data.zoomLens.element.addEventListener("pointerenter", handlePointerEnter, false)
-    data.zoomLens.element.addEventListener("pointerleave", handlePointerLeave, false)
+    data.zoomLens.addEventListener("pointerenter", handlePointerEnter, false)
+    data.zoomLens.addEventListener("pointerleave", handlePointerLeave, false)
     window.addEventListener("scroll", handleScroll, false)
 
     return data
@@ -267,51 +154,46 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
       backgroundTop = offsetX * scaleX
       backgroundRight = offsetY * scaleY
       backgroundPosition = "-" + backgroundTop + "px " + "-" + backgroundRight + "px"
-      data.zoomedImg.element.style.backgroundPosition = backgroundPosition
-      data.zoomLens.element.style.cssText +=
-        "transform:" + "translate(" + offsetX + "px," + offsetY + "px); top: 0; left: 0;"
+      data.zoomedImg.style.backgroundPosition = backgroundPosition
+      data.zoomLens.style.cssText += "transform:" + "translate(" + offsetX + "px," + offsetY + "px); top: 0; left: 0;"
     }
   }
 
   function handlePointerEnter() {
-    data.zoomedImg.element.style.display = "block"
-    data.zoomLens.element.style.display = "block"
+    data.zoomedImg.style.display = "block"
+    data.zoomLens.style.display = "block"
   }
 
   function handlePointerLeave() {
-    // data.zoomedImg.element.style.display = "none"
-    // data.zoomLens.element.style.display = "none"
+    data.zoomedImg.style.display = "none"
+    data.zoomLens.style.display = "none"
   }
 
   function handleScroll() {
-    offset = getOffset(data.sourceImg.element)
+    offset = getOffset(data.sourceImg)
+  }
+
+  if (data.sourceImg.complete) {
+    onSourceImageREady()
+  } else {
+    data.sourceImg.onload = onSourceImageREady
   }
 
   setup()
 
-  if (data.sourceImg.element.complete) {
-    onSourceImgLoad()
-  } else {
-    data.sourceImg.element.onload = onSourceImgLoad
-  }
-
-  function destroy() {
+  return function cleanup() {
     container.removeEventListener("pointermove", handlePointerMove)
     container.removeEventListener("pointerenter", handlePointerEnter)
     container.removeEventListener("pointerleave", handlePointerLeave)
-    data.zoomLens.element.removeEventListener("pointerenter", handlePointerEnter)
-    data.zoomLens.element.removeEventListener("pointerleave", handlePointerLeave)
+    data.zoomLens.removeEventListener("pointerenter", handlePointerEnter)
+    data.zoomLens.removeEventListener("pointerleave", handlePointerLeave)
     window.removeEventListener("scroll", handleScroll)
 
-    container.removeChild(data.zoomLens.element)
-    data.zoomContainer.removeChild(data.zoomedImg.element)
-
-    container.removeChild(data.sourceImg.element)
+    container.removeChild(data.zoomLens)
+    data.zoomContainer.removeChild(data.zoomedImg)
 
     return data
   }
-
-  return destroy
 }
 
 export { createZoomImage }
