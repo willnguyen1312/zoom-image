@@ -4,7 +4,7 @@
 
 ## Architecture
 
-![Diagram](./diagram.svg)
+![Diagram](./Zoom%20Image%20Diagram.png)
 
 ## Install
 
