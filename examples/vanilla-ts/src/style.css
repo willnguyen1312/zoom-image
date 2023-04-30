@@ -21,6 +21,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.wrapper {
+  padding: 16px;
+}
+
+.demo {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+}
+
 .image-container {
   position: relative;
   margin-right: 10px;
@@ -33,6 +44,8 @@ body {
   height: 100%;
 }
 
-.wrapper {
-  padding: 16px;
+#zoom-target {
+  position: absolute;
+  display: block;
+  left: 500px;
 }
