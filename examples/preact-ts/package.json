@@ -1,0 +1,20 @@
+{
+  "name": "preact-ts",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "preact": "^10.13.2",
+    "@zoom-image/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.5.0",
+    "typescript": "^5.0.4",
+    "vite": "^4.3.3"
+  }
+}
