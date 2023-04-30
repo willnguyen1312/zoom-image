@@ -1,22 +1,28 @@
 <script setup lang="ts">
 import { createZoomImage } from "@zoom-image/core"
-import { onMounted, ref } from "vue"
+import { onMounted, onUnmounted, ref } from "vue"
 
 const imageContainerRef = ref<HTMLElement>()
 const zoomTargetRef = ref<HTMLElement>()
+
+let cleanup: () => void
 
 onMounted(() => {
   if (imageContainerRef.value) {
     const imageContainer = imageContainerRef.value
     const zoomTarget = zoomTargetRef.value
 
-    createZoomImage(imageContainer, {
+    cleanup = createZoomImage(imageContainer, {
       zoomImageSource: "/large.webp",
       customZoom: { width: 820, height: 820 },
       zoomTarget,
       scaleFactor: 0.5,
     })
   }
+})
+
+onUnmounted(() => {
+  cleanup?.()
 })
 </script>
 
