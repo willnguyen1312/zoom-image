@@ -9,4 +9,6 @@ if (!imageContainer) {
 
 createZoomImage(imageContainer, {
   zoomImageSource: "/large.webp",
+  offset: { x: 20 },
+  customZoom: { width: 300, height: 600 },
 })

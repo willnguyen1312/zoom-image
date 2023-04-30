@@ -1,13 +1,11 @@
 type ZoomImageOptions = {
   width?: number
   height?: number
-  zoomWidth?: number
+  customZoom?: { width: number; height: number }
   zoomImageSource?: string
-  scale?: number
-  offset?: { vertical: number; horizontal: number }
+  offset?: { x?: number; y?: number }
   zoomContainer?: HTMLElement
   zoomStyle?: string
-  zoomPosition?: string
   zoomLensStyle?: string
   zoomAreaClass?: string
   zoomImageClass?: string
@@ -54,15 +52,13 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
     width: options.width || sourceImgElement.width,
     height: options.height || sourceImgElement.height,
     zoomImageSource: options.zoomImageSource || sourceImgElement.src,
-    offset: options.offset || { vertical: 0, horizontal: 0 },
+    offset: options.offset || { y: 0, x: 0 },
     zoomContainer: options.zoomContainer || container,
     zoomStyle: options.zoomStyle || "",
-    zoomPosition: options.zoomPosition || "right",
     zoomLensStyle: options.zoomLensStyle || "",
-    scale: options.scale || 1,
-    zoomWidth: options.zoomWidth || 0,
     zoomAreaClass: options.zoomAreaClass || "__zoom-area",
     zoomImageClass: options.zoomImageClass || "__zoom-image",
+    customZoom: options.customZoom || { width: 0, height: 0 },
   }
 
   const div = document.createElement("div")
@@ -97,11 +93,12 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
   let scaleX: number
   let scaleY: number
   let offset: { left: number; top: number }
+
   data.zoomedImgOffset = {
-    vertical: finalOptions.offset && finalOptions.offset.vertical ? finalOptions.offset.vertical : 0,
-    horizontal: finalOptions.offset && finalOptions.offset.horizontal ? finalOptions.offset.horizontal : 0,
+    vertical: finalOptions.offset && finalOptions.offset.y ? finalOptions.offset.y : 0,
+    horizontal: finalOptions.offset && finalOptions.offset.x ? finalOptions.offset.x : 0,
   }
-  data.zoomPosition = finalOptions.zoomPosition || "right"
+
   data.zoomContainer = finalOptions.zoomContainer ? finalOptions.zoomContainer : container
   function getOffset(el: HTMLElement) {
     if (el) {
@@ -146,27 +143,19 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
     return getPosition(top, topMin, topLimit(topMin))
   }
 
-  function setZoomedImgSize(options: any, data: any) {
-    if (options.scale) {
-      data.zoomedImg.element.style.width = options.width * options.scale + "px"
-      data.zoomedImg.element.style.height = options.height * options.scale + "px"
-    } else if (options.zoomWidth) {
-      data.zoomedImg.element.style.width = options.zoomWidth + "px"
-      data.zoomedImg.element.style.height = data.sourceImg.element.style.height
-    } else {
-      data.zoomedImg.element.style.width = "100%"
-      data.zoomedImg.element.style.height = "100%"
+  function setZoomedImgSize() {
+    if (finalOptions.customZoom.width && finalOptions.customZoom.height) {
+      data.zoomedImg.element.style.width = finalOptions.customZoom.width + "px"
+      data.zoomedImg.element.style.height = finalOptions.customZoom.height + "px"
+      return
     }
+
+    data.zoomedImg.element.style.width = data.sourceImg.element.width + "px"
+    data.zoomedImg.element.style.height = data.sourceImg.element.height + "px"
   }
 
   function onSourceImgLoad() {
-    // use height determined by browser if height is not set in options
-    finalOptions.height = finalOptions.height || data.sourceImg.element.height
-
-    // use width determined by browser if width is not set in options
-    finalOptions.width = finalOptions.width || data.sourceImg.element.width
-
-    setZoomedImgSize(finalOptions, data)
+    setZoomedImgSize()
 
     data.sourceImg.naturalWidth = data.sourceImg.element.naturalWidth
     data.sourceImg.naturalHeight = data.sourceImg.element.naturalHeight
@@ -179,41 +168,31 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
     if (finalOptions.zoomLensStyle) {
       data.zoomLens.element.style.cssText += finalOptions.zoomLensStyle
     } else {
-      data.zoomLens.element.style.background = "white"
+      data.zoomLens.element.style.background = "red"
       data.zoomLens.element.style.opacity = "0.4"
+      data.zoomLens.element.style.cursor = "crosshair"
     }
 
     scaleX = data.sourceImg.naturalWidth / finalOptions.width
     scaleY = data.sourceImg.naturalHeight / finalOptions.height
     offset = getOffset(data.sourceImg.element)
 
-    // set zoomLens dimensions
-    // if custom scale is set
-    if (finalOptions.scale) {
-      data.zoomLens.width =
-        finalOptions.width / (data.sourceImg.naturalWidth / (finalOptions.width * finalOptions.scale))
-      data.zoomLens.height =
-        finalOptions.height / (data.sourceImg.naturalHeight / (finalOptions.height * finalOptions.scale))
-    }
-
-    // else if zoomWidth is set
-    else if (finalOptions.zoomWidth) {
-      data.zoomLens.width = finalOptions.zoomWidth / scaleX
-      data.zoomLens.height = finalOptions.height / scaleY
+    if (finalOptions.customZoom.width && finalOptions.customZoom.height) {
+      data.zoomLens.width = finalOptions.customZoom.width / scaleX
+      data.zoomLens.height = finalOptions.customZoom.height / scaleY
     }
 
     // else read from the zoomedImg
     else {
       data.zoomedImg.element.style.display = "block"
-      data.zoomLens.width = data.zoomedImg.element.clientWidth / scaleX
-      data.zoomLens.height = data.zoomedImg.element.clientHeight / scaleY
+      data.zoomLens.width = data.sourceImg.element.clientWidth / scaleX
+      data.zoomLens.height = data.sourceImg.element.clientHeight / scaleY
       data.zoomedImg.element.style.display = "none"
     }
 
     data.zoomLens.element.style.position = "absolute"
     data.zoomLens.element.style.width = data.zoomLens.width + "px"
     data.zoomLens.element.style.height = data.zoomLens.height + "px"
-    data.zoomLens.element.style.pointerEvents = "none"
   }
 
   function setup() {
@@ -266,57 +245,46 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
     }
 
     // setup event listeners
-    container.addEventListener("pointermove", events, false)
-    container.addEventListener("pointerenter", events, false)
-    container.addEventListener("pointerleave", events, false)
-    data.zoomLens.element.addEventListener("pointerenter", events, false)
-    data.zoomLens.element.addEventListener("pointerleave", events, false)
-    window.addEventListener("scroll", events, false)
+    container.addEventListener("pointermove", handlePointerMove, false)
+    container.addEventListener("pointerenter", handlePointerEnter, false)
+    container.addEventListener("pointerleave", handlePointerLeave, false)
+    data.zoomLens.element.addEventListener("pointerenter", handlePointerEnter, false)
+    data.zoomLens.element.addEventListener("pointerleave", handlePointerLeave, false)
+    window.addEventListener("scroll", handleScroll, false)
 
     return data
   }
 
-  const events = {
-    handleEvent: function (event: PointerEvent) {
-      switch (event.type) {
-        case "pointermove":
-          return this.handleMouseMove(event)
-        case "pointerenter":
-          return this.handleMouseEnter()
-        case "pointerleave":
-          return this.handleMouseLeave()
-        case "scroll":
-          return this.handleScroll()
-      }
-    },
-    handleMouseMove: function (event: PointerEvent) {
-      let offsetX: number
-      let offsetY: number
-      let backgroundTop: number
-      let backgroundRight: number
-      let backgroundPosition: string
-      if (offset) {
-        offsetX = zoomLensLeft(event.clientX - offset.left)
-        offsetY = zoomLensTop(event.clientY - offset.top)
-        backgroundTop = offsetX * scaleX
-        backgroundRight = offsetY * scaleY
-        backgroundPosition = "-" + backgroundTop + "px " + "-" + backgroundRight + "px"
-        data.zoomedImg.element.style.backgroundPosition = backgroundPosition
-        data.zoomLens.element.style.cssText +=
-          "transform:" + "translate(" + offsetX + "px," + offsetY + "px);display: block;left:0px;top:0px;"
-      }
-    },
-    handleMouseEnter: function () {
-      data.zoomedImg.element.style.display = "block"
-      data.zoomLens.element.style.display = "block"
-    },
-    handleMouseLeave: function () {
-      data.zoomedImg.element.style.display = "none"
-      data.zoomLens.element.style.display = "none"
-    },
-    handleScroll: function () {
-      offset = getOffset(data.sourceImg.element)
-    },
+  function handlePointerMove(event: PointerEvent) {
+    let offsetX: number
+    let offsetY: number
+    let backgroundTop: number
+    let backgroundRight: number
+    let backgroundPosition: string
+    if (offset) {
+      offsetX = zoomLensLeft(event.clientX - offset.left)
+      offsetY = zoomLensTop(event.clientY - offset.top)
+      backgroundTop = offsetX * scaleX
+      backgroundRight = offsetY * scaleY
+      backgroundPosition = "-" + backgroundTop + "px " + "-" + backgroundRight + "px"
+      data.zoomedImg.element.style.backgroundPosition = backgroundPosition
+      data.zoomLens.element.style.cssText +=
+        "transform:" + "translate(" + offsetX + "px," + offsetY + "px); top: 0; left: 0;"
+    }
+  }
+
+  function handlePointerEnter() {
+    data.zoomedImg.element.style.display = "block"
+    data.zoomLens.element.style.display = "block"
+  }
+
+  function handlePointerLeave() {
+    // data.zoomedImg.element.style.display = "none"
+    // data.zoomLens.element.style.display = "none"
+  }
+
+  function handleScroll() {
+    offset = getOffset(data.sourceImg.element)
   }
 
   setup()
@@ -328,12 +296,12 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
   }
 
   function destroy() {
-    container.removeEventListener("pointermove", events)
-    container.removeEventListener("pointerenter", events)
-    container.removeEventListener("pointerleave", events)
-    data.zoomLens.element.removeEventListener("pointerenter", events)
-    data.zoomLens.element.removeEventListener("pointerleave", events)
-    window.removeEventListener("scroll", events)
+    container.removeEventListener("pointermove", handlePointerMove)
+    container.removeEventListener("pointerenter", handlePointerEnter)
+    container.removeEventListener("pointerleave", handlePointerLeave)
+    data.zoomLens.element.removeEventListener("pointerenter", handlePointerEnter)
+    data.zoomLens.element.removeEventListener("pointerleave", handlePointerLeave)
+    window.removeEventListener("scroll", handleScroll)
 
     container.removeChild(data.zoomLens.element)
     data.zoomContainer.removeChild(data.zoomedImg.element)
