@@ -14,7 +14,7 @@ if (!zoomTarget) {
 
 createZoomImage(imageContainer, {
   zoomImageSource: "/large.webp",
-  customZoom: { width: 800, height: 800 },
+  customZoom: { width: 820, height: 820 },
   zoomTarget,
   scaleFactor: 0.5,
 })

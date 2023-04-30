@@ -44,7 +44,7 @@ body {
   height: 100%;
 }
 
-#zoom-target {
+.zoom-target {
   position: absolute;
   display: block;
   left: 500px;
