@@ -7,7 +7,16 @@
     <title>Vite + TS</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div class="wrapper">
+      <h1>Zoom Image</h1>
+      <div class="demo">
+        <div id="image-container" class="image-container">
+          <image class="image" alt="Small Image" src="/small.webp" />
+        </div>
+        <div id="zoom-target" class="zoom-target"></div>
+      </div>
+    </div>
+
     <script type="module" src="./src/main.ts"></script>
   </body>
 </html>

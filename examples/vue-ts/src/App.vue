@@ -1,14 +1,63 @@
 <script setup lang="ts">
-import { justSayHi } from "@zoom-image/core"
-import { onMounted } from "vue"
+import { createZoomImage } from "@zoom-image/core"
+import { onMounted, ref } from "vue"
+
+const imageContainerRef = ref<HTMLElement>()
+const zoomTargetRef = ref<HTMLElement>()
 
 onMounted(() => {
-  justSayHi()
+  if (imageContainerRef.value) {
+    const imageContainer = imageContainerRef.value
+    const zoomTarget = zoomTargetRef.value
+
+    createZoomImage(imageContainer, {
+      zoomImageSource: "/large.webp",
+      customZoom: { width: 820, height: 820 },
+      zoomTarget,
+      scaleFactor: 0.5,
+    })
+  }
 })
 </script>
 
 <template>
-  <h1>Hello Vue</h1>
+  <div :class="$style.wrapper">
+    <h1>Zoom Image</h1>
+    <div :class="$style.demo">
+      <div ref="imageContainerRef" id="image-container" :class="$style.imageContainer">
+        <img :class="$style.image" alt="Small Image" src="/small.webp" />
+      </div>
+      <div ref="zoomTargetRef" id="zoom-target" :class="$style.zoomTarget"></div>
+    </div>
+  </div>
 </template>
 
-<style module></style>
+<style module>
+.wrapper {
+  padding: 16px;
+}
+
+.demo {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+}
+
+.imageContainer {
+  position: relative;
+  margin-right: 10px;
+  width: 416px;
+  height: 416px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+
+.zoomTarget {
+  position: absolute;
+  left: 500px;
+}
+</style>

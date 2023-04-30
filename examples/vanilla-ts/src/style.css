@@ -8,7 +8,7 @@
 }
 
 body {
-  min-height: 100vh;
+  min-height: 200vh;
   color: var(--color-text);
   background: var(--color-background);
   transition: color 0.5s, background-color 0.5s;
@@ -19,4 +19,33 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.wrapper {
+  padding: 16px;
+}
+
+.demo {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+}
+
+.image-container {
+  position: relative;
+  margin-right: 10px;
+  width: 416px;
+  height: 416px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+
+.zoom-target {
+  position: absolute;
+  display: block;
+  left: 500px;
 }
