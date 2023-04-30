@@ -1,8 +1,10 @@
 # Zoom Image
 
-A little library to zoom image on hover
+### A little library to zoom image on hover. It is typical experience on e-commerce sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 
 ## Architecture
+
+![Diagram](./Zoom%20Image%20Diagram.png)
 
 ## Install
 
@@ -13,6 +15,24 @@ pnpm install
 ```
 
 ## Developement
+
+### With Preact
+
+```bash
+pnpm start-preact
+```
+
+### With React
+
+```bash
+pnpm start-react
+```
+
+### With Svelte
+
+```bash
+pnpm start-svelte
+```
 
 ### With Vanilla JS
 

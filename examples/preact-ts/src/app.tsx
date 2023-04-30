@@ -1,5 +1,5 @@
-import { useRef, useEffect } from 'preact/hooks'
-import {createZoomImage} from '@zoom-image/core'
+import { useRef, useEffect } from "preact/hooks"
+import { createZoomImage } from "@zoom-image/core"
 
 function App() {
   const imageContainerRef = useRef<HTMLDivElement>(null)
