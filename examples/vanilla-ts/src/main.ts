@@ -7,4 +7,6 @@ if (!imageContainer) {
   throw new Error("Image container not found")
 }
 
-createZoomImage(imageContainer)
+createZoomImage(imageContainer, {
+  zoomImageSource: "/large.webp",
+})

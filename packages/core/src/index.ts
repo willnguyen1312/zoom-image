@@ -1,15 +1,16 @@
 type ZoomImageOptions = {
-  fillContainer?: boolean
   width?: number
   height?: number
   zoomWidth?: number
-  img?: string
+  zoomImageSource?: string
   scale?: number
   offset?: { vertical: number; horizontal: number }
   zoomContainer?: HTMLElement
   zoomStyle?: string
   zoomPosition?: string
   zoomLensStyle?: string
+  zoomAreaClass?: string
+  zoomImageClass?: string
 }
 
 type ZoomImageData = {
@@ -50,10 +51,9 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
   }
 
   const finalOptions: Required<ZoomImageOptions> = {
-    fillContainer: options.fillContainer || false,
     width: options.width || sourceImgElement.width,
     height: options.height || sourceImgElement.height,
-    img: options.img || sourceImgElement.src,
+    zoomImageSource: options.zoomImageSource || sourceImgElement.src,
     offset: options.offset || { vertical: 0, horizontal: 0 },
     zoomContainer: options.zoomContainer || container,
     zoomStyle: options.zoomStyle || "",
@@ -61,6 +61,8 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
     zoomLensStyle: options.zoomLensStyle || "",
     scale: options.scale || 1,
     zoomWidth: options.zoomWidth || 0,
+    zoomAreaClass: options.zoomAreaClass || "__zoom-area",
+    zoomImageClass: options.zoomImageClass || "__zoom-image",
   }
 
   const div = document.createElement("div")
@@ -160,11 +162,9 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
   function onSourceImgLoad() {
     // use height determined by browser if height is not set in options
     finalOptions.height = finalOptions.height || data.sourceImg.element.height
-    data.sourceImg.element.style.height = finalOptions.fillContainer ? "100%" : finalOptions.height + "px"
 
     // use width determined by browser if width is not set in options
     finalOptions.width = finalOptions.width || data.sourceImg.element.width
-    data.sourceImg.element.style.width = finalOptions.fillContainer ? "100%" : finalOptions.width + "px"
 
     setZoomedImgSize(finalOptions, data)
 
@@ -217,24 +217,13 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
   }
 
   function setup() {
-    data.sourceImg.element.style.width = finalOptions.fillContainer
-      ? "100%"
-      : finalOptions.width
-      ? finalOptions.width + "px"
-      : "auto"
-    data.sourceImg.element.style.height = finalOptions.fillContainer
-      ? "100%"
-      : finalOptions.height
-      ? finalOptions.height + "px"
-      : "auto"
-
     data.zoomLens.element = container.appendChild(lensDiv)
     data.zoomLens.element.style.display = "none"
-    data.zoomLens.element.classList.add("js-image-zoom__zoomed-area")
+    data.zoomLens.element.classList.add(finalOptions.zoomAreaClass)
 
     data.zoomedImg.element = data.zoomContainer.appendChild(div)
-    data.zoomedImg.element.classList.add("js-image-zoom__zoomed-image")
-    data.zoomedImg.element.style.backgroundImage = "url('" + data.sourceImg.element.src + "')"
+    data.zoomedImg.element.classList.add(finalOptions.zoomImageClass)
+    data.zoomedImg.element.style.backgroundImage = "url('" + finalOptions.zoomImageSource + "')"
     data.zoomedImg.element.style.backgroundRepeat = "no-repeat"
     data.zoomedImg.element.style.display = "none"
 
