@@ -4,9 +4,8 @@ type ZoomImageOptions = {
   zoomLensClass?: string
   zoomImageClass?: string
   zoomTarget?: HTMLElement
+  scaleFactor?: number
 }
-
-const scaleFactor = 0.5
 
 type RequiredExcept<T, K extends keyof T> = Omit<Required<T>, K> & { [P in K]?: T[P] }
 
@@ -31,11 +30,12 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
     throw new Error("Please place an image inside the container")
   }
 
-  const finalOptions: RequiredExcept<ZoomImageOptions, "zoomTarget"> = {
+  const finalOptions: RequiredExcept<ZoomImageOptions, "zoomTarget" | "customZoom"> = {
     zoomImageSource: options.zoomImageSource || sourceImgElement.src,
     zoomLensClass: options.zoomLensClass || "",
     zoomImageClass: options.zoomImageClass || "",
-    customZoom: options.customZoom || { width: 0, height: 0 },
+    customZoom: options.customZoom,
+    scaleFactor: options.scaleFactor || 1,
     zoomTarget: options.zoomTarget,
   }
 
@@ -75,7 +75,7 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
 
   function setZoomedImgSize() {
     // Custom zoom available
-    if (finalOptions.customZoom.width && finalOptions.customZoom.height) {
+    if (finalOptions.customZoom) {
       store.zoomedImg.style.width = finalOptions.customZoom.width + "px"
       store.zoomedImg.style.height = finalOptions.customZoom.height + "px"
       return
@@ -94,7 +94,11 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
     scaleY = store.sourceImg.naturalHeight / sourceImgElement!.height
 
     // Setup default zoom image style
-    store.zoomedImg.style.backgroundSize = store.sourceImg.naturalWidth + "px " + store.sourceImg.naturalHeight + "px"
+    store.zoomedImg.style.backgroundSize =
+      store.sourceImg.naturalWidth / finalOptions.scaleFactor +
+      "px " +
+      store.sourceImg.naturalHeight / finalOptions.scaleFactor +
+      "px"
     store.zoomedImg.style.display = "block"
     store.zoomedImg.style.display = "none"
 
@@ -102,14 +106,14 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
     store.zoomLens.style.position = "absolute"
 
     if (!finalOptions.zoomLensClass) {
-      store.zoomLens.style.background = "red"
+      store.zoomLens.style.background = "violet"
       store.zoomLens.style.opacity = "0.4"
       store.zoomLens.style.cursor = "crosshair"
     }
 
-    if (finalOptions.customZoom.width && finalOptions.customZoom.height) {
-      store.zoomLens.style.width = (finalOptions.customZoom.width / scaleX) * scaleFactor + "px"
-      store.zoomLens.style.height = (finalOptions.customZoom.height / scaleY) * scaleFactor + "px"
+    if (finalOptions.customZoom) {
+      store.zoomLens.style.width = (finalOptions.customZoom.width / scaleX) * finalOptions.scaleFactor + "px"
+      store.zoomLens.style.height = (finalOptions.customZoom.height / scaleY) * finalOptions.scaleFactor + "px"
       return
     }
 
@@ -163,8 +167,8 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
     if (offset) {
       offsetX = zoomLensLeft(event.clientX - offset.left)
       offsetY = zoomLensTop(event.clientY - offset.top)
-      backgroundTop = offsetX * scaleX
-      backgroundRight = offsetY * scaleY
+      backgroundTop = (offsetX * scaleX) / finalOptions.scaleFactor
+      backgroundRight = (offsetY * scaleY) / finalOptions.scaleFactor
       backgroundPosition = "-" + backgroundTop + "px " + "-" + backgroundRight + "px"
       store.zoomedImg.style.backgroundPosition = backgroundPosition
       store.zoomLens.style.cssText += "transform:" + "translate(" + offsetX + "px," + offsetY + "px); top: 0; left: 0;"
