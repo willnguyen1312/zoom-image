@@ -12,10 +12,12 @@
     "build": "pnpm packages -- build",
     "preact": "pnpm --filter \"./examples/react-ts\"",
     "react": "pnpm --filter \"./examples/react-ts\"",
+    "svelte": "pnpm --filter \"./examples/svelte-ts\"",
     "vanilla": "pnpm --filter \"./examples/vanilla-ts\"",
     "vue": "pnpm --filter \"./examples/vue-ts\"",
     "start-preact": "pnpm preact dev",
     "start-react": "pnpm react dev",
+    "start-svelte": "pnpm svelte dev",
     "start-vanilla": "pnpm vanilla dev",
     "start-vue": "pnpm vue dev",
     "typecheck": "pnpm packages -- typecheck",
@@ -24,14 +26,14 @@
     "lint": "eslint packages --ext .ts"
   },
   "dependencies": {
-    "eslint": "8.36.0",
-    "eslint-config-prettier": "8.7.0",
+    "eslint": "8.39.0",
+    "eslint-config-prettier": "8.8.0",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-prettier": "4.2.1",
-    "prettier": "2.8.5",
-    "tsup": "6.7.0",
-    "tsx": "3.12.5",
+    "prettier": "2.8.8",
     "ts-morph": "^18.0.0",
-    "typescript": "5.0.2"
+    "tsup": "6.7.0",
+    "tsx": "3.12.7",
+    "typescript": "5.0.4"
   }
 }

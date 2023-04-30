@@ -5,7 +5,7 @@ import { onMounted, onUnmounted, ref } from "vue"
 const imageContainerRef = ref<HTMLElement>()
 const zoomTargetRef = ref<HTMLElement>()
 
-let cleanup: () => void
+let cleanup: (() => void) | undefined
 
 onMounted(() => {
   if (imageContainerRef.value) {
@@ -31,7 +31,7 @@ onUnmounted(() => {
     <h1>Zoom Image</h1>
     <div :class="$style.demo">
       <div ref="imageContainerRef" id="image-container" :class="$style.imageContainer">
-        <img :class="$style.image" alt="Small Image" src="/small.webp" />
+        <img :class="$style.image" alt="Small Pic" src="/small.webp" />
       </div>
       <div ref="zoomTargetRef" id="zoom-target" :class="$style.zoomTarget"></div>
     </div>
