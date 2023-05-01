@@ -1,7 +1,7 @@
 # Zoom Image
 
-A little yet powerful library to zoom image on wheel / hover / pinch actions. It is typical experience on e-commerce sites. Examples are written with Preact,
-React, Svelte, Vanilla JS and Vue.
+A little yet powerful library to zoom image on wheel / hover / pinch actions. It is typical experience on e-commerce
+sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 
 - ✅ Zoom on hover
 - 🚧 Zoom on wheel (Porting from battle-tested library of mine - https://react-zoomable-media.netlify.app/)
