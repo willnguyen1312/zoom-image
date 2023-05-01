@@ -163,11 +163,11 @@ pnpm start-vue
 
 ## Relevant projects
 
-- [js-image-zoom](https://github.com/malaman/js-image-zoom) - The internal working of zoom-image is inspired by this
-  library
 - [react-zoomable-media](https://github.com/willnguyen1312/react-zoomable-media) - The library I wrote for my previous
   company
 - [zagjs](https://github.com/chakra-ui/zag) - The project's architecture is inspired by this library
+- [js-image-zoom](https://github.com/malaman/js-image-zoom) - The internal working of zoom-image is inspired by this
+  library
 
 ## License
 
