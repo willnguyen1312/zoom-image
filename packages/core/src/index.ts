@@ -1,3 +1,5 @@
+import { enableScroll, disableScroll } from "./scroll"
+
 export type ZoomImageOptions = {
   customZoom?: { width: number; height: number }
   zoomImageSource?: string
@@ -138,7 +140,8 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
     store.zoomedImg.style.display = "none"
 
     // setup event listeners
-    container.addEventListener("pointermove", handlePointerMove)
+    container.addEventListener("pointerdown", processZoom)
+    container.addEventListener("pointermove", processZoom)
     container.addEventListener("pointerenter", handlePointerEnter)
     container.addEventListener("pointerleave", handlePointerLeave)
     store.zoomLens.addEventListener("pointerenter", handlePointerEnter)
@@ -158,7 +161,8 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
     store.zoomedImg.style.transform = "translateX(100%)"
   }
 
-  function handlePointerMove(event: PointerEvent) {
+  function processZoom(event: PointerEvent) {
+    disableScroll()
     let offsetX: number
     let offsetY: number
     let backgroundTop: number
@@ -181,6 +185,7 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
   }
 
   function handlePointerLeave() {
+    enableScroll()
     store.zoomedImg.style.display = "none"
     store.zoomLens.style.display = "none"
   }
@@ -198,7 +203,8 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
   setup()
 
   return function cleanup() {
-    container.removeEventListener("pointermove", handlePointerMove)
+    container.removeEventListener("pointermove", processZoom)
+    container.removeEventListener("pointerdown", processZoom)
     container.removeEventListener("pointerenter", handlePointerEnter)
     container.removeEventListener("pointerleave", handlePointerLeave)
     store.zoomLens.removeEventListener("pointerenter", handlePointerEnter)
