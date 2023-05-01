@@ -1,4 +1,4 @@
-type ZoomImageOptions = {
+export type ZoomImageOptions = {
   customZoom?: { width: number; height: number }
   zoomImageSource?: string
   zoomLensClass?: string
