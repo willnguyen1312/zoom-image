@@ -1,13 +1,11 @@
-// left: 37, up: 38, right: 39, down: 40,
-// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-const keySet = new Set([37, 38, 39, 40])
+const keySet = new Set(["ArrowUp", "ArrowRight", "ArrowDown", "ArrowLeft"])
 
 function preventDefault(event: Event) {
   event.preventDefault()
 }
 
 function preventDefaultForScrollKeys(event: KeyboardEvent) {
-  if (keySet.has[event.keyCode]) {
+  if (keySet.has(event.key)) {
     preventDefault(event)
     return false
   }
