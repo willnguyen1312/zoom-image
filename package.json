@@ -8,8 +8,10 @@
   "license": "MIT",
   "scripts": {
     "packages": "pnpm --filter=./packages/** -r",
+    "examples": "pnpm --filter=./packages/** -r",
     "build-fast": "pnpm packages -- build-fast",
     "build": "pnpm packages -- build",
+    "deploy:demo": "netlify deploy --prod --dir=./examples/vanilla-ts/dist",
     "preact": "pnpm --filter \"./examples/react-ts\"",
     "react": "pnpm --filter \"./examples/react-ts\"",
     "svelte": "pnpm --filter \"./examples/svelte-ts\"",
