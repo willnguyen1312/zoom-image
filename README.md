@@ -114,17 +114,6 @@ original image on the right. You can customize it by passing optional `options` 
 | zoomTarget      |                       HTMLElement |                                                                                         The container of zoomed image |
 | scaleFactor     |                            number | By default, zoomed image will have a scale of 1. The smaller the value, the bigger zoomed image and smaller zoom lens |
 
-```ts
-type ZoomImageOptions = {
-  customZoom?: { width: number; height: number }
-  zoomImageSource?: string
-  zoomLensClass?: string
-  zoomImageClass?: string
-  zoomTarget?: HTMLElement
-  scaleFactor?: number
-}
-```
-
 ## Architecture
 
 ![Diagram](./Zoom%20Image%20Diagram.png)
