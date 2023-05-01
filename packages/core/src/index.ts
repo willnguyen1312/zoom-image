@@ -1,4 +1,4 @@
-import { enableScroll, disableScroll } from "./scroll"
+import { enableScroll, disableScroll, clamp } from "./utils"
 
 export type ZoomImageOptions = {
   customZoom?: { width: number; height: number }
@@ -16,10 +16,6 @@ type ZoomImageStore = {
   sourceImg: HTMLImageElement
   zoomedImg: HTMLDivElement
   zoomLens: HTMLDivElement
-}
-
-function clamp(value: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, value))
 }
 
 function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {}) {
