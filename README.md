@@ -57,12 +57,12 @@ sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 ```
 
 ```js
-import { createZoomImage } from "@zoom-image/core"
+import { createZoomImageHover } from "@zoom-image/core"
 
 const imageContainer = document.getElementById("image-container")
-const cleanup = createZoomImage(imageContainer)
+const cleanup = createZoomImageHover(imageContainer)
 
-// Cleanup when you don't need it anymore
+// Call cleanup function when you don't need zoom image anymore
 ```
 
 ### With React
@@ -76,7 +76,7 @@ function ZoomImageComponent() {
   const imageContainerRef = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
-    const cleanup = createZoomImage(imageContainer)
+    const cleanup = createZoomImageHover(imageContainer)
 
     return cleanup
   }, [])
@@ -108,9 +108,11 @@ function ZoomImageComponent() {
 
 ## API
 
-### createZoomImage(container: HTMLElement, options)
+### createZoomImageHover(container: HTMLElement, options)
 
 The only required parameter is `container`. It is the container of the image. The image will be zoomed when you hover.
+The result of this function is a cleanup function. You should call it when you don't need zoom image anymore.
+
 By default, the zoomed image will be the same as the original image and placed as direct child of container next to the
 original image on the right. You can customize it by passing optional `options` object as documented below.
 

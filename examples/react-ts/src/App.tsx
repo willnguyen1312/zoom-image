@@ -1,5 +1,5 @@
 import React from "react"
-import { createZoomImage } from "@zoom-image/core"
+import { createZoomImageHover } from "@zoom-image/core"
 
 function App() {
   const imageContainerRef = React.useRef<HTMLDivElement>(null)
@@ -17,7 +17,7 @@ function App() {
       throw new Error("Zoom target not found")
     }
 
-    const cleanup = createZoomImage(imageContainer, {
+    const cleanup = createZoomImageHover(imageContainer, {
       zoomImageSource: "/large.webp",
       customZoom: { width: 820, height: 820 },
       zoomTarget,

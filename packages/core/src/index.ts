@@ -18,7 +18,7 @@ type ZoomImageStore = {
   zoomLens: HTMLDivElement
 }
 
-function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {}) {
+function createZoomImageHover(container: HTMLElement, options: ZoomImageOptions = {}) {
   if (!container) {
     throw new Error("Please specify a container for the zoom image")
   }
@@ -218,4 +218,4 @@ function createZoomImage(container: HTMLElement, options: ZoomImageOptions = {})
   }
 }
 
-export { createZoomImage }
+export { createZoomImageHover }
