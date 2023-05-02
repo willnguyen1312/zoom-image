@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte"
-  import { createZoomImage } from "@zoom-image/core"
+  import { createZoomImageHover } from "@zoom-image/core"
 
   let cleanup: (() => void) | undefined
   let imageContainer: HTMLDivElement
   let zoomTarget: HTMLDivElement
 
   onMount(() => {
-    cleanup = createZoomImage(imageContainer, {
+    cleanup = createZoomImageHover(imageContainer, {
       zoomImageSource: "/large.webp",
       customZoom: { width: 820, height: 820 },
       zoomTarget,
