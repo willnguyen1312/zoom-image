@@ -2,7 +2,8 @@
   "name": "zoom-image",
   "private": true,
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "https://github.com/willnguyen1312/zoom-image"
   },
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "license": "MIT",
@@ -25,7 +26,10 @@
     "typecheck": "pnpm packages -- typecheck",
     "prettier": "prettier --check **/*",
     "prettier-fix": "prettier --write **/*",
-    "lint": "eslint packages --ext .ts"
+    "lint": "eslint packages --ext .ts",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
     "eslint": "8.39.0",
@@ -37,5 +41,8 @@
     "tsup": "6.7.0",
     "tsx": "3.12.7",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "vitepress": "1.0.0-alpha.75"
   }
 }
