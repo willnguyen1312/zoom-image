@@ -111,7 +111,8 @@ function ZoomImageComponent() {
 ### createZoomImageHover(container: HTMLElement, options)
 
 The only required parameter is `container`. It is the container of the image. The image will be zoomed when you hover.
-The result of this function is a cleanup function. You should call it when you don't need zoom image anymore.
+The result of this function is object which stores a set of functions. You should call cleanup function when you don't
+need zoom image anymore to avoid memory leak.
 
 By default, the zoomed image will be the same as the original image and placed as direct child of container next to the
 original image on the right. You can customize it by passing optional `options` object as documented below.
