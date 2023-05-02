@@ -1,5 +1,6 @@
 // Start importing createZoomImageHover
-import { createZoomImageHover, ZoomImageHoverOptions } from "./createZoomImageHover"
+import { createZoomImageHover } from "./createZoomImageHover"
+import type { ZoomImageHoverOptions } from "./createZoomImageHover"
 
 export { createZoomImageHover }
 export type { ZoomImageHoverOptions }
