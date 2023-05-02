@@ -31,7 +31,7 @@ onUnmounted(() => {
 <template>
   <div :class="$style.wrapper">
     <h1>Zoom Image Hover</h1>
-    <div :class="$style.demo - image - hover">
+    <div :class="$style.demoImageHover">
       <div ref="imageContainerRef" id="image-hover-container" :class="$style.imageContainer">
         <img :class="$style.image" alt="Small Pic" src="/small.webp" />
       </div>
@@ -45,7 +45,7 @@ onUnmounted(() => {
   padding: 16px;
 }
 
-.demo-image-hover {
+.demoImageHover {
   position: relative;
   display: flex;
   flex-direction: row;
