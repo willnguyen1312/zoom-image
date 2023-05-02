@@ -55,3 +55,15 @@ export const scaleLinear =
   }) =>
   (value: number) =>
     rangeStart + (rangeStop - rangeStart) * ((value - domainStart) / (domainStop - domainStart))
+
+export type PointerPosition = {
+  x: number
+  y: number
+}
+
+export function getPointersCenter(first: PointerPosition, second: PointerPosition) {
+  return {
+    x: (first.x + second.x) / 2,
+    y: (first.y + second.y) / 2,
+  }
+}

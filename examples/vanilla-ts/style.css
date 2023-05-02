@@ -8,7 +8,7 @@
 }
 
 body {
-  min-height: 100vh;
+  min-height: 200vh;
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans",
@@ -25,7 +25,8 @@ body {
 
 .demo-image-hover {
   position: relative;
-  display: flex;
+  display: none;
+  /* display: flex; */
   flex-direction: row;
   align-items: start;
 }
@@ -49,8 +50,8 @@ body {
 }
 
 .image-wheel-container {
-  width: 416px;
-  height: 416px;
+  width: 832px;
+  height: 832px;
   cursor: move;
 }
 

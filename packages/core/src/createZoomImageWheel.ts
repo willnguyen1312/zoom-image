@@ -1,5 +1,9 @@
 import {
+  PointerPosition,
   clamp,
+  disableScroll,
+  enableScroll,
+  getPointersCenter,
   getSourceImage,
   // scaleLinear
 } from "./utils"
@@ -17,7 +21,7 @@ const ZOOM_DELTA = 0.5
 
 export function createZoomImageWheel(container: HTMLElement, options: ZoomImageWheelProps = {}) {
   const finalOptions: Required<ZoomImageWheelProps> = {
-    maxZoom: options.maxZoom || 4,
+    maxZoom: options.maxZoom || 20,
     wheelZoomRatio: options.wheelZoomRatio || 0.1,
   }
 
@@ -50,15 +54,28 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     return newPositionY
   }
 
+  let prevDistance = -1
+  let enabledScroll = true
+
   //   States
+  const pointerMap = new Map<number, { x: number; y: number }>()
   let currentZoom = 1
-  //   let currentPercentage = 0
+  let isOnMove = false
   let currentPositionX = 0
+  let lastPositionX = 0
   let currentPositionY = 0
+  let lastPositionY = 0
+  let startX = 0
+  let startY = 0
+  //   let currentPercentage = 0
 
   container.style.overflow = "hidden"
   const sourceImgElement = getSourceImage(container)
   sourceImgElement.style.transformOrigin = "0 0"
+
+  function updateZoom() {
+    sourceImgElement.style.transform = `translate(${currentPositionX}px, ${currentPositionY}px) scale(${currentZoom})`
+  }
 
   function processZoom({ delta, x, y }: { delta: number; x: number; y: number }) {
     const containerRect = container.getBoundingClientRect()
@@ -68,7 +85,11 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     const zoomTargetX = (zoomPointX - currentPositionX) / currentZoom
     const zoomTargetY = (zoomPointY - currentPositionY) / currentZoom
 
-    const newCurrentZoom = clamp(currentZoom + delta * currentZoom, 1, finalOptions.maxZoom)
+    const newCurrentZoom = clamp(
+      currentZoom + delta * finalOptions.wheelZoomRatio * currentZoom,
+      1,
+      finalOptions.maxZoom,
+    )
 
     currentPositionX = calculatePositionX(-zoomTargetX * newCurrentZoom + zoomPointX, newCurrentZoom)
     currentPositionY = calculatePositionY(-zoomTargetY * newCurrentZoom + zoomPointY, newCurrentZoom)
@@ -78,17 +99,105 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
 
   function onWheel(event: WheelEvent) {
     event.preventDefault()
-    const delta = -clamp(event.deltaY, -ZOOM_DELTA, ZOOM_DELTA) * finalOptions.wheelZoomRatio
+    const delta = -clamp(event.deltaY, -ZOOM_DELTA, ZOOM_DELTA)
     processZoom({ delta, x: event.pageX, y: event.pageY })
-
-    sourceImgElement.style.transform = `translate(${currentPositionX}px, ${currentPositionY}px) scale(${currentZoom})`
+    updateZoom()
   }
 
-  container.addEventListener("wheel", onWheel, { passive: false })
+  function handlePointerMove(event: PointerEvent) {
+    event.preventDefault()
+    const { pageX, pageY, pointerId } = event
+    for (const [cachedPointerid] of pointerMap.entries()) {
+      if (cachedPointerid === pointerId) {
+        pointerMap.set(cachedPointerid, { x: pageX, y: pageY })
+      }
+    }
+
+    if (!isOnMove) {
+      return
+    }
+
+    if (pointerMap.size === 2) {
+      const pointersIterator = pointerMap.values()
+      const first = pointersIterator.next().value as PointerPosition
+      const second = pointersIterator.next().value as PointerPosition
+      const curDistance = Math.sqrt(Math.pow(first.x - second.x, 2) + Math.pow(first.y - second.y, 2))
+      const { x, y } = getPointersCenter(first, second)
+      if (prevDistance > 0) {
+        if (curDistance > prevDistance) {
+          // The distance between the two pointers has increased
+          processZoom({ delta: ZOOM_DELTA, x, y })
+        }
+        if (curDistance < prevDistance) {
+          // The distance between the two pointers has decreased
+          processZoom({ delta: -ZOOM_DELTA, x, y })
+        }
+      }
+      // Store the distance for the next move event
+      prevDistance = curDistance
+
+      updateZoom()
+      return
+    }
+
+    if (pointerMap.size === 1) {
+      const offsetX = pageX - startX
+      const offsetY = pageY - startY
+      currentPositionX = calculatePositionX(lastPositionX + offsetX, currentZoom)
+      currentPositionY = calculatePositionY(lastPositionY + offsetY, currentZoom)
+      updateZoom()
+    }
+  }
+
+  function handlePointerDown(event: PointerEvent) {
+    event.preventDefault()
+
+    if (pointerMap.size === 2) {
+      return
+    }
+
+    if (enabledScroll) {
+      disableScroll()
+      enabledScroll = false
+    }
+
+    const { pageX, pageY, pointerId } = event
+    isOnMove = true
+    lastPositionX = currentPositionX
+    lastPositionY = currentPositionY
+    startX = pageX
+    startY = pageY
+    pointerMap.set(pointerId, { x: pageX, y: pageY })
+  }
+
+  function handlePointerUp(event: PointerEvent) {
+    pointerMap.delete(event.pointerId)
+
+    if (pointerMap.size === 0) {
+      isOnMove = false
+      prevDistance = -1
+    }
+
+    if (pointerMap.size === 0 && !enabledScroll) {
+      enableScroll()
+      enabledScroll = true
+    }
+
+    lastPositionX = currentPositionX
+    lastPositionY = currentPositionY
+  }
+
+  container.addEventListener("wheel", onWheel)
+  container.addEventListener("pointerdown", handlePointerDown)
+  container.addEventListener("pointermove", handlePointerMove)
+  container.addEventListener("pointerup", handlePointerUp)
 
   return {
     cleanup() {
       container.removeEventListener("wheel", onWheel)
+      container.removeEventListener("pointerdown", handlePointerDown)
+      container.removeEventListener("pointermove", handlePointerMove)
+      container.removeEventListener("pointerup", handlePointerUp)
     },
   }
 }
