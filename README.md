@@ -34,13 +34,13 @@ sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 ### With Vanilla TS
 
 ```html
-<div id="image-container" class="image-container">
-  <img class="image" alt="Small Pic" src="/small.webp" />
+<div id="image-hover-container" class="image-hover-container">
+  <img class="image-hover" alt="Small Pic" src="/small.webp" />
 </div>
 ```
 
 ```css
-.image-container {
+.image-hover-container {
   /* This is important as the zoomed area will be positioned absolute as a child of image container */
   position: relative;
   /* Can be arbitrary value */
@@ -50,7 +50,7 @@ sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 }
 
 /* It's best to keep image sizes according to image container. Since img tag cannot have children. We need an extra container to achieve UI composition for zooming purpose */
-.image {
+.image-hover {
   width: 100%;
   height: 100%;
 }
@@ -59,8 +59,8 @@ sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 ```js
 import { createZoomImageHover } from "@zoom-image/core"
 
-const imageContainer = document.getElementById("image-container")
-const cleanup = createZoomImageHover(imageContainer)
+const imageContainer = document.getElementById("image-hover-container")
+const { cleanup } = createZoomImageHover(imageContainer)
 
 // Call cleanup function when you don't need zoom image anymore
 ```
@@ -76,21 +76,21 @@ function ZoomImageComponent() {
   const imageContainerRef = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
-    const cleanup = createZoomImageHover(imageContainer)
+    const { cleanup } = createZoomImageHover(imageContainer)
 
     return cleanup
   }, [])
 
   return (
-    <div ref={imageContainerRef} class="image-container">
-      <img class="image" alt="Small Pic" src="/small.webp" />
+    <div ref={imageContainerRef} class="image-hover-container">
+      <img class="image-hover" alt="Small Pic" src="/small.webp" />
     </div>
   )
 }
 ```
 
 ```css
-.image-container {
+.image-hover-container {
   /* This is important as the zoomed area will be positioned absolute as a child of image container */
   position: relative;
   /* Can be arbitrary value */
@@ -100,7 +100,7 @@ function ZoomImageComponent() {
 }
 
 /* It's best to keep image sizes according to image container. Since img tag cannot have children. We need an extra container to achieve UI composition for zooming purpose */
-.image {
+.image-hover {
   width: 100%;
   height: 100%;
 }

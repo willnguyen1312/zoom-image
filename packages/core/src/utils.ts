@@ -27,3 +27,31 @@ export function enableScroll() {
   window.removeEventListener("touchmove", preventDefault)
   window.removeEventListener("keydown", preventDefaultForScrollKeys)
 }
+
+export function getSourceImage(container: HTMLElement) {
+  if (!container) {
+    throw new Error("Please specify a container for the zoom image")
+  }
+
+  const sourceImgElement = container.querySelector("img")
+  if (!sourceImgElement) {
+    throw new Error("Please place an image inside the container")
+  }
+
+  return sourceImgElement
+}
+
+export const scaleLinear =
+  ({
+    domainStart,
+    domainStop,
+    rangeStart,
+    rangeStop,
+  }: {
+    domainStart: number
+    domainStop: number
+    rangeStart: number
+    rangeStop: number
+  }) =>
+  (value: number) =>
+    rangeStart + (rangeStop - rangeStart) * ((value - domainStart) / (domainStop - domainStart))
