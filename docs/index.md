@@ -3,23 +3,33 @@
 layout: home
 
 hero:
-  name: "Zoom Image Library"
-  text: "A little yet powerful library to zoom image on wheel / hover / pinch actions"
-  tagline: My great project tagline
+  name: "Zoom Image"
+  tagline: "A little yet powerful library to zoom image"
+  image:
+    src: /favicon.svg
+    alt: ZoomImage
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Get Started
+      link: /guide
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: View on GitHub
+      link: https://github.com/willnguyen1312/zoom-image
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Zoom on wheel
+    details: Support mouse wheel zoom on image
+    icon: 🛞
+  - title: Zoom on hover
+    details: Support mouse hover zoom on image
+    icon: 🖱️
+  - title: Zoom on pinch
+    details: Support touch pinch zoom on image
+    icon: 🤏
 ---
 
+<script setup>
+import Footer from './components/Footer.vue'
+</script>
+
+<Footer />
