@@ -8,7 +8,13 @@ sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 
 ## Demo
 
-![Demo](./demo.gif)
+### Zoom on hover
+
+![Demo Zoom on hover](./images/demo-zoom-hover.gif)
+
+### Zoom on wheel
+
+![Demo Zoom on wheel](./images/demo-zoom-wheel.gif)
 
 ## Table of Contents
 
@@ -119,7 +125,7 @@ original image on the right. You can customize it by passing optional `options` 
 
 ## Architecture
 
-![Diagram](./Zoom%20Image%20Diagram.png)
+![Diagram](./images/diagram.png)
 
 ## Development
 
