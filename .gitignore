@@ -174,3 +174,8 @@ e2e/junit.xml
 e2e/results
 # Local Netlify folder
 .netlify
+
+
+# Vitepress
+docs/.vitepress/dist
+docs/.vitepress/cache
