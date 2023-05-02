@@ -17,7 +17,7 @@ function App() {
       throw new Error("Zoom target not found")
     }
 
-    const cleanup = createZoomImageHover(imageContainer, {
+    const { cleanup } = createZoomImageHover(imageContainer, {
       zoomImageSource: "/large.webp",
       customZoom: { width: 820, height: 820 },
       zoomTarget,
@@ -29,12 +29,12 @@ function App() {
 
   return (
     <div class="wrapper">
-      <h1>Zoom Image</h1>
-      <div class="demo">
-        <div ref={imageContainerRef} id="image-container" class="image-container">
-          <img class="image" alt="Small Pic" src="/small.webp" />
+      <h1>Zoom Image Hover</h1>
+      <div class="demo-image-hover">
+        <div ref={imageContainerRef} id="image-hover-container" class="image-hover-container">
+          <img class="image-hover" alt="Small Pic" src="/small.webp" />
         </div>
-        <div ref={zoomTargetRef} id="zoom-target" class="zoom-target"></div>
+        <div ref={zoomTargetRef} id="zoom-hover-target" class="zoom-hover-target"></div>
       </div>
     </div>
   )

@@ -12,12 +12,14 @@ onMounted(() => {
     const imageContainer = imageContainerRef.value
     const zoomTarget = zoomTargetRef.value
 
-    cleanup = createZoomImageHover(imageContainer, {
+    const result = createZoomImageHover(imageContainer, {
       zoomImageSource: "/large.webp",
       customZoom: { width: 820, height: 820 },
       zoomTarget,
       scaleFactor: 0.5,
     })
+
+    cleanup = result.cleanup
   }
 })
 
@@ -28,12 +30,12 @@ onUnmounted(() => {
 
 <template>
   <div :class="$style.wrapper">
-    <h1>Zoom Image</h1>
-    <div :class="$style.demo">
-      <div ref="imageContainerRef" id="image-container" :class="$style.imageContainer">
+    <h1>Zoom Image Hover</h1>
+    <div :class="$style.demo - image - hover">
+      <div ref="imageContainerRef" id="image-hover-container" :class="$style.imageContainer">
         <img :class="$style.image" alt="Small Pic" src="/small.webp" />
       </div>
-      <div ref="zoomTargetRef" id="zoom-target" :class="$style.zoomTarget"></div>
+      <div ref="zoomTargetRef" id="zoom-hover-target" :class="$style.zoomTarget"></div>
     </div>
   </div>
 </template>
@@ -43,7 +45,7 @@ onUnmounted(() => {
   padding: 16px;
 }
 
-.demo {
+.demo-image-hover {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -57,7 +59,7 @@ onUnmounted(() => {
   height: 416px;
 }
 
-.image {
+.image-hover {
   width: 100%;
   height: 100%;
 }

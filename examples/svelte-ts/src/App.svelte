@@ -7,12 +7,14 @@
   let zoomTarget: HTMLDivElement
 
   onMount(() => {
-    cleanup = createZoomImageHover(imageContainer, {
+    const result = createZoomImageHover(imageContainer, {
       zoomImageSource: "/large.webp",
       customZoom: { width: 820, height: 820 },
       zoomTarget,
       scaleFactor: 0.5,
     })
+
+    cleanup = result.cleanup
   })
 
   onDestroy(() => {
@@ -22,12 +24,12 @@
 
 <main>
   <div class="wrapper">
-    <h1>Zoom Image</h1>
-    <div class="demo">
-      <div id="image-container" class="image-container" bind:this={imageContainer}>
-        <img class="image" alt="Small Pic" src="/small.webp" />
+    <h1>Zoom Image Hover</h1>
+    <div class="demo-image-hover">
+      <div id="image-hover-container" class="image-hover-container" bind:this={imageContainer}>
+        <img class="image-hover" alt="Small Pic" src="/small.webp" />
       </div>
-      <div id="zoom-target" class="zoom-target" bind:this={zoomTarget} />
+      <div id="zoom-hover-target" class="zoom-hover-target" bind:this={zoomTarget} />
     </div>
   </div>
 </main>
@@ -37,26 +39,26 @@
     padding: 16px;
   }
 
-  .demo {
+  .demo-image-hover {
     position: relative;
     display: flex;
     flex-direction: row;
     align-items: start;
   }
 
-  .image-container {
+  .image-hover-container {
     position: relative;
     margin-right: 10px;
     width: 416px;
     height: 416px;
   }
 
-  .image {
+  .image-hover {
     width: 100%;
     height: 100%;
   }
 
-  .zoom-target {
+  .zoom-hover-target {
     position: absolute;
     display: block;
     left: 500px;
