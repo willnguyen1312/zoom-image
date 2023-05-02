@@ -41,21 +41,6 @@ export function getSourceImage(container: HTMLElement) {
   return sourceImgElement
 }
 
-export const scaleLinear =
-  ({
-    domainStart,
-    domainStop,
-    rangeStart,
-    rangeStop,
-  }: {
-    domainStart: number
-    domainStop: number
-    rangeStart: number
-    rangeStop: number
-  }) =>
-  (value: number) =>
-    rangeStart + (rangeStop - rangeStart) * ((value - domainStart) / (domainStop - domainStart))
-
 export type PointerPosition = {
   x: number
   y: number

@@ -1,12 +1,5 @@
-import {
-  PointerPosition,
-  clamp,
-  disableScroll,
-  enableScroll,
-  getPointersCenter,
-  getSourceImage,
-  // scaleLinear
-} from "./utils"
+import { clamp, disableScroll, enableScroll, getPointersCenter, getSourceImage } from "./utils"
+import type { PointerPosition } from "./utils"
 
 export type ZoomImageWheelProps = {
   maxZoom?: number
@@ -19,25 +12,19 @@ export type ZoomImageWheelProps = {
  */
 const ZOOM_DELTA = 0.5
 
+type ZoomImageWheelState = {
+  currentZoom: number
+}
+
+type Listener = (state: ZoomImageWheelState) => void
+
 export function createZoomImageWheel(container: HTMLElement, options: ZoomImageWheelProps = {}) {
   const finalOptions: Required<ZoomImageWheelProps> = {
-    maxZoom: options.maxZoom || 20,
+    maxZoom: options.maxZoom || 4,
     wheelZoomRatio: options.wheelZoomRatio || 0.1,
   }
 
-  //   const calculatePercentage = scaleLinear({
-  //     domainStart: 1,
-  //     domainStop: finalOptions.maxZoom,
-  //     rangeStart: 0,
-  //     rangeStop: 100,
-  //   })
-
-  //   const calculateCurrentZoom = scaleLinear({
-  //     domainStart: 0,
-  //     domainStop: 100,
-  //     rangeStart: 1,
-  //     rangeStop: finalOptions.maxZoom,
-  //   })
+  const listeners = new Set<Listener>()
 
   const calculatePositionX = (newPositionX: number, currentZoom: number) => {
     const width = container.clientWidth
@@ -54,11 +41,13 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     return newPositionY
   }
 
+  let enabledZoom = true
   let prevDistance = -1
   let enabledScroll = true
+  let zoomType: "wheel" | "pinch" | "" = ""
+  const pointerMap = new Map<number, { x: number; y: number }>()
 
   //   States
-  const pointerMap = new Map<number, { x: number; y: number }>()
   let currentZoom = 1
   let isOnMove = false
   let currentPositionX = 0
@@ -67,7 +56,6 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   let lastPositionY = 0
   let startX = 0
   let startY = 0
-  //   let currentPercentage = 0
 
   container.style.overflow = "hidden"
   const sourceImgElement = getSourceImage(container)
@@ -75,6 +63,11 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
 
   function updateZoom() {
     sourceImgElement.style.transform = `translate(${currentPositionX}px, ${currentPositionY}px) scale(${currentZoom})`
+    listeners.forEach((listener) => {
+      listener({
+        currentZoom,
+      })
+    })
   }
 
   function processZoom({ delta, x, y }: { delta: number; x: number; y: number }) {
@@ -98,6 +91,10 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function onWheel(event: WheelEvent) {
+    if (!enabledZoom) {
+      return
+    }
+
     event.preventDefault()
     const delta = -clamp(event.deltaY, -ZOOM_DELTA, ZOOM_DELTA)
     processZoom({ delta, x: event.pageX, y: event.pageY })
@@ -105,6 +102,10 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function handlePointerMove(event: PointerEvent) {
+    if (!enabledZoom) {
+      return
+    }
+
     event.preventDefault()
     const { pageX, pageY, pointerId } = event
     for (const [cachedPointerid] of pointerMap.entries()) {
@@ -117,7 +118,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       return
     }
 
-    if (pointerMap.size === 2) {
+    if (pointerMap.size === 2 && zoomType === "pinch") {
       const pointersIterator = pointerMap.values()
       const first = pointersIterator.next().value as PointerPosition
       const second = pointersIterator.next().value as PointerPosition
@@ -140,7 +141,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       return
     }
 
-    if (pointerMap.size === 1) {
+    if (pointerMap.size === 1 && zoomType !== "pinch") {
       const offsetX = pageX - startX
       const offsetY = pageY - startY
       currentPositionX = calculatePositionX(lastPositionX + offsetX, currentZoom)
@@ -150,6 +151,10 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function handlePointerDown(event: PointerEvent) {
+    if (!enabledZoom) {
+      return
+    }
+
     event.preventDefault()
 
     if (pointerMap.size === 2) {
@@ -168,9 +173,17 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     startX = pageX
     startY = pageY
     pointerMap.set(pointerId, { x: pageX, y: pageY })
+
+    if (pointerMap.size === 2) {
+      zoomType = "pinch"
+    }
   }
 
   function handlePointerUp(event: PointerEvent) {
+    if (!enabledZoom) {
+      return
+    }
+
     pointerMap.delete(event.pointerId)
 
     if (pointerMap.size === 0) {
@@ -181,6 +194,10 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     if (pointerMap.size === 0 && !enabledScroll) {
       enableScroll()
       enabledScroll = true
+    }
+
+    if (pointerMap.size === 0 && zoomType === "pinch") {
+      zoomType = ""
     }
 
     lastPositionX = currentPositionX
@@ -198,6 +215,14 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       container.removeEventListener("pointerdown", handlePointerDown)
       container.removeEventListener("pointermove", handlePointerMove)
       container.removeEventListener("pointerup", handlePointerUp)
+      listeners.clear()
+    },
+    subscribe(listener: Listener) {
+      listeners.add(listener)
+      return () => listeners.delete(listener)
+    },
+    setEnabledZoom(value: boolean) {
+      enabledZoom = value
     },
   }
 }

@@ -25,8 +25,7 @@ body {
 
 .demo-image-hover {
   position: relative;
-  display: none;
-  /* display: flex; */
+  display: flex;
   flex-direction: row;
   align-items: start;
 }
@@ -50,8 +49,8 @@ body {
 }
 
 .image-wheel-container {
-  width: 832px;
-  height: 832px;
+  width: 416px;
+  height: 416px;
   cursor: move;
 }
 
