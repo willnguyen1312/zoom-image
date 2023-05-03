@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@zoom-image/core": "workspace:*",
     "typescript": "^5.0.4",
     "vite": "^4.3.4"
+  },
+  "dependencies": {
+    "@zoom-image/core": "^0.0.1"
   }
 }

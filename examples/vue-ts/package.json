@@ -1,6 +1,6 @@
 {
   "name": "vue-ts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -11,10 +11,10 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@zoom-image/core": "^0.0.1",
     "vue": "^3.2.47"
   },
   "devDependencies": {
-    "@zoom-image/core": "workspace:*",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/node": "^18.16.3",
     "@vitejs/plugin-vue": "^4.2.1",
