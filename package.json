@@ -40,9 +40,7 @@
     "ts-morph": "^18.0.0",
     "tsup": "6.7.0",
     "tsx": "3.12.7",
-    "typescript": "5.0.4"
-  },
-  "devDependencies": {
+    "typescript": "5.0.4",
     "vitepress": "1.0.0-alpha.75"
   }
 }

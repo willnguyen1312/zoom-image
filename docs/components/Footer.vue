@@ -1,6 +1,6 @@
 <template>
   <p :class="$style.footer">
-    Made with love by
+    Made with ❤️‍🔥 by
     <a :class="$style.blog" target="_blank" rel="noopener noreferrer" href="https://namnguyen.design">Nam Nguyen</a>
   </p>
 </template>
