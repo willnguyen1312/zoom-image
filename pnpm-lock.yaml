@@ -132,10 +132,11 @@ importers:
         version: 4.3.4(@types/node@18.16.3)
 
   examples/vanilla-ts:
-    devDependencies:
+    dependencies:
       '@zoom-image/core':
         specifier: ^0.0.1
         version: link:../../packages/core
+    devDependencies:
       typescript:
         specifier: ^5.0.4
         version: 5.0.4
