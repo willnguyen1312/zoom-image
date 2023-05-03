@@ -1,10 +1,25 @@
-# Zoom Image
+- [Zoom Image](#zoom-image)
+- [Demo](#demo)
+  - [Zoom on hover](#zoom-on-hover)
+  - [Zoom on wheel](#zoom-on-wheel)
+- [Architecture](#architecture)
+- [Development](#development)
+- [Commands](#commands)
+  - [With Preact](#with-preact)
+  - [With React](#with-react)
+  - [With Svelte](#with-svelte)
+  - [With Vanilla JS](#with-vanilla-js)
+  - [With Vue](#with-vue)
+- [Relevant projects](#relevant-projects)
+- [License](#license)
+
+## Zoom Image
 
 A little yet powerful library to zoom image on wheel / hover / pinch actions. It is typical experience on e-commerce
 sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 
 - ✅ Zoom on hover
-- 🚧 Zoom on wheel (Porting from battle-tested library of mine - https://react-zoomable-media.netlify.app/)
+- ✅ Zoom on wheel
 
 ## Demo
 
@@ -15,116 +30,6 @@ sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 ### Zoom on wheel
 
 ![Demo Zoom on wheel](./images/demo-zoom-wheel.gif)
-
-## Table of Contents
-
-- [Usage](#usage)
-- [API](#api)
-- [Architecture](#architecture)
-- [Development](#development)
-- [Commands](#commands)
-  - [With Preact](#with-preact)
-  - [With React](#with-react)
-  - [With Svelte](#with-svelte)
-  - [With Vanilla JS](#with-vanilla-js)
-  - [With Vue](#with-vue)
-
-## Usage
-
-### With Vanilla TS
-
-```html
-<div id="image-hover-container" class="image-hover-container">
-  <img class="image-hover" alt="Small Pic" src="/small.webp" />
-</div>
-```
-
-```css
-.image-hover-container {
-  /* This is important as the zoomed area will be positioned absolute as a child of image container */
-  position: relative;
-  /* Can be arbitrary value */
-  width: 321px;
-  /* Can be arbitrary value */
-  height: 321px;
-}
-
-/* It's best to keep image sizes according to image container. Since img tag cannot have children. We need an extra container to achieve UI composition for zooming purpose */
-.image-hover {
-  width: 100%;
-  height: 100%;
-}
-```
-
-```js
-import { createZoomImageHover } from "@zoom-image/core"
-
-const imageContainer = document.getElementById("image-hover-container")
-const { cleanup } = createZoomImageHover(imageContainer)
-
-// Call cleanup function when you don't need zoom image anymore
-```
-
-### With React
-
-```tsx
-import React from "react"
-import { ZoomImage } from "@zoom-image/react"
-import "./styles.css"
-
-function ZoomImageComponent() {
-  const imageContainerRef = React.useRef<HTMLDivElement>(null)
-
-  React.useEffect(() => {
-    const { cleanup } = createZoomImageHover(imageContainer)
-
-    return cleanup
-  }, [])
-
-  return (
-    <div ref={imageContainerRef} class="image-hover-container">
-      <img class="image-hover" alt="Small Pic" src="/small.webp" />
-    </div>
-  )
-}
-```
-
-```css
-.image-hover-container {
-  /* This is important as the zoomed area will be positioned absolute as a child of image container */
-  position: relative;
-  /* Can be arbitrary value */
-  width: 321px;
-  /* Can be arbitrary value */
-  height: 321px;
-}
-
-/* It's best to keep image sizes according to image container. Since img tag cannot have children. We need an extra container to achieve UI composition for zooming purpose */
-.image-hover {
-  width: 100%;
-  height: 100%;
-}
-```
-
-## API
-
-### createZoomImageHover(container: HTMLElement, options)
-
-The only required parameter is `container`. It is the container of the image. The image will be zoomed when you hover.
-The result of this function is object which stores a set of functions. You should call cleanup function when you don't
-need zoom image anymore to avoid memory leak.
-
-By default, the zoomed image will be the same as the original image and placed as direct child of container next to the
-original image on the right. You can customize it by passing optional `options` object as documented below.
-
-| Name            |                              Type |                                                                                                                  Note |
-| --------------- | --------------------------------: | --------------------------------------------------------------------------------------------------------------------: |
-| customZoom      | { width: number; height: number } |                                                        The size of zoomed window where zoomed image will be displayed |
-| zoomImageSource |                            string |                                                                                            The source of zoomed image |
-| zoomLensClass   |                            string |                                                                      The css class will be added to zoom lens element |
-| zoomImageClass  |                            string |                                                                   The css class will be added to zoomed image element |
-| zoomTarget      |                       HTMLElement |                                                                                         The container of zoomed image |
-| scaleFactor     |                            number | By default, zoomed image will have a scale of 1. The smaller the value, the bigger zoomed image and smaller zoom lens |
 
 ## Architecture
 
