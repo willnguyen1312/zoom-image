@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- 983970c: Fix image wheel
+- 01248b1: Fix image on wheel 🚀
 
 ## 0.0.2
 
