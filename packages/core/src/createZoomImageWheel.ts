@@ -1,4 +1,4 @@
-import { clamp, disableScroll, enableScroll, getPointersCenter, getSourceImage } from "./utils"
+import { clamp, disableScroll, enableScroll, getPointersCenter, getSourceImage, makeMaybeCallFunction } from "./utils"
 import type { PointerPosition } from "./utils"
 
 export type ZoomImageWheelProps = {
@@ -90,22 +90,14 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     // currentPercentage = calculatePercentage(newCurrentZoom)
   }
 
-  function onWheel(event: WheelEvent) {
-    if (!enabledZoom) {
-      return
-    }
-
+  function _onWheel(event: WheelEvent) {
     event.preventDefault()
     const delta = -clamp(event.deltaY, -ZOOM_DELTA, ZOOM_DELTA)
     processZoom({ delta, x: event.pageX, y: event.pageY })
     updateZoom()
   }
 
-  function handlePointerMove(event: PointerEvent) {
-    if (!enabledZoom) {
-      return
-    }
-
+  function _handlePointerMove(event: PointerEvent) {
     event.preventDefault()
     const { pageX, pageY, pointerId } = event
     for (const [cachedPointerid] of pointerMap.entries()) {
@@ -150,11 +142,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     }
   }
 
-  function handlePointerDown(event: PointerEvent) {
-    if (!enabledZoom) {
-      return
-    }
-
+  function _handlePointerDown(event: PointerEvent) {
     event.preventDefault()
 
     if (pointerMap.size === 2) {
@@ -179,11 +167,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     }
   }
 
-  function handlePointerUp(event: PointerEvent) {
-    if (!enabledZoom) {
-      return
-    }
-
+  function _handlePointerUp(event: PointerEvent) {
     pointerMap.delete(event.pointerId)
 
     if (pointerMap.size === 0) {
@@ -203,6 +187,15 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     lastPositionX = currentPositionX
     lastPositionY = currentPositionY
   }
+
+  function checkZoomEnabled() {
+    return enabledZoom
+  }
+
+  const onWheel = makeMaybeCallFunction(checkZoomEnabled, _onWheel)
+  const handlePointerDown = makeMaybeCallFunction(checkZoomEnabled, _handlePointerMove)
+  const handlePointerMove = makeMaybeCallFunction(checkZoomEnabled, _handlePointerDown)
+  const handlePointerUp = makeMaybeCallFunction(checkZoomEnabled, _handlePointerUp)
 
   container.addEventListener("wheel", onWheel)
   container.addEventListener("pointerdown", handlePointerDown)
