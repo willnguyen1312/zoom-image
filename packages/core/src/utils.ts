@@ -52,3 +52,11 @@ export function getPointersCenter(first: PointerPosition, second: PointerPositio
     y: (first.y + second.y) / 2,
   }
 }
+
+export function makeMaybeCallFunction<T>(predicateFn: () => boolean, fn: (arg: T) => void) {
+  return (arg: T) => {
+    if (predicateFn()) {
+      fn(arg)
+    }
+  }
+}
