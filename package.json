@@ -29,7 +29,9 @@
     "lint": "eslint packages --ext .ts",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "changeset": "changeset",
+    "release": "changeset publish"
   },
   "dependencies": {
     "@changesets/changelog-github": "^0.4.8",
