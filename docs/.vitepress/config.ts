@@ -2,7 +2,7 @@ import { defineConfig } from "vitepress"
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Zoom Image Library",
+  title: "Zoom Image",
   description: "A little yet powerful library to zoom image on wheel / hover / pinch actions",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-configp
