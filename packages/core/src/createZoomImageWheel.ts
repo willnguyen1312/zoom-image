@@ -193,8 +193,8 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   const onWheel = makeMaybeCallFunction(checkZoomEnabled, _onWheel)
-  const handlePointerDown = makeMaybeCallFunction(checkZoomEnabled, _handlePointerMove)
-  const handlePointerMove = makeMaybeCallFunction(checkZoomEnabled, _handlePointerDown)
+  const handlePointerDown = makeMaybeCallFunction(checkZoomEnabled, _handlePointerDown)
+  const handlePointerMove = makeMaybeCallFunction(checkZoomEnabled, _handlePointerMove)
   const handlePointerUp = makeMaybeCallFunction(checkZoomEnabled, _handlePointerUp)
 
   container.addEventListener("wheel", onWheel)

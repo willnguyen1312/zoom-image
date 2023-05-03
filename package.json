@@ -11,6 +11,7 @@
     "packages": "pnpm --filter=./packages/** -r",
     "examples": "pnpm --filter=./examples/** -r",
     "build-fast": "pnpm packages -- build-fast",
+    "dev": "pnpm packages -- dev",
     "build": "pnpm packages -- build",
     "deploy:demo": "netlify deploy --prod --dir=./examples/vanilla-ts/dist",
     "preact": "pnpm --filter \"./examples/react-ts\"",
@@ -45,6 +46,8 @@
     "tsup": "6.7.0",
     "tsx": "3.12.7",
     "typescript": "5.0.4",
-    "vitepress": "1.0.0-alpha.75"
+    "unocss": "^0.51.8",
+    "vitepress": "1.0.0-alpha.75",
+    "vue": "^3.2.47"
   }
 }
