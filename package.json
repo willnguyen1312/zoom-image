@@ -45,6 +45,8 @@
     "tsup": "6.7.0",
     "tsx": "3.12.7",
     "typescript": "5.0.4",
-    "vitepress": "1.0.0-alpha.75"
+    "unocss": "^0.51.8",
+    "vitepress": "1.0.0-alpha.75",
+    "vue": "^3.2.47"
   }
 }

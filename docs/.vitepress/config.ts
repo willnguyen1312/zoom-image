@@ -1,3 +1,4 @@
+import Unocss from "unocss/vite"
 import { defineConfig } from "vitepress"
 
 // https://vitepress.dev/reference/site-config
@@ -17,43 +18,23 @@ export default defineConfig({
         items: [
           {
             text: "Vanilla JS",
-            items: [
-              { text: "Zoom on hover", link: "/examples/vanilla/zoomOnHover" },
-              { text: "Zoom on wheel", link: "/examples/vanilla/zoomOnWheel" },
-            ],
-            collapsed: true,
+            link: "/examples/vanilla",
           },
           {
             text: "Vue",
-            items: [
-              { text: "Zoom on hover", link: "/examples/vue/zoomOnHover" },
-              { text: "Zoom on wheel", link: "/examples/vue/zoomOnWheel" },
-            ],
-            collapsed: true,
+            link: "/examples/vue",
           },
           {
             text: "React",
-            items: [
-              { text: "Zoom on hover", link: "/examples/react/zoomOnHover" },
-              { text: "Zoom on wheel", link: "/examples/react/zoomOnWheel" },
-            ],
-            collapsed: true,
+            link: "/examples/react",
           },
           {
             text: "Preact",
-            items: [
-              { text: "Zoom on hover", link: "/examples/preact/zoomOnHover" },
-              { text: "Zoom on wheel", link: "/examples/preact/zoomOnWheel" },
-            ],
-            collapsed: true,
+            link: "/examples/preact",
           },
           {
             text: "Svelte",
-            items: [
-              { text: "Zoom on hover", link: "/examples/svelte/zoomOnHover" },
-              { text: "Zoom on wheel", link: "/examples/svelte/zoomOnWheel" },
-            ],
-            collapsed: true,
+            link: "/examples/svelte",
           },
         ],
       },
@@ -71,5 +52,8 @@ export default defineConfig({
     search: {
       provider: "local",
     },
+  },
+  vite: {
+    plugins: [Unocss()],
   },
 })
