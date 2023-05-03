@@ -1,0 +1,22 @@
+{
+	"name": "@volar/typescript",
+	"version": "1.4.1",
+	"main": "out/index.js",
+	"license": "MIT",
+	"files": [
+		"out/**/*.js",
+		"out/**/*.d.ts"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/volarjs/volar.js.git",
+		"directory": "packages/typescript"
+	},
+	"dependencies": {
+		"@volar/language-core": "1.4.1"
+	},
+	"peerDependencies": {
+		"typescript": "*"
+	},
+	"gitHead": "2c8a783542ace3292649a04490919b515e387b9e"
+}

@@ -1,0 +1,39 @@
+{
+  "module": "./esm/mod.js",
+  "main": "./script/mod.js",
+  "name": "code-block-writer",
+  "version": "12.0.0",
+  "description": "A simple code writer that assists with formatting and visualizing blocks of code.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dsherret/code-block-writer.git"
+  },
+  "keywords": [
+    "code generation",
+    "typescript",
+    "writer",
+    "printer"
+  ],
+  "author": "David Sherret",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dsherret/code-block-writer/issues"
+  },
+  "homepage": "https://github.com/dsherret/code-block-writer#readme",
+  "exports": {
+    ".": {
+      "import": "./esm/mod.js",
+      "require": "./script/mod.js"
+    }
+  },
+  "scripts": {
+    "test": "node test_runner.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "chalk": "^4.1.2",
+    "@types/chai": "4.3",
+    "chai": "4.3.7",
+    "@deno/shim-deno": "~0.13.0"
+  }
+}

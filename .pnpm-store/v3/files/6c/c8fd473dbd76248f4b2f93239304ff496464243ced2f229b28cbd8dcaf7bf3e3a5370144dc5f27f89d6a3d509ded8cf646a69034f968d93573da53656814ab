@@ -1,0 +1,55 @@
+{
+	"name": "babel-plugin-transform-hook-names",
+	"version": "1.0.2",
+	"description": "Babel plugin to add hook names for Preact devtools",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "mocha -r ts-node/register --extension js,ts,tsx test/*.test.ts",
+		"prepublishOnly": "npm test"
+	},
+	"keywords": [
+		"babel",
+		"hook",
+		"preact",
+		"devtools"
+	],
+	"author": "The Preact Authors (https://preactjs.com)",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/preactjs/babel-plugin-transform-hook-names.git"
+	},
+	"peerDependencies": {
+		"@babel/core": "^7.12.10"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.12.10",
+		"@babel/preset-typescript": "^7.13.0",
+		"@types/babel__core": "^7.1.12",
+		"@types/chai": "^4.2.14",
+		"@types/mocha": "^8.2.0",
+		"@types/node": "^14.14.22",
+		"chai": "^4.2.0",
+		"husky": "^4.3.8",
+		"lint-staged": "^10.5.3",
+		"mocha": "^8.2.1",
+		"prettier": "^2.2.1",
+		"ts-node": "^9.1.1",
+		"typescript": "^4.1.3"
+	},
+	"lint-staged": {
+		"**/*.{js,jsx,ts,tsx,json}": [
+			"prettier --write"
+		]
+	},
+	"prettier": {
+		"useTabs": true,
+		"trailingComma": "all",
+		"arrowParens": "avoid"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	}
+}

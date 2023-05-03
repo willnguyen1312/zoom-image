@@ -1,0 +1,80 @@
+{
+	"name": "@preact/preset-vite",
+	"version": "2.5.0",
+	"description": "Preact preset for the vite bundler",
+	"main": "./dist/cjs/index.js",
+	"module": "./dist/esm/index.mjs",
+	"exports": {
+		".": {
+			"import": "./dist/esm/index.mjs",
+			"require": "./dist/cjs/index.js",
+			"types": "./dist/types/index.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
+	"types": "dist/types/index.d.ts",
+	"scripts": {
+		"dev": "vite demo",
+		"dev:build": "vite build demo",
+		"build": "rimraf dist && tsc && tsc -p tsconfig.cjs.json && node tools/postbuild.mjs",
+		"test": "node --test test",
+		"prepublishOnly": "npm run build"
+	},
+	"keywords": [
+		"preact",
+		"vite",
+		"vite-preset",
+		"preset"
+	],
+	"author": "The Preact Team (https://preactjs.com)",
+	"repository": "preactjs/preset-vite",
+	"license": "MIT",
+	"files": [
+		"dist/"
+	],
+	"dependencies": {
+		"@babel/plugin-transform-react-jsx": "^7.14.9",
+		"@babel/plugin-transform-react-jsx-development": "^7.16.7",
+		"@prefresh/vite": "^2.2.8",
+		"@rollup/pluginutils": "^4.1.1",
+		"babel-plugin-transform-hook-names": "^1.0.2",
+		"debug": "^4.3.1",
+		"kolorist": "^1.2.10",
+		"resolve": "^1.20.0"
+	},
+	"peerDependencies": {
+		"@babel/core": "7.x",
+		"vite": "2.x || 3.x || 4.x"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.15.8",
+		"@types/babel__core": "^7.1.14",
+		"@types/debug": "^4.1.5",
+		"@types/estree": "^0.0.50",
+		"@types/node": "^14.14.33",
+		"@types/resolve": "^1.20.1",
+		"lint-staged": "^10.5.4",
+		"prettier": "^2.2.1",
+		"rimraf": "^3.0.2",
+		"simple-git-hooks": "^2.0.2",
+		"ts-node": "^9.1.1",
+		"typescript": "^4.2.3",
+		"vite": "^2.6.7"
+	},
+	"lint-staged": {
+		"**/*.{js,jsx,ts,tsx,yml}": [
+			"prettier --write"
+		]
+	},
+	"simple-git-hooks": {
+		"pre-commit": "npx lint-staged"
+	},
+	"prettier": {
+		"useTabs": true,
+		"arrowParens": "avoid",
+		"trailingComma": "all"
+	},
+	"volta": {
+		"node": "18.12.1"
+	}
+}
