@@ -9,8 +9,10 @@
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
+  "dependencies": {
+    "@zoom-image/core": "^0.0.1"
+  },
   "devDependencies": {
-    "@zoom-image/core": "workspace:*",
     "@sveltejs/vite-plugin-svelte": "^2.1.1",
     "@tsconfig/svelte": "^4.0.1",
     "svelte": "^3.58.0",

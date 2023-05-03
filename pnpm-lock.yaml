@@ -44,7 +44,7 @@ importers:
   examples/preact-ts:
     dependencies:
       '@zoom-image/core':
-        specifier: workspace:*
+        specifier: ^0.0.1
         version: link:../../packages/core
       preact:
         specifier: ^10.13.2
@@ -63,7 +63,7 @@ importers:
   examples/react-ts:
     dependencies:
       '@zoom-image/core':
-        specifier: workspace:*
+        specifier: ^0.0.1
         version: link:../../packages/core
       react:
         specifier: ^18.2.0
@@ -106,7 +106,7 @@ importers:
   examples/svelte-ts:
     dependencies:
       '@zoom-image/core':
-        specifier: workspace:*
+        specifier: ^0.0.1
         version: link:../../packages/core
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
@@ -134,7 +134,7 @@ importers:
   examples/vanilla-ts:
     devDependencies:
       '@zoom-image/core':
-        specifier: workspace:*
+        specifier: ^0.0.1
         version: link:../../packages/core
       typescript:
         specifier: ^5.0.4
@@ -146,7 +146,7 @@ importers:
   examples/vue-ts:
     dependencies:
       '@zoom-image/core':
-        specifier: workspace:*
+        specifier: ^0.0.1
         version: link:../../packages/core
       vue:
         specifier: ^3.2.47
