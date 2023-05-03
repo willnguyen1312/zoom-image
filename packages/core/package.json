@@ -7,7 +7,7 @@
   "sideEffects": false,
   "scripts": {
     "build-fast": "tsup src",
-    "start": "pnpm build --watch",
+    "dev": "pnpm build --watch",
     "build": "tsup src --dts",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit"
