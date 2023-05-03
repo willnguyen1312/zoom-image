@@ -179,3 +179,6 @@ e2e/results
 # Vitepress
 docs/.vitepress/dist
 docs/.vitepress/cache
+
+# PNPM stuff
+.pnpm-store
