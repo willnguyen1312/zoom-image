@@ -1,5 +1,11 @@
 # @zoom-image/core
 
+## 0.0.3
+
+### Patch Changes
+
+- 983970c: Fix image wheel
+
 ## 0.0.2
 
 ### Patch Changes
