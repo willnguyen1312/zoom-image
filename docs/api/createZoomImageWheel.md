@@ -19,10 +19,22 @@ type ZoomImageWheelProps = {
   wheelZoomRatio?: number
 }
 
+type ZoomImageWheelState = {
+  currentZoom: number
+}
+
+type Listener = (state: ZoomImageWheelState) => void
+type StateUpdate = { enable: boolean }
+
 function createZoomImageWheel(
   container: HTMLElement,
   options?: ZoomImageWheelProps,
 ): {
+  // Remove all event listeners
   cleanup: () => void
+  // Subscribe to state changes, returns a function to unsubscribe
+  subscribe: (listener: Listener) => () => void
+  // Update state, can be used to enable/disable the zoom
+  update(value: StateUpdate): void
 }
 ```
