@@ -118,7 +118,7 @@ importers:
   examples/solid-ts:
     dependencies:
       '@zoom-image/core':
-        specifier: workspace:^0.0.5
+        specifier: ^0.0.5
         version: link:../../packages/core
       solid-js:
         specifier: ^1.7.4
