@@ -52,9 +52,10 @@ export default defineConfig({
       },
       {
         text: "API",
+        link: "/api/",
         items: [
-          { text: "createZoomImageHover", link: "/api/zoomOnHover" },
-          { text: "createZoomImageWheel", link: "/api/zoomOnWheel" },
+          { text: "createZoomImageHover", link: "/api/createZoomImageHover" },
+          { text: "createZoomImageWheel", link: "/api/createZoomImageWheel" },
         ],
       },
     ],

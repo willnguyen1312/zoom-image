@@ -2,6 +2,8 @@
 aside: false
 ---
 
+# Vanilla JS Example
+
 <script setup>
 import Demo from '../components/Demo.vue'
 </script>

@@ -2,6 +2,8 @@
 aside: false
 ---
 
+# Preact Example
+
 <script setup>
 import Demo from '../components/Demo.vue'
 </script>
