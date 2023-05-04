@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import "virtual:uno.css"
+import "uno.css"
 import { createZoomImageHover, createZoomImageWheel } from "@zoom-image/core"
 
 function createSimpleState<T>(initialState: T) {

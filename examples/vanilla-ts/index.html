@@ -6,42 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Zoom Image Demo</title>
   </head>
-  <body class="font-sans">
-    <div class="p4">
-      <div class="decoration-none">
-        <div class="sm:block">
-          <nav class="flex space-x-4" aria-label="Tabs">
-            <a
-              href="#"
-              id="zoom-image-wheel"
-              class="bg-gray-200 text-gray-800 rounded-md px-3 py-2 text-sm font-medium decoration-none cursor-pointer"
-              >Zoom Image Wheel</a
-            >
-            <a
-              href="#"
-              id="zoom-image-hover"
-              class="text-gray-800 rounded-md px-3 py-2 text-sm font-medium decoration-none cursor-pointer"
-              >Zoom Image Hover</a
-            >
-          </nav>
-        </div>
+  <body class="font-sans p4">
+    <nav class="flex space-x-4 decoration-none" aria-label="Tabs">
+      <a
+        href="#"
+        id="zoom-image-wheel"
+        class="bg-gray-200 text-gray-800 rounded-md px-3 py-2 text-sm font-medium decoration-none cursor-pointer"
+        >Zoom Image Wheel</a
+      >
+      <a
+        href="#"
+        id="zoom-image-hover"
+        class="text-gray-800 rounded-md px-3 py-2 text-sm font-medium decoration-none cursor-pointer"
+        >Zoom Image Hover</a
+      >
+    </nav>
+
+    <template id="image-wheel">
+      <div id="image-wheel-container" class="w-[300px] h-[300px] cursor-crosshair">
+        <img class="w-full h-full" alt="Large Pic" src="/large.webp" />
       </div>
+    </template>
 
-      <template id="image-wheel">
-        <div id="image-wheel-container" class="w-[300px] h-[300px] cursor-crosshair">
-          <img class="w-full h-full" alt="Large Pic" src="/large.webp" />
-        </div>
-      </template>
+    <template id="image-hover">
+      <div id="image-hover-container" class="relative flex items-start w-[250px] h-[250px]">
+        <img class="w-full h-full" alt="Small Pic" src="/small.webp" />
+        <div id="zoom-hover-target" class="absolute left-[300px]"></div>
+      </div>
+    </template>
 
-      <template id="image-hover">
-        <div id="image-hover-container" class="relative flex items-start w-[250px] h-[250px]">
-          <img class="w-full h-full" alt="Small Pic" src="/small.webp" />
-          <div id="zoom-hover-target" class="absolute left-[300px]"></div>
-        </div>
-      </template>
-
-      <div id="parent" class="mt-4"></div>
-    </div>
+    <div id="parent" class="mt-4"></div>
 
     <script type="module" src="./src/main.ts"></script>
   </body>
