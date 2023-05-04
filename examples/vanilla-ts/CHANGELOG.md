@@ -1,5 +1,13 @@
 # vanilla-ts
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies
+  [[`5eb9d2b`](https://github.com/willnguyen1312/zoom-image/commit/5eb9d2ba3f4c39155d5dcfd07c3cd2e5cff57c60)]:
+  - @zoom-image/core@0.0.5
+
 ## 0.0.3
 
 ### Patch Changes

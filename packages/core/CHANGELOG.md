@@ -1,5 +1,14 @@
 # @zoom-image/core
 
+## 0.0.5
+
+### Patch Changes
+
+- [#30](https://github.com/willnguyen1312/zoom-image/pull/30)
+  [`5eb9d2b`](https://github.com/willnguyen1312/zoom-image/commit/5eb9d2ba3f4c39155d5dcfd07c3cd2e5cff57c60) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Integrate Algolia DocSearch, update docs and
+  createZoomImageWheel signature
+
 ## 0.0.4
 
 ### Patch Changes
