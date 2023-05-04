@@ -23,6 +23,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.0",
     "typescript": "^5.0.4",
+    "unocss": "^0.51.8",
     "vite": "^4.3.4"
   }
 }

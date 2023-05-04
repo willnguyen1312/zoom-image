@@ -21,9 +21,9 @@ const zoomType = computed(() => {
   return found?.value as "hover" | "wheel"
 })
 
-const imageWheelContainerRef = ref<HTMLElement>()
-const imageHoverContainerRef = ref<HTMLElement>()
-const zoomTargetRef = ref<HTMLElement>()
+const imageWheelContainerRef = ref<HTMLDivElement>()
+const imageHoverContainerRef = ref<HTMLDivElement>()
+const zoomTargetRef = ref<HTMLDivElement>()
 
 const handleTabClick = (tab: { name: string; href: string; current: boolean }) => {
   tabs.value.forEach((tab) => {
@@ -36,7 +36,6 @@ watch(
   zoomType,
   async () => {
     cleanup()
-
     await nextTick()
 
     if (zoomType.value === "hover") {

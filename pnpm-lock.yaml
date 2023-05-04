@@ -105,6 +105,9 @@ importers:
       typescript:
         specifier: ^5.0.4
         version: 5.0.4
+      unocss:
+        specifier: ^0.51.8
+        version: 0.51.8(postcss@8.4.23)(vite@4.3.4)
       vite:
         specifier: ^4.3.4
         version: 4.3.4(@types/node@18.16.3)
