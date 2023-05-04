@@ -63,7 +63,12 @@ export default defineConfig({
     socialLinks: [{ icon: "github", link: "https://github.com/willnguyen1312/zoom-image" }],
 
     search: {
-      provider: "local",
+      provider: "algolia",
+      options: {
+        appId: "KBKA7LOEM6",
+        apiKey: "5c0bc869b542428154f42183a7145aa5",
+        indexName: "zoom-images",
+      },
     },
   },
   vite: {

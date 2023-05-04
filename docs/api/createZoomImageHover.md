@@ -32,6 +32,7 @@ function createZoomImageHover(
   container: HTMLElement,
   options?: ZoomImageHoverOptions,
 ): {
+  // Remove all event listeners, remove zoom lens and zoomed image
   cleanup: () => void
 }
 ```

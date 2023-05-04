@@ -17,6 +17,7 @@ type ZoomImageWheelState = {
 }
 
 type Listener = (state: ZoomImageWheelState) => void
+type StateUpdate = { enable: boolean }
 
 export function createZoomImageWheel(container: HTMLElement, options: ZoomImageWheelProps = {}) {
   const finalOptions: Required<ZoomImageWheelProps> = {
@@ -41,7 +42,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     return newPositionY
   }
 
-  let enabledZoom = true
+  let enable = true
   let prevDistance = -1
   let enabledScroll = true
   let zoomType: "wheel" | "pinch" | "" = ""
@@ -189,7 +190,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function checkZoomEnabled() {
-    return enabledZoom
+    return enable
   }
 
   const onWheel = makeMaybeCallFunction(checkZoomEnabled, _onWheel)
@@ -212,10 +213,12 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     },
     subscribe(listener: Listener) {
       listeners.add(listener)
-      return () => listeners.delete(listener)
+      return () => {
+        listeners.delete(listener)
+      }
     },
-    setEnabledZoom(value: boolean) {
-      enabledZoom = value
+    update(state: StateUpdate) {
+      enable = state.enable
     },
   }
 }
