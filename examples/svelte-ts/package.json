@@ -1,7 +1,7 @@
 {
   "name": "svelte-ts",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,7 +10,7 @@
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "dependencies": {
-    "@zoom-image/core": "^0.0.4"
+    "@zoom-image/core": "^0.0.5"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.1.1",
