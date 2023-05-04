@@ -1,4 +1,4 @@
-# With zoomOnHover
+# createZoomImageHover
 
 ### Basic Usage
 

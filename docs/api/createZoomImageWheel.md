@@ -1,4 +1,4 @@
-# With zoomOnWheel
+# createZoomImageWheel
 
 ### Basic Usage
 
