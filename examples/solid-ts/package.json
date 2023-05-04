@@ -1,0 +1,22 @@
+{
+  "name": "solid-ts",
+  "version": "0.0.5",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@unocss/preset-mini": "^0.51.8",
+    "@unocss/vite": "^0.51.8",
+    "typescript": "^5.0.4",
+    "vite": "^4.3.4",
+    "vite-plugin-solid": "^2.7.0"
+  },
+  "dependencies": {
+    "@zoom-image/core": "^0.0.5",
+    "solid-js": "^1.7.4"
+  }
+}
