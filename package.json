@@ -14,7 +14,7 @@
     "dev": "pnpm packages -- dev",
     "build": "pnpm packages -- build",
     "deploy:demo": "netlify deploy --prod --dir=./examples/vanilla-ts/dist",
-    "preact": "pnpm --filter \"./examples/react-ts\"",
+    "preact": "pnpm --filter \"./examples/preact-ts\"",
     "react": "pnpm --filter \"./examples/react-ts\"",
     "svelte": "pnpm --filter \"./examples/svelte-ts\"",
     "vanilla": "pnpm --filter \"./examples/vanilla-ts\"",

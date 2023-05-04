@@ -1,71 +1,105 @@
 <script setup lang="ts">
-import { createZoomImageHover } from "@zoom-image/core"
-import { onMounted, onUnmounted, ref } from "vue"
+import { createZoomImageHover, createZoomImageWheel } from "@zoom-image/core"
+import { computed, nextTick, onUnmounted, ref, watch } from "vue"
 
-const imageContainerRef = ref<HTMLElement>()
-const zoomTargetRef = ref<HTMLElement>()
+let cleanup: () => void = () => {}
 
-let cleanup: (() => void) | undefined
+const tabs = ref<
+  {
+    name: string
+    href: string
+    current: boolean
+    value: "wheel" | "hover"
+  }[]
+>([
+  { name: "Zoom Image Wheel", href: "#", current: true, value: "wheel" },
+  { name: "Zoom Image Hover", href: "#", current: false, value: "hover" },
+])
 
-onMounted(() => {
-  if (imageContainerRef.value) {
-    const imageContainer = imageContainerRef.value
-    const zoomTarget = zoomTargetRef.value
-
-    const result = createZoomImageHover(imageContainer, {
-      zoomImageSource: "/large.webp",
-      customZoom: { width: 820, height: 820 },
-      zoomTarget,
-      scaleFactor: 0.5,
-    })
-
-    cleanup = result.cleanup
-  }
+const zoomType = computed(() => {
+  const found = tabs.value.find((tab) => tab.current)
+  return found?.value as "hover" | "wheel"
 })
 
+const imageWheelContainerRef = ref<HTMLDivElement>()
+const imageHoverContainerRef = ref<HTMLDivElement>()
+const zoomTargetRef = ref<HTMLDivElement>()
+
+const handleTabClick = (tab: { name: string; href: string; current: boolean }) => {
+  tabs.value.forEach((tab) => {
+    tab.current = false
+  })
+  tab.current = true
+}
+
+watch(
+  zoomType,
+  async () => {
+    cleanup()
+    await nextTick()
+
+    if (zoomType.value === "hover") {
+      const imageContainer = imageHoverContainerRef.value as HTMLDivElement
+      const zoomTarget = zoomTargetRef.value
+
+      const result = createZoomImageHover(imageContainer, {
+        zoomImageSource: "/large.webp",
+        customZoom: { width: 300, height: 500 },
+        zoomTarget,
+        scaleFactor: 0.5,
+      })
+      cleanup = result.cleanup
+    }
+
+    if (zoomType.value === "wheel") {
+      const imageContainer = imageWheelContainerRef.value as HTMLDivElement
+
+      const result = createZoomImageWheel(imageContainer)
+      cleanup = result.cleanup
+    }
+  },
+  { immediate: true },
+)
+
 onUnmounted(() => {
-  cleanup?.()
+  cleanup()
 })
 </script>
 
 <template>
-  <div :class="$style.wrapper">
-    <h1>Zoom Image Hover</h1>
-    <div :class="$style.demoImageHover">
-      <div ref="imageContainerRef" id="image-hover-container" :class="$style.imageContainer">
-        <img :class="$style.image" alt="Small Pic" src="/small.webp" />
-      </div>
-      <div ref="zoomTargetRef" id="zoom-hover-target" :class="$style.zoomTarget"></div>
+  <div class="font-sans">
+    <nav class="flex space-x-4 pb-4" aria-label="Tabs">
+      <a
+        v-for="tab in tabs"
+        @click="handleTabClick(tab)"
+        :key="tab.name"
+        :href="tab.href"
+        :class="[
+          tab.current ? 'bg-gray-100 text-gray-700' : 'text-gray-500 hover:text-gray-700',
+          'rounded-md px-3 py-2 text-sm font-medium decoration-none',
+        ]"
+        :aria-current="tab.current ? 'page' : undefined"
+        >{{ tab.name }}</a
+      >
+    </nav>
+
+    <div
+      v-if="zoomType === 'wheel'"
+      ref="imageWheelContainerRef"
+      id="image-wheel-container"
+      class="w-[300px] h-[300px] cursor-crosshair"
+    >
+      <img class="w-full h-full" alt="Large Pic" src="/large.webp" />
+    </div>
+
+    <div
+      v-if="zoomType === 'hover'"
+      id="image-hover-container"
+      ref="imageHoverContainerRef"
+      class="relative flex items-start w-[250px] h-[250px]"
+    >
+      <img class="w-full h-full" alt="Small Pic" src="/small.webp" />
+      <div ref="zoomTargetRef" id="zoom-hover-target" class="absolute left-[300px]"></div>
     </div>
   </div>
 </template>
-
-<style module>
-.wrapper {
-  padding: 16px;
-}
-
-.demoImageHover {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: start;
-}
-
-.imageContainer {
-  position: relative;
-  margin-right: 10px;
-  width: 416px;
-  height: 416px;
-}
-
-.image-hover {
-  width: 100%;
-  height: 100%;
-}
-
-.zoomTarget {
-  position: absolute;
-  left: 500px;
-}
-</style>
