@@ -1,4 +1,5 @@
-import "./app.css"
+// eslint-disable-next-line import/no-unresolved
+import "uno.css"
 import App from "./App.svelte"
 
 const app = new App({

@@ -1,15 +1,25 @@
 <script setup lang="ts">
 import { createZoomImageHover, createZoomImageWheel } from "@zoom-image/core"
-import { nextTick, onUnmounted, ref, watch } from "vue"
+import { computed, nextTick, onUnmounted, ref, watch } from "vue"
 
 let cleanup: () => void = () => {}
 
-const tabs = ref([
-  { name: "Zoom Image Wheel", href: "#", current: true },
-  { name: "Zoom Image Hover", href: "#", current: false },
+const tabs = ref<
+  {
+    name: string
+    href: string
+    current: boolean
+    value: "wheel" | "hover"
+  }[]
+>([
+  { name: "Zoom Image Wheel", href: "#", current: true, value: "wheel" },
+  { name: "Zoom Image Hover", href: "#", current: false, value: "hover" },
 ])
 
-const zoomType = ref<"hover" | "wheel">("wheel")
+const zoomType = computed(() => {
+  const found = tabs.value.find((tab) => tab.current)
+  return found?.value as "hover" | "wheel"
+})
 
 const imageWheelContainerRef = ref<HTMLElement>()
 const imageHoverContainerRef = ref<HTMLElement>()
@@ -20,7 +30,6 @@ const handleTabClick = (tab: { name: string; href: string; current: boolean }) =
     tab.current = false
   })
   tab.current = true
-  zoomType.value = tab.name === "Zoom Image Wheel" ? "wheel" : "hover"
 }
 
 watch(

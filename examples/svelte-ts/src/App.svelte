@@ -1,66 +1,83 @@
 <script lang="ts">
-  import { onDestroy, onMount } from "svelte"
-  import { createZoomImageHover } from "@zoom-image/core"
+  import { onDestroy, tick } from "svelte"
+  import { createZoomImageHover, createZoomImageWheel } from "@zoom-image/core"
 
-  let cleanup: (() => void) | undefined
-  let imageContainer: HTMLDivElement
+  const tabs: {
+    name: string
+    href: string
+    current: boolean
+    value: "wheel" | "hover"
+  }[] = [
+    { name: "Zoom Image Wheel", href: "#", current: true, value: "wheel" },
+    { name: "Zoom Image Hover", href: "#", current: false, value: "hover" },
+  ]
+  $: zoomType = tabs.find((tab) => tab.current)?.value
+
+  let imageWheelContainer: HTMLDivElement
+  let imageHoverContainer: HTMLDivElement
   let zoomTarget: HTMLDivElement
+  let cleanup: () => void = () => {}
 
-  onMount(() => {
-    const result = createZoomImageHover(imageContainer, {
-      zoomImageSource: "/large.webp",
-      customZoom: { width: 820, height: 820 },
-      zoomTarget,
-      scaleFactor: 0.5,
-    })
+  async function processZoom(zoomType: string) {
+    cleanup()
+    await tick()
 
-    cleanup = result.cleanup
-  })
+    if (zoomType === "hover") {
+      const result = createZoomImageHover(imageHoverContainer, {
+        zoomImageSource: "/large.webp",
+        customZoom: { width: 300, height: 500 },
+        zoomTarget,
+        scaleFactor: 0.5,
+      })
+      cleanup = result.cleanup
+    }
+
+    if (zoomType === "wheel") {
+      const result = createZoomImageWheel(imageWheelContainer)
+      cleanup = result.cleanup
+    }
+  }
+
+  $: processZoom(zoomType)
 
   onDestroy(() => {
-    cleanup?.()
+    cleanup()
   })
 </script>
 
-<main>
-  <div class="wrapper">
-    <h1>Zoom Image Hover</h1>
-    <div class="demo-image-hover">
-      <div id="image-hover-container" class="image-hover-container" bind:this={imageContainer}>
-        <img class="image-hover" alt="Small Pic" src="/small.webp" />
-      </div>
-      <div id="zoom-hover-target" class="zoom-hover-target" bind:this={zoomTarget} />
+<div class="font-sans">
+  <nav class="flex space-x-4 pb-4" aria-label="Tabs">
+    {#each tabs as tab (tab.name)}
+      <a
+        on:click={() => {
+          tabs.forEach((tab) => {
+            tab.current = false
+          })
+          tab.current = true
+        }}
+        aria-current={tab.current ? "page" : undefined}
+        href={tab.href}
+        class={`rounded-md px-3 py-2 text-sm font-medium decoration-none ${
+          tab.current ? "bg-gray-100 text-gray-700" : "text-gray-500 hover:text-gray-700"
+        }`}>{tab.name}</a
+      >
+    {/each}
+  </nav>
+
+  {#if zoomType === "wheel"}
+    <div bind:this={imageWheelContainer} id="image-wheel-container" class="w-[300px] h-[300px] cursor-crosshair">
+      <img class="w-full h-full" alt="Large Pic" src="/large.webp" />
     </div>
-  </div>
-</main>
+  {/if}
 
-<style>
-  .wrapper {
-    padding: 16px;
-  }
-
-  .demo-image-hover {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: start;
-  }
-
-  .image-hover-container {
-    position: relative;
-    margin-right: 10px;
-    width: 416px;
-    height: 416px;
-  }
-
-  .image-hover {
-    width: 100%;
-    height: 100%;
-  }
-
-  .zoom-hover-target {
-    position: absolute;
-    display: block;
-    left: 500px;
-  }
-</style>
+  {#if zoomType === "hover"}
+    <div
+      id="image-hover-container"
+      bind:this={imageHoverContainer}
+      class="relative flex items-start w-[250px] h-[250px]"
+    >
+      <img class="w-full h-full" alt="Small Pic" src="/small.webp" />
+      <div bind:this={zoomTarget} id="zoom-hover-target" class="absolute left-[300px]" />
+    </div>
+  {/if}
+</div>
