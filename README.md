@@ -10,6 +10,8 @@
   - [With Svelte](#with-svelte)
   - [With Vanilla JS](#with-vanilla-js)
   - [With Vue](#with-vue)
+  - [With Solid](#with-solid)
+  - [With Qwik](#with-qwik)
 - [Relevant projects](#relevant-projects)
 - [License](#license)
 
@@ -73,6 +75,18 @@ pnpm start-vanilla
 
 ```bash
 pnpm start-vue
+```
+
+### With Solid
+
+```bash
+pnpm start-solid
+```
+
+### With Qwik
+
+```bash
+pnpm start-qwik
 ```
 
 ## Relevant projects
