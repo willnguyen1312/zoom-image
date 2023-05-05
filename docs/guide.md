@@ -69,3 +69,5 @@ Refer to [API section](/api/) for more details.
 - [React](/examples/react)
 - [Preact](/examples/preact)
 - [Svelte](/examples/svelte)
+- [Solid](/examples/solid)
+- [Qwik](/examples/qwik)

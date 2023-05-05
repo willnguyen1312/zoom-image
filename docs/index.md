@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "Zoom Image"
-  tagline: "A little yet powerful library to zoom image"
+  tagline: "A little powerful library to zoom image on the web"
   image:
     src: /favicon.svg
     alt: ZoomImage
