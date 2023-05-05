@@ -11,7 +11,7 @@
   "devDependencies": {
     "typescript": "^5.0.4",
     "unocss": "^0.51.8",
-    "vite": "^4.3.4"
+    "vite": "^4.3.5"
   },
   "dependencies": {
     "@zoom-image/core": "^0.0.5"

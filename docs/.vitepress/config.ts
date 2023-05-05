@@ -48,6 +48,14 @@ export default defineConfig({
             text: "Svelte",
             link: "/examples/svelte",
           },
+          {
+            text: "Solid",
+            link: "/examples/solid",
+          },
+          {
+            text: "Qwik",
+            link: "/examples/qwik",
+          },
         ],
       },
       {
