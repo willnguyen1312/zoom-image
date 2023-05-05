@@ -1,5 +1,17 @@
 # @zoom-image/core
 
+## 0.0.6
+
+### Patch Changes
+
+- [#34](https://github.com/willnguyen1312/zoom-image/pull/34)
+  [`3e122f2`](https://github.com/willnguyen1312/zoom-image/commit/3e122f2b02dc809adac66adf848184d1c9535818) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add qwik example
+
+- [#32](https://github.com/willnguyen1312/zoom-image/pull/32)
+  [`cdd5975`](https://github.com/willnguyen1312/zoom-image/commit/cdd5975b96a55591eb5e6da4a51a5f6369761b30) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add solid example
+
 ## 0.0.5
 
 ### Patch Changes
