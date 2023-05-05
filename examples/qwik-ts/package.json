@@ -37,6 +37,7 @@
     "vite-tsconfig-paths": "4.2.0"
   },
   "dependencies": {
-    "@zoom-image/core": "^0.0.5"
-  }
+    "@zoom-image/core": "^0.0.6"
+  },
+  "version": null
 }

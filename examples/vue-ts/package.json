@@ -1,6 +1,6 @@
 {
   "name": "vue-ts",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@zoom-image/core": "^0.0.5",
+    "@zoom-image/core": "^0.0.6",
     "vue": "^3.2.47"
   },
   "devDependencies": {
