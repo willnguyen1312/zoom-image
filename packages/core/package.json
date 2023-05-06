@@ -10,7 +10,10 @@
     "dev": "pnpm build --watch",
     "build": "tsup src --dts",
     "lint": "eslint src --ext .ts,.tsx",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:ci": "vitest run"
   },
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -20,5 +23,19 @@
   "files": [
     "dist",
     "src"
-  ]
+  ],
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "@testing-library/dom": "^9.2.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/user-event": "^14.4.3",
+    "@testing-library/vue": "^7.0.0",
+    "@types/testing-library__jest-dom": "^5.14.5",
+    "@vitejs/plugin-vue": "^4.2.1",
+    "@vue/test-utils": "^2.3.2",
+    "fast-check": "^3.8.1",
+    "happy-dom": "^9.10.9",
+    "vite": "^4.3.5",
+    "vitest": "^0.31.0"
+  }
 }

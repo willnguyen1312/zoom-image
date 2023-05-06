@@ -60,3 +60,24 @@ export function makeMaybeCallFunction<T>(predicateFn: () => boolean, fn: (arg: T
     }
   }
 }
+
+const scaleLinear =
+  ({
+    domainStart,
+    domainStop,
+    rangeStart,
+    rangeStop,
+  }: {
+    domainStart: number
+    domainStop: number
+    rangeStart: number
+    rangeStop: number
+  }) =>
+  (value: number) =>
+    rangeStart + (rangeStop - rangeStart) * ((value - domainStart) / (domainStop - domainStart))
+
+export const makeCalculatePercentage = (maxZoom: number) =>
+  scaleLinear({ domainStart: 1, domainStop: maxZoom, rangeStart: 0, rangeStop: 100 })
+
+export const makeCalculateCurrentZoom = (maxZoom: number) =>
+  scaleLinear({ domainStart: 0, domainStop: 100, rangeStart: 1, rangeStop: maxZoom })
