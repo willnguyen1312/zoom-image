@@ -1,7 +1,7 @@
 import { clamp, disableScroll, enableScroll, getPointersCenter, getSourceImage, makeMaybeCallFunction } from "./utils"
 import type { PointerPosition } from "./utils"
 
-export type ZoomImageWheelProps = {
+export type ZoomImageWheelOptions = {
   maxZoom?: number
   wheelZoomRatio?: number
 }
@@ -19,8 +19,8 @@ type ZoomImageWheelState = {
 type Listener = (state: ZoomImageWheelState) => void
 type StateUpdate = { enable: boolean }
 
-export function createZoomImageWheel(container: HTMLElement, options: ZoomImageWheelProps = {}) {
-  const finalOptions: Required<ZoomImageWheelProps> = {
+export function createZoomImageWheel(container: HTMLElement, options: ZoomImageWheelOptions = {}) {
+  const finalOptions: Required<ZoomImageWheelOptions> = {
     maxZoom: options.maxZoom || 4,
     wheelZoomRatio: options.wheelZoomRatio || 0.1,
   }

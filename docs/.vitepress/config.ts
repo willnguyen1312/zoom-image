@@ -64,6 +64,8 @@ export default defineConfig({
         items: [
           { text: "createZoomImageHover", link: "/api/createZoomImageHover" },
           { text: "createZoomImageWheel", link: "/api/createZoomImageWheel" },
+          { text: "makeCalculateZoom", link: "/api/makeCalculateZoom" },
+          { text: "makeCalculatePercentage", link: "/api/makeCalculatePercentage" },
         ],
       },
     ],

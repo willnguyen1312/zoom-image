@@ -79,5 +79,5 @@ const scaleLinear =
 export const makeCalculatePercentage = (maxZoom: number) =>
   scaleLinear({ domainStart: 1, domainStop: maxZoom, rangeStart: 0, rangeStop: 100 })
 
-export const makeCalculateCurrentZoom = (maxZoom: number) =>
+export const makeCalculateZoom = (maxZoom: number) =>
   scaleLinear({ domainStart: 0, domainStop: 100, rangeStart: 1, rangeStop: maxZoom })
