@@ -1,6 +1,6 @@
 import fc from "fast-check"
 import { faker } from "@faker-js/faker"
-import { clamp, makeCalculateCurrentZoom, makeCalculatePercentage, makeMaybeCallFunction } from "../src/utils"
+import { clamp, makeCalculateZoom, makeCalculatePercentage, makeMaybeCallFunction } from "../src/utils"
 import { it } from "vitest"
 
 describe("clamp functions", () => {
@@ -56,11 +56,11 @@ describe("makeCalculatePercentage function", () => {
   })
 })
 
-describe("makeCalculateCurrentZoom function", () => {
+describe("makeCalculateZoom function", () => {
   it("should work as expected", () => {
-    expect(makeCalculateCurrentZoom(4)(0)).toMatchInlineSnapshot("1")
-    expect(makeCalculateCurrentZoom(4)(33.33333333333333)).toMatchInlineSnapshot("1.9999999999999998")
-    expect(makeCalculateCurrentZoom(4)(66.66666666666666)).toMatchInlineSnapshot("2.9999999999999996")
-    expect(makeCalculateCurrentZoom(4)(100)).toMatchInlineSnapshot("4")
+    expect(makeCalculateZoom(4)(0)).toMatchInlineSnapshot("1")
+    expect(makeCalculateZoom(4)(33.33333333333333)).toMatchInlineSnapshot("1.9999999999999998")
+    expect(makeCalculateZoom(4)(66.66666666666666)).toMatchInlineSnapshot("2.9999999999999996")
+    expect(makeCalculateZoom(4)(100)).toMatchInlineSnapshot("4")
   })
 })

@@ -12,7 +12,7 @@ cleanup()
 ### Type Declaration
 
 ```ts
-type ZoomImageWheelProps = {
+type ZoomImageWheelOptions = {
   // Maximum zoom scale, default is 4
   maxZoom?: number
   // Zoom ratio when scrolling, default is 0.1
@@ -28,7 +28,7 @@ type StateUpdate = { enable: boolean }
 
 function createZoomImageWheel(
   container: HTMLElement,
-  options?: ZoomImageWheelProps,
+  options?: ZoomImageWheelOptions,
 ): {
   // Remove all event listeners
   cleanup: () => void
