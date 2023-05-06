@@ -1,5 +1,19 @@
 # @zoom-image/core
 
+## 0.1.0
+
+### Minor Changes
+
+- [#37](https://github.com/willnguyen1312/zoom-image/pull/37)
+  [`fcbc00f`](https://github.com/willnguyen1312/zoom-image/commit/fcbc00f83828262d9127fea7d3e64a6d1f6ca745) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add zoom calculation utilities 🚀
+
+### Patch Changes
+
+- [#35](https://github.com/willnguyen1312/zoom-image/pull/35)
+  [`f25238c`](https://github.com/willnguyen1312/zoom-image/commit/f25238c9eb2880df4d560a504e4ffa3c87e95a11) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add Vitest
+
 ## 0.0.6
 
 ### Patch Changes
