@@ -12,6 +12,8 @@
     "examples": "pnpm --filter=./examples/** -r",
     "build-fast": "pnpm packages -- build-fast",
     "dev": "pnpm packages -- dev",
+    "test": "pnpm packages -- test",
+    "test:ci": "pnpm packages -- test:ci",
     "build": "pnpm packages -- build",
     "deploy:demo": "netlify deploy --prod --dir=./examples/vanilla-ts/dist",
     "preact": "pnpm --filter \"./examples/preact-ts\"",
