@@ -7,8 +7,7 @@
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@zoom-image/core": "^0.0.6",
@@ -18,7 +17,6 @@
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/node": "^20.0.0",
     "@vitejs/plugin-vue": "^4.2.1",
-    "@vitejs/plugin-vue-jsx": "^3.0.1",
     "@vue/eslint-config-typescript": "^11.0.3",
     "@vue/tsconfig": "^0.3.2",
     "eslint": "^8.39.0",

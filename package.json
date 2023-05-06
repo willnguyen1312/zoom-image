@@ -21,6 +21,7 @@
     "vue": "pnpm --filter \"./examples/vue-ts\"",
     "solid": "pnpm --filter \"./examples/solid-ts\"",
     "qwik": "pnpm --filter \"./examples/qwik-ts\"",
+    "core": "pnpm --filter \"./packages/core\"",
     "start-preact": "pnpm preact dev",
     "start-react": "pnpm react dev",
     "start-svelte": "pnpm svelte dev",
