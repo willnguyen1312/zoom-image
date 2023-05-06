@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/vue"
 import userEvent from "@testing-library/user-event"
-import TestImageZoomWheel from "./TestImageZoomWheel.vue"
+import TestImageZoomWheel from "./components/TestImageZoomWheel.vue"
 import { it } from "vitest"
 
 describe("createZoomImageWheel function", () => {

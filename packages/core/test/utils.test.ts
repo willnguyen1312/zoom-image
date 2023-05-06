@@ -40,7 +40,7 @@ describe("makeMaybeCallFunction function", () => {
     fc.assert(
       fc.property(fc.boolean(), (value) => {
         const mockFn = vi.fn()
-        makeMaybeCallFunction(() => value, mockFn)()
+        makeMaybeCallFunction(() => value, mockFn)(void 0)
         expect(mockFn).toHaveBeenCalledTimes(value ? 1 : 0)
       }),
     )
@@ -58,9 +58,9 @@ describe("makeCalculatePercentage function", () => {
 
 describe("makeCalculateCurrentZoom function", () => {
   it("should work as expected", () => {
-    expect(makeCalculateCurrentZoom(4)(0)).toMatchInlineSnapshot('1')
-    expect(makeCalculateCurrentZoom(4)(33.33333333333333)).toMatchInlineSnapshot('1.9999999999999998')
-    expect(makeCalculateCurrentZoom(4)(66.66666666666666)).toMatchInlineSnapshot('2.9999999999999996')
-    expect(makeCalculateCurrentZoom(4)(100)).toMatchInlineSnapshot('4')
+    expect(makeCalculateCurrentZoom(4)(0)).toMatchInlineSnapshot("1")
+    expect(makeCalculateCurrentZoom(4)(33.33333333333333)).toMatchInlineSnapshot("1.9999999999999998")
+    expect(makeCalculateCurrentZoom(4)(66.66666666666666)).toMatchInlineSnapshot("2.9999999999999996")
+    expect(makeCalculateCurrentZoom(4)(100)).toMatchInlineSnapshot("4")
   })
 })

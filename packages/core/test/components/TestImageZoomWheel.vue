@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { createZoomImageHover, createZoomImageWheel } from "../src"
+import { createZoomImageHover, createZoomImageWheel } from "../../src"
 import { computed, nextTick, onUnmounted, ref, watch } from "vue"
 
 let cleanup: () => void = () => {}
