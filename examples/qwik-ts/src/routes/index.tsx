@@ -4,13 +4,14 @@ import { createZoomImageHover, createZoomImageWheel } from "@zoom-image/core"
 type Tab = {
   name: string
   current: boolean
+  href: string
   value: "wheel" | "hover"
 }
 
 export default component$(() => {
   const tabs = useSignal<Tab[]>([
-    { name: "Zoom Image Wheel", current: true, value: "wheel" },
-    { name: "Zoom Image Hover", current: false, value: "hover" },
+    { name: "Zoom Image Wheel", href: "#", current: true, value: "wheel" },
+    { name: "Zoom Image Hover", href: "#", current: false, value: "hover" },
   ])
   const imageWheelContainerRef = useSignal<HTMLDivElement>()
   const imageHoverContainerRef = useSignal<HTMLDivElement>()
@@ -23,9 +24,9 @@ export default component$(() => {
   useVisibleTask$(({ track, cleanup }) => {
     track(() => zoomType.value)
 
-    if (zoomType.value === "hover") {
-      const imageContainer = imageHoverContainerRef.value as HTMLDivElement
-      const zoomTarget = zoomTargetRef.value as HTMLDivElement
+    if (zoomType.value === "hover" && imageHoverContainerRef.value) {
+      const imageContainer = imageHoverContainerRef.value
+      const zoomTarget = zoomTargetRef.value
       const result = createZoomImageHover(imageContainer, {
         zoomImageSource: "/large.webp",
         customZoom: { width: 300, height: 500 },
@@ -35,8 +36,8 @@ export default component$(() => {
       cleanup(result.cleanup)
     }
 
-    if (zoomType.value === "wheel") {
-      const imageContainer = imageWheelContainerRef.value as HTMLDivElement
+    if (zoomType.value === "wheel" && imageWheelContainerRef.value) {
+      const imageContainer = imageWheelContainerRef.value
       const result = createZoomImageWheel(imageContainer)
       cleanup(result.cleanup)
     }
@@ -48,6 +49,8 @@ export default component$(() => {
         {tabs.value.map((tab) => {
           return (
             <a
+              preventdefault:click
+              href={tab.href}
               onClick$={() => {
                 tabs.value = tabs.value.map((t) => {
                   if (t.name === tab.name) {
