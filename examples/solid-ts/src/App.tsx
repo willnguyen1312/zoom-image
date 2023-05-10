@@ -74,9 +74,12 @@ const App: Component = () => {
       </nav>
 
       {zoomType() === "wheel" && (
-        <div ref={imageWheelContainer} id="image-wheel-container" class="w-[300px] h-[300px] cursor-crosshair">
-          <img class="w-full h-full" alt="Large Pic" src="/large.webp" elementtiming="" fetchpriority="high" />
-        </div>
+        <>
+          <p>Scroll inside the image to see zoom in-out effect</p>
+          <div ref={imageWheelContainer} id="image-wheel-container" class="w-[300px] h-[300px] cursor-crosshair">
+            <img class="w-full h-full" alt="Large Pic" src="/large.webp" elementtiming="" fetchpriority="high" />
+          </div>
+        </>
       )}
 
       {zoomType() === "hover" && (

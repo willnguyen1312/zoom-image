@@ -83,14 +83,12 @@ onUnmounted(() => {
       >
     </nav>
 
-    <div
-      v-if="zoomType === 'wheel'"
-      ref="imageWheelContainerRef"
-      id="image-wheel-container"
-      class="w-[300px] h-[300px] cursor-crosshair"
-    >
-      <img class="w-full h-full" alt="Large Pic" src="/large.webp" />
-    </div>
+    <template v-if="zoomType === 'wheel'">
+      <p>Scroll inside the image to see zoom in-out effect</p>
+      <div ref="imageWheelContainerRef" id="image-wheel-container" class="w-[300px] h-[300px] cursor-crosshair">
+        <img class="w-full h-full" alt="Large Pic" src="/large.webp" />
+      </div>
+    </template>
 
     <div
       v-if="zoomType === 'hover'"
