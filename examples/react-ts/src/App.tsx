@@ -78,9 +78,12 @@ function App() {
       </nav>
 
       {zoomType === "wheel" && (
-        <div ref={imageWheelContainerRef} id="image-wheel-container" className="w-[300px] h-[300px] cursor-crosshair">
-          <img className="w-full h-full" alt="Large Pic" src="/large.webp" />
-        </div>
+        <>
+          <p>Scroll inside the image to see zoom in-out effect</p>
+          <div ref={imageWheelContainerRef} id="image-wheel-container" className="w-[300px] h-[300px] cursor-crosshair">
+            <img className="w-full h-full" alt="Large Pic" src="/large.webp" />
+          </div>
+        </>
       )}
 
       {zoomType === "hover" && (
