@@ -1,19 +1,21 @@
 <script lang="ts">
   import { onDestroy, tick } from "svelte"
-  import { createZoomImageHover, createZoomImageWheel } from "@zoom-image/core"
+  import { createZoomImageHover, createZoomImageWheel, createZoomImageMove } from "@zoom-image/core"
 
   const tabs: {
     name: string
     href: string
     current: boolean
-    value: "wheel" | "hover"
+    value: "wheel" | "hover" | "move"
   }[] = [
     { name: "Zoom Image Wheel", href: "#", current: true, value: "wheel" },
     { name: "Zoom Image Hover", href: "#", current: false, value: "hover" },
+    { name: "Zoom Image Move", href: "#", current: false, value: "move" },
   ]
   $: zoomType = tabs.find((tab) => tab.current)?.value
 
   let imageWheelContainer: HTMLDivElement
+  let imageMoveContainer: HTMLDivElement
   let imageHoverContainer: HTMLDivElement
   let zoomTarget: HTMLDivElement
   let cleanup: () => void = () => {}
@@ -35,6 +37,12 @@
     if (zoomType === "wheel") {
       const result = createZoomImageWheel(imageWheelContainer)
       cleanup = result.cleanup
+    }
+
+    if (zoomType === "move") {
+      cleanup = createZoomImageMove(imageMoveContainer, {
+        zoomImageSource: "/large.webp",
+      }).cleanup
     }
   }
 
@@ -79,6 +87,16 @@
     >
       <img class="w-full h-full" alt="Small Pic" src="/small.webp" />
       <div bind:this={zoomTarget} id="zoom-hover-target" class="absolute left-[300px]" />
+    </div>
+  {/if}
+
+  {#if zoomType === "move"}
+    <div
+      id="image-move-container"
+      bind:this={imageMoveContainer}
+      class="w-[300px] h-[300px] cursor-crosshair relative overflow-hidden"
+    >
+      <img class="w-full h-full" alt="Large Pic" src="/small.webp" />
     </div>
   {/if}
 </div>
