@@ -12,11 +12,17 @@ export function createZoomImageMousemove(container: HTMLElement, options: ZoomIm
     zoomImageSource: options.zoomImageSource ?? "",
   }
 
-  const zoomedImg = document.createElement("img")
+  const zoomedImgWidth = sourceImgElement.clientWidth * finalOptions.zoomFactor
+  const zoomedImgHeight = sourceImgElement.clientHeight * finalOptions.zoomFactor
+
+  const zoomedImg = document.createElement("div")
   container.appendChild(zoomedImg)
-  zoomedImg.style.width = `${sourceImgElement.clientWidth * finalOptions.zoomFactor}px`
-  zoomedImg.style.height = `${sourceImgElement.clientHeight * finalOptions.zoomFactor}px`
-  zoomedImg.src = finalOptions.zoomImageSource
+  zoomedImg.style.width = `${zoomedImgWidth}px`
+  zoomedImg.style.height = `${zoomedImgHeight}px`
+  zoomedImg.style.backgroundSize = `${zoomedImgWidth}px ${zoomedImgHeight}px`
+  zoomedImg.style.backgroundImage = "url('" + finalOptions.zoomImageSource + "')"
+  zoomedImg.style.backgroundRepeat = "no-repeat"
+  zoomedImg.style.display = "none"
 
   function handleMouseEnter() {
     sourceImgElement.style.display = "none"
@@ -28,15 +34,16 @@ export function createZoomImageMousemove(container: HTMLElement, options: ZoomIm
     const offsetX = event.clientX - rect.left
     const offsetY = event.clientY - rect.top
 
-    let left = container.clientWidth / 2 - zoomedImg.clientWidth * (offsetX / container.clientWidth)
-    let top = container.offsetHeight / 2 - zoomedImg.offsetHeight * (offsetY / container.clientHeight)
+    const minLeft = container.clientWidth - zoomedImgWidth
+    const minTop = container.offsetHeight - zoomedImgHeight
 
-    const minLeft = container.clientWidth - zoomedImg.clientWidth
-    const minTop = container.offsetHeight - zoomedImg.offsetHeight
+    let left = container.clientWidth / 2 - zoomedImgWidth * (offsetX / container.clientWidth)
+    let top = container.offsetHeight / 2 - zoomedImgHeight * (offsetY / container.clientHeight)
 
     left = clamp(left, minLeft, 0)
     top = clamp(top, minTop, 0)
-    zoomedImg.style.transform = `translate(${left}px, ${top}px)`
+
+    zoomedImg.style.backgroundPosition = `top ${top}px left ${left}px`
   }
 
   function handleMouseLeave() {
