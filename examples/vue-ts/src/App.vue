@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { createZoomImageHover, createZoomImageWheel } from "@zoom-image/core"
+import { createZoomImageHover, createZoomImageWheel, createZoomImageMove } from "@zoom-image/core"
 import { computed, nextTick, onUnmounted, ref, watch } from "vue"
 
 let cleanup: () => void = () => {}
@@ -9,19 +9,21 @@ const tabs = ref<
     name: string
     href: string
     current: boolean
-    value: "wheel" | "hover"
+    value: "wheel" | "hover" | "move"
   }[]
 >([
   { name: "Zoom Image Wheel", href: "#", current: true, value: "wheel" },
   { name: "Zoom Image Hover", href: "#", current: false, value: "hover" },
+  { name: "Zoom Image Move", href: "#", current: false, value: "move" },
 ])
 
 const zoomType = computed(() => {
   const found = tabs.value.find((tab) => tab.current)
-  return found?.value as "hover" | "wheel"
+  return found?.value as "hover" | "wheel" | "move"
 })
 
 const imageWheelContainerRef = ref<HTMLDivElement>()
+const imageMoveContainerRef = ref<HTMLDivElement>()
 const imageHoverContainerRef = ref<HTMLDivElement>()
 const zoomTargetRef = ref<HTMLDivElement>()
 
@@ -55,6 +57,15 @@ watch(
       const imageContainer = imageWheelContainerRef.value as HTMLDivElement
 
       const result = createZoomImageWheel(imageContainer)
+      cleanup = result.cleanup
+    }
+
+    if (zoomType.value === "move") {
+      const imageContainer = imageMoveContainerRef.value as HTMLDivElement
+
+      const result = createZoomImageMove(imageContainer, {
+        zoomImageSource: "/large.webp",
+      })
       cleanup = result.cleanup
     }
   },
@@ -98,6 +109,15 @@ onUnmounted(() => {
     >
       <img class="w-full h-full" alt="Small Pic" src="/small.webp" />
       <div ref="zoomTargetRef" id="zoom-hover-target" class="absolute left-[300px]"></div>
+    </div>
+
+    <div
+      v-if="zoomType === 'move'"
+      id="image-move-container"
+      ref="imageMoveContainerRef"
+      class="w-[300px] h-[300px] cursor-crosshair relative overflow-hidden"
+    >
+      <img class="w-full h-full" alt="Large Pic" src="/small.webp" />
     </div>
   </div>
 </template>

@@ -9,7 +9,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   const sourceImgElement = getSourceImage(container)
   const finalOptions: Required<ZoomImageMoveOptions> = {
     zoomFactor: options.zoomFactor ?? 4,
-    zoomImageSource: options.zoomImageSource ?? "",
+    zoomImageSource: options.zoomImageSource ?? sourceImgElement.src,
   }
 
   const zoomedImgWidth = sourceImgElement.clientWidth * finalOptions.zoomFactor
