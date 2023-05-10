@@ -29,7 +29,9 @@ features:
 ---
 
 <script setup>
+import HomeGif from './components/HomeGif.vue'
 import Footer from './components/Footer.vue'
 </script>
 
+<HomeGif />
 <Footer />
