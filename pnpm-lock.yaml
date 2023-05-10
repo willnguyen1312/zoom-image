@@ -225,7 +225,7 @@ importers:
   examples/vanilla-ts:
     dependencies:
       '@zoom-image/core':
-        specifier: ^0.1.0
+        specifier: workspace:*
         version: link:../../packages/core
     devDependencies:
       typescript:
