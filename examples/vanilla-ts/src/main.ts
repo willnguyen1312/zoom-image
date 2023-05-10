@@ -14,10 +14,9 @@ function createSimpleState<T>(initialState: T) {
       }
     },
     set: (value: T) => {
-      if (state === value) {
+      if (Object.is(state, value)) {
         return
       }
-
       state = value
       listeners.forEach((listener) => listener(state))
     },

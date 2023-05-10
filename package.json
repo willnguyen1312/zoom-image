@@ -35,7 +35,7 @@
     "prettier": "prettier --check **/*",
     "prettier-fix": "prettier --write packages/** examples/**",
     "lint": "eslint packages --ext .ts",
-    "docs:dev": "vitepress dev docs",
+    "docs:dev": "vitepress dev docs --open",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "changeset": "changeset",

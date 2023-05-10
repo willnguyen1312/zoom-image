@@ -1,13 +1,13 @@
 import { clamp, disableScroll, enableScroll, getSourceImage } from "./utils"
 
-export type ZoomImageMousemoveOptions = {
+export type ZoomImageMoveOptions = {
   zoomFactor?: number
   zoomImageSource?: string
 }
 
-export function createZoomImageMove(container: HTMLElement, options: ZoomImageMousemoveOptions = {}) {
+export function createZoomImageMove(container: HTMLElement, options: ZoomImageMoveOptions = {}) {
   const sourceImgElement = getSourceImage(container)
-  const finalOptions: Required<ZoomImageMousemoveOptions> = {
+  const finalOptions: Required<ZoomImageMoveOptions> = {
     zoomFactor: options.zoomFactor ?? 4,
     zoomImageSource: options.zoomImageSource ?? "",
   }
