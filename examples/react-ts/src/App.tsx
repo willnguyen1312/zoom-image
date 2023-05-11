@@ -14,6 +14,13 @@ function App() {
     { name: "Zoom Image Hover", href: "#", current: false, value: "hover" },
     { name: "Zoom Image Move", href: "#", current: false, value: "move" },
   ])
+
+
+
+
+
+
+  
   const zoomType = useMemo(() => tabs.find((tab) => tab.current)?.value, [tabs])
   const imageWheelContainerRef = useRef<HTMLDivElement>(null)
   const imageHoverContainerRef = useRef<HTMLDivElement>(null)

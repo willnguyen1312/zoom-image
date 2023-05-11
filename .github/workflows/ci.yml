@@ -37,3 +37,17 @@ jobs:
 
       - name: Test
         run: pnpm test:ci
+
+      - name: Run prettier
+        run: pnpm prettier-fix
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "chore: format code with Prettier" --no-verify
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
