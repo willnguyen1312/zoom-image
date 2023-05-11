@@ -26,12 +26,15 @@ features:
   - title: Zoom on pinch
     details: Support touch pinch zoom on image
     icon: 🤏
+  - title: Zoom on move
+    details: Support mouse move zoom on image
+    icon: 🎢
 ---
 
 <script setup>
-import HomeGif from './components/HomeGif.vue'
+import HomeVideo from './components/HomeVideo.vue'
 import Footer from './components/Footer.vue'
 </script>
 
-<HomeGif />
+<HomeVideo />
 <Footer />

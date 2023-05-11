@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-unresolved
 import "uno.css"
-import { createZoomImageHover, createZoomImageWheel } from "@zoom-image/core"
+import { createZoomImageHover, createZoomImageWheel, createZoomImageMove } from "@zoom-image/core"
 
 function createSimpleState<T>(initialState: T) {
   const listeners = new Set<(value: T) => void>()
@@ -14,10 +14,9 @@ function createSimpleState<T>(initialState: T) {
       }
     },
     set: (value: T) => {
-      if (state === value) {
+      if (Object.is(state, value)) {
         return
       }
-
       state = value
       listeners.forEach((listener) => listener(state))
     },
@@ -26,19 +25,22 @@ function createSimpleState<T>(initialState: T) {
 
 const zoomWheelLink = document.getElementById("zoom-image-wheel") as HTMLAnchorElement
 const zoomHoverLink = document.getElementById("zoom-image-hover") as HTMLAnchorElement
+const zoomMouseLink = document.getElementById("zoom-image-move") as HTMLAnchorElement
 
-const makeImageWheel = (id: "image-wheel" | "image-hover") => {
+type ZoomType = "wheel" | "hover" | "move"
+
+const makeImageTemplate = (id: "image-wheel" | "image-hover" | "image-move") => {
   const template = document.getElementById(id) as HTMLTemplateElement
   return template.content.cloneNode(true)
 }
 
 const parent = document.getElementById("parent") as HTMLDivElement
-const state = createSimpleState<"wheel" | "hover" | "">("")
+const state = createSimpleState<ZoomType | "">("")
 
 const makeUpdateUIFunc = () => {
   let cleanupZoom: () => void = () => {}
 
-  return (state: "wheel" | "hover" | "") => {
+  return (state: ZoomType | "") => {
     if (state === "") {
       return
     }
@@ -47,7 +49,7 @@ const makeUpdateUIFunc = () => {
     parent.replaceChildren()
 
     if (state === "wheel") {
-      const imageWheel = makeImageWheel("image-wheel")
+      const imageWheel = makeImageTemplate("image-wheel")
       parent.replaceChildren(imageWheel)
       const container = document.getElementById("image-wheel-container") as HTMLDivElement
 
@@ -55,7 +57,7 @@ const makeUpdateUIFunc = () => {
     }
 
     if (state === "hover") {
-      const imageHover = makeImageWheel("image-hover")
+      const imageHover = makeImageTemplate("image-hover")
       parent.replaceChildren(imageHover)
 
       const container = document.getElementById("image-hover-container") as HTMLDivElement
@@ -68,20 +70,34 @@ const makeUpdateUIFunc = () => {
         scaleFactor: 0.5,
       }).cleanup
     }
+
+    if (state === "move") {
+      const imageHover = makeImageTemplate("image-move")
+      parent.replaceChildren(imageHover)
+
+      const container = document.getElementById("image-move-container") as HTMLDivElement
+
+      cleanupZoom = createZoomImageMove(container, {
+        zoomImageSource: "/large.webp",
+      }).cleanup
+    }
   }
 }
 
 state.subscribe(makeUpdateUIFunc())
-state.set("wheel")
 
-zoomWheelLink.addEventListener("click", () => {
-  state.set("wheel")
-  zoomWheelLink.classList.add("bg-gray-200")
-  zoomHoverLink.classList.remove("bg-gray-200")
+const links: { element: HTMLElement; type: ZoomType }[] = [
+  { element: zoomWheelLink, type: "wheel" },
+  { element: zoomHoverLink, type: "hover" },
+  { element: zoomMouseLink, type: "move" },
+]
+
+links.forEach((link) => {
+  link.element.addEventListener("click", () => {
+    state.set(link.type)
+    links.forEach((link) => link.element.classList.remove("bg-gray-200"))
+    link.element.classList.add("bg-gray-200")
+  })
 })
 
-zoomHoverLink.addEventListener("click", () => {
-  state.set("hover")
-  zoomHoverLink.classList.add("bg-gray-200")
-  zoomWheelLink.classList.remove("bg-gray-200")
-})
+zoomWheelLink.click()

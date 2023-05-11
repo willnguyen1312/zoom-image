@@ -94,16 +94,16 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   function _onWheel(event: WheelEvent) {
     event.preventDefault()
     const delta = -clamp(event.deltaY, -ZOOM_DELTA, ZOOM_DELTA)
-    processZoom({ delta, x: event.pageX, y: event.pageY })
+    processZoom({ delta, x: event.clientX, y: event.clientY })
     updateZoom()
   }
 
   function _handlePointerMove(event: PointerEvent) {
     event.preventDefault()
-    const { pageX, pageY, pointerId } = event
+    const { clientX, clientY, pointerId } = event
     for (const [cachedPointerid] of pointerMap.entries()) {
       if (cachedPointerid === pointerId) {
-        pointerMap.set(cachedPointerid, { x: pageX, y: pageY })
+        pointerMap.set(cachedPointerid, { x: clientX, y: clientY })
       }
     }
 
@@ -135,8 +135,8 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     }
 
     if (pointerMap.size === 1 && zoomType !== "pinch") {
-      const offsetX = pageX - startX
-      const offsetY = pageY - startY
+      const offsetX = clientX - startX
+      const offsetY = clientY - startY
       currentPositionX = calculatePositionX(lastPositionX + offsetX, currentZoom)
       currentPositionY = calculatePositionY(lastPositionY + offsetY, currentZoom)
       updateZoom()
@@ -155,13 +155,13 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       enabledScroll = false
     }
 
-    const { pageX, pageY, pointerId } = event
+    const { clientX, clientY, pointerId } = event
     isOnMove = true
     lastPositionX = currentPositionX
     lastPositionY = currentPositionY
-    startX = pageX
-    startY = pageY
-    pointerMap.set(pointerId, { x: pageX, y: pageY })
+    startX = clientX
+    startY = clientY
+    pointerMap.set(pointerId, { x: clientX, y: clientY })
 
     if (pointerMap.size === 2) {
       zoomType = "pinch"
