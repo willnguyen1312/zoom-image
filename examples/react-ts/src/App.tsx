@@ -67,6 +67,13 @@ function App() {
     return cleanup
   }, [zoomType])
 
+
+
+
+
+
+  
+
   return (
     <div className="font-sans">
       <nav className="flex space-x-4 pb-4" aria-label="Tabs">
