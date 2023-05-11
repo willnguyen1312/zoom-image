@@ -3,7 +3,9 @@
 ### Basic Usage
 
 ```ts
-const { cleanup } = createZoomImageHover(container)
+const { cleanup } = createZoomImageHover(container, {
+  zoomImageSource: "large-image.webp",
+})
 
 // Call cleanup when you don't need it anymore
 cleanup()
