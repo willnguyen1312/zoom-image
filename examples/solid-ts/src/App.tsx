@@ -40,7 +40,7 @@ const App: Component = () => {
     if (zoomType() === "hover") {
       const imageContainer = imageHoverContainer
       const result = createZoomImageHover(imageContainer, {
-        zoomImageSource: "/large.webp",
+        zoomImageSource: "/large.jpg",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
         scaleFactor: 0.5,
@@ -57,7 +57,7 @@ const App: Component = () => {
     if (zoomType() === "move") {
       const imageContainer = imageMoveContainer
       const result = createZoomImageMove(imageContainer, {
-        zoomImageSource: "/large.webp",
+        zoomImageSource: "/large.jpg",
       })
       cleanup = result.cleanup
     }
@@ -87,21 +87,21 @@ const App: Component = () => {
         <>
           <p>Scroll inside the image to see zoom in-out effect</p>
           <div ref={imageWheelContainer} class="w-[300px] h-[300px] cursor-crosshair">
-            <img class="w-full h-full" alt="Large Pic" src="/large.webp" elementtiming="" fetchpriority="high" />
+            <img class="w-full h-full" alt="Large Pic" src="/large.jpg" elementtiming="" fetchpriority="high" />
           </div>
         </>
       )}
 
       {zoomType() === "hover" && (
         <div ref={imageHoverContainer} class="relative flex items-start w-[250px] h-[250px]">
-          <img class="w-full h-full" alt="Small Pic" src="/small.webp" elementtiming="" fetchpriority="high" />
+          <img class="w-full h-full" alt="Small Pic" src="/small.jpg" elementtiming="" fetchpriority="high" />
           <div ref={zoomTarget} class="absolute left-[300px]"></div>
         </div>
       )}
 
       {zoomType() === "move" && (
         <div ref={imageMoveContainer} class="w-[300px] h-[300px] cursor-crosshair relative overflow-hidden">
-          <img class="w-full h-full" alt="Large Pic" src="/small.webp" elementtiming="" fetchpriority="high" />
+          <img class="w-full h-full" alt="Large Pic" src="/small.jpg" elementtiming="" fetchpriority="high" />
         </div>
       )}
     </div>
