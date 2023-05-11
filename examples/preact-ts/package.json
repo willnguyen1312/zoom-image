@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@zoom-image/core": "workspace*",
+    "@zoom-image/core": "^0.1.0",
     "preact": "^10.13.2"
   },
   "devDependencies": {

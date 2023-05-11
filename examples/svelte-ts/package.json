@@ -10,7 +10,7 @@
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "dependencies": {
-    "@zoom-image/core": "workspace*"
+    "@zoom-image/core": "^0.1.0"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.2.0",
