@@ -39,7 +39,7 @@ function App() {
       const imageContainer = imageHoverContainerRef.current as HTMLDivElement
       const zoomTarget = zoomTargetRef.current as HTMLDivElement
       const result = createZoomImageHover(imageContainer, {
-        zoomImageSource: "/large.webp",
+        zoomImageSource: "/large.jpg",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
         scaleFactor: 0.5,
@@ -56,7 +56,7 @@ function App() {
     if (zoomType === "move") {
       const imageContainer = imageMoveContainerRef.current as HTMLDivElement
       const result = createZoomImageMove(imageContainer, {
-        zoomImageSource: "/large.webp",
+        zoomImageSource: "/large.jpg",
       })
       cleanup = result.cleanup
     }
@@ -89,21 +89,21 @@ function App() {
         <>
           <p>Scroll inside the image to see zoom in-out effect</p>
           <div ref={imageWheelContainerRef} class="w-[300px] h-[300px] cursor-crosshair">
-            <img class="w-full h-full" alt="Large Pic" src="/large.webp" />
+            <img class="w-full h-full" alt="Large Pic" src="/large.jpg" />
           </div>
         </>
       )}
 
       {zoomType === "hover" && (
         <div ref={imageHoverContainerRef} class="relative flex items-start w-[250px] h-[250px]">
-          <img class="w-full h-full" alt="Small Pic" src="/small.webp" />
+          <img class="w-full h-full" alt="Small Pic" src="/small.jpg" />
           <div ref={zoomTargetRef} class="absolute left-[300px]"></div>
         </div>
       )}
 
       {zoomType === "move" && (
         <div ref={imageMoveContainerRef} class="w-[300px] h-[300px] cursor-crosshair relative overflow-hidden">
-          <img class="w-full h-full" alt="Large Pic" src="/small.webp" />
+          <img class="w-full h-full" alt="Large Pic" src="/small.jpg" />
         </div>
       )}
     </div>

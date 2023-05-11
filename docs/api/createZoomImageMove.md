@@ -4,7 +4,7 @@
 
 ```ts
 const { cleanup } = createZoomImageMove(container, {
-  zoomImageSource: "large-image.webp",
+  zoomImageSource: "large-image.jpg",
 })
 
 // Call cleanup when you don't need it anymore
