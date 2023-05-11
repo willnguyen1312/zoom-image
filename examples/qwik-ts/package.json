@@ -1,5 +1,6 @@
 {
   "name": "qwik-ts",
+  "version": "0.0.8",
   "private": true,
   "scripts": {
     "build": "qwik build",
@@ -34,6 +35,5 @@
   },
   "dependencies": {
     "@zoom-image/core": "^0.2.0"
-  },
-  "version": null
+  }
 }
