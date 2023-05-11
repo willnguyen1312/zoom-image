@@ -23,6 +23,9 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   zoomedImg.style.backgroundImage = "url('" + finalOptions.zoomImageSource + "')"
   zoomedImg.style.backgroundRepeat = "no-repeat"
   zoomedImg.style.display = "none"
+  zoomedImg.style.position = "absolute"
+  zoomedImg.style.top = "0"
+  zoomedImg.style.left = "0"
 
   function processZoom(event: PointerEvent) {
     const rect = container.getBoundingClientRect()
@@ -43,7 +46,6 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
 
   function handlePointerEnter(event: PointerEvent) {
     disableScroll()
-    sourceImgElement.style.display = "none"
     zoomedImg.style.display = "block"
     processZoom(event)
   }
@@ -55,7 +57,6 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   function handlePointerLeave() {
     enableScroll()
     zoomedImg.style.display = "none"
-    sourceImgElement.style.display = "block"
   }
 
   container.addEventListener("pointerenter", handlePointerEnter)
