@@ -1,7 +1,5 @@
 - [Zoom Image](#zoom-image)
 - [Demo](#demo)
-  - [Zoom on hover](#zoom-on-hover)
-  - [Zoom on wheel](#zoom-on-wheel)
 - [Architecture](#architecture)
 - [Development](#development)
 - [Commands](#commands)
@@ -21,17 +19,12 @@ A little yet powerful library to zoom image on wheel / hover / pinch actions. It
 sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 
 - ✅ Zoom on hover
+- ✅ Zoom on move
 - ✅ Zoom on wheel
 
 ## Demo
 
-### Zoom on hover
-
-![Demo Zoom on hover](./images/demo-zoom-hover.gif)
-
-### Zoom on wheel
-
-![Demo Zoom on wheel](./images/demo-zoom-wheel.gif)
+![Demo Zoom](./images/demo.gif)
 
 ## Architecture
 

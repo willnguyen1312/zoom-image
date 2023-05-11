@@ -1,22 +1,24 @@
 import type { Component } from "solid-js"
 import { createSignal, createMemo, createEffect, For } from "solid-js"
-import { createZoomImageHover, createZoomImageWheel } from "@zoom-image/core"
+import { createZoomImageHover, createZoomImageWheel, createZoomImageMove } from "@zoom-image/core"
 
 type Tab = {
   name: string
   href: string
   current: boolean
-  value: "wheel" | "hover"
+  value: "wheel" | "hover" | "move"
 }
 
 const App: Component = () => {
   const [tabs, setTabs] = createSignal<Tab[]>([
     { name: "Zoom Image Wheel", href: "#", current: true, value: "wheel" },
     { name: "Zoom Image Hover", href: "#", current: false, value: "hover" },
+    { name: "Zoom Image Move", href: "#", current: false, value: "move" },
   ])
   const zoomType = createMemo(() => tabs().find((tab) => tab.current).value)
   let imageWheelContainer: HTMLDivElement
   let imageHoverContainer: HTMLDivElement
+  let imageMoveContainer: HTMLDivElement
   let zoomTarget: HTMLDivElement
 
   const makeHandleTabClick = (tab: Tab) => () => {
@@ -51,6 +53,14 @@ const App: Component = () => {
       const result = createZoomImageWheel(imageContainer)
       cleanup = result.cleanup
     }
+
+    if (zoomType() === "move") {
+      const imageContainer = imageMoveContainer
+      const result = createZoomImageMove(imageContainer, {
+        zoomImageSource: "/large.webp",
+      })
+      cleanup = result.cleanup
+    }
   })
 
   return (
@@ -76,16 +86,22 @@ const App: Component = () => {
       {zoomType() === "wheel" && (
         <>
           <p>Scroll inside the image to see zoom in-out effect</p>
-          <div ref={imageWheelContainer} id="image-wheel-container" class="w-[300px] h-[300px] cursor-crosshair">
+          <div ref={imageWheelContainer} class="w-[300px] h-[300px] cursor-crosshair">
             <img class="w-full h-full" alt="Large Pic" src="/large.webp" elementtiming="" fetchpriority="high" />
           </div>
         </>
       )}
 
       {zoomType() === "hover" && (
-        <div id="image-hover-container" ref={imageHoverContainer} class="relative flex items-start w-[250px] h-[250px]">
+        <div ref={imageHoverContainer} class="relative flex items-start w-[250px] h-[250px]">
           <img class="w-full h-full" alt="Small Pic" src="/small.webp" elementtiming="" fetchpriority="high" />
-          <div ref={zoomTarget} id="zoom-hover-target" class="absolute left-[300px]"></div>
+          <div ref={zoomTarget} class="absolute left-[300px]"></div>
+        </div>
+      )}
+
+      {zoomType() === "move" && (
+        <div ref={imageMoveContainer} class="w-[300px] h-[300px] cursor-crosshair relative overflow-hidden">
+          <img class="w-full h-full" alt="Large Pic" src="/small.webp" elementtiming="" fetchpriority="high" />
         </div>
       )}
     </div>
