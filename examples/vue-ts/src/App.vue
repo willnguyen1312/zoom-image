@@ -96,24 +96,18 @@ onUnmounted(() => {
 
     <template v-if="zoomType === 'wheel'">
       <p>Scroll inside the image to see zoom in-out effect</p>
-      <div ref="imageWheelContainerRef" id="image-wheel-container" class="w-[300px] h-[300px] cursor-crosshair">
+      <div ref="imageWheelContainerRef" class="w-[300px] h-[300px] cursor-crosshair">
         <img class="w-full h-full" alt="Large Pic" src="/large.webp" />
       </div>
     </template>
 
-    <div
-      v-if="zoomType === 'hover'"
-      id="image-hover-container"
-      ref="imageHoverContainerRef"
-      class="relative flex items-start w-[250px] h-[250px]"
-    >
+    <div v-if="zoomType === 'hover'" ref="imageHoverContainerRef" class="relative flex items-start w-[250px] h-[250px]">
       <img class="w-full h-full" alt="Small Pic" src="/small.webp" />
-      <div ref="zoomTargetRef" id="zoom-hover-target" class="absolute left-[300px]"></div>
+      <div ref="zoomTargetRef" class="absolute left-[300px]"></div>
     </div>
 
     <div
       v-if="zoomType === 'move'"
-      id="image-move-container"
       ref="imageMoveContainerRef"
       class="w-[300px] h-[300px] cursor-crosshair relative overflow-hidden"
     >

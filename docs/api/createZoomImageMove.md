@@ -17,7 +17,7 @@ cleanup()
 type ZoomImageMoveOptions = {
   // Zoom scale, default is 4
   zoomFactor?: number
-  // The source of zoomed image
+  // The source of zoomed image, default is the same as the original image
   zoomImageSource?: string
 }
 
