@@ -6,6 +6,16 @@ export { createZoomImageHover }
 export type { ZoomImageHoverOptions }
 // End importing createZoomImageHover
 
+// Start importing createZoomImageMove
+import { createZoomImageMove } from "./createZoomImageMove"
+import type { ZoomImageMoveOptions } from "./createZoomImageMove"
+// import type { ZoomImageHoverOptions } from "./createZoomImageHover"
+
+export { createZoomImageMove }
+export type { ZoomImageMoveOptions }
+// export type { ZoomImageHoverOptions }
+// End importing createZoomImageHover
+
 // Start importing createZoomImageWheel
 import { createZoomImageWheel } from "./createZoomImageWheel"
 import type { ZoomImageWheelOptions } from "./createZoomImageWheel"

@@ -26,6 +26,9 @@ features:
   - title: Zoom on pinch
     details: Support touch pinch zoom on image
     icon: 🤏
+  - title: Zoom on move
+    details: Support mouse move zoom on image
+    icon: 🎢
 ---
 
 <script setup>

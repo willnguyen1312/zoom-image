@@ -20,6 +20,12 @@
         class="text-gray-800 rounded-md px-3 py-2 text-sm font-medium decoration-none cursor-pointer"
         >Zoom Image Hover</a
       >
+      <a
+        href="#"
+        id="zoom-image-move"
+        class="text-gray-800 rounded-md px-3 py-2 text-sm font-medium decoration-none cursor-pointer"
+        >Zoom Image Move</a
+      >
     </nav>
 
     <template id="image-wheel">
@@ -33,6 +39,12 @@
       <div id="image-hover-container" class="relative flex items-start w-[250px] h-[250px]">
         <img class="w-full h-full" alt="Small Pic" src="/small.webp" />
         <div id="zoom-hover-target" class="absolute left-[300px]"></div>
+      </div>
+    </template>
+
+    <template id="image-move">
+      <div id="image-move-container" class="w-[300px] h-[300px] cursor-crosshair relative overflow-hidden">
+        <img class="w-full h-full" alt="Large Pic" src="/small.webp" />
       </div>
     </template>
 

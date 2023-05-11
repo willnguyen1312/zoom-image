@@ -1,9 +1,5 @@
 {
-  "name": "my-qwik-basic-starter",
-  "description": "App with Routing built-in (recommended)",
-  "engines": {
-    "node": ">=15.0.0"
-  },
+  "name": "qwik-ts",
   "private": true,
   "scripts": {
     "build": "qwik build",
@@ -38,6 +34,5 @@
   },
   "dependencies": {
     "@zoom-image/core": "^0.1.0"
-  },
-  "version": null
+  }
 }

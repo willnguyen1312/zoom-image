@@ -15,7 +15,7 @@ cleanup()
 type ZoomImageHoverOptions = {
   // The size of zoomed window where zoomed image will be displayed
   customZoom?: { width: number; height: number }
-  // The source of zoomed image
+  // The source of zoomed image, default is the same as the original image
   zoomImageSource?: string
   // The css class will be added to zoom lens element
   zoomLensClass?: string
