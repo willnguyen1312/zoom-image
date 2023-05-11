@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, useMemo } from "preact/hooks"
-import { createZoomImageHover, createZoomImageWheel } from "@zoom-image/core"
+import { createZoomImageHover, createZoomImageMove, createZoomImageWheel } from "@zoom-image/core"
 
 function App() {
   const [tabs, setTabs] = useState<
@@ -7,14 +7,16 @@ function App() {
       name: string
       href: string
       current: boolean
-      value: "wheel" | "hover"
+      value: "wheel" | "hover" | "move"
     }[]
   >([
     { name: "Zoom Image Wheel", href: "#", current: true, value: "wheel" },
     { name: "Zoom Image Hover", href: "#", current: false, value: "hover" },
+    { name: "Zoom Image Move", href: "#", current: false, value: "move" },
   ])
   const zoomType = useMemo(() => tabs.find((tab) => tab.current)?.value, [tabs])
   const imageWheelContainerRef = useRef<HTMLDivElement>(null)
+  const imageMoveContainerRef = useRef<HTMLDivElement>(null)
   const imageHoverContainerRef = useRef<HTMLDivElement>(null)
   const zoomTargetRef = useRef<HTMLDivElement>(null)
 
@@ -51,6 +53,14 @@ function App() {
       cleanup = result.cleanup
     }
 
+    if (zoomType === "move") {
+      const imageContainer = imageMoveContainerRef.current as HTMLDivElement
+      const result = createZoomImageMove(imageContainer, {
+        zoomImageSource: "/large.webp",
+      })
+      cleanup = result.cleanup
+    }
+
     return cleanup
   }, [zoomType])
 
@@ -78,20 +88,22 @@ function App() {
       {zoomType === "wheel" && (
         <>
           <p>Scroll inside the image to see zoom in-out effect</p>
-          <div ref={imageWheelContainerRef} id="image-wheel-container" class="w-[300px] h-[300px] cursor-crosshair">
+          <div ref={imageWheelContainerRef} class="w-[300px] h-[300px] cursor-crosshair">
             <img class="w-full h-full" alt="Large Pic" src="/large.webp" />
           </div>
         </>
       )}
 
       {zoomType === "hover" && (
-        <div
-          id="image-hover-container"
-          ref={imageHoverContainerRef}
-          class="relative flex items-start w-[250px] h-[250px]"
-        >
+        <div ref={imageHoverContainerRef} class="relative flex items-start w-[250px] h-[250px]">
           <img class="w-full h-full" alt="Small Pic" src="/small.webp" />
-          <div ref={zoomTargetRef} id="zoom-hover-target" class="absolute left-[300px]"></div>
+          <div ref={zoomTargetRef} class="absolute left-[300px]"></div>
+        </div>
+      )}
+
+      {zoomType === "move" && (
+        <div ref={imageMoveContainerRef} class="w-[300px] h-[300px] cursor-crosshair relative overflow-hidden">
+          <img class="w-full h-full" alt="Large Pic" src="/small.webp" />
         </div>
       )}
     </div>

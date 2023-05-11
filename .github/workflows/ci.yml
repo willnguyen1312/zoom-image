@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  test:
+  verify:
     runs-on: ubuntu-latest
 
     steps:
@@ -37,3 +37,19 @@ jobs:
 
       - name: Test
         run: pnpm test:ci
+
+      - name: Run prettier
+        run: pnpm prettier-fix
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git diff --quiet && git diff --staged --quiet || (git commit -am "chore: format code with Prettier" --no-verify)
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.head_ref }}
+          force: true
