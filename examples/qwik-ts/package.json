@@ -1,5 +1,6 @@
 {
   "name": "qwik-ts",
+  "version": "0.0.8",
   "private": true,
   "scripts": {
     "build": "qwik build",
@@ -33,6 +34,6 @@
     "vite-tsconfig-paths": "4.2.0"
   },
   "dependencies": {
-    "@zoom-image/core": "^0.1.0"
+    "@zoom-image/core": "^0.2.0"
   }
 }

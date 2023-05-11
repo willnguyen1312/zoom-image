@@ -1,6 +1,6 @@
 {
   "name": "vue-ts",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -10,7 +10,7 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@zoom-image/core": "^0.1.0",
+    "@zoom-image/core": "^0.2.0",
     "vue": "^3.2.47"
   },
   "devDependencies": {
