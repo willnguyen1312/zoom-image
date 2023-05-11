@@ -5,6 +5,14 @@
 ### Patch Changes
 
 - Updated dependencies
+  [[`2fe07ad`](https://github.com/willnguyen1312/zoom-image/commit/2fe07ad332eb615b7ce1b655dfc0a041a1f752aa)]:
+  - @zoom-image/core@0.2.0
+
+## null
+
+### Patch Changes
+
+- Updated dependencies
   [[`f25238c`](https://github.com/willnguyen1312/zoom-image/commit/f25238c9eb2880df4d560a504e4ffa3c87e95a11),
   [`fcbc00f`](https://github.com/willnguyen1312/zoom-image/commit/fcbc00f83828262d9127fea7d3e64a6d1f6ca745)]:
   - @zoom-image/core@0.1.0
