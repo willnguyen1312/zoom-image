@@ -24,10 +24,7 @@ sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 
 ## Demo
 
-<video muted autoplay loop playsinline>
-  <source src="docs/public/demo.webm" type="video/webm" />
-  <source src="docs/public/demo.mp4" type="video/mp4" />
-</video>
+![Demo Zoom](./images/demo.gif)
 
 ## Architecture
 
