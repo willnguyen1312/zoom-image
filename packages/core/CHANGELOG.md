@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.2.0
+
+### Minor Changes
+
+- [#44](https://github.com/willnguyen1312/zoom-image/pull/44)
+  [`2fe07ad`](https://github.com/willnguyen1312/zoom-image/commit/2fe07ad332eb615b7ce1b655dfc0a041a1f752aa) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add support for zooming image on move
+
 ## 0.1.0
 
 ### Minor Changes
