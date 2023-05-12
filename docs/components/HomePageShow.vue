@@ -120,9 +120,6 @@ onUnmounted(() => {
   </div>
 
   <div class="m-x-auto mt-4 flex justify-center px-6 md:px-12 lg:hidden">
-    <video class="rounded-4" muted autoplay loop playsinline>
-      <source src="/demo.webm" type="video/webm" />
-      <source src="/demo.mp4" type="video/mp4" />
-    </video>
+    <video src="/demo.mov" class="rounded-4" muted autoplay loop playsinline controls preload="auto" />
   </div>
 </template>
