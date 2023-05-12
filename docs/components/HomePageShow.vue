@@ -96,7 +96,7 @@ onUnmounted(() => {
       </nav>
 
       <div class="space-y-4" v-if="zoomType === 'wheel'">
-        <p>Scroll inside the image to see zoom in-out effect</p>
+        <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
         <div ref="imageWheelContainerRef" class="mt-1 h-[300px] w-[300px] cursor-crosshair">
           <img class="h-full w-full" alt="Large Pic" src="/large.jpg" />
         </div>

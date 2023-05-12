@@ -32,9 +32,9 @@ features:
 ---
 
 <script setup>
-import HomeVideo from './components/HomeVideo.vue'
+import HomePageShow from './components/HomePageShow.vue'
 import Footer from './components/Footer.vue'
 </script>
 
-<HomeVideo />
+<HomePageShow />
 <Footer />
