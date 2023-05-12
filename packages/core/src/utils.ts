@@ -16,8 +16,8 @@ function preventDefaultForScrollKeys(event: KeyboardEvent) {
 
 export function disableScroll() {
   window.addEventListener("DOMMouseScroll", preventDefault)
-  window.addEventListener("wheel", preventDefault)
-  window.addEventListener("touchmove", preventDefault)
+  window.addEventListener("wheel", preventDefault, { passive: false })
+  window.addEventListener("touchmove", preventDefault, { passive: false })
   window.addEventListener("keydown", preventDefaultForScrollKeys)
 }
 

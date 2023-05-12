@@ -8,4 +8,5 @@ export default defineConfig({
   minify: true,
   globalName: "ZoomImage",
   name: "zoom-image",
+  dts: true,
 })
