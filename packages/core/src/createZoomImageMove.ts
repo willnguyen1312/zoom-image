@@ -1,3 +1,5 @@
+import { createStore } from "./store"
+import { ZoomedImgStatus } from "./types"
 import { clamp, disableScroll, enableScroll, getSourceImage } from "./utils"
 
 export type ZoomImageMoveOptions = {
@@ -5,18 +7,13 @@ export type ZoomImageMoveOptions = {
   zoomImageSource?: string
 }
 
-export type ZoomedImgStatus = "initial" | "loading" | "loaded" | "error"
-
-type ZoomImageMoveState = {
+export type ZoomImageMoveState = {
   zoomedImgStatus: ZoomedImgStatus
 }
 
-type Listener = (state: ZoomImageMoveState) => void
-
 export function createZoomImageMove(container: HTMLElement, options: ZoomImageMoveOptions = {}) {
   let createdZoomImage = false
-  const zoomImageState: ZoomImageMoveState = { zoomedImgStatus: "initial" }
-  const listeners = new Set<Listener>()
+  const zoomImageStore = createStore<ZoomImageMoveState>({ zoomedImgStatus: "initial" })
 
   const sourceImgElement = getSourceImage(container)
   const finalOptions: Required<ZoomImageMoveOptions> = {
@@ -29,19 +26,21 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   const zoomedImg = container.appendChild(document.createElement("img"))
 
   function createZoomImage() {
+    zoomedImg.src = finalOptions.zoomImageSource
     createdZoomImage = true
-    zoomImageState.zoomedImgStatus = "loading"
+    zoomImageStore.update({ zoomedImgStatus: "loading" })
     zoomedImg.style.width = `${zoomedImgWidth}px`
     zoomedImg.style.height = `${zoomedImgHeight}px`
-    zoomedImg.src = finalOptions.zoomImageSource
     zoomedImg.style.position = "absolute"
     zoomedImg.style.top = "0"
     zoomedImg.style.left = "0"
-    notifyListeners()
 
     zoomedImg.addEventListener("load", () => {
-      zoomImageState.zoomedImgStatus = "loaded"
-      notifyListeners()
+      zoomImageStore.update({ zoomedImgStatus: "loaded" })
+    })
+
+    zoomedImg.addEventListener("error", () => {
+      zoomImageStore.update({ zoomedImgStatus: "error" })
     })
   }
 
@@ -62,11 +61,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
     zoomedImg.style.transform = `translate(${left}px, ${top}px)`
   }
 
-  function notifyListeners() {
-    listeners.forEach((listener) => listener(zoomImageState))
-  }
-
-  async function handlePointerEnter(event: PointerEvent) {
+  function handlePointerEnter(event: PointerEvent) {
     if (!createdZoomImage) {
       createZoomImage()
     }
@@ -95,16 +90,9 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
       container.removeEventListener("pointermove", handlePointerMove)
       container.removeEventListener("pointerleave", handlePointerLeave)
       container.removeChild(zoomedImg)
-      listeners.clear()
+      zoomImageStore.cleanup()
     },
-    subscribe(listener: Listener) {
-      listeners.add(listener)
-      return () => {
-        listeners.delete(listener)
-      }
-    },
-    getState(): ZoomImageMoveState {
-      return zoomImageState
-    },
+    subscribe: zoomImageStore.subscribe,
+    getState: zoomImageStore.getState,
   }
 }
