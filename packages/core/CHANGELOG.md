@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.2.1
+
+### Patch Changes
+
+- [#51](https://github.com/willnguyen1312/zoom-image/pull/51)
+  [`4d36a06`](https://github.com/willnguyen1312/zoom-image/commit/4d36a06dde76286f5a40205be5f2d45614cbc4f2) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix zoom image on hover 🥳
+
 ## 0.2.0
 
 ### Minor Changes
