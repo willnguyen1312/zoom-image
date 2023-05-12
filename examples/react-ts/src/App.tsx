@@ -77,7 +77,7 @@ function App() {
               key={tab.name}
               href={tab.href}
               className={
-                "rounded-md px-3 py-2 text-sm font-medium decoration-none " +
+                "decoration-none rounded-md px-3 py-2 text-sm font-medium " +
                 (tab.current ? "bg-gray-100 text-gray-700" : "text-gray-500 hover:text-gray-700")
               }
               aria-current={tab.current ? "page" : undefined}
@@ -91,22 +91,22 @@ function App() {
       {zoomType === "wheel" && (
         <>
           <p>Scroll inside the image to see zoom in-out effect</p>
-          <div ref={imageWheelContainerRef} className="w-[300px] h-[300px] cursor-crosshair">
-            <img className="w-full h-full" alt="Large Pic" src="/large.jpg" />
+          <div ref={imageWheelContainerRef} className="h-[300px] w-[300px] cursor-crosshair">
+            <img className="h-full w-full" alt="Large Pic" src="/large.jpg" />
           </div>
         </>
       )}
 
       {zoomType === "hover" && (
-        <div ref={imageHoverContainerRef} className="relative flex items-start w-[250px] h-[250px]">
-          <img className="w-full h-full" alt="Small Pic" src="/small.jpg" />
+        <div ref={imageHoverContainerRef} className="relative flex h-[250px] w-[250px] items-start">
+          <img className="h-full w-full" alt="Small Pic" src="/small.jpg" />
           <div ref={zoomTargetRef} className="absolute left-[300px]"></div>
         </div>
       )}
 
       {zoomType === "move" && (
-        <div ref={imageMoveContainerRef} className="w-[300px] h-[300px] cursor-crosshair relative overflow-hidden">
-          <img className="w-full h-full" alt="Large Pic" src="/small.jpg" />
+        <div ref={imageMoveContainerRef} className="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+          <img className="h-full w-full" alt="Large Pic" src="/small.jpg" />
         </div>
       )}
     </div>

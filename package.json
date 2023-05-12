@@ -44,16 +44,19 @@
   "dependencies": {
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
+    "@zoom-image/core": "latest",
     "eslint": "8.40.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-prettier": "4.2.1",
     "prettier": "2.8.8",
+    "prettier-plugin-tailwindcss": "^0.2.8",
     "ts-morph": "^18.0.0",
     "tsup": "6.7.0",
     "tsx": "3.12.7",
     "typescript": "5.0.4",
     "unocss": "^0.51.12",
-    "vitepress": "1.0.0-alpha.75"
+    "vitepress": "1.0.0-alpha.75",
+    "vue": "^3.3.1"
   }
 }
