@@ -5,7 +5,25 @@ export type ZoomImageMoveOptions = {
   zoomImageSource?: string
 }
 
+function loadImage(src: string) {
+  return new Promise((resolve, reject) => {
+    const image = new Image()
+    image.addEventListener("load", resolve)
+    image.addEventListener("error", reject)
+    image.src = src
+  })
+}
+
+type ZoomImageMoveState = {
+  zoomedImgLoaded: boolean
+}
+
+type Listener = (state: ZoomImageMoveState) => void
+
 export function createZoomImageMove(container: HTMLElement, options: ZoomImageMoveOptions = {}) {
+  const zoomImageState: ZoomImageMoveState = { zoomedImgLoaded: false }
+  const listeners = new Set<Listener>()
+
   const sourceImgElement = getSourceImage(container)
   const finalOptions: Required<ZoomImageMoveOptions> = {
     zoomFactor: options.zoomFactor ?? 4,
@@ -44,7 +62,22 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
     zoomedImg.style.backgroundPosition = `top ${top}px left ${left}px`
   }
 
-  function handlePointerEnter(event: PointerEvent) {
+  function notifyListeners() {
+    listeners.forEach((listener) => listener(zoomImageState))
+  }
+
+  async function handlePointerEnter(event: PointerEvent) {
+    if (!zoomImageState.zoomedImgLoaded) {
+      try {
+        await loadImage(finalOptions.zoomImageSource)
+        zoomImageState.zoomedImgLoaded = true
+        notifyListeners()
+      } catch (error) {
+        console.log("Error loading zoomed image")
+        console.log(error)
+      }
+    }
+
     disableScroll()
     zoomedImg.style.display = "block"
     processZoom(event)
@@ -69,6 +102,16 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
       container.removeEventListener("pointermove", handlePointerMove)
       container.removeEventListener("pointerleave", handlePointerLeave)
       container.removeChild(zoomedImg)
+      listeners.clear()
+    },
+    subscribe(listener: Listener) {
+      listeners.add(listener)
+      return () => {
+        listeners.delete(listener)
+      }
+    },
+    getState(): ZoomImageMoveState {
+      return zoomImageState
     },
   }
 }
