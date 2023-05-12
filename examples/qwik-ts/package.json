@@ -1,6 +1,5 @@
 {
   "name": "qwik-ts",
-  "version": "0.0.8",
   "private": true,
   "scripts": {
     "build": "qwik build",
