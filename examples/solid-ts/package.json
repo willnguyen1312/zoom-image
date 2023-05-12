@@ -16,7 +16,7 @@
     "vite-plugin-solid": "^2.7.0"
   },
   "dependencies": {
-    "@zoom-image/core": "^0.2.0",
+    "@zoom-image/core": "latest",
     "solid-js": "^1.7.4"
   }
 }
