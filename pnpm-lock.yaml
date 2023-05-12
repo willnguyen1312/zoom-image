@@ -11,7 +11,7 @@ importers:
         specifier: ^2.26.1
         version: 2.26.1
       '@zoom-image/core':
-        specifier: ^0.2.1
+        specifier: workspace:*
         version: link:packages/core
       eslint:
         specifier: 8.40.0
