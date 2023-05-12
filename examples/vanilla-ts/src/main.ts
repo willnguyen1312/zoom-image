@@ -100,4 +100,4 @@ links.forEach((link) => {
   })
 })
 
-zoomMouseLink.click()
+zoomWheelLink.click()

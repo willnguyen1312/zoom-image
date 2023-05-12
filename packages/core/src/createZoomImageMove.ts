@@ -5,23 +5,17 @@ export type ZoomImageMoveOptions = {
   zoomImageSource?: string
 }
 
-function loadImage(src: string) {
-  return new Promise((resolve, reject) => {
-    const image = new Image()
-    image.addEventListener("load", resolve)
-    image.addEventListener("error", reject)
-    image.src = src
-  })
-}
+export type ZoomedImgStatus = "initial" | "loading" | "loaded" | "error"
 
 type ZoomImageMoveState = {
-  zoomedImgLoaded: boolean
+  zoomedImgStatus: ZoomedImgStatus
 }
 
 type Listener = (state: ZoomImageMoveState) => void
 
 export function createZoomImageMove(container: HTMLElement, options: ZoomImageMoveOptions = {}) {
-  const zoomImageState: ZoomImageMoveState = { zoomedImgLoaded: false }
+  let createdZoomImage = false
+  const zoomImageState: ZoomImageMoveState = { zoomedImgStatus: "initial" }
   const listeners = new Set<Listener>()
 
   const sourceImgElement = getSourceImage(container)
@@ -32,18 +26,24 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
 
   const zoomedImgWidth = sourceImgElement.clientWidth * finalOptions.zoomFactor
   const zoomedImgHeight = sourceImgElement.clientHeight * finalOptions.zoomFactor
+  const zoomedImg = container.appendChild(document.createElement("img"))
 
-  const zoomedImg = container.appendChild(document.createElement("div"))
-  zoomedImg.style.pointerEvents = "none"
-  zoomedImg.style.width = `${zoomedImgWidth}px`
-  zoomedImg.style.height = `${zoomedImgHeight}px`
-  zoomedImg.style.backgroundSize = `${zoomedImgWidth}px ${zoomedImgHeight}px`
-  zoomedImg.style.backgroundImage = "url('" + finalOptions.zoomImageSource + "')"
-  zoomedImg.style.backgroundRepeat = "no-repeat"
-  zoomedImg.style.display = "none"
-  zoomedImg.style.position = "absolute"
-  zoomedImg.style.top = "0"
-  zoomedImg.style.left = "0"
+  function createZoomImage() {
+    createdZoomImage = true
+    zoomImageState.zoomedImgStatus = "loading"
+    zoomedImg.style.width = `${zoomedImgWidth}px`
+    zoomedImg.style.height = `${zoomedImgHeight}px`
+    zoomedImg.src = finalOptions.zoomImageSource
+    zoomedImg.style.position = "absolute"
+    zoomedImg.style.top = "0"
+    zoomedImg.style.left = "0"
+    notifyListeners()
+
+    zoomedImg.addEventListener("load", () => {
+      zoomImageState.zoomedImgStatus = "loaded"
+      notifyListeners()
+    })
+  }
 
   function processZoom(event: PointerEvent) {
     const rect = container.getBoundingClientRect()
@@ -59,7 +59,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
     left = clamp(left, minLeft, 0)
     top = clamp(top, minTop, 0)
 
-    zoomedImg.style.backgroundPosition = `top ${top}px left ${left}px`
+    zoomedImg.style.transform = `translate(${left}px, ${top}px)`
   }
 
   function notifyListeners() {
@@ -67,15 +67,8 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   }
 
   async function handlePointerEnter(event: PointerEvent) {
-    if (!zoomImageState.zoomedImgLoaded) {
-      try {
-        await loadImage(finalOptions.zoomImageSource)
-        zoomImageState.zoomedImgLoaded = true
-        notifyListeners()
-      } catch (error) {
-        console.log("Error loading zoomed image")
-        console.log(error)
-      }
+    if (!createdZoomImage) {
+      createZoomImage()
     }
 
     disableScroll()
