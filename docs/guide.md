@@ -36,7 +36,7 @@ Simply importing the utilities you need from `@zoom-image/core`
 
 ```html
 <div id="container" class="container">
-  <img class="image" alt="Large Pic" src="/image.jpg" />
+  <img class="image" alt="Large Pic" src="/image.webp" />
 </div>
 ```
 
