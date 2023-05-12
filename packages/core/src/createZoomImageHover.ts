@@ -13,7 +13,7 @@ type RequiredExcept<T, K extends keyof T> = Omit<Required<T>, K> & { [P in K]?: 
 
 function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOptions = {}) {
   const sourceImgElement = getSourceImage(container)
-  const zoomedImg = container.appendChild(document.createElement("div"))
+  const zoomedImg = document.createElement("div")
   const zoomLens = container.appendChild(document.createElement("div"))
 
   const finalOptions: RequiredExcept<ZoomImageHoverOptions, "zoomTarget" | "customZoom"> = {
@@ -35,11 +35,11 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
   }
 
   function getLimitX(value: number) {
-    return sourceImgElement!.width - value
+    return sourceImgElement.width - value
   }
 
   function getLimitY(value: number) {
-    return sourceImgElement!.height - value
+    return sourceImgElement.height - value
   }
 
   function zoomLensLeft(left: number) {
@@ -65,12 +65,12 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
     zoomedImg.style.height = sourceImgElement.height + "px"
   }
 
-  function onSourceImageREady() {
+  function onSourceImageReady() {
     setZoomedImgSize()
     offset = getOffset(sourceImgElement)
     // Calculate scale and offset
-    scaleX = sourceImgElement.naturalWidth / sourceImgElement!.width
-    scaleY = sourceImgElement.naturalHeight / sourceImgElement!.height
+    scaleX = sourceImgElement.naturalWidth / sourceImgElement.width
+    scaleY = sourceImgElement.naturalHeight / sourceImgElement.height
 
     // Setup default zoom image style
     zoomedImg.style.backgroundSize =
@@ -121,8 +121,6 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
     container.addEventListener("pointermove", processZoom)
     container.addEventListener("pointerenter", handlePointerEnter)
     container.addEventListener("pointerleave", handlePointerLeave)
-    zoomLens.addEventListener("pointerenter", handlePointerEnter)
-    zoomLens.addEventListener("pointerleave", handlePointerLeave)
     window.addEventListener("scroll", handleScroll)
 
     // Setup zoomed image position if zoom target is specified
@@ -132,7 +130,6 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
     }
 
     container.appendChild(zoomedImg)
-    // Default zoom image position
     zoomedImg.style.position = "absolute"
     zoomedImg.style.top = "0px"
     zoomedImg.style.right = "0px"
@@ -140,7 +137,6 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
   }
 
   function processZoom(event: PointerEvent) {
-    disableScroll()
     let offsetX: number
     let offsetY: number
     let backgroundTop: number
@@ -158,6 +154,7 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
   }
 
   function handlePointerEnter() {
+    disableScroll()
     zoomedImg.style.display = "block"
     zoomLens.style.display = "block"
   }
@@ -173,9 +170,9 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
   }
 
   if (sourceImgElement.complete) {
-    onSourceImageREady()
+    onSourceImageReady()
   } else {
-    sourceImgElement.onload = onSourceImageREady
+    sourceImgElement.onload = onSourceImageReady
   }
 
   setup()
@@ -185,8 +182,6 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
     container.removeEventListener("pointerdown", processZoom)
     container.removeEventListener("pointerenter", handlePointerEnter)
     container.removeEventListener("pointerleave", handlePointerLeave)
-    zoomLens.removeEventListener("pointerenter", handlePointerEnter)
-    zoomLens.removeEventListener("pointerleave", handlePointerLeave)
     window.removeEventListener("scroll", handleScroll)
     container.removeChild(zoomLens)
 
