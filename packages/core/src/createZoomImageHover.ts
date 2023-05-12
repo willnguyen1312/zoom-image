@@ -80,9 +80,7 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
     zoomLens.style.position = "absolute"
 
     if (!finalOptions.zoomLensClass) {
-      zoomLens.style.background = "violet"
-      zoomLens.style.opacity = "0.4"
-      zoomLens.style.cursor = "crosshair"
+      zoomLens.style.background = "rgba(238, 130, 238, 0.5)"
     }
 
     if (finalOptions.customZoom) {
