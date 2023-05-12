@@ -25,17 +25,18 @@
     "src"
   ],
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0",
+    "@faker-js/faker": "^8.0.0",
     "@testing-library/dom": "^9.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^14.4.3",
     "@testing-library/vue": "^7.0.0",
     "@types/testing-library__jest-dom": "^5.14.5",
-    "@vitejs/plugin-vue": "^4.2.1",
+    "@vitejs/plugin-vue": "^4.2.2",
     "@vue/test-utils": "^2.3.2",
     "fast-check": "^3.8.1",
-    "happy-dom": "^9.10.9",
+    "happy-dom": "^9.16.0",
     "vite": "^4.3.5",
-    "vitest": "^0.31.0"
+    "vitest": "^0.31.0",
+    "vue": "^3.3.1"
   }
 }

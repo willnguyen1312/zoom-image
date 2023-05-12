@@ -1,7 +1,6 @@
 {
   "name": "preact-ts",
   "private": true,
-  "version": "0.0.8",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -15,7 +14,7 @@
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",
     "typescript": "^5.0.4",
-    "unocss": "^0.51.8",
+    "unocss": "^0.51.12",
     "vite": "^4.3.5"
   }
 }
