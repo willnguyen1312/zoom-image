@@ -14,6 +14,7 @@ const ZOOM_DELTA = 0.5
 
 type ZoomImageWheelState = {
   currentZoom: number
+  enable: boolean
 }
 
 type Listener = (state: ZoomImageWheelState) => void
@@ -67,6 +68,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     listeners.forEach((listener) => {
       listener({
         currentZoom,
+        enable,
       })
     })
   }
@@ -219,6 +221,9 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     },
     update(state: StateUpdate) {
       enable = state.enable
+    },
+    getState(): ZoomImageWheelState {
+      return { enable, currentZoom }
     },
   }
 }
