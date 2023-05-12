@@ -8,14 +8,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@unocss/preset-mini": "^0.51.8",
-    "@unocss/vite": "^0.51.8",
+    "@unocss/preset-mini": "^0.51.12",
+    "@unocss/vite": "^0.51.12",
     "typescript": "^5.0.4",
     "vite": "^4.3.5",
     "vite-plugin-solid": "^2.7.0"
   },
   "dependencies": {
     "@zoom-image/core": "latest",
-    "solid-js": "^1.7.4"
+    "solid-js": "^1.7.5"
   }
 }
