@@ -1,7 +1,11 @@
 <template>
-  <p class="text-center mt-4">
+  <p class="mt-4 text-center text-2xl">
     Made with ❤️‍🔥 by
-    <a class="font-bold text-violet" target="_blank" rel="noopener noreferrer" href="https://namnguyen.design"
+    <a
+      class="dark:text-violet font-bold text-[#7c447c]"
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://namnguyen.design"
       >Nam Nguyen</a
     >
   </p>
