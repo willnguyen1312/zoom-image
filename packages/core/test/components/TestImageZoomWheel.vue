@@ -43,7 +43,7 @@ watch(
       const zoomTarget = zoomTargetRef.value
 
       const result = createZoomImageHover(imageContainer, {
-        zoomImageSource: "/large.jpg",
+        zoomImageSource: "/large.webp",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
         scaleFactor: 0.5,
@@ -80,11 +80,11 @@ onUnmounted(() => {
     </nav>
 
     <div v-if="zoomType === 'wheel'" ref="imageWheelContainerRef">
-      <img alt="Large Pic" src="/large.jpg" />
+      <img alt="Large Pic" src="/large.webp" />
     </div>
 
     <div v-if="zoomType === 'hover'" ref="imageHoverContainerRef">
-      <img alt="Small Pic" src="/small.jpg" />
+      <img alt="Small Pic" src="/small.webp" />
       <div ref="zoomTargetRef" data-testid="zoomTarget"></div>
     </div>
   </div>
