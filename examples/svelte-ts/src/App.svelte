@@ -26,7 +26,7 @@
 
     if (zoomType === "hover") {
       const result = createZoomImageHover(imageHoverContainer, {
-        zoomImageSource: "/large.jpg",
+        zoomImageSource: "/large.webp",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
         scaleFactor: 0.5,
@@ -41,7 +41,7 @@
 
     if (zoomType === "move") {
       cleanup = createZoomImageMove(imageMoveContainer, {
-        zoomImageSource: "/large.jpg",
+        zoomImageSource: "/large.webp",
       }).cleanup
     }
   }
@@ -75,20 +75,20 @@
   {#if zoomType === "wheel"}
     <p>Scroll inside the image to see zoom in-out effect</p>
     <div bind:this={imageWheelContainer} class="w-[300px] h-[300px] cursor-crosshair">
-      <img class="w-full h-full" alt="Large Pic" src="/large.jpg" />
+      <img class="w-full h-full" alt="Large Pic" src="/large.webp" />
     </div>
   {/if}
 
   {#if zoomType === "hover"}
     <div bind:this={imageHoverContainer} class="relative flex items-start w-[250px] h-[250px]">
-      <img class="w-full h-full" alt="Small Pic" src="/small.jpg" />
+      <img class="w-full h-full" alt="Small Pic" src="/small.webp" />
       <div bind:this={zoomTarget} class="absolute left-[300px]" />
     </div>
   {/if}
 
   {#if zoomType === "move"}
     <div bind:this={imageMoveContainer} class="w-[300px] h-[300px] cursor-crosshair relative overflow-hidden">
-      <img class="w-full h-full" alt="Large Pic" src="/small.jpg" />
+      <img class="w-full h-full" alt="Large Pic" src="/small.webp" />
     </div>
   {/if}
 </div>

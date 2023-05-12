@@ -4,7 +4,7 @@
 
 ```ts
 const { cleanup } = createZoomImageHover(container, {
-  zoomImageSource: "large-image.jpg",
+  zoomImageSource: "large-image.webp",
 })
 
 // Call cleanup when you don't need it anymore

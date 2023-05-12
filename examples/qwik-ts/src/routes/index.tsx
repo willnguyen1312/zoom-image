@@ -30,7 +30,7 @@ export default component$(() => {
       const imageContainer = imageHoverContainerRef.value
       const zoomTarget = zoomTargetRef.value
       const result = createZoomImageHover(imageContainer, {
-        zoomImageSource: "/large.jpg",
+        zoomImageSource: "/large.webp",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
         scaleFactor: 0.5,
@@ -47,7 +47,7 @@ export default component$(() => {
     if (zoomType.value === "move") {
       const imageContainer = imageMoveContainerRef.value as HTMLDivElement
       const result = createZoomImageMove(imageContainer, {
-        zoomImageSource: "/large.jpg",
+        zoomImageSource: "/large.webp",
       })
       cleanup = result.cleanup
     }
@@ -86,21 +86,21 @@ export default component$(() => {
         <>
           <p>Scroll inside the image to see zoom in-out effect</p>
           <div ref={imageWheelContainerRef} class="h-[300px] w-[300px] cursor-crosshair">
-            <img class="h-full w-full" alt="Large Pic" src="/large.jpg" />
+            <img class="h-full w-full" alt="Large Pic" src="/large.webp" />
           </div>
         </>
       )}
 
       {zoomType.value === "hover" && (
         <div ref={imageHoverContainerRef} class="relative flex h-[250px] w-[250px] items-start">
-          <img class="h-full w-full" alt="Small Pic" src="/small.jpg" />
+          <img class="h-full w-full" alt="Small Pic" src="/small.webp" />
           <div ref={zoomTargetRef} class="absolute left-[300px]"></div>
         </div>
       )}
 
       {zoomType.value === "move" && (
         <div ref={imageMoveContainerRef} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-          <img class="h-full w-full" alt="Large Pic" src="/small.jpg" />
+          <img class="h-full w-full" alt="Large Pic" src="/small.webp" />
         </div>
       )}
     </div>
