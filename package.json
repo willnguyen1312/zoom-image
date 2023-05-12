@@ -15,7 +15,7 @@
     "test": "pnpm packages -- test",
     "test:ci": "pnpm packages -- test:ci",
     "build": "pnpm packages -- build",
-    "deploy:demo": "netlify deploy --prod --dir=./examples/vanilla-ts/dist",
+    "deploy:docs": "pnpm docs:build && netlify deploy --prod --dir=./docs/.vitepress/dist",
     "preact": "pnpm --filter \"./examples/preact-ts\"",
     "react": "pnpm --filter \"./examples/react-ts\"",
     "svelte": "pnpm --filter \"./examples/svelte-ts\"",
