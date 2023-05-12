@@ -8,7 +8,7 @@ describe("clamp functions", () => {
     fc.assert(
       fc.property(fc.integer(), fc.integer(), (first, second) => {
         const [min, max] = [Math.min(first, second), Math.max(first, second)]
-        const value = faker.datatype.number({ min, max })
+        const value = faker.number.int({ min, max })
         expect(clamp(value, min, max)).toBe(value)
       }),
     )
@@ -18,7 +18,7 @@ describe("clamp functions", () => {
     fc.assert(
       fc.property(fc.integer(), fc.integer(), (first, second) => {
         const [min, max] = [Math.min(first, second), Math.max(first, second)]
-        const value = faker.datatype.number({ min: Number.MIN_SAFE_INTEGER, max: min - 1 })
+        const value = faker.number.int({ min: Number.MIN_SAFE_INTEGER, max: min - 1 })
         expect(clamp(value, min, max)).toBe(min)
       }),
     )
@@ -28,7 +28,7 @@ describe("clamp functions", () => {
     fc.assert(
       fc.property(fc.integer(), fc.integer(), (first, second) => {
         const [min, max] = [Math.min(first, second), Math.max(first, second)]
-        const value = faker.datatype.number({ min: max + 1, max: Number.MAX_SAFE_INTEGER })
+        const value = faker.number.int({ min: max + 1, max: Number.MAX_SAFE_INTEGER })
         expect(clamp(value, min, max)).toBe(max)
       }),
     )
