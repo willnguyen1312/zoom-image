@@ -1,4 +1,4 @@
-import { createStore, createZoomImageIfNotAvailable } from "./store"
+import { createStore, imageCache } from "./store"
 import { ZoomedImgStatus } from "./types"
 import { enableScroll, disableScroll, clamp, getSourceImage } from "./utils"
 
@@ -24,8 +24,8 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   const zoomedImgWrapper = document.createElement("div")
   zoomedImgWrapper.style.overflow = "hidden"
   const zoomedImg = zoomedImgWrapper.appendChild(document.createElement("img"))
+  zoomedImg.style.maxWidth = "none"
   const zoomLens = container.appendChild(document.createElement("div"))
-  const store = createStore<ZoomImageHoverState>({ zoomedImgStatus: "idle", enabled: true })
 
   const finalOptions: RequiredExcept<ZoomImageHoverOptions, "zoomTarget" | "customZoom"> = {
     zoomImageSource: options.zoomImageSource || sourceImgElement.src,
@@ -34,6 +34,11 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     scaleFactor: options.scaleFactor || 1,
     zoomTarget: options.zoomTarget,
   }
+
+  const store = createStore<ZoomImageHoverState>({
+    zoomedImgStatus: imageCache.checkImageLoaded(finalOptions.zoomImageSource) ? "loaded" : "idle",
+    enabled: true,
+  })
 
   let scaleX: number
   let scaleY: number
@@ -146,7 +151,8 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   }
 
   async function handlePointerEnter() {
-    createZoomImageIfNotAvailable({ img: zoomedImg, src: finalOptions.zoomImageSource, store })
+    zoomedImg.src = finalOptions.zoomImageSource
+    imageCache.createZoomImage({ img: zoomedImg, src: finalOptions.zoomImageSource, store })
 
     disableScroll()
     zoomedImg.style.display = "block"
