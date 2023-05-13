@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.5.0
+
+### Minor Changes
+
+- [#75](https://github.com/willnguyen1312/zoom-image/pull/75)
+  [`3896ef9`](https://github.com/willnguyen1312/zoom-image/commit/3896ef941f00d42f52a50d939f2e2b016f69835d) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add support for zooming image on click
+
 ## 0.4.2
 
 ### Patch Changes
