@@ -14,9 +14,16 @@ cleanup()
 ### Type Declaration
 
 ```ts
+type Listener = (state: ZoomImageMoveState) => void
+
+type ZoomImageMoveState = {
+  zoomedImgStatus: ZoomedImgStatus
+}
+
 type ZoomImageMoveOptions = {
   // Zoom scale, default is 4
   zoomFactor?: number
+
   // The source of zoomed image, default is the same as the original image
   zoomImageSource?: string
 }
@@ -27,5 +34,11 @@ function createZoomImageMove(
 ): {
   // Remove all event listeners and zoomed image
   cleanup: () => void
+
+  // Subscribe to state changes, returns a function to unsubscribe
+  subscribe: (listener: Listener) => () => void
+
+  // Get current state
+  getState: () => ZoomImageHoverState
 }
 ```
