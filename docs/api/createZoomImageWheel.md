@@ -1,4 +1,4 @@
-# createZoomImageWheel - 1.3 kB
+# createZoomImageWheel - 1.4 kB
 
 ### Basic Usage
 
