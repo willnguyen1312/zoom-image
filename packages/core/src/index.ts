@@ -24,6 +24,14 @@ export { createZoomImageWheel }
 export type { ZoomImageWheelOptions }
 // End importing createZoomImageWheel
 
+// Start importing createZoomImageClick
+import { createZoomImageClick } from "./createZoomImageClick"
+import type { ZoomImageClickOptions } from "./createZoomImageClick"
+
+export { createZoomImageClick }
+export type { ZoomImageClickOptions }
+// End importing createZoomImageClick
+
 // Start importing utils
 import { makeCalculatePercentage, makeCalculateZoom } from "./utils"
 
