@@ -187,17 +187,29 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     lastPositionY = currentPositionY
   }
 
+  function _handlePointerLeave() {
+    pointerMap.clear()
+    isOnMove = false
+    prevDistance = -1
+    if (!enabledScroll) {
+      enableScroll()
+      enabledScroll = true
+    }
+  }
+
   function checkZoomEnabled() {
     return store.getState().enable
   }
 
   const onWheel = makeMaybeCallFunction(checkZoomEnabled, _onWheel)
   const handlePointerDown = makeMaybeCallFunction(checkZoomEnabled, _handlePointerDown)
+  const handlePointerLeave = makeMaybeCallFunction(checkZoomEnabled, _handlePointerLeave)
   const handlePointerMove = makeMaybeCallFunction(checkZoomEnabled, _handlePointerMove)
   const handlePointerUp = makeMaybeCallFunction(checkZoomEnabled, _handlePointerUp)
 
   container.addEventListener("wheel", onWheel)
   container.addEventListener("pointerdown", handlePointerDown)
+  container.addEventListener("pointerleave", handlePointerLeave)
   container.addEventListener("pointermove", handlePointerMove)
   container.addEventListener("pointerup", handlePointerUp)
 
@@ -205,6 +217,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     cleanup() {
       container.removeEventListener("wheel", onWheel)
       container.removeEventListener("pointerdown", handlePointerDown)
+      container.removeEventListener("pointerleave", handlePointerLeave)
       container.removeEventListener("pointermove", handlePointerMove)
       container.removeEventListener("pointerup", handlePointerUp)
       store.cleanup()
