@@ -25,6 +25,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   const zoomedImgWidth = sourceImgElement.clientWidth * finalOptions.zoomFactor
   const zoomedImgHeight = sourceImgElement.clientHeight * finalOptions.zoomFactor
   const zoomedImg = container.appendChild(document.createElement("img"))
+  zoomedImg.style.maxWidth = "none"
   zoomedImg.style.width = `${zoomedImgWidth}px`
   zoomedImg.style.height = `${zoomedImgHeight}px`
   zoomedImg.style.position = "absolute"
@@ -63,7 +64,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
 
   function handlePointerLeave() {
     enableScroll()
-    zoomedImg.style.display = "none"
+    // zoomedImg.style.display = "none"
   }
 
   container.addEventListener("pointerenter", handlePointerEnter)

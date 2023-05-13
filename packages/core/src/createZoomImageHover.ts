@@ -24,6 +24,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   const zoomedImgWrapper = document.createElement("div")
   zoomedImgWrapper.style.overflow = "hidden"
   const zoomedImg = zoomedImgWrapper.appendChild(document.createElement("img"))
+  zoomedImg.style.maxWidth = "none"
   const zoomLens = container.appendChild(document.createElement("div"))
 
   const finalOptions: RequiredExcept<ZoomImageHoverOptions, "zoomTarget" | "customZoom"> = {
