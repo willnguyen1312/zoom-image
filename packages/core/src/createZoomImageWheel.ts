@@ -18,8 +18,7 @@ export type ZoomImageWheelState = {
   enable: boolean
 }
 
-export type Listener = (state: ZoomImageWheelState) => void
-export type StateUpdate = { enable: boolean }
+type StateUpdate = { enable: boolean }
 
 export function createZoomImageWheel(container: HTMLElement, options: ZoomImageWheelOptions = {}) {
   const store = createStore<ZoomImageWheelState>({

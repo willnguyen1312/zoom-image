@@ -21,11 +21,23 @@ type ZoomImageMoveOptions = {
   zoomImageSource?: string
 }
 
+type Listener = (state: ZoomImageMoveState) => void
+
+type ZoomImageMoveState = {
+  zoomedImgStatus: ZoomedImgStatus
+}
+
 function createZoomImageMove(
   container: HTMLElement,
   options?: ZoomImageMoveOptions,
 ): {
   // Remove all event listeners and zoomed image
   cleanup: () => void
+
+  // Subscribe to state changes, returns a function to unsubscribe
+  subscribe: (listener: Listener) => () => void
+
+  // Get current state
+  getState: () => ZoomImageHoverState
 }
 ```

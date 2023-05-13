@@ -12,7 +12,10 @@ export type ZoomImageHoverOptions = {
 
 export type ZoomImageHoverState = {
   zoomedImgStatus: ZoomedImgStatus
+  enabled: boolean
 }
+
+type StateUpdate = { enabled: boolean }
 
 type RequiredExcept<T, K extends keyof T> = Omit<Required<T>, K> & { [P in K]?: T[P] }
 
@@ -22,7 +25,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   zoomedImgWrapper.style.overflow = "hidden"
   const zoomedImg = zoomedImgWrapper.appendChild(document.createElement("img"))
   const zoomLens = container.appendChild(document.createElement("div"))
-  const store = createStore<ZoomImageHoverState>({ zoomedImgStatus: "idle" })
+  const store = createStore<ZoomImageHoverState>({ zoomedImgStatus: "idle", enabled: true })
 
   const finalOptions: RequiredExcept<ZoomImageHoverOptions, "zoomTarget" | "customZoom"> = {
     zoomImageSource: options.zoomImageSource || sourceImgElement.src,
@@ -203,5 +206,8 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     },
     subscribe: store.subscribe,
     getState: store.getState,
+    update: (newState: StateUpdate) => {
+      store.update(newState)
+    },
   }
 }
