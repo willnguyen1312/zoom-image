@@ -102,6 +102,12 @@
       "path": "packages/core/dist/index.mjs",
       "import": "{ createZoomImageMove }",
       "limit": "1.5KB"
+    },
+    {
+      "name": "createZoomImageClick",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ createZoomImageClick }",
+      "limit": "1.5KB"
     }
   ]
 }

@@ -26,6 +26,12 @@
         class="decoration-none cursor-pointer rounded-md px-3 py-2 text-sm font-medium text-gray-800"
         >Zoom Image Move</a
       >
+      <a
+        href="#"
+        id="zoom-image-click"
+        class="decoration-none cursor-pointer rounded-md px-3 py-2 text-sm font-medium text-gray-800"
+        >Zoom Image Click</a
+      >
     </nav>
 
     <template id="image-wheel">
@@ -44,6 +50,12 @@
 
     <template id="image-move">
       <div id="image-move-container" class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+        <img class="h-full w-full" alt="Large Pic" src="/small.webp" />
+      </div>
+    </template>
+
+    <template id="image-click">
+      <div id="image-click-container" class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
         <img class="h-full w-full" alt="Large Pic" src="/small.webp" />
       </div>
     </template>

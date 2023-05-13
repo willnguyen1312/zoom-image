@@ -9,4 +9,5 @@ export default defineConfig({
   globalName: "ZoomImage",
   name: "zoom-image",
   dts: true,
+  treeshake: true,
 })

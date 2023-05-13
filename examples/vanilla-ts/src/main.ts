@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-unresolved
 import "uno.css"
-import { createZoomImageHover, createZoomImageWheel, createZoomImageMove } from "@zoom-image/core"
+import { createZoomImageHover, createZoomImageWheel, createZoomImageMove, createZoomImageClick } from "@zoom-image/core"
 
 function createSimpleState<T>(initialState: T) {
   const listeners = new Set<(value: T) => void>()
@@ -26,10 +26,11 @@ function createSimpleState<T>(initialState: T) {
 const zoomWheelLink = document.getElementById("zoom-image-wheel") as HTMLAnchorElement
 const zoomHoverLink = document.getElementById("zoom-image-hover") as HTMLAnchorElement
 const zoomMouseLink = document.getElementById("zoom-image-move") as HTMLAnchorElement
+const zoomClickLink = document.getElementById("zoom-image-click") as HTMLAnchorElement
 
-type ZoomType = "wheel" | "hover" | "move"
+type ZoomType = "wheel" | "hover" | "move" | "click"
 
-const makeImageTemplate = (id: "image-wheel" | "image-hover" | "image-move") => {
+const makeImageTemplate = (id: "image-wheel" | "image-hover" | "image-move" | "image-click") => {
   const template = document.getElementById(id) as HTMLTemplateElement
   return template.content.cloneNode(true)
 }
@@ -81,6 +82,17 @@ const makeUpdateUIFunc = () => {
         zoomImageSource: "/large.webp",
       }).cleanup
     }
+
+    if (state === "click") {
+      const imageClick = makeImageTemplate("image-click")
+      parent.replaceChildren(imageClick)
+
+      const container = document.getElementById("image-click-container") as HTMLDivElement
+
+      cleanupZoom = createZoomImageClick(container, {
+        zoomImageSource: "/large.webp",
+      }).cleanup
+    }
   }
 }
 
@@ -90,6 +102,7 @@ const links: { element: HTMLElement; type: ZoomType }[] = [
   { element: zoomWheelLink, type: "wheel" },
   { element: zoomHoverLink, type: "hover" },
   { element: zoomMouseLink, type: "move" },
+  { element: zoomClickLink, type: "click" },
 ]
 
 links.forEach((link) => {
