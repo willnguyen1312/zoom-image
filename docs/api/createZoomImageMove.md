@@ -1,4 +1,4 @@
-# createZoomImageMove - 898 B
+# createZoomImageMove - 1 kB
 
 ### Basic Usage
 

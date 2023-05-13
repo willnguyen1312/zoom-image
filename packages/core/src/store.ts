@@ -26,3 +26,26 @@ export function createStore<TState>(initialState: TState) {
     getState,
   }
 }
+
+const makeCreateZoomImageFunc = () => {
+  const loadedImageSet = new Set<string>()
+
+  return ({ src, store, img }: { src: string; store: ReturnType<typeof createStore>; img: HTMLImageElement }) => {
+    if (loadedImageSet.has(src)) return
+
+    loadedImageSet.add(src)
+
+    img.src = src
+    store.update({ zoomedImgStatus: "loading" })
+
+    img.addEventListener("load", () => {
+      store.update({ zoomedImgStatus: "loaded" })
+    })
+
+    img.addEventListener("error", () => {
+      store.update({ zoomedImgStatus: "error" })
+    })
+  }
+}
+
+export const createZoomImageIfNotAvailable = makeCreateZoomImageFunc()
