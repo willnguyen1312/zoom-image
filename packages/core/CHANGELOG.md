@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.4.0
+
+### Minor Changes
+
+- [#68](https://github.com/willnguyen1312/zoom-image/pull/68)
+  [`875fd07`](https://github.com/willnguyen1312/zoom-image/commit/875fd07bf05e87896edd0fc8a7fce36e719d4349) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add image caching mechanism 💞
+
 ## 0.3.0
 
 ### Minor Changes
