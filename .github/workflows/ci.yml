@@ -53,3 +53,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.head_ref }}
           force: true
+
+      - name: Size limit action
+        uses: andresz1/size-limit-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
