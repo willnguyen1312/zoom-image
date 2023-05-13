@@ -12,19 +12,20 @@ cleanup()
 ### Type Declaration
 
 ```ts
-type ZoomImageWheelOptions = {
-  // Maximum zoom scale, default is 4
-  maxZoom?: number
-  // Zoom ratio when scrolling, default is 0.1
-  wheelZoomRatio?: number
-}
-
 type ZoomImageWheelState = {
   currentZoom: number
 }
 
 type Listener = (state: ZoomImageWheelState) => void
-type StateUpdate = { enable: boolean }
+type StateUpdate = { enabled: boolean }
+
+type ZoomImageWheelOptions = {
+  // Maximum zoom scale, default is 4
+  maxZoom?: number
+
+  // Zoom ratio when scrolling, default is 0.1
+  wheelZoomRatio?: number
+}
 
 function createZoomImageWheel(
   container: HTMLElement,
@@ -32,9 +33,14 @@ function createZoomImageWheel(
 ): {
   // Remove all event listeners
   cleanup: () => void
+
   // Subscribe to state changes, returns a function to unsubscribe
   subscribe: (listener: Listener) => () => void
+
   // Update state, can be used to enable/disable the zoom
   update(value: StateUpdate): void
+
+  // Get current state
+  getState: () => ZoomImageWheelState
 }
 ```
