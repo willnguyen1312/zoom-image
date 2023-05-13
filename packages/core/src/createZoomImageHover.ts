@@ -1,4 +1,4 @@
-import { createStore } from "./store"
+import { createStore, createZoomImageIfNotAvailable } from "./store"
 import { ZoomedImgStatus } from "./types"
 import { enableScroll, disableScroll, clamp, getSourceImage } from "./utils"
 
@@ -35,26 +35,9 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     zoomTarget: options.zoomTarget,
   }
 
-  let createdZoomImage = false
   let scaleX: number
   let scaleY: number
   let offset: { left: number; top: number }
-
-  function createZoomImageIfNotAvailable() {
-    if (createdZoomImage) return
-    createdZoomImage = true
-
-    zoomedImg.src = finalOptions.zoomImageSource
-    store.update({ zoomedImgStatus: "loading" })
-
-    zoomedImg.addEventListener("load", () => {
-      store.update({ zoomedImgStatus: "loaded" })
-    })
-
-    zoomedImg.addEventListener("error", () => {
-      store.update({ zoomedImgStatus: "error" })
-    })
-  }
 
   function getOffset(element: HTMLElement) {
     const elRect = element.getBoundingClientRect()
@@ -163,7 +146,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   }
 
   async function handlePointerEnter() {
-    createZoomImageIfNotAvailable()
+    createZoomImageIfNotAvailable({ img: zoomedImg, src: finalOptions.zoomImageSource, store })
 
     disableScroll()
     zoomedImg.style.display = "block"

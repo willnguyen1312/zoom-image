@@ -1,4 +1,4 @@
-import { createStore } from "./store"
+import { createStore, createZoomImageIfNotAvailable } from "./store"
 import { ZoomedImgStatus } from "./types"
 import { clamp, disableScroll, enableScroll, getSourceImage } from "./utils"
 
@@ -12,9 +12,7 @@ export type ZoomImageMoveState = {
 }
 
 export function createZoomImageMove(container: HTMLElement, options: ZoomImageMoveOptions = {}) {
-  let createdZoomImage = false
   const store = createStore<ZoomImageMoveState>({ zoomedImgStatus: "idle" })
-
   const sourceImgElement = getSourceImage(container)
   const finalOptions: Required<ZoomImageMoveOptions> = {
     zoomFactor: options.zoomFactor ?? 4,
@@ -29,22 +27,6 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   zoomedImg.style.position = "absolute"
   zoomedImg.style.top = "0"
   zoomedImg.style.left = "0"
-
-  function createZoomImageIfNotAvailable() {
-    if (createdZoomImage) return
-    createdZoomImage = true
-
-    zoomedImg.src = finalOptions.zoomImageSource
-    store.update({ zoomedImgStatus: "loading" })
-
-    zoomedImg.addEventListener("load", () => {
-      store.update({ zoomedImgStatus: "loaded" })
-    })
-
-    zoomedImg.addEventListener("error", () => {
-      store.update({ zoomedImgStatus: "error" })
-    })
-  }
 
   function processZoom(event: PointerEvent) {
     const rect = container.getBoundingClientRect()
@@ -64,7 +46,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   }
 
   function handlePointerEnter(event: PointerEvent) {
-    createZoomImageIfNotAvailable()
+    createZoomImageIfNotAvailable({ img: zoomedImg, src: finalOptions.zoomImageSource, store })
 
     disableScroll()
     zoomedImg.style.display = "block"
