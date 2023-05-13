@@ -86,16 +86,19 @@
   },
   "size-limit": [
     {
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ createZoomImageHover }",
-      "limit": "1s"
-    },
-    {
+      "name": "createZoomImageWheel",
       "path": "packages/core/dist/index.mjs",
       "import": "{ createZoomImageWheel }",
       "limit": "1s"
     },
     {
+      "name": "createZoomImageHover",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ createZoomImageHover }",
+      "limit": "1s"
+    },
+    {
+      "name": "createZoomImageMove",
       "path": "packages/core/dist/index.mjs",
       "import": "{ createZoomImageMove }",
       "limit": "1s"
