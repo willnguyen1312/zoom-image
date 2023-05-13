@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.4.2
+
+### Patch Changes
+
+- [#73](https://github.com/willnguyen1312/zoom-image/pull/73)
+  [`7bfb6a1`](https://github.com/willnguyen1312/zoom-image/commit/7bfb6a15103e522109db9a606c2c24659b5e3875) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix zoom image on move
+
 ## 0.4.1
 
 ### Patch Changes
