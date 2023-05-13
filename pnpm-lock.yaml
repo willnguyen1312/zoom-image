@@ -256,7 +256,7 @@ importers:
   examples/vue-ts:
     dependencies:
       '@zoom-image/core':
-        specifier: latest
+        specifier: workspace:*
         version: link:../../packages/core
       vue:
         specifier: ^3.3.1
