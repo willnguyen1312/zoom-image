@@ -64,7 +64,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
 
   function handlePointerLeave() {
     enableScroll()
-    // zoomedImg.style.display = "none"
+    zoomedImg.style.display = "none"
   }
 
   container.addEventListener("pointerenter", handlePointerEnter)
