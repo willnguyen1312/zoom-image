@@ -14,17 +14,18 @@ cleanup()
 ### Type Declaration
 
 ```ts
-type ZoomImageMoveOptions = {
-  // Zoom scale, default is 4
-  zoomFactor?: number
-  // The source of zoomed image, default is the same as the original image
-  zoomImageSource?: string
-}
-
 type Listener = (state: ZoomImageMoveState) => void
 
 type ZoomImageMoveState = {
   zoomedImgStatus: ZoomedImgStatus
+}
+
+type ZoomImageMoveOptions = {
+  // Zoom scale, default is 4
+  zoomFactor?: number
+
+  // The source of zoomed image, default is the same as the original image
+  zoomImageSource?: string
 }
 
 function createZoomImageMove(
