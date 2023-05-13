@@ -24,7 +24,7 @@ type ZoomImageWheelState = {
 }
 
 type Listener = (state: ZoomImageWheelState) => void
-type StateUpdate = { enable: boolean }
+type StateUpdate = { enabled: boolean }
 
 function createZoomImageWheel(
   container: HTMLElement,
@@ -32,9 +32,14 @@ function createZoomImageWheel(
 ): {
   // Remove all event listeners
   cleanup: () => void
+
   // Subscribe to state changes, returns a function to unsubscribe
   subscribe: (listener: Listener) => () => void
+
   // Update state, can be used to enable/disable the zoom
   update(value: StateUpdate): void
+
+  // Get current state
+  getState: () => ZoomImageWheelState
 }
 ```
