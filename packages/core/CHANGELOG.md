@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.4.1
+
+### Patch Changes
+
+- [#71](https://github.com/willnguyen1312/zoom-image/pull/71)
+  [`d228668`](https://github.com/willnguyen1312/zoom-image/commit/d228668036f6b613b9345502133dccda46e3e431) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix zoom image on wheel when pointer leave
+
 ## 0.4.0
 
 ### Minor Changes
