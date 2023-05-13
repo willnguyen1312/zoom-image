@@ -8,7 +8,7 @@
   "scripts": {
     "build-fast": "tsup src",
     "dev": "pnpm build --watch",
-    "build": "tsup src",
+    "build": "tsup src terser",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "test": "vitest",

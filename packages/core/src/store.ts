@@ -41,7 +41,7 @@ const makeImageCache = () => {
     store: ReturnType<typeof createStore>
     img: HTMLImageElement
   }) => {
-    if (loadedImageSet.has(src)) return
+    if (checkImageLoaded(src)) return
 
     loadedImageSet.add(src)
 
