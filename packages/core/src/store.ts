@@ -2,7 +2,7 @@ export type Listener<TState> = (currentState: TState) => void
 
 export function createStore<TState>(initialState: TState) {
   const listeners = new Set<Listener<TState>>()
-  const state: TState = structuredClone(initialState)
+  const state: TState = initialState
 
   const update = (updatedState: Partial<TState>) => {
     // @ts-ignore
@@ -17,7 +17,7 @@ export function createStore<TState>(initialState: TState) {
 
   const cleanup = () => listeners.clear()
 
-  const getState = () => structuredClone(state)
+  const getState = () => state
 
   return {
     update,

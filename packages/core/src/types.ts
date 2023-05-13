@@ -1,1 +1,1 @@
-export type ZoomedImgStatus = "initial" | "loading" | "loaded" | "error"
+export type ZoomedImgStatus = "idle" | "loading" | "loaded" | "error"
