@@ -1,4 +1,4 @@
-import { createStore, createZoomImageIfNotAvailable } from "./store"
+import { createStore, imageCache } from "./store"
 import { ZoomedImgStatus } from "./types"
 import { clamp, disableScroll, enableScroll, getSourceImage } from "./utils"
 
@@ -12,16 +12,20 @@ export type ZoomImageMoveState = {
 }
 
 export function createZoomImageMove(container: HTMLElement, options: ZoomImageMoveOptions = {}) {
-  const store = createStore<ZoomImageMoveState>({ zoomedImgStatus: "idle" })
   const sourceImgElement = getSourceImage(container)
   const finalOptions: Required<ZoomImageMoveOptions> = {
     zoomFactor: options.zoomFactor ?? 4,
     zoomImageSource: options.zoomImageSource ?? sourceImgElement.src,
   }
 
+  const store = createStore<ZoomImageMoveState>({
+    zoomedImgStatus: imageCache.checkImageLoaded(finalOptions.zoomImageSource) ? "loaded" : "idle",
+  })
+
   const zoomedImgWidth = sourceImgElement.clientWidth * finalOptions.zoomFactor
   const zoomedImgHeight = sourceImgElement.clientHeight * finalOptions.zoomFactor
   const zoomedImg = container.appendChild(document.createElement("img"))
+  zoomedImg.style.maxWidth = "none"
   zoomedImg.style.width = `${zoomedImgWidth}px`
   zoomedImg.style.height = `${zoomedImgHeight}px`
   zoomedImg.style.position = "absolute"
@@ -46,7 +50,8 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   }
 
   function handlePointerEnter(event: PointerEvent) {
-    createZoomImageIfNotAvailable({ img: zoomedImg, src: finalOptions.zoomImageSource, store })
+    zoomedImg.src = finalOptions.zoomImageSource
+    imageCache.createZoomImage({ img: zoomedImg, src: finalOptions.zoomImageSource, store })
 
     disableScroll()
     zoomedImg.style.display = "block"
@@ -59,7 +64,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
 
   function handlePointerLeave() {
     enableScroll()
-    zoomedImg.style.display = "none"
+    // zoomedImg.style.display = "none"
   }
 
   container.addEventListener("pointerenter", handlePointerEnter)
