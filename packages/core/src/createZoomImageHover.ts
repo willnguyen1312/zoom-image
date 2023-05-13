@@ -1,33 +1,60 @@
+import { createStore } from "./store"
+import { ZoomedImgStatus } from "./types"
 import { enableScroll, disableScroll, clamp, getSourceImage } from "./utils"
 
 export type ZoomImageHoverOptions = {
   customZoom?: { width: number; height: number }
   zoomImageSource?: string
   zoomLensClass?: string
-  zoomImageClass?: string
   zoomTarget?: HTMLElement
   scaleFactor?: number
 }
 
+export type ZoomImageHoverState = {
+  zoomedImgStatus: ZoomedImgStatus
+  enabled: boolean
+}
+
+type StateUpdate = { enabled: boolean }
+
 type RequiredExcept<T, K extends keyof T> = Omit<Required<T>, K> & { [P in K]?: T[P] }
 
-function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOptions = {}) {
+export function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOptions = {}) {
   const sourceImgElement = getSourceImage(container)
-  const zoomedImg = document.createElement("div")
+  const zoomedImgWrapper = document.createElement("div")
+  zoomedImgWrapper.style.overflow = "hidden"
+  const zoomedImg = zoomedImgWrapper.appendChild(document.createElement("img"))
   const zoomLens = container.appendChild(document.createElement("div"))
+  const store = createStore<ZoomImageHoverState>({ zoomedImgStatus: "idle", enabled: true })
 
   const finalOptions: RequiredExcept<ZoomImageHoverOptions, "zoomTarget" | "customZoom"> = {
     zoomImageSource: options.zoomImageSource || sourceImgElement.src,
     zoomLensClass: options.zoomLensClass || "",
-    zoomImageClass: options.zoomImageClass || "",
     customZoom: options.customZoom,
     scaleFactor: options.scaleFactor || 1,
     zoomTarget: options.zoomTarget,
   }
 
+  let createdZoomImage = false
   let scaleX: number
   let scaleY: number
   let offset: { left: number; top: number }
+
+  function createZoomImageIfNotAvailable() {
+    if (createdZoomImage) return
+    createdZoomImage = true
+
+    zoomedImg.src = finalOptions.zoomImageSource
+    store.update({ zoomedImgStatus: "loading" })
+
+    zoomedImg.addEventListener("load", () => {
+      store.update({ zoomedImgStatus: "loaded" })
+    })
+
+    zoomedImg.addEventListener("error", () => {
+      store.update({ zoomedImgStatus: "error" })
+    })
+  }
 
   function getOffset(element: HTMLElement) {
     const elRect = element.getBoundingClientRect()
@@ -55,14 +82,14 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
   function setZoomedImgSize() {
     // Custom zoom available
     if (finalOptions.customZoom) {
-      zoomedImg.style.width = finalOptions.customZoom.width + "px"
-      zoomedImg.style.height = finalOptions.customZoom.height + "px"
+      zoomedImgWrapper.style.width = finalOptions.customZoom.width + "px"
+      zoomedImgWrapper.style.height = finalOptions.customZoom.height + "px"
       return
     }
 
     // Default zoom to source image size
-    zoomedImg.style.width = sourceImgElement.width + "px"
-    zoomedImg.style.height = sourceImgElement.height + "px"
+    zoomedImgWrapper.style.width = sourceImgElement.width + "px"
+    zoomedImgWrapper.style.height = sourceImgElement.height + "px"
   }
 
   function onSourceImageReady() {
@@ -72,12 +99,6 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
     scaleX = sourceImgElement.naturalWidth / sourceImgElement.width
     scaleY = sourceImgElement.naturalHeight / sourceImgElement.height
 
-    // Setup default zoom image style
-    zoomedImg.style.backgroundSize =
-      sourceImgElement.naturalWidth / finalOptions.scaleFactor +
-      "px " +
-      sourceImgElement.naturalHeight / finalOptions.scaleFactor +
-      "px"
     zoomedImg.style.display = "block"
     zoomedImg.style.display = "none"
 
@@ -85,9 +106,7 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
     zoomLens.style.position = "absolute"
 
     if (!finalOptions.zoomLensClass) {
-      zoomLens.style.background = "violet"
-      zoomLens.style.opacity = "0.4"
-      zoomLens.style.cursor = "crosshair"
+      zoomLens.style.background = "rgba(238, 130, 238, 0.5)"
     }
 
     if (finalOptions.customZoom) {
@@ -107,15 +126,6 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
       zoomLens.classList.add(finalOptions.zoomLensClass)
     }
 
-    if (finalOptions.zoomImageClass) {
-      zoomedImg.classList.add(finalOptions.zoomImageClass)
-    }
-
-    // Setup zoomed image style
-    zoomedImg.style.backgroundImage = "url('" + finalOptions.zoomImageSource + "')"
-    zoomedImg.style.backgroundRepeat = "no-repeat"
-    zoomedImg.style.display = "none"
-
     // setup event listeners
     container.addEventListener("pointerdown", processZoom)
     container.addEventListener("pointermove", processZoom)
@@ -125,11 +135,11 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
 
     // Setup zoomed image position if zoom target is specified
     if (finalOptions.zoomTarget) {
-      finalOptions.zoomTarget.appendChild(zoomedImg)
+      finalOptions.zoomTarget.appendChild(zoomedImgWrapper)
       return
     }
 
-    container.appendChild(zoomedImg)
+    container.appendChild(zoomedImgWrapper)
     zoomedImg.style.position = "absolute"
     zoomedImg.style.top = "0px"
     zoomedImg.style.right = "0px"
@@ -141,19 +151,20 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
     let offsetY: number
     let backgroundTop: number
     let backgroundRight: number
-    let backgroundPosition: string
+    // let backgroundPosition: string
     if (offset) {
       offsetX = zoomLensLeft(event.clientX - offset.left)
       offsetY = zoomLensTop(event.clientY - offset.top)
       backgroundTop = (offsetX * scaleX) / finalOptions.scaleFactor
       backgroundRight = (offsetY * scaleY) / finalOptions.scaleFactor
-      backgroundPosition = "-" + backgroundTop + "px " + "-" + backgroundRight + "px"
-      zoomedImg.style.backgroundPosition = backgroundPosition
+      zoomedImg.style.transform = "translate(" + -backgroundTop + "px," + -backgroundRight + "px)"
       zoomLens.style.cssText += "transform:" + "translate(" + offsetX + "px," + offsetY + "px); top: 0; left: 0;"
     }
   }
 
-  function handlePointerEnter() {
+  async function handlePointerEnter() {
+    createZoomImageIfNotAvailable()
+
     disableScroll()
     zoomedImg.style.display = "block"
     zoomLens.style.display = "block"
@@ -177,25 +188,26 @@ function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOpt
 
   setup()
 
-  function cleanup() {
-    container.removeEventListener("pointermove", processZoom)
-    container.removeEventListener("pointerdown", processZoom)
-    container.removeEventListener("pointerenter", handlePointerEnter)
-    container.removeEventListener("pointerleave", handlePointerLeave)
-    window.removeEventListener("scroll", handleScroll)
-    container.removeChild(zoomLens)
-
-    if (finalOptions.zoomTarget) {
-      finalOptions.zoomTarget.removeChild(zoomedImg)
-      return
-    }
-
-    container.removeChild(zoomedImg)
-  }
-
   return {
-    cleanup,
+    cleanup: () => {
+      container.removeEventListener("pointermove", processZoom)
+      container.removeEventListener("pointerdown", processZoom)
+      container.removeEventListener("pointerenter", handlePointerEnter)
+      container.removeEventListener("pointerleave", handlePointerLeave)
+      window.removeEventListener("scroll", handleScroll)
+      container.removeChild(zoomLens)
+
+      if (finalOptions.zoomTarget) {
+        finalOptions.zoomTarget.removeChild(zoomedImgWrapper)
+        return
+      }
+
+      container.removeChild(zoomedImgWrapper)
+    },
+    subscribe: store.subscribe,
+    getState: store.getState,
+    update: (newState: StateUpdate) => {
+      store.update(newState)
+    },
   }
 }
-
-export { createZoomImageHover }
