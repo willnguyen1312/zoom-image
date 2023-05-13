@@ -46,7 +46,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit -m "Update by GitHub Action" storage.json || echo "Nothing to update"
+          git diff --quiet && git diff --staged --quiet || (git commit -am "chore: format code with Prettier" --no-verify)
 
       - name: Push changes
         uses: ad-m/github-push-action@master
