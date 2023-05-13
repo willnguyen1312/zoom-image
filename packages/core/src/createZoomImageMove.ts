@@ -1,3 +1,5 @@
+import { createStore } from "./store"
+import { ZoomedImgStatus } from "./types"
 import { clamp, disableScroll, enableScroll, getSourceImage } from "./utils"
 
 export type ZoomImageMoveOptions = {
@@ -5,7 +7,14 @@ export type ZoomImageMoveOptions = {
   zoomImageSource?: string
 }
 
+export type ZoomImageMoveState = {
+  zoomedImgStatus: ZoomedImgStatus
+}
+
 export function createZoomImageMove(container: HTMLElement, options: ZoomImageMoveOptions = {}) {
+  let createdZoomImage = false
+  const store = createStore<ZoomImageMoveState>({ zoomedImgStatus: "idle" })
+
   const sourceImgElement = getSourceImage(container)
   const finalOptions: Required<ZoomImageMoveOptions> = {
     zoomFactor: options.zoomFactor ?? 4,
@@ -14,18 +23,28 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
 
   const zoomedImgWidth = sourceImgElement.clientWidth * finalOptions.zoomFactor
   const zoomedImgHeight = sourceImgElement.clientHeight * finalOptions.zoomFactor
-
-  const zoomedImg = container.appendChild(document.createElement("div"))
-  zoomedImg.style.pointerEvents = "none"
+  const zoomedImg = container.appendChild(document.createElement("img"))
   zoomedImg.style.width = `${zoomedImgWidth}px`
   zoomedImg.style.height = `${zoomedImgHeight}px`
-  zoomedImg.style.backgroundSize = `${zoomedImgWidth}px ${zoomedImgHeight}px`
-  zoomedImg.style.backgroundImage = "url('" + finalOptions.zoomImageSource + "')"
-  zoomedImg.style.backgroundRepeat = "no-repeat"
-  zoomedImg.style.display = "none"
   zoomedImg.style.position = "absolute"
   zoomedImg.style.top = "0"
   zoomedImg.style.left = "0"
+
+  function createZoomImageIfNotAvailable() {
+    if (createdZoomImage) return
+    createdZoomImage = true
+
+    zoomedImg.src = finalOptions.zoomImageSource
+    store.update({ zoomedImgStatus: "loading" })
+
+    zoomedImg.addEventListener("load", () => {
+      store.update({ zoomedImgStatus: "loaded" })
+    })
+
+    zoomedImg.addEventListener("error", () => {
+      store.update({ zoomedImgStatus: "error" })
+    })
+  }
 
   function processZoom(event: PointerEvent) {
     const rect = container.getBoundingClientRect()
@@ -41,10 +60,12 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
     left = clamp(left, minLeft, 0)
     top = clamp(top, minTop, 0)
 
-    zoomedImg.style.backgroundPosition = `top ${top}px left ${left}px`
+    zoomedImg.style.transform = `translate(${left}px, ${top}px)`
   }
 
   function handlePointerEnter(event: PointerEvent) {
+    createZoomImageIfNotAvailable()
+
     disableScroll()
     zoomedImg.style.display = "block"
     processZoom(event)
@@ -69,6 +90,9 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
       container.removeEventListener("pointermove", handlePointerMove)
       container.removeEventListener("pointerleave", handlePointerLeave)
       container.removeChild(zoomedImg)
+      store.cleanup()
     },
+    subscribe: store.subscribe,
+    getState: store.getState,
   }
 }
