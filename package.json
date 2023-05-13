@@ -29,6 +29,7 @@
     "test": "pnpm packages -- test",
     "test:ci": "pnpm packages -- test:ci",
     "build": "pnpm packages -- build",
+    "size": "pnpm build && size-limit",
     "deploy:docs": "pnpm docs:build && netlify deploy --prod --dir=./docs/.vitepress/dist",
     "preact": "pnpm --filter \"./examples/preact-ts\"",
     "react": "pnpm --filter \"./examples/react-ts\"",
@@ -85,15 +86,18 @@
   },
   "size-limit": [
     {
-      "path": "packages/core/dist/createZoomImageWheel.global.js",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ createZoomImageHover }",
       "limit": "200 ms"
     },
     {
-      "path": "packages/core/dist/createZoomImageMove.global.js",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ createZoomImageWheel }",
       "limit": "200 ms"
     },
     {
-      "path": "packages/core/dist/createZoomImageHover.global.js",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ createZoomImageMove }",
       "limit": "200 ms"
     }
   ]
