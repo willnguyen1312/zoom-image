@@ -88,17 +88,17 @@
     {
       "path": "packages/core/dist/index.mjs",
       "import": "{ createZoomImageHover }",
-      "limit": "200 ms"
+      "limit": "1s"
     },
     {
       "path": "packages/core/dist/index.mjs",
       "import": "{ createZoomImageWheel }",
-      "limit": "200 ms"
+      "limit": "1s"
     },
     {
       "path": "packages/core/dist/index.mjs",
       "import": "{ createZoomImageMove }",
-      "limit": "200 ms"
+      "limit": "1s"
     }
   ]
 }
