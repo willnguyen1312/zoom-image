@@ -27,15 +27,24 @@ export function createStore<TState>(initialState: TState) {
   }
 }
 
-const makeCreateZoomImageFunc = () => {
+const makeImageCache = () => {
   const loadedImageSet = new Set<string>()
 
-  return ({ src, store, img }: { src: string; store: ReturnType<typeof createStore>; img: HTMLImageElement }) => {
+  const checkImageLoaded = (src: string) => loadedImageSet.has(src)
+
+  const createZoomImage = ({
+    src,
+    store,
+    img,
+  }: {
+    src: string
+    store: ReturnType<typeof createStore>
+    img: HTMLImageElement
+  }) => {
     if (loadedImageSet.has(src)) return
 
     loadedImageSet.add(src)
 
-    img.src = src
     store.update({ zoomedImgStatus: "loading" })
 
     img.addEventListener("load", () => {
@@ -46,6 +55,11 @@ const makeCreateZoomImageFunc = () => {
       store.update({ zoomedImgStatus: "error" })
     })
   }
+
+  return {
+    createZoomImage,
+    checkImageLoaded,
+  }
 }
 
-export const createZoomImageIfNotAvailable = makeCreateZoomImageFunc()
+export const imageCache = makeImageCache()
