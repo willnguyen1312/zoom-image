@@ -1,4 +1,4 @@
-# createZoomImageHover
+# createZoomImageHover - 1.3 kB
 
 ### Basic Usage
 
