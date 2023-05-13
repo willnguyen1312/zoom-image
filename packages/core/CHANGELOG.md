@@ -6,7 +6,9 @@
 
 - [#65](https://github.com/willnguyen1312/zoom-image/pull/65)
   [`35e1a70`](https://github.com/willnguyen1312/zoom-image/commit/35e1a706aa38f96863807611c88dd2bc797a7ae9) Thanks
-  [@willnguyen1312](https://github.com/willnguyen1312)! - - Add zoomed image status
+  [@willnguyen1312](https://github.com/willnguyen1312)!
+
+  - Add zoomed image status
   - Migrate background-size to image
   - Create simple store for state management
 
