@@ -65,6 +65,7 @@
   "dependencies": {
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
+    "@size-limit/preset-big-lib": "^8.2.4",
     "@zoom-image/core": "workspace:*",
     "eslint": "8.40.0",
     "eslint-config-prettier": "8.8.0",
@@ -73,6 +74,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",
+    "size-limit": "^8.2.4",
     "ts-morph": "^18.0.0",
     "tsup": "6.7.0",
     "tsx": "3.12.7",
@@ -84,15 +86,15 @@
   "size-limit": [
     {
       "path": "packages/core/dist/createZoomImageWheel.global.js",
-      "limit": "4500 ms"
+      "limit": "200 ms"
     },
     {
       "path": "packages/core/dist/createZoomImageMove.global.js",
-      "limit": "4500 ms"
+      "limit": "200 ms"
     },
     {
       "path": "packages/core/dist/createZoomImageHover.global.js",
-      "limit": "4500 ms"
+      "limit": "200 ms"
     }
   ]
 }

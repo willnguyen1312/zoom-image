@@ -1,3 +1,11 @@
+<p align="center">
+  <img alt="Bundle Size" src="https://badgen.net/bundlephobia/minzip/@zoom-image/core"/>
+  <img alt="Github Checks" src="https://badgen.net/github/checks/willnguyen1312/zoom-image/main"/>
+  <img alt="Github Stars" src="https://badgen.net/github/stars/willnguyen1312/zoom-image" />
+</p>
+
+<br />
+
 - [Zoom Image](#zoom-image)
 - [Demo](#demo)
 - [Architecture](#architecture)
@@ -87,8 +95,8 @@ pnpm start-qwik
 - [react-zoomable-media](https://github.com/willnguyen1312/react-zoomable-media) - The library I wrote for my previous
   company
 - [zagjs](https://github.com/chakra-ui/zag) - The project's architecture is inspired by this library
-- [js-image-zoom](https://github.com/malaman/js-image-zoom) - The internal working of zoom image on hover is inspired by this
-  library
+- [js-image-zoom](https://github.com/malaman/js-image-zoom) - The internal working of zoom image on hover is inspired by
+  this library
 
 ## License
 
