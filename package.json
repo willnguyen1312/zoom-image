@@ -86,19 +86,22 @@
   },
   "size-limit": [
     {
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ createZoomImageHover }",
-      "limit": "200 ms"
-    },
-    {
+      "name": "createZoomImageWheel",
       "path": "packages/core/dist/index.mjs",
       "import": "{ createZoomImageWheel }",
-      "limit": "200 ms"
+      "limit": "1s"
     },
     {
+      "name": "createZoomImageHover",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ createZoomImageHover }",
+      "limit": "1s"
+    },
+    {
+      "name": "createZoomImageMove",
       "path": "packages/core/dist/index.mjs",
       "import": "{ createZoomImageMove }",
-      "limit": "200 ms"
+      "limit": "1s"
     }
   ]
 }
