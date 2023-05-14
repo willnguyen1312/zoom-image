@@ -13,7 +13,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:ci": "vitest run"
+    "test:ci": "vitest run --coverage"
   },
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -32,6 +32,7 @@
     "@testing-library/vue": "^7.0.0",
     "@types/testing-library__jest-dom": "^5.14.5",
     "@vitejs/plugin-vue": "^4.2.2",
+    "@vitest/coverage-c8": "^0.31.0",
     "@vue/test-utils": "^2.3.2",
     "fast-check": "^3.8.1",
     "happy-dom": "^9.16.0",

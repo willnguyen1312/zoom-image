@@ -33,7 +33,6 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   zoomedImg.style.left = "0"
 
   function handlePointerEnter(event: PointerEvent) {
-    zoomedImg.src = finalOptions.zoomImageSource
     zoomedImg.style.display = "block"
     imageCache.createZoomImage({ img: zoomedImg, src: finalOptions.zoomImageSource, store })
 
@@ -66,7 +65,6 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   }
 
   function processZoom(event: PointerEvent) {
-    zoomedImg.src = finalOptions.zoomImageSource
     zoomedImg.style.display = "block"
     imageCache.createZoomImage({ img: zoomedImg, src: finalOptions.zoomImageSource, store })
 
