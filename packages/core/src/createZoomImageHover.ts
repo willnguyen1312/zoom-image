@@ -151,7 +151,6 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   }
 
   async function handlePointerEnter() {
-    zoomedImg.src = finalOptions.zoomImageSource
     imageCache.createZoomImage({ img: zoomedImg, src: finalOptions.zoomImageSource, store })
 
     disableScroll()

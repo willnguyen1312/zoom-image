@@ -57,7 +57,6 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
   }
 
   function processZoom(event: PointerEvent) {
-    zoomedImg.src = finalOptions.zoomImageSource
     zoomedImg.style.display = "block"
     imageCache.createZoomImage({ img: zoomedImg, src: finalOptions.zoomImageSource, store })
 
