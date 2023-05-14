@@ -1,5 +1,16 @@
 # @zoom-image/core
 
+## 0.6.0
+
+### Minor Changes
+
+- [#77](https://github.com/willnguyen1312/zoom-image/pull/77)
+  [`eefd40d`](https://github.com/willnguyen1312/zoom-image/commit/eefd40d312095c07d6ee75939961112f23cfae81) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Changes:
+
+      ✅ Refactor image cache usage
+      ✅ Add test coverage for image cache
+
 ## 0.5.0
 
 ### Minor Changes
