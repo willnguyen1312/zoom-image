@@ -7,8 +7,6 @@
 <br />
 
 - [Zoom Image](#zoom-image)
-- [Demo](#demo)
-- [Architecture](#architecture)
 - [Development](#development)
 - [Commands](#commands)
   - [With Preact](#with-preact)
@@ -29,14 +27,6 @@ sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 - ✅ Zoom on hover
 - ✅ Zoom on move
 - ✅ Zoom on wheel
-
-## Demo
-
-![Demo Zoom](./images/demo.gif)
-
-## Architecture
-
-![Diagram](./images/diagram.png)
 
 ## Development
 
