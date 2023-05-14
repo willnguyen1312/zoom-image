@@ -45,7 +45,7 @@ watch(
       const zoomTarget = zoomTargetRef.value
 
       const result = createZoomImageHover(imageContainer, {
-        zoomImageSource: "/large.webp",
+        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
         scaleFactor: 0.5,
@@ -64,7 +64,7 @@ watch(
       const imageContainer = imageMoveContainerRef.value as HTMLDivElement
 
       const result = createZoomImageMove(imageContainer, {
-        zoomImageSource: "/large.webp",
+        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
       })
       cleanup = result.cleanup
     }
@@ -97,12 +97,12 @@ onUnmounted(() => {
     <template v-if="zoomType === 'wheel'">
       <p>Scroll inside the image to see zoom in-out effect</p>
       <div ref="imageWheelContainerRef" class="h-[300px] w-[300px] cursor-crosshair">
-        <img class="h-full w-full" alt="Large Pic" src="/large.webp" />
+        <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/large.webp" />
       </div>
     </template>
 
     <div v-if="zoomType === 'hover'" ref="imageHoverContainerRef" class="relative flex h-[250px] w-[250px] items-start">
-      <img class="h-full w-full" alt="Small Pic" src="/small.webp" />
+      <img class="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
       <div ref="zoomTargetRef" class="absolute left-[300px]"></div>
     </div>
 
@@ -111,7 +111,7 @@ onUnmounted(() => {
       ref="imageMoveContainerRef"
       class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
     >
-      <img class="h-full w-full" alt="Large Pic" src="/small.webp" />
+      <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
     </div>
   </div>
 </template>
