@@ -47,7 +47,7 @@ watch(
       const zoomTarget = zoomTargetRef.value
 
       const result = createZoomImageHover(imageContainer, {
-        zoomImageSource: "/large.webp",
+        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
         customZoom: { width: 300, height: 450 },
         zoomTarget,
         scaleFactor: 0.5,
@@ -66,7 +66,7 @@ watch(
       const imageContainer = imageMoveContainerRef.value as HTMLDivElement
 
       const result = createZoomImageMove(imageContainer, {
-        zoomImageSource: "/large.webp",
+        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
       })
       cleanup = result.cleanup
     }
@@ -75,7 +75,7 @@ watch(
       const imageContainer = imageClickContainerRef.value as HTMLDivElement
 
       const result = createZoomImageClick(imageContainer, {
-        zoomImageSource: "/large.webp",
+        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
       })
       cleanup = result.cleanup
     }
@@ -109,14 +109,14 @@ onUnmounted(() => {
       <div class="space-y-4" v-if="zoomType === 'wheel'">
         <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
         <div ref="imageWheelContainerRef" class="mt-1 h-[300px] w-[300px] cursor-crosshair">
-          <img class="h-full w-full" alt="Large Pic" src="/large.webp" />
+          <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/large.webp" />
         </div>
       </div>
 
       <div class="space-y-4" v-if="zoomType === 'hover'">
         <p>Hover inside the image to see zoom effect</p>
         <div ref="imageHoverContainerRef" class="relative mt-1 flex h-[300px] w-[300px] items-start">
-          <img class="h-full w-full" alt="Small Pic" src="/small.webp" />
+          <img class="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
           <div ref="zoomTargetRef" class="absolute left-[350px]"></div>
         </div>
       </div>
@@ -124,14 +124,14 @@ onUnmounted(() => {
       <div class="space-y-4" v-if="zoomType === 'move'">
         <p>Move mouse inside the image to see zoom effect</p>
         <div ref="imageMoveContainerRef" class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-          <img class="h-full w-full" alt="Large Pic" src="/small.webp" />
+          <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
         </div>
       </div>
 
       <div class="space-y-4" v-if="zoomType === 'click'">
         <p>Click inside the image to see zoom effect</p>
         <div ref="imageClickContainerRef" class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-          <img class="h-full w-full" alt="Large Pic" src="/small.webp" />
+          <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
         </div>
       </div>
     </div>

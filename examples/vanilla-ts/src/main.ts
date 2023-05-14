@@ -65,7 +65,7 @@ const makeUpdateUIFunc = () => {
       const zoomTarget = document.getElementById("zoom-hover-target") as HTMLDivElement
 
       cleanupZoom = createZoomImageHover(container, {
-        zoomImageSource: "/large.webp",
+        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
         scaleFactor: 0.5,
@@ -79,7 +79,7 @@ const makeUpdateUIFunc = () => {
       const container = document.getElementById("image-move-container") as HTMLDivElement
 
       cleanupZoom = createZoomImageMove(container, {
-        zoomImageSource: "/large.webp",
+        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
       }).cleanup
     }
 
@@ -90,7 +90,7 @@ const makeUpdateUIFunc = () => {
       const container = document.getElementById("image-click-container") as HTMLDivElement
 
       cleanupZoom = createZoomImageClick(container, {
-        zoomImageSource: "/large.webp",
+        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
       }).cleanup
     }
   }
