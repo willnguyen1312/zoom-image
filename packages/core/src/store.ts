@@ -27,7 +27,7 @@ export function createStore<TState>(initialState: TState) {
   }
 }
 
-const makeImageCache = () => {
+export const makeImageCache = () => {
   const loadedImageSet = new Set<string>()
 
   const checkImageLoaded = (src: string) => loadedImageSet.has(src)
@@ -41,6 +41,7 @@ const makeImageCache = () => {
     store: ReturnType<typeof createStore>
     img: HTMLImageElement
   }) => {
+    img.src = src
     if (checkImageLoaded(src)) return
 
     loadedImageSet.add(src)

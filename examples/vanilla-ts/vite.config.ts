@@ -4,4 +4,7 @@ import { defineConfig } from "vite"
 
 export default defineConfig({
   plugins: [UnoCSS()],
+  server: {
+    port: 1312,
+  },
 })
