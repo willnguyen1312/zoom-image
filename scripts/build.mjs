@@ -4,7 +4,7 @@ import sizeLimit from "size-limit"
 import presetSmallLib from "@size-limit/preset-small-lib"
 import fs from "fs"
 
-function formatBytes(bytes, decimals = 1) {
+function formatBytes(bytes, decimals = 2) {
   if (bytes == 0) return "0 Bytes"
   var k = 1024,
     dm = decimals || 2,
