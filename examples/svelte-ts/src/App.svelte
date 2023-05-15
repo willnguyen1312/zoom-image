@@ -1,26 +1,33 @@
 <script lang="ts">
   import { onDestroy, tick } from "svelte"
-  import { createZoomImageHover, createZoomImageWheel, createZoomImageMove } from "@zoom-image/core"
+  import {
+    createZoomImageHover,
+    createZoomImageWheel,
+    createZoomImageMove,
+    createZoomImageClick,
+  } from "@zoom-image/core"
 
   const tabs: {
     name: string
     href: string
     current: boolean
-    value: "wheel" | "hover" | "move"
+    value: "wheel" | "hover" | "move" | "click"
   }[] = [
     { name: "Zoom Image Wheel", href: "#", current: true, value: "wheel" },
     { name: "Zoom Image Hover", href: "#", current: false, value: "hover" },
     { name: "Zoom Image Move", href: "#", current: false, value: "move" },
+    { name: "Zoom Image Click", href: "#", current: false, value: "click" },
   ]
-  $: zoomType = tabs.find((tab) => tab.current)?.value
+  $: zoomType = tabs.find((tab) => tab.current)?.value as "wheel" | "hover" | "move" | "click"
 
   let imageWheelContainer: HTMLDivElement
   let imageMoveContainer: HTMLDivElement
   let imageHoverContainer: HTMLDivElement
+  let imageClickContainer: HTMLDivElement
   let zoomTarget: HTMLDivElement
   let cleanup: () => void = () => {}
 
-  async function processZoom(zoomType: string) {
+  async function processZoom(zoomType: "wheel" | "hover" | "move" | "click") {
     cleanup()
     await tick()
 
@@ -41,6 +48,12 @@
 
     if (zoomType === "move") {
       cleanup = createZoomImageMove(imageMoveContainer, {
+        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+      }).cleanup
+    }
+
+    if (zoomType === "click") {
+      cleanup = createZoomImageClick(imageClickContainer, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
       }).cleanup
     }
@@ -89,6 +102,12 @@
   {#if zoomType === "move"}
     <div bind:this={imageMoveContainer} class="w-[300px] h-[300px] cursor-crosshair relative overflow-hidden">
       <img class="w-full h-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+    </div>
+  {/if}
+
+  {#if zoomType === "click"}
+    <div bind:this={imageClickContainer} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+      <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
     </div>
   {/if}
 </div>

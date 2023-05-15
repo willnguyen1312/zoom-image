@@ -28,7 +28,7 @@
     "dev": "pnpm packages -- dev",
     "test": "pnpm packages -- test",
     "test:ci": "pnpm packages -- test:ci",
-    "build": "pnpm packages -- build",
+    "build": "pnpm packages -- build && node scripts/build.mjs",
     "size": "pnpm build && size-limit",
     "deploy:docs": "pnpm docs:build && netlify deploy --prod --dir=./docs/.vitepress/dist",
     "preact": "pnpm --filter \"./examples/preact-ts\"",

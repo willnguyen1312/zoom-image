@@ -1,4 +1,8 @@
-# createZoomImageWheel
+<script setup>
+import BundleSize from '../components/BundleSize.vue'
+</script>
+
+<BundleSize func="makeCalculatePercentage" />
 
 Calculate the current percentage based on the zoom level
 

@@ -1,4 +1,8 @@
-# createZoomImageHover - 1.4 kB
+<script setup>
+import BundleSize from '../components/BundleSize.vue'
+</script>
+
+<BundleSize func="createZoomImageHover" />
 
 ### Basic Usage
 

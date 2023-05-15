@@ -1,6 +1,8 @@
 import fc from "fast-check"
 import { faker } from "@faker-js/faker"
-import { clamp, makeCalculateZoom, makeCalculatePercentage, makeMaybeCallFunction } from "../src/utils"
+import { clamp, makeMaybeCallFunction } from "../src/utils"
+import { makeCalculatePercentage } from "../src/makeCalculatePercentage"
+import { makeCalculateZoom } from "../src/makeCalculateZoom"
 import { it } from "vitest"
 
 describe("clamp functions", () => {

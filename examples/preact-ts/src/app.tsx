@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, useMemo } from "preact/hooks"
-import { createZoomImageHover, createZoomImageMove, createZoomImageWheel } from "@zoom-image/core"
+import { createZoomImageClick, createZoomImageHover, createZoomImageMove, createZoomImageWheel } from "@zoom-image/core"
 
 function App() {
   const [tabs, setTabs] = useState<
@@ -7,16 +7,18 @@ function App() {
       name: string
       href: string
       current: boolean
-      value: "wheel" | "hover" | "move"
+      value: "wheel" | "hover" | "move" | "click"
     }[]
   >([
     { name: "Zoom Image Wheel", href: "#", current: true, value: "wheel" },
     { name: "Zoom Image Hover", href: "#", current: false, value: "hover" },
     { name: "Zoom Image Move", href: "#", current: false, value: "move" },
+    { name: "Zoom Image Click", href: "#", current: false, value: "click" },
   ])
   const zoomType = useMemo(() => tabs.find((tab) => tab.current)?.value, [tabs])
   const imageWheelContainerRef = useRef<HTMLDivElement>(null)
   const imageMoveContainerRef = useRef<HTMLDivElement>(null)
+  const imageClickContainerRef = useRef<HTMLDivElement>(null)
   const imageHoverContainerRef = useRef<HTMLDivElement>(null)
   const zoomTargetRef = useRef<HTMLDivElement>(null)
 
@@ -56,6 +58,14 @@ function App() {
     if (zoomType === "move") {
       const imageContainer = imageMoveContainerRef.current as HTMLDivElement
       const result = createZoomImageMove(imageContainer, {
+        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+      })
+      cleanup = result.cleanup
+    }
+
+    if (zoomType === "click") {
+      const imageContainer = imageClickContainerRef.current as HTMLDivElement
+      const result = createZoomImageClick(imageContainer, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
       })
       cleanup = result.cleanup
@@ -103,6 +113,12 @@ function App() {
 
       {zoomType === "move" && (
         <div ref={imageMoveContainerRef} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+          <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+        </div>
+      )}
+
+      {zoomType === "click" && (
+        <div ref={imageClickContainerRef} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
           <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
         </div>
       )}
