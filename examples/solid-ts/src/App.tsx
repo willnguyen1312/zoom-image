@@ -1,12 +1,12 @@
 import type { Component } from "solid-js"
 import { createSignal, createMemo, createEffect, For } from "solid-js"
-import { createZoomImageHover, createZoomImageWheel, createZoomImageMove } from "@zoom-image/core"
+import { createZoomImageHover, createZoomImageWheel, createZoomImageMove, createZoomImageClick } from "@zoom-image/core"
 
 type Tab = {
   name: string
   href: string
   current: boolean
-  value: "wheel" | "hover" | "move"
+  value: "wheel" | "hover" | "move" | "click"
 }
 
 const App: Component = () => {
@@ -14,11 +14,13 @@ const App: Component = () => {
     { name: "Zoom Image Wheel", href: "#", current: true, value: "wheel" },
     { name: "Zoom Image Hover", href: "#", current: false, value: "hover" },
     { name: "Zoom Image Move", href: "#", current: false, value: "move" },
+    { name: "Zoom Image Click", href: "#", current: false, value: "click" },
   ])
   const zoomType = createMemo(() => tabs().find((tab) => tab.current).value)
   let imageWheelContainer: HTMLDivElement
   let imageHoverContainer: HTMLDivElement
   let imageMoveContainer: HTMLDivElement
+  let imageClickContainer: HTMLDivElement
   let zoomTarget: HTMLDivElement
 
   const makeHandleTabClick = (tab: Tab) => () => {
@@ -57,6 +59,14 @@ const App: Component = () => {
     if (zoomType() === "move") {
       const imageContainer = imageMoveContainer
       const result = createZoomImageMove(imageContainer, {
+        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+      })
+      cleanup = result.cleanup
+    }
+
+    if (zoomType() === "click") {
+      const imageContainer = imageClickContainer
+      const result = createZoomImageClick(imageContainer, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
       })
       cleanup = result.cleanup
@@ -120,6 +130,12 @@ const App: Component = () => {
             elementtiming=""
             fetchpriority="high"
           />
+        </div>
+      )}
+
+      {zoomType() === "click" && (
+        <div ref={imageClickContainer} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+          <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
         </div>
       )}
     </div>
