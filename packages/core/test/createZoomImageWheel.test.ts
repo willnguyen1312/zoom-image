@@ -10,7 +10,7 @@ describe("createZoomImageWheel function", () => {
     const user = userEvent.setup()
 
     const zoomWheelLink = screen.getByRole("link", {
-      name: /zoom image hover/i,
+      name: /hover/i,
     })
 
     await user.click(zoomWheelLink)
