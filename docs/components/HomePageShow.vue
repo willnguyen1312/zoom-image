@@ -12,10 +12,10 @@ const tabs = ref<
     value: "wheel" | "hover" | "move" | "click"
   }[]
 >([
-  { name: "Zoom Image Wheel", href: "#", current: true, value: "wheel" },
-  { name: "Zoom Image Hover", href: "#", current: false, value: "hover" },
-  { name: "Zoom Image Move", href: "#", current: false, value: "move" },
-  { name: "Zoom Image Click", href: "#", current: false, value: "click" },
+  { name: "Wheel", href: "#", current: true, value: "wheel" },
+  { name: "Hover", href: "#", current: false, value: "hover" },
+  { name: "Move", href: "#", current: false, value: "move" },
+  { name: "Click", href: "#", current: false, value: "click" },
 ])
 
 const zoomType = computed(() => {

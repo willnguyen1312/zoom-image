@@ -17,18 +17,18 @@ hero:
       link: https://github.com/willnguyen1312/zoom-image
 
 features:
-  - title: Zoom on wheel
-    details: Support mouse wheel zoom on image
-    icon: 🛞
-  - title: Zoom on hover
-    details: Support mouse hover zoom on image
-    icon: 🖱️
-  - title: Zoom on pinch
-    details: Support touch pinch zoom on image
+  - title: Zoom on scroll / pinch
+    details: Support scroll / pinch on image
     icon: 🤏
+  - title: Zoom on hover
+    details: Support hover on image
+    icon: 🖱️
   - title: Zoom on move
-    details: Support mouse move zoom on image
+    details: Support pointer move on image
     icon: 🎢
+  - title: Zoom on click
+    details: Support click on image
+    icon: 💻
 ---
 
 <script setup>
