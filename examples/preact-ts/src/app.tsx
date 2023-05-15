@@ -10,10 +10,10 @@ function App() {
       value: "wheel" | "hover" | "move" | "click"
     }[]
   >([
-    { name: "Zoom Image Wheel", href: "#", current: true, value: "wheel" },
-    { name: "Zoom Image Hover", href: "#", current: false, value: "hover" },
-    { name: "Zoom Image Move", href: "#", current: false, value: "move" },
-    { name: "Zoom Image Click", href: "#", current: false, value: "click" },
+    { name: "Wheel", href: "#", current: true, value: "wheel" },
+    { name: "Hover", href: "#", current: false, value: "hover" },
+    { name: "Move", href: "#", current: false, value: "move" },
+    { name: "Click", href: "#", current: false, value: "click" },
   ])
   const zoomType = useMemo(() => tabs.find((tab) => tab.current)?.value, [tabs])
   const imageWheelContainerRef = useRef<HTMLDivElement>(null)

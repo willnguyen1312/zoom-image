@@ -108,6 +108,18 @@
       "path": "packages/core/dist/index.mjs",
       "import": "{ createZoomImageClick }",
       "limit": "1.5KB"
+    },
+    {
+      "name": "makeCalculatePercentage",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ makeCalculatePercentage }",
+      "limit": "1.5KB"
+    },
+    {
+      "name": "makeCalculateZoom",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ makeCalculateZoom }",
+      "limit": "1.5KB"
     }
   ]
 }
