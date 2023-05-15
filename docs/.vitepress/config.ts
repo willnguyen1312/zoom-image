@@ -62,6 +62,7 @@ export default defineConfig({
         text: "API",
         link: "/api/",
         items: [
+          { text: "createZoomImageClick", link: "/api/createZoomImageClick" },
           { text: "createZoomImageHover", link: "/api/createZoomImageHover" },
           { text: "createZoomImageMove", link: "/api/createZoomImageMove" },
           { text: "createZoomImageWheel", link: "/api/createZoomImageWheel" },
