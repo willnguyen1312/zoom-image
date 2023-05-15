@@ -2,12 +2,12 @@
 import BundleSize from '../components/BundleSize.vue'
 </script>
 
-<BundleSize func="createZoomImageMove" />
+<BundleSize func="createZoomImageClick" />
 
 ### Basic Usage
 
 ```ts
-const { cleanup } = createZoomImageMove(container, {
+const { cleanup } = createZoomImageClick(container, {
   zoomImageSource: "large-image.webp",
 })
 
@@ -18,13 +18,13 @@ cleanup()
 ### Type Declaration
 
 ```ts
-type Listener = (state: ZoomImageMoveState) => void
+type Listener = (state: ZoomImageClickState) => void
 
-type ZoomImageMoveState = {
+type ZoomImageClickState = {
   zoomedImgStatus: ZoomedImgStatus
 }
 
-type ZoomImageMoveOptions = {
+type ZoomImageClickOptions = {
   // Zoom scale, default is 4
   zoomFactor?: number
 
@@ -32,9 +32,9 @@ type ZoomImageMoveOptions = {
   zoomImageSource?: string
 }
 
-function createZoomImageMove(
+function createZoomImageClick(
   container: HTMLElement,
-  options?: ZoomImageMoveOptions,
+  options?: ZoomImageClickOptions,
 ): {
   // Remove all event listeners and zoomed image
   cleanup: () => void
@@ -43,6 +43,6 @@ function createZoomImageMove(
   subscribe: (listener: Listener) => () => void
 
   // Get current state
-  getState: () => ZoomImageHoverState
+  getState: () => ZoomImageClickState
 }
 ```
