@@ -1,8 +1,8 @@
 {
   "createZoomImageClick": "1 KB",
+  "createZoomImageHover": "1.4 KB",
   "createZoomImageMove": "1020 B",
   "createZoomImageWheel": "1.5 KB",
-  "makeCalculateZoom": "141 B",
   "makeCalculatePercentage": "145 B",
-  "createZoomImageHover": "1.4 KB"
+  "makeCalculateZoom": "141 B"
 }

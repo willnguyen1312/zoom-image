@@ -23,18 +23,26 @@ async function main() {
     listOfFunction.push(func)
   }
 
+  listOfFunction.sort()
+
   /**
    * @type {{[key: string]: string}}
    */
   const data = {}
 
-  await Promise.all(
+  const bundleInfos = await Promise.all(
     listOfFunction.map((funcName) => {
       return sizeLimit([presetSmallLib], [`packages/core/dist/${funcName}.global.js`]).then((result) => {
-        data[funcName] = formatBytes(result[0].size)
+        return formatBytes(result[0].size)
       })
     }),
   )
+
+  for (let index = 0; index < listOfFunction.length; index++) {
+    const funcName = listOfFunction[index]
+    const size = bundleInfos[index]
+    data[funcName] = size
+  }
 
   fs.writeFileSync("size.json", JSON.stringify(data, null, 2))
 }
