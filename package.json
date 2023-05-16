@@ -39,7 +39,7 @@
     "solid": "pnpm --filter \"./examples/solid-ts\"",
     "qwik": "pnpm --filter \"./examples/qwik-ts\"",
     "core": "pnpm --filter \"./packages/core\"",
-    "start:preact": "pnpm vanilla dev --open --host",
+    "start:preact": "pnpm preact dev --open --host",
     "start-preact": "run-p dev start:preact",
     "start:react": "pnpm react dev --open --host",
     "start-react": "run-p dev start:react",
