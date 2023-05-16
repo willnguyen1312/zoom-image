@@ -12,6 +12,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          # Make sure the actual branch is checked out when running on pull requests
+          ref: ${{ github.head_ref }}
+          # This is important to fetch the changes to the previous commit
+          fetch-depth: 0
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
@@ -39,18 +44,11 @@ jobs:
       - name: Run prettier
         run: pnpm prettier-fix
 
-      - name: Commit changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git diff --quiet && git diff --staged --quiet || (git commit -am "chore: format code with Prettier" --no-verify)
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.head_ref }}
-          force: true
+          prettier_options: --write packages/** examples/**
+          only_changed: True
 
       - name: Size limit action
         uses: andresz1/size-limit-action@v1
