@@ -16,6 +16,8 @@ const ZOOM_DELTA = 0.5
 export type ZoomImageWheelState = {
   currentZoom: number
   enable: boolean
+  currentPositionX: number
+  currentPositionY: number
 }
 
 type StateUpdate = { enable: boolean }
@@ -24,7 +26,11 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   const store = createStore<ZoomImageWheelState>({
     currentZoom: 1,
     enable: true,
+    currentPositionX: 0,
+    currentPositionY: 0,
   })
+
+  const state = store.getState()
 
   const sourceImgElement = getSourceImage(container)
   const finalOptions: Required<ZoomImageWheelOptions> = {
@@ -53,9 +59,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   const pointerMap = new Map<number, { x: number; y: number }>()
 
   let isOnMove = false
-  let currentPositionX = 0
   let lastPositionX = 0
-  let currentPositionY = 0
   let lastPositionY = 0
   let startX = 0
   let startY = 0
@@ -64,7 +68,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   sourceImgElement.style.transformOrigin = "0 0"
 
   function updateZoom() {
-    sourceImgElement.style.transform = `translate(${currentPositionX}px, ${currentPositionY}px) scale(${
+    sourceImgElement.style.transform = `translate(${state.currentPositionX}px, ${state.currentPositionY}px) scale(${
       store.getState().currentZoom
     })`
   }
@@ -75,8 +79,8 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     const zoomPointY = y - containerRect.top
     const { currentZoom } = store.getState()
 
-    const zoomTargetX = (zoomPointX - currentPositionX) / currentZoom
-    const zoomTargetY = (zoomPointY - currentPositionY) / currentZoom
+    const zoomTargetX = (zoomPointX - state.currentPositionX) / currentZoom
+    const zoomTargetY = (zoomPointY - state.currentPositionY) / currentZoom
 
     const newCurrentZoom = clamp(
       currentZoom + delta * finalOptions.wheelZoomRatio * currentZoom,
@@ -84,8 +88,8 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       finalOptions.maxZoom,
     )
 
-    currentPositionX = calculatePositionX(-zoomTargetX * newCurrentZoom + zoomPointX, newCurrentZoom)
-    currentPositionY = calculatePositionY(-zoomTargetY * newCurrentZoom + zoomPointY, newCurrentZoom)
+    state.currentPositionX = calculatePositionX(-zoomTargetX * newCurrentZoom + zoomPointX, newCurrentZoom)
+    state.currentPositionY = calculatePositionY(-zoomTargetY * newCurrentZoom + zoomPointY, newCurrentZoom)
     store.update({ currentZoom: newCurrentZoom })
   }
 
@@ -135,8 +139,8 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       const offsetX = clientX - startX
       const offsetY = clientY - startY
       const { currentZoom } = store.getState()
-      currentPositionX = calculatePositionX(lastPositionX + offsetX, currentZoom)
-      currentPositionY = calculatePositionY(lastPositionY + offsetY, currentZoom)
+      state.currentPositionX = calculatePositionX(lastPositionX + offsetX, currentZoom)
+      state.currentPositionY = calculatePositionY(lastPositionY + offsetY, currentZoom)
       updateZoom()
     }
   }
@@ -155,8 +159,8 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
 
     const { clientX, clientY, pointerId } = event
     isOnMove = true
-    lastPositionX = currentPositionX
-    lastPositionY = currentPositionY
+    lastPositionX = state.currentPositionX
+    lastPositionY = state.currentPositionY
     startX = clientX
     startY = clientY
     pointerMap.set(pointerId, { x: clientX, y: clientY })
@@ -183,8 +187,8 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       zoomType = ""
     }
 
-    lastPositionX = currentPositionX
-    lastPositionY = currentPositionY
+    lastPositionX = state.currentPositionX
+    lastPositionY = state.currentPositionY
   }
 
   function _handlePointerLeave() {

@@ -35,6 +35,7 @@ export type { ZoomImageClickOptions }
 // Start importing utils
 import { makeCalculatePercentage } from "./makeCalculatePercentage"
 import { makeCalculateZoom } from "./makeCalculateZoom"
+import { cropImage } from "./cropImage"
 
-export { makeCalculatePercentage, makeCalculateZoom }
+export { makeCalculatePercentage, makeCalculateZoom, cropImage }
 // Stop importing utils
