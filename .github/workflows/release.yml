@@ -24,7 +24,9 @@ jobs:
           cache: pnpm
 
       - name: Setup npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+        run:
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >
+          .npmrc
 
       - name: install dependencies
         run: pnpm install
@@ -34,7 +36,7 @@ jobs:
 
       - name: Publish packages
         id: changesets
-        uses: changesets/action@v1
+        uses: changesets/action@main
         with:
           publish: pnpm release
           commit: "chore: update versions"

@@ -47,7 +47,7 @@ async function main() {
     data[funcName] = size
   }
 
-  fs.writeFileSync("size.json", JSON.stringify(data, null, 2))
+  fs.writeFileSync("size.json", JSON.stringify(data, null, 2) + "\n")
 }
 
 main()
