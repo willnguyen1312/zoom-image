@@ -72,7 +72,6 @@ watch(
       handleCropWheelZoomImage = () => {
         const state = result.getState()
         const croppedImage = cropImage({
-          container: imageContainer,
           currentZoom: state.currentZoom,
           image: imageContainer.querySelector("img") as HTMLImageElement,
           positionX: state.currentPositionX,
@@ -80,7 +79,6 @@ watch(
         })
         const cropImageElement = document.getElementById("crop-image") as HTMLImageElement
         cropImageElement.src = croppedImage
-        console.log(croppedImage)
       }
     }
 

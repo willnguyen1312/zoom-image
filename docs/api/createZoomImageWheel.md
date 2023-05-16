@@ -18,6 +18,9 @@ cleanup()
 ```ts
 type ZoomImageWheelState = {
   currentZoom: number
+  enable: boolean
+  currentPositionX: number
+  currentPositionY: number
 }
 
 type Listener = (state: ZoomImageWheelState) => void

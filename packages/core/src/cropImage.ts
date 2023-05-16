@@ -1,20 +1,15 @@
-export const cropImage = ({
-  image,
-  container,
-  positionX,
-  positionY,
-  currentZoom,
-}: {
+type CropImageArg = {
+  currentZoom: number
   image: HTMLImageElement
-  container: HTMLElement
   positionX: number
   positionY: number
-  currentZoom: number
-}) => {
+}
+
+export const cropImage = ({ image, positionX, positionY, currentZoom }: CropImageArg) => {
   const canvas = document.createElement("canvas")
-  const scale = image.naturalWidth / (container.clientWidth * currentZoom)
-  const croppedImageWidth = container.clientWidth * scale
-  const croppedImageHeight = container.clientHeight * scale
+  const scale = image.naturalWidth / (image.clientWidth * currentZoom)
+  const croppedImageWidth = image.clientWidth * scale
+  const croppedImageHeight = image.clientHeight * scale
   canvas.width = croppedImageWidth
   canvas.height = croppedImageHeight
   const canvasContext = canvas.getContext("2d") as CanvasRenderingContext2D
