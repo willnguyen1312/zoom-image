@@ -27,7 +27,7 @@ export type ZoomImageWheelState = {
   currentPositionY: number
 }
 
-type StateUpdate = { enable: boolean }
+type StateUpdate = Partial<{ enable: boolean; currentZoom: number }>
 
 export function createZoomImageWheel(
   container: HTMLElement,
@@ -85,7 +85,25 @@ export function createZoomImageWheel(
     }px, ${state.currentPositionY}px) scale(${store.getState().currentZoom})`
   }
 
-  function processZoom({
+  function processZoomMiddle() {
+    const containerRect = container.getBoundingClientRect()
+    const zoomPointX = containerRect.width / 2
+    const zoomPointY = containerRect.height / 2
+
+    state.currentPositionX = calculatePositionX(
+      -zoomPointX * state.currentZoom + zoomPointX,
+      state.currentZoom,
+    )
+
+    state.currentPositionY = calculatePositionX(
+      -zoomPointY * state.currentZoom + zoomPointX,
+      state.currentZoom,
+    )
+
+    updateZoom()
+  }
+
+  function processZoomWheel({
     delta,
     x,
     y,
@@ -122,7 +140,7 @@ export function createZoomImageWheel(
   function _onWheel(event: WheelEvent) {
     event.preventDefault()
     const delta = -clamp(event.deltaY, -ZOOM_DELTA, ZOOM_DELTA)
-    processZoom({ delta, x: event.clientX, y: event.clientY })
+    processZoomWheel({ delta, x: event.clientX, y: event.clientY })
     updateZoom()
   }
 
@@ -150,11 +168,11 @@ export function createZoomImageWheel(
       if (prevDistance > 0) {
         if (curDistance > prevDistance) {
           // The distance between the two pointers has increased
-          processZoom({ delta: ZOOM_DELTA, x, y })
+          processZoomWheel({ delta: ZOOM_DELTA, x, y })
         }
         if (curDistance < prevDistance) {
           // The distance between the two pointers has decreased
-          processZoom({ delta: -ZOOM_DELTA, x, y })
+          processZoomWheel({ delta: -ZOOM_DELTA, x, y })
         }
       }
       // Store the distance for the next move event
@@ -274,7 +292,19 @@ export function createZoomImageWheel(
     },
     subscribe: store.subscribe,
     update: (newState: StateUpdate) => {
-      store.update(newState)
+      const oldState = store.getState()
+
+      store.update({
+        enable:
+          typeof newState.enable === "boolean"
+            ? newState.enable
+            : oldState.enable,
+        currentZoom:
+          typeof newState.currentZoom === "number"
+            ? clamp(newState.currentZoom, 1, finalOptions.maxZoom)
+            : oldState.currentZoom,
+      })
+      processZoomMiddle()
     },
     getState(): ZoomImageWheelState {
       return structuredClone(store.getState())

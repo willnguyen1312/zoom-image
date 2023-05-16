@@ -37,7 +37,11 @@ const imageHoverContainerRef = ref<HTMLDivElement>()
 const imageClickContainerRef = ref<HTMLDivElement>()
 const zoomTargetRef = ref<HTMLDivElement>()
 
-const handleTabClick = (tab: { name: string; href: string; current: boolean }) => {
+const handleTabClick = (tab: {
+  name: string
+  href: string
+  current: boolean
+}) => {
   tabs.value.forEach((tab) => {
     tab.current = false
   })
@@ -45,25 +49,14 @@ const handleTabClick = (tab: { name: string; href: string; current: boolean }) =
 }
 
 let handleCropWheelZoomImage = () => {}
+let zoomIn = () => {}
+let zoomOut = () => {}
 
 watch(
   zoomType,
   async () => {
     cleanup()
     await nextTick()
-
-    if (zoomType.value === "hover") {
-      const imageContainer = imageHoverContainerRef.value as HTMLDivElement
-      const zoomTarget = zoomTargetRef.value
-
-      const result = createZoomImageHover(imageContainer, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
-        customZoom: { width: 300, height: 450 },
-        zoomTarget,
-        scaleFactor: 0.5,
-      })
-      cleanup = result.cleanup
-    }
 
     if (zoomType.value === "wheel") {
       const imageContainer = imageWheelContainerRef.value as HTMLDivElement
@@ -80,6 +73,31 @@ watch(
           positionY: state.currentPositionY,
         })
       }
+
+      zoomIn = () => {
+        result.update({
+          currentZoom: result.getState().currentZoom + 0.75,
+        })
+      }
+
+      zoomOut = () => {
+        result.update({
+          currentZoom: result.getState().currentZoom - 0.75,
+        })
+      }
+    }
+
+    if (zoomType.value === "hover") {
+      const imageContainer = imageHoverContainerRef.value as HTMLDivElement
+      const zoomTarget = zoomTargetRef.value
+
+      const result = createZoomImageHover(imageContainer, {
+        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        customZoom: { width: 300, height: 450 },
+        zoomTarget,
+        scaleFactor: 0.5,
+      })
+      cleanup = result.cleanup
     }
 
     if (zoomType.value === "move") {
@@ -110,7 +128,9 @@ onUnmounted(() => {
 
 <template>
   <div class="hidden px-12 lg:block">
-    <div class="min-h-xl m-x-auto rounded-4 container mt-4 flex flex-col bg-white p-4 font-sans text-black">
+    <div
+      class="min-h-xl m-x-auto rounded-4 container mt-4 flex flex-col bg-white p-4 font-sans text-black"
+    >
       <nav class="mb-4 flex space-x-4" aria-label="Tabs">
         <a
           v-for="tab in tabs"
@@ -118,7 +138,9 @@ onUnmounted(() => {
           :key="tab.name"
           :href="tab.href"
           :class="[
-            tab.current ? 'text-dark-700 bg-gray-100' : 'text-dark-500 hover:text-dark-700',
+            tab.current
+              ? 'text-dark-700 bg-gray-100'
+              : 'text-dark-500 hover:text-dark-700',
             'decoration-none rounded-md px-3 py-2 text-sm font-medium',
           ]"
           :aria-current="tab.current ? 'page' : undefined"
@@ -129,41 +151,101 @@ onUnmounted(() => {
       <div class="space-y-4" v-if="zoomType === 'wheel'">
         <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
         <div class="mt-1 flex space-x-2">
-          <div ref="imageWheelContainerRef" class="h-[300px] w-[300px] cursor-crosshair">
-            <img class="h-full w-full" crossorigin="anonymous" alt="Large Pic" src="/large.webp" />
+          <div
+            ref="imageWheelContainerRef"
+            class="h-[300px] w-[300px] cursor-crosshair"
+          >
+            <img
+              class="h-full w-full"
+              crossorigin="anonymous"
+              alt="Large Pic"
+              src="/large.webp"
+            />
           </div>
-          <img :src="croppedImage" v-if="!!croppedImage" class="h-[300px] w-[300px]" alt="Cropped image placeholder" />
+          <img
+            :src="croppedImage"
+            v-if="!!croppedImage"
+            class="h-[300px] w-[300px]"
+            alt="Cropped image placeholder"
+          />
         </div>
-        <button class="text-dark-500 rounded bg-gray-100 p-2 font-medium" @click="handleCropWheelZoomImage">
-          Crop image
-        </button>
+        <div class="flex space-x-2">
+          <button
+            @click="zoomIn"
+            class="text-dark-500 rounded bg-gray-100 p-2 font-medium"
+          >
+            Zoom in
+          </button>
+          <button
+            @click="zoomOut"
+            class="text-dark-500 rounded bg-gray-100 p-2 font-medium"
+          >
+            Zoom out
+          </button>
+          <button
+            class="text-dark-500 rounded bg-gray-100 p-2 font-medium"
+            @click="handleCropWheelZoomImage"
+          >
+            Crop image
+          </button>
+        </div>
       </div>
 
       <div class="space-y-4" v-if="zoomType === 'hover'">
         <p>Hover inside the image to see zoom effect</p>
-        <div ref="imageHoverContainerRef" class="relative mt-1 flex h-[300px] w-[300px] items-start">
-          <img class="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+        <div
+          ref="imageHoverContainerRef"
+          class="relative mt-1 flex h-[300px] w-[300px] items-start"
+        >
+          <img
+            class="h-full w-full"
+            alt="Small Pic"
+            src="https://nam-assets.netlify.app/static/small.webp"
+          />
           <div ref="zoomTargetRef" class="absolute left-[350px]"></div>
         </div>
       </div>
 
       <div class="space-y-4" v-if="zoomType === 'move'">
         <p>Move mouse inside the image to see zoom effect</p>
-        <div ref="imageMoveContainerRef" class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-          <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+        <div
+          ref="imageMoveContainerRef"
+          class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden"
+        >
+          <img
+            class="h-full w-full"
+            alt="Large Pic"
+            src="https://nam-assets.netlify.app/static/small.webp"
+          />
         </div>
       </div>
 
       <div class="space-y-4" v-if="zoomType === 'click'">
         <p>Click inside the image to see zoom effect</p>
-        <div ref="imageClickContainerRef" class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-          <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+        <div
+          ref="imageClickContainerRef"
+          class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden"
+        >
+          <img
+            class="h-full w-full"
+            alt="Large Pic"
+            src="https://nam-assets.netlify.app/static/small.webp"
+          />
         </div>
       </div>
     </div>
   </div>
 
   <div class="mt-4 px-6 md:px-12 lg:hidden">
-    <video src="/demo.mp4" class="rounded-4" muted autoplay loop playsinline controls preload="auto" />
+    <video
+      src="/demo.mp4"
+      class="rounded-4"
+      muted
+      autoplay
+      loop
+      playsinline
+      controls
+      preload="auto"
+    />
   </div>
 </template>
