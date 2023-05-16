@@ -5,7 +5,7 @@ import presetSmallLib from "@size-limit/preset-small-lib"
 import fs from "fs"
 
 function formatBytes(bytes, decimals = 2) {
-  if (bytes == 0) return "0 Bytes"
+  if (bytes === 0) return "0 Bytes"
   var k = 1024,
     dm = decimals || 2,
     sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"],

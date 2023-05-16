@@ -80,35 +80,47 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     }px) scale(${store.getState().currentZoom})`
   }
 
-  function processZoomMiddle() {
-    const containerRect = container.getBoundingClientRect()
-    const zoomPointX = containerRect.width / 2
-    const zoomPointY = containerRect.height / 2
+  function update(newState: StateUpdate) {
+    if (typeof newState.enable === "boolean") {
+      store.update({
+        enable: newState.enable,
+      })
+    }
 
-    state.currentPositionX = calculatePositionX(
-      -zoomPointX * state.currentZoom + zoomPointX,
-      state.currentZoom,
-    )
+    if (typeof newState.currentZoom === "number" && newState.currentZoom !== state.currentZoom) {
+      const newCurrentZoom = clamp(newState.currentZoom, 1, finalOptions.maxZoom)
+      const zoomPointX = container.clientWidth / 2
+      const zoomPointY = container.clientHeight / 2
 
-    state.currentPositionY = calculatePositionX(
-      -zoomPointY * state.currentZoom + zoomPointX,
-      state.currentZoom,
-    )
+      const zoomTargetX = (zoomPointX - state.currentPositionX) / state.currentZoom
+      const zoomTargetY = (zoomPointY - state.currentPositionY) / state.currentZoom
 
-    updateZoom()
+      state.currentPositionX = calculatePositionX(
+        -zoomTargetX * newCurrentZoom + zoomPointX,
+        newCurrentZoom,
+      )
+      state.currentPositionY = calculatePositionY(
+        -zoomTargetY * newCurrentZoom + zoomPointY,
+        newCurrentZoom,
+      )
+
+      store.update({
+        currentZoom: newCurrentZoom,
+      })
+      updateZoom()
+    }
   }
 
   function processZoomWheel({ delta, x, y }: { delta: number; x: number; y: number }) {
     const containerRect = container.getBoundingClientRect()
     const zoomPointX = x - containerRect.left
     const zoomPointY = y - containerRect.top
-    const { currentZoom } = store.getState()
 
-    const zoomTargetX = (zoomPointX - state.currentPositionX) / currentZoom
-    const zoomTargetY = (zoomPointY - state.currentPositionY) / currentZoom
+    const zoomTargetX = (zoomPointX - state.currentPositionX) / state.currentZoom
+    const zoomTargetY = (zoomPointY - state.currentPositionY) / state.currentZoom
 
     const newCurrentZoom = clamp(
-      currentZoom + delta * finalOptions.wheelZoomRatio * currentZoom,
+      state.currentZoom + delta * finalOptions.wheelZoomRatio * state.currentZoom,
       1,
       finalOptions.maxZoom,
     )
@@ -260,18 +272,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       store.cleanup()
     },
     subscribe: store.subscribe,
-    update: (newState: StateUpdate) => {
-      const oldState = store.getState()
-
-      store.update({
-        enable: typeof newState.enable === "boolean" ? newState.enable : oldState.enable,
-        currentZoom:
-          typeof newState.currentZoom === "number"
-            ? clamp(newState.currentZoom, 1, finalOptions.maxZoom)
-            : oldState.currentZoom,
-      })
-      processZoomMiddle()
-    },
+    update,
     getState(): ZoomImageWheelState {
       return structuredClone(store.getState())
     },
