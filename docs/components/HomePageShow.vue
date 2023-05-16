@@ -25,6 +25,7 @@ const tabs = ref<
 ])
 
 const croppedImage = ref<string>()
+const currentZoom = ref(1)
 
 const zoomType = computed(() => {
   const found = tabs.value.find((tab) => tab.current)
@@ -37,11 +38,7 @@ const imageHoverContainerRef = ref<HTMLDivElement>()
 const imageClickContainerRef = ref<HTMLDivElement>()
 const zoomTargetRef = ref<HTMLDivElement>()
 
-const handleTabClick = (tab: {
-  name: string
-  href: string
-  current: boolean
-}) => {
+const handleTabClick = (tab: { name: string; href: string; current: boolean }) => {
   tabs.value.forEach((tab) => {
     tab.current = false
   })
@@ -56,6 +53,8 @@ watch(
   zoomType,
   async () => {
     cleanup()
+    croppedImage.value = ""
+    currentZoom.value = 1
     await nextTick()
 
     if (zoomType.value === "wheel") {
@@ -76,15 +75,19 @@ watch(
 
       zoomIn = () => {
         result.update({
-          currentZoom: result.getState().currentZoom + 0.75,
+          currentZoom: result.getState().currentZoom + 0.5,
         })
       }
 
       zoomOut = () => {
         result.update({
-          currentZoom: result.getState().currentZoom - 0.75,
+          currentZoom: result.getState().currentZoom - 0.5,
         })
       }
+
+      result.subscribe((state) => {
+        currentZoom.value = state.currentZoom
+      })
     }
 
     if (zoomType.value === "hover") {
@@ -138,9 +141,7 @@ onUnmounted(() => {
           :key="tab.name"
           :href="tab.href"
           :class="[
-            tab.current
-              ? 'text-dark-700 bg-gray-100'
-              : 'text-dark-500 hover:text-dark-700',
+            tab.current ? 'text-dark-700 bg-gray-100' : 'text-dark-500 hover:text-dark-700',
             'decoration-none rounded-md px-3 py-2 text-sm font-medium',
           ]"
           :aria-current="tab.current ? 'page' : undefined"
@@ -150,17 +151,10 @@ onUnmounted(() => {
 
       <div class="space-y-4" v-if="zoomType === 'wheel'">
         <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
+        <p>Current zoom: {{ `${Math.round(currentZoom * 100)}%` }}</p>
         <div class="mt-1 flex space-x-2">
-          <div
-            ref="imageWheelContainerRef"
-            class="h-[300px] w-[300px] cursor-crosshair"
-          >
-            <img
-              class="h-full w-full"
-              crossorigin="anonymous"
-              alt="Large Pic"
-              src="/large.webp"
-            />
+          <div ref="imageWheelContainerRef" class="h-[300px] w-[300px] cursor-crosshair">
+            <img class="h-full w-full" crossorigin="anonymous" alt="Large Pic" src="/large.webp" />
           </div>
           <img
             :src="croppedImage"
@@ -170,16 +164,10 @@ onUnmounted(() => {
           />
         </div>
         <div class="flex space-x-2">
-          <button
-            @click="zoomIn"
-            class="text-dark-500 rounded bg-gray-100 p-2 font-medium"
-          >
+          <button @click="zoomIn" class="text-dark-500 rounded bg-gray-100 p-2 font-medium">
             Zoom in
           </button>
-          <button
-            @click="zoomOut"
-            class="text-dark-500 rounded bg-gray-100 p-2 font-medium"
-          >
+          <button @click="zoomOut" class="text-dark-500 rounded bg-gray-100 p-2 font-medium">
             Zoom out
           </button>
           <button
