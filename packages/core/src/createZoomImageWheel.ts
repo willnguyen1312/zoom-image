@@ -27,7 +27,7 @@ export type ZoomImageWheelState = {
   currentPositionY: number
 }
 
-type StateUpdate = { enable: boolean }
+type StateUpdate = Partial<{ enable: boolean; currentZoom: number }>
 
 export function createZoomImageWheel(
   container: HTMLElement,
@@ -83,6 +83,24 @@ export function createZoomImageWheel(
     sourceImgElement.style.transform = `translate(${
       state.currentPositionX
     }px, ${state.currentPositionY}px) scale(${store.getState().currentZoom})`
+  }
+
+  function processZoomMiddle() {
+    const containerRect = container.getBoundingClientRect()
+    const zoomPointX = containerRect.width / 2
+    const zoomPointY = containerRect.height / 2
+
+    state.currentPositionX = calculatePositionX(
+      -zoomPointX * state.currentZoom + zoomPointX,
+      state.currentZoom,
+    )
+
+    state.currentPositionY = calculatePositionX(
+      -zoomPointY * state.currentZoom + zoomPointX,
+      state.currentZoom,
+    )
+
+    updateZoom()
   }
 
   function processZoom({
@@ -274,7 +292,19 @@ export function createZoomImageWheel(
     },
     subscribe: store.subscribe,
     update: (newState: StateUpdate) => {
-      store.update(newState)
+      const oldState = store.getState()
+
+      store.update({
+        enable:
+          typeof newState.enable === "boolean"
+            ? newState.enable
+            : oldState.enable,
+        currentZoom:
+          typeof newState.currentZoom === "number"
+            ? clamp(newState.currentZoom, 1, finalOptions.maxZoom)
+            : oldState.currentZoom,
+      })
+      processZoomMiddle()
     },
     getState(): ZoomImageWheelState {
       return structuredClone(store.getState())

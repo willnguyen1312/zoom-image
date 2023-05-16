@@ -24,7 +24,7 @@ type ZoomImageWheelState = {
 }
 
 type Listener = (state: ZoomImageWheelState) => void
-type StateUpdate = { enabled: boolean }
+type StateUpdate = { currentZoom: number; enabled: boolean }
 
 type ZoomImageWheelOptions = {
   // Maximum zoom scale, default is 4
