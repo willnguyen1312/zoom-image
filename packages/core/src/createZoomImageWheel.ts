@@ -103,7 +103,7 @@ export function createZoomImageWheel(
     updateZoom()
   }
 
-  function processZoom({
+  function processZoomWheel({
     delta,
     x,
     y,
@@ -140,7 +140,7 @@ export function createZoomImageWheel(
   function _onWheel(event: WheelEvent) {
     event.preventDefault()
     const delta = -clamp(event.deltaY, -ZOOM_DELTA, ZOOM_DELTA)
-    processZoom({ delta, x: event.clientX, y: event.clientY })
+    processZoomWheel({ delta, x: event.clientX, y: event.clientY })
     updateZoom()
   }
 
@@ -168,11 +168,11 @@ export function createZoomImageWheel(
       if (prevDistance > 0) {
         if (curDistance > prevDistance) {
           // The distance between the two pointers has increased
-          processZoom({ delta: ZOOM_DELTA, x, y })
+          processZoomWheel({ delta: ZOOM_DELTA, x, y })
         }
         if (curDistance < prevDistance) {
           // The distance between the two pointers has decreased
-          processZoom({ delta: -ZOOM_DELTA, x, y })
+          processZoomWheel({ delta: -ZOOM_DELTA, x, y })
         }
       }
       // Store the distance for the next move event
