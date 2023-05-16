@@ -1,5 +1,18 @@
 # @zoom-image/core
 
+## 0.10.0
+
+### Minor Changes
+
+- [#99](https://github.com/willnguyen1312/zoom-image/pull/99)
+  [`2768637`](https://github.com/willnguyen1312/zoom-image/commit/2768637ed909733c78a560ff665c93895902f94b)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - optimize normal store setState
+  mechanism 🎢
+
+- [#99](https://github.com/willnguyen1312/zoom-image/pull/99)
+  [`2768637`](https://github.com/willnguyen1312/zoom-image/commit/2768637ed909733c78a560ff665c93895902f94b)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Optimize rendering mechanism 🚀
+
 ## 0.9.0
 
 ### Minor Changes
