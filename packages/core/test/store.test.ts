@@ -15,6 +15,12 @@ describe("simple store", () => {
     expect(listener1).toHaveBeenCalledTimes(1)
     expect(listener2).toHaveBeenCalledTimes(1)
 
+    store.setState({ count: 1 })
+    store.setState({ count: 1 })
+    store.setState({ count: 1 })
+    expect(listener1).toHaveBeenCalledTimes(1)
+    expect(listener2).toHaveBeenCalledTimes(1)
+
     unsubscribe()
     store.setState({ count: 2 })
     expect(store.getState()).toEqual({ count: 2 })
