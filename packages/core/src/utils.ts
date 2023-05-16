@@ -46,14 +46,20 @@ export type PointerPosition = {
   y: number
 }
 
-export function getPointersCenter(first: PointerPosition, second: PointerPosition) {
+export function getPointersCenter(
+  first: PointerPosition,
+  second: PointerPosition,
+) {
   return {
     x: (first.x + second.x) / 2,
     y: (first.y + second.y) / 2,
   }
 }
 
-export function makeMaybeCallFunction<T>(predicateFn: () => boolean, fn: (arg: T) => void) {
+export function makeMaybeCallFunction<T>(
+  predicateFn: () => boolean,
+  fn: (arg: T) => void,
+) {
   return (arg: T) => {
     if (predicateFn()) {
       fn(arg)
@@ -74,4 +80,6 @@ export const scaleLinear =
     rangeStop: number
   }) =>
   (value: number) =>
-    rangeStart + (rangeStop - rangeStart) * ((value - domainStart) / (domainStop - domainStart))
+    rangeStart +
+    (rangeStop - rangeStart) *
+      ((value - domainStart) / (domainStop - domainStart))

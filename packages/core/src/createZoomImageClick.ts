@@ -11,7 +11,10 @@ export type ZoomImageClickState = {
   zoomedImgStatus: ZoomedImgStatus
 }
 
-export function createZoomImageClick(container: HTMLElement, options: ZoomImageClickOptions = {}) {
+export function createZoomImageClick(
+  container: HTMLElement,
+  options: ZoomImageClickOptions = {},
+) {
   const sourceImgElement = getSourceImage(container)
   const finalOptions: Required<ZoomImageClickOptions> = {
     zoomFactor: options.zoomFactor ?? 4,
@@ -21,11 +24,14 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
   let isOnMove = false
 
   const store = createStore<ZoomImageClickState>({
-    zoomedImgStatus: imageCache.checkImageLoaded(finalOptions.zoomImageSource) ? "loaded" : "idle",
+    zoomedImgStatus: imageCache.checkImageLoaded(finalOptions.zoomImageSource)
+      ? "loaded"
+      : "idle",
   })
 
   const zoomedImgWidth = sourceImgElement.clientWidth * finalOptions.zoomFactor
-  const zoomedImgHeight = sourceImgElement.clientHeight * finalOptions.zoomFactor
+  const zoomedImgHeight =
+    sourceImgElement.clientHeight * finalOptions.zoomFactor
   const zoomedImg = container.appendChild(document.createElement("img"))
   zoomedImg.style.maxWidth = "none"
   zoomedImg.style.width = `${zoomedImgWidth}px`
@@ -45,27 +51,37 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
   const calculatePositionX = (newPositionX: number) => {
     const width = container.clientWidth
     if (newPositionX > 0) return 0
-    if (newPositionX + width * finalOptions.zoomFactor < width) return -width * (finalOptions.zoomFactor - 1)
+    if (newPositionX + width * finalOptions.zoomFactor < width)
+      return -width * (finalOptions.zoomFactor - 1)
     return newPositionX
   }
 
   const calculatePositionY = (newPositionY: number) => {
     const height = container.clientHeight
     if (newPositionY > 0) return 0
-    if (newPositionY + height * finalOptions.zoomFactor < height) return -height * (finalOptions.zoomFactor - 1)
+    if (newPositionY + height * finalOptions.zoomFactor < height)
+      return -height * (finalOptions.zoomFactor - 1)
     return newPositionY
   }
 
   function processZoom(event: PointerEvent) {
     zoomedImg.style.display = "block"
-    imageCache.createZoomImage({ img: zoomedImg, src: finalOptions.zoomImageSource, store })
+    imageCache.createZoomImage({
+      img: zoomedImg,
+      src: finalOptions.zoomImageSource,
+      store,
+    })
 
     const containerRect = container.getBoundingClientRect()
     const zoomPointX = event.clientX - containerRect.left
     const zoomPointY = event.clientY - containerRect.top
 
-    const currentPositionX = calculatePositionX(-zoomPointX * finalOptions.zoomFactor + zoomPointX)
-    const currentPositionY = calculatePositionY(-zoomPointY * finalOptions.zoomFactor + zoomPointY)
+    const currentPositionX = calculatePositionX(
+      -zoomPointX * finalOptions.zoomFactor + zoomPointX,
+    )
+    const currentPositionY = calculatePositionY(
+      -zoomPointY * finalOptions.zoomFactor + zoomPointY,
+    )
 
     zoomedImg.style.transform = `translate(${currentPositionX}px, ${currentPositionY}px)`
   }

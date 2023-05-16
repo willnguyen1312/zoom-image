@@ -11,6 +11,8 @@ export default defineConfig(() => {
     plugins: [qwikCity(), qwikVite(), tsconfigPaths(), UnoCSS()],
     server: {
       port: 1312,
+      host: true,
+      open: true,
     },
   }
 })

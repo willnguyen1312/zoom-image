@@ -5,7 +5,12 @@ type CropImageArg = {
   positionY: number
 }
 
-export const cropImage = ({ image, positionX, positionY, currentZoom }: CropImageArg) => {
+export const cropImage = ({
+  image,
+  positionX,
+  positionY,
+  currentZoom,
+}: CropImageArg) => {
   const canvas = document.createElement("canvas")
   const scale = image.naturalWidth / (image.clientWidth * currentZoom)
   const croppedImageWidth = image.clientWidth * scale
