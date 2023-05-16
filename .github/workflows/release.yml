@@ -31,8 +31,8 @@ jobs:
       - name: install dependencies
         run: pnpm install
 
-      - name: Build full
-        run: pnpm build:full
+      - name: Build
+        run: pnpm build
 
       - name: Publish packages
         id: changesets
