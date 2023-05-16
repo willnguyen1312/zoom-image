@@ -1,5 +1,14 @@
 # @zoom-image/core
 
+## 0.8.1
+
+### Patch Changes
+
+- [#94](https://github.com/willnguyen1312/zoom-image/pull/94)
+  [`8a51fff`](https://github.com/willnguyen1312/zoom-image/commit/8a51fffc4a1120f7d14ba6f84e67f5349d29c535)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - fix zoom wheel on update
+  currentZoom property 💞
+
 ## 0.8.0
 
 ### Minor Changes
