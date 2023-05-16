@@ -1,13 +1,52 @@
 export type Listener<TState> = (currentState: TState) => void
 
 export function createStore<TState>(initialState: TState) {
+  let batching = false
   const listeners = new Set<Listener<TState>>()
-  const state: TState = initialState
+  let state: TState = initialState
+  let prevState: TState | undefined
 
-  const update = (updatedState: Partial<TState>) => {
+  const setState = (updatedState: Partial<TState>) => {
+    if (batching && !prevState) {
+      prevState = { ...state }
+    }
+
     // @ts-ignore
-    Object.assign(state, updatedState)
+    state = Object.assign(state, updatedState)
+
+    flush()
+  }
+
+  const flush = () => {
+    if (batching) return
+
+    if (!prevState) {
+      listeners.forEach((listener) => listener(state))
+      return
+    }
+
+    let hasChanged = false
+    for (const key in state) {
+      if (state[key] !== prevState[key]) {
+        hasChanged = true
+        break
+      }
+    }
+
+    prevState = undefined
+
+    if (!hasChanged) {
+      return
+    }
+
     listeners.forEach((listener) => listener(state))
+  }
+
+  const batch = (cb: () => void) => {
+    batching = true
+    cb()
+    batching = false
+    flush()
   }
 
   const subscribe = (listener: Listener<TState>) => {
@@ -20,10 +59,11 @@ export function createStore<TState>(initialState: TState) {
   const getState = () => state
 
   return {
-    update,
     subscribe,
     cleanup,
     getState,
+    setState,
+    batch,
   }
 }
 
@@ -46,14 +86,14 @@ export const makeImageCache = () => {
 
     loadedImageSet.add(src)
 
-    store.update({ zoomedImgStatus: "loading" })
+    store.setState({ zoomedImgStatus: "loading" })
 
     img.addEventListener("load", () => {
-      store.update({ zoomedImgStatus: "loaded" })
+      store.setState({ zoomedImgStatus: "loaded" })
     })
 
     img.addEventListener("error", () => {
-      store.update({ zoomedImgStatus: "error" })
+      store.setState({ zoomedImgStatus: "error" })
     })
   }
 
