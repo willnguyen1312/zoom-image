@@ -7,7 +7,7 @@
 - [#91](https://github.com/willnguyen1312/zoom-image/pull/91)
   [`90334cb`](https://github.com/willnguyen1312/zoom-image/commit/90334cbb6abede817f11f4d7c532e7ffef1219e1)
   Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Expose currentZoom property in
-  wheel zoom
+  wheel zoom 🎉
 
 ## 0.7.0
 
