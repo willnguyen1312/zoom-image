@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.9.0
+
+### Minor Changes
+
+- [#97](https://github.com/willnguyen1312/zoom-image/pull/97)
+  [`06d3f28`](https://github.com/willnguyen1312/zoom-image/commit/06d3f28df65fde9f35203c8ca601653301293de9)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Optimize rendering mechanism 🚀
+
 ## 0.8.1
 
 ### Patch Changes
