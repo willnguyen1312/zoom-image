@@ -6,9 +6,8 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build-fast": "tsup src",
     "dev": "pnpm build --watch",
-    "build": "tsup src terser",
+    "build:full": "tsup src terser",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --coverage",

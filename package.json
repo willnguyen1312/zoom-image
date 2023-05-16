@@ -24,9 +24,9 @@
   "scripts": {
     "test": "turbo run test",
     "test:watch": "pnpm --filter=@zoom-image/core test:watch",
-    "build": "turbo run build",
-    "build:full": "pnpm --filter=@zoom-image/core build",
-    "size": "pnpm build:full && size-limit",
+    "build:full": "turbo run build:full",
+    "build": "pnpm --filter=@zoom-image/core build:full",
+    "size": "pnpm build && size-limit && node scripts/size-limit.mjs",
     "start-preact": "turbo run dev --filter=@zoom-image/core --filter=preact-ts",
     "start-react": "turbo run dev --filter=@zoom-image/core --filter=react-ts",
     "start-svelte": "turbo run dev --filter=@zoom-image/core --filter=svelte-ts",
