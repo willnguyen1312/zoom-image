@@ -45,3 +45,9 @@ jobs:
 
       - name: Format
         run: pnpm format:check
+
+      - name: Size limit action
+        uses: andresz1/size-limit-action@master
+        with:
+          build_script: build:full
+          github_token: ${{ secrets.GITHUB_TOKEN }}
