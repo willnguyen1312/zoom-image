@@ -31,7 +31,9 @@ describe("simple store", () => {
 
 describe("image cache", () => {
   it("should work as expected", () => {
-    const store = createStore<{ zoomedImgStatus: ZoomedImgStatus }>({ zoomedImgStatus: "idle" })
+    const store = createStore<{ zoomedImgStatus: ZoomedImgStatus }>({
+      zoomedImgStatus: "idle",
+    })
     const { createZoomImage, checkImageLoaded } = makeImageCache()
     const img = document.createElement("img")
     const src = "https://example.com/image.png"

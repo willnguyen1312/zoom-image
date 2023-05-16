@@ -9,5 +9,7 @@ export default defineConfig({
   plugins: [svelte(), UnoCSS()],
   server: {
     port: 1312,
+    host: true,
+    open: true,
   },
 })

@@ -5,7 +5,8 @@ const pkg = require("../../packages/core/package.json")
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Zoom Image",
-  description: "A little yet powerful framework agnostic library to zoom image on the web",
+  description:
+    "A little yet powerful framework agnostic library to zoom image on the web",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -68,12 +69,17 @@ export default defineConfig({
           { text: "createZoomImageWheel", link: "/api/createZoomImageWheel" },
           { text: "cropImage", link: "/api/cropImage" },
           { text: "makeCalculateZoom", link: "/api/makeCalculateZoom" },
-          { text: "makeCalculatePercentage", link: "/api/makeCalculatePercentage" },
+          {
+            text: "makeCalculatePercentage",
+            link: "/api/makeCalculatePercentage",
+          },
         ],
       },
     ],
 
-    socialLinks: [{ icon: "github", link: "https://github.com/willnguyen1312/zoom-image" }],
+    socialLinks: [
+      { icon: "github", link: "https://github.com/willnguyen1312/zoom-image" },
+    ],
 
     search: {
       provider: "algolia",

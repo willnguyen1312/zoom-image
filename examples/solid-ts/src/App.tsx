@@ -1,6 +1,11 @@
 import type { Component } from "solid-js"
 import { createSignal, createMemo, createEffect, For } from "solid-js"
-import { createZoomImageHover, createZoomImageWheel, createZoomImageMove, createZoomImageClick } from "@zoom-image/core"
+import {
+  createZoomImageHover,
+  createZoomImageWheel,
+  createZoomImageMove,
+  createZoomImageClick,
+} from "@zoom-image/core"
 
 type Tab = {
   name: string
@@ -83,7 +88,9 @@ const App: Component = () => {
               href={tab.href}
               class={
                 "decoration-none rounded-md px-3 py-2 text-sm font-medium " +
-                (tab.current ? "bg-gray-100 text-gray-700" : "text-gray-500 hover:text-gray-700")
+                (tab.current
+                  ? "bg-gray-100 text-gray-700"
+                  : "text-gray-500 hover:text-gray-700")
               }
               aria-current={tab.current ? "page" : undefined}
             >
@@ -96,7 +103,10 @@ const App: Component = () => {
       {zoomType() === "wheel" && (
         <>
           <p>Scroll inside the image to see zoom in-out effect</p>
-          <div ref={imageWheelContainer} class="h-[300px] w-[300px] cursor-crosshair">
+          <div
+            ref={imageWheelContainer}
+            class="h-[300px] w-[300px] cursor-crosshair"
+          >
             <img
               class="h-full w-full"
               alt="Large Pic"
@@ -109,7 +119,10 @@ const App: Component = () => {
       )}
 
       {zoomType() === "hover" && (
-        <div ref={imageHoverContainer} class="relative flex h-[250px] w-[250px] items-start">
+        <div
+          ref={imageHoverContainer}
+          class="relative flex h-[250px] w-[250px] items-start"
+        >
           <img
             class="h-full w-full"
             alt="Small Pic"
@@ -122,7 +135,10 @@ const App: Component = () => {
       )}
 
       {zoomType() === "move" && (
-        <div ref={imageMoveContainer} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+        <div
+          ref={imageMoveContainer}
+          class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
+        >
           <img
             class="h-full w-full"
             alt="Large Pic"
@@ -134,8 +150,15 @@ const App: Component = () => {
       )}
 
       {zoomType() === "click" && (
-        <div ref={imageClickContainer} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-          <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+        <div
+          ref={imageClickContainer}
+          class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
+        >
+          <img
+            class="h-full w-full"
+            alt="Large Pic"
+            src="https://nam-assets.netlify.app/static/small.webp"
+          />
         </div>
       )}
     </div>

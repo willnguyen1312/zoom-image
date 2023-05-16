@@ -11,9 +11,9 @@
     "build": "tsup src terser",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:ci": "vitest run --coverage"
+    "test": "vitest run --coverage",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui"
   },
   "types": "dist/index.d.ts",
   "main": "dist/index.js",

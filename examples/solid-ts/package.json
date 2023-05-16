@@ -2,9 +2,7 @@
   "name": "solid-ts",
   "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+    "dev": "vite"
   },
   "license": "MIT",
   "devDependencies": {

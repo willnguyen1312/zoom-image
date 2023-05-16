@@ -8,5 +8,7 @@ export default defineConfig({
   plugins: [preact(), UnoCSS()],
   server: {
     port: 1312,
+    host: true,
+    open: true,
   },
 })

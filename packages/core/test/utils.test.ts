@@ -20,7 +20,10 @@ describe("clamp functions", () => {
     fc.assert(
       fc.property(fc.integer(), fc.integer(), (first, second) => {
         const [min, max] = [Math.min(first, second), Math.max(first, second)]
-        const value = faker.number.int({ min: Number.MIN_SAFE_INTEGER, max: min - 1 })
+        const value = faker.number.int({
+          min: Number.MIN_SAFE_INTEGER,
+          max: min - 1,
+        })
         expect(clamp(value, min, max)).toBe(min)
       }),
     )
@@ -30,7 +33,10 @@ describe("clamp functions", () => {
     fc.assert(
       fc.property(fc.integer(), fc.integer(), (first, second) => {
         const [min, max] = [Math.min(first, second), Math.max(first, second)]
-        const value = faker.number.int({ min: max + 1, max: Number.MAX_SAFE_INTEGER })
+        const value = faker.number.int({
+          min: max + 1,
+          max: Number.MAX_SAFE_INTEGER,
+        })
         expect(clamp(value, min, max)).toBe(max)
       }),
     )
@@ -52,8 +58,12 @@ describe("makeMaybeCallFunction function", () => {
 describe("makeCalculatePercentage function", () => {
   it("should work as expected", () => {
     expect(makeCalculatePercentage(4)(1)).toMatchInlineSnapshot("0")
-    expect(makeCalculatePercentage(4)(2)).toMatchInlineSnapshot("33.33333333333333")
-    expect(makeCalculatePercentage(4)(3)).toMatchInlineSnapshot("66.66666666666666")
+    expect(makeCalculatePercentage(4)(2)).toMatchInlineSnapshot(
+      "33.33333333333333",
+    )
+    expect(makeCalculatePercentage(4)(3)).toMatchInlineSnapshot(
+      "66.66666666666666",
+    )
     expect(makeCalculatePercentage(4)(4)).toMatchInlineSnapshot("100")
   })
 })
@@ -61,8 +71,12 @@ describe("makeCalculatePercentage function", () => {
 describe("makeCalculateZoom function", () => {
   it("should work as expected", () => {
     expect(makeCalculateZoom(4)(0)).toMatchInlineSnapshot("1")
-    expect(makeCalculateZoom(4)(33.33333333333333)).toMatchInlineSnapshot("1.9999999999999998")
-    expect(makeCalculateZoom(4)(66.66666666666666)).toMatchInlineSnapshot("2.9999999999999996")
+    expect(makeCalculateZoom(4)(33.33333333333333)).toMatchInlineSnapshot(
+      "1.9999999999999998",
+    )
+    expect(makeCalculateZoom(4)(66.66666666666666)).toMatchInlineSnapshot(
+      "2.9999999999999996",
+    )
     expect(makeCalculateZoom(4)(100)).toMatchInlineSnapshot("4")
   })
 })

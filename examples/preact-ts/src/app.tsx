@@ -1,5 +1,10 @@
 import { useRef, useEffect, useState, useMemo } from "preact/hooks"
-import { createZoomImageClick, createZoomImageHover, createZoomImageMove, createZoomImageWheel } from "@zoom-image/core"
+import {
+  createZoomImageClick,
+  createZoomImageHover,
+  createZoomImageMove,
+  createZoomImageWheel,
+} from "@zoom-image/core"
 
 function App() {
   const [tabs, setTabs] = useState<
@@ -85,7 +90,9 @@ function App() {
               href={tab.href}
               class={
                 "decoration-none rounded-md px-3 py-2 text-sm font-medium " +
-                (tab.current ? "bg-gray-100 text-gray-700" : "text-gray-500 hover:text-gray-700")
+                (tab.current
+                  ? "bg-gray-100 text-gray-700"
+                  : "text-gray-500 hover:text-gray-700")
               }
               aria-current={tab.current ? "page" : undefined}
             >
@@ -98,28 +105,56 @@ function App() {
       {zoomType === "wheel" && (
         <>
           <p>Scroll inside the image to see zoom in-out effect</p>
-          <div ref={imageWheelContainerRef} class="h-[300px] w-[300px] cursor-crosshair">
-            <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/large.webp" />
+          <div
+            ref={imageWheelContainerRef}
+            class="h-[300px] w-[300px] cursor-crosshair"
+          >
+            <img
+              class="h-full w-full"
+              alt="Large Pic"
+              src="https://nam-assets.netlify.app/static/large.webp"
+            />
           </div>
         </>
       )}
 
       {zoomType === "hover" && (
-        <div ref={imageHoverContainerRef} class="relative flex h-[250px] w-[250px] items-start">
-          <img class="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+        <div
+          ref={imageHoverContainerRef}
+          class="relative flex h-[250px] w-[250px] items-start"
+        >
+          <img
+            class="h-full w-full"
+            alt="Small Pic"
+            src="https://nam-assets.netlify.app/static/small.webp"
+          />
           <div ref={zoomTargetRef} class="absolute left-[300px]"></div>
         </div>
       )}
 
       {zoomType === "move" && (
-        <div ref={imageMoveContainerRef} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-          <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+        <div
+          ref={imageMoveContainerRef}
+          class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
+        >
+          <img
+            class="h-full w-full"
+            alt="Large Pic"
+            src="https://nam-assets.netlify.app/static/small.webp"
+          />
         </div>
       )}
 
       {zoomType === "click" && (
-        <div ref={imageClickContainerRef} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-          <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+        <div
+          ref={imageClickContainerRef}
+          class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
+        >
+          <img
+            class="h-full w-full"
+            alt="Large Pic"
+            src="https://nam-assets.netlify.app/static/small.webp"
+          />
         </div>
       )}
     </div>
