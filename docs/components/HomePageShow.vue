@@ -24,6 +24,8 @@ const tabs = ref<
   { name: "Click", href: "#", current: false, value: "click" },
 ])
 
+const croppedImage = ref<string>()
+
 const zoomType = computed(() => {
   const found = tabs.value.find((tab) => tab.current)
   return found?.value as "hover" | "wheel" | "move" | "click"
@@ -71,14 +73,12 @@ watch(
 
       handleCropWheelZoomImage = () => {
         const state = result.getState()
-        const croppedImage = cropImage({
+        croppedImage.value = cropImage({
           currentZoom: state.currentZoom,
           image: imageContainer.querySelector("img") as HTMLImageElement,
           positionX: state.currentPositionX,
           positionY: state.currentPositionY,
         })
-        const cropImageElement = document.getElementById("crop-image") as HTMLImageElement
-        cropImageElement.src = croppedImage
       }
     }
 
@@ -132,7 +132,7 @@ onUnmounted(() => {
           <div ref="imageWheelContainerRef" class="h-[300px] w-[300px] cursor-crosshair">
             <img class="h-full w-full" crossorigin="anonymous" alt="Large Pic" src="/large.webp" />
           </div>
-          <img class="h-[300px] w-[300px]" id="crop-image" />
+          <img :src="croppedImage" v-if="!!croppedImage" class="h-[300px] w-[300px]" alt="Cropped image placeholder" />
         </div>
         <button class="text-dark-500 rounded bg-gray-100 p-2 font-medium" @click="handleCropWheelZoomImage">
           Crop image
