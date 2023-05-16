@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.7.0
+
+### Minor Changes
+
+- [#84](https://github.com/willnguyen1312/zoom-image/pull/84)
+  [`5809c27`](https://github.com/willnguyen1312/zoom-image/commit/5809c271c098a9a59fa449a98c7a408d6e1c5744) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add crop image utility 💞
+
 ## 0.6.0
 
 ### Minor Changes
