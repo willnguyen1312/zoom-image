@@ -32,7 +32,7 @@ type StateUpdate = Partial<{ enable: boolean; currentZoom: number }>
 export function createZoomImageWheel(container: HTMLElement, options: ZoomImageWheelOptions = {}) {
   const store = createStore<ZoomImageWheelState>({
     currentZoom: 1,
-    enable: true,
+    enable: false,
     currentPositionX: 0,
     currentPositionY: 0,
   })
