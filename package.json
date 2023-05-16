@@ -110,6 +110,12 @@
       "limit": "1.5KB"
     },
     {
+      "name": "cropImage",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ cropImage }",
+      "limit": "1.5KB"
+    },
+    {
       "name": "makeCalculatePercentage",
       "path": "packages/core/dist/index.mjs",
       "import": "{ makeCalculatePercentage }",
