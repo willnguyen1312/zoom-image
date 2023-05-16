@@ -7,7 +7,7 @@ export function createStore<TState>(initialState: TState) {
   let prevState: TState | undefined
 
   const setState = (updatedState: Partial<TState>) => {
-    if (batching && !prevState) {
+    if (!prevState) {
       prevState = { ...state }
     }
 
@@ -20,16 +20,14 @@ export function createStore<TState>(initialState: TState) {
   const flush = () => {
     if (batching) return
 
-    if (!prevState) {
-      listeners.forEach((listener) => listener(state))
-      return
-    }
-
     let hasChanged = false
-    for (const key in state) {
-      if (state[key] !== prevState[key]) {
-        hasChanged = true
-        break
+
+    if (prevState) {
+      for (const key in state) {
+        if (state[key] !== prevState[key]) {
+          hasChanged = true
+          break
+        }
       }
     }
 
