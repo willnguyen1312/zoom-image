@@ -1,9 +1,4 @@
-import {
-  component$,
-  useSignal,
-  useComputed$,
-  useVisibleTask$,
-} from "@builder.io/qwik"
+import { component$, useSignal, useComputed$, useVisibleTask$ } from "@builder.io/qwik"
 import {
   createZoomImageClick,
   createZoomImageHover,
@@ -92,9 +87,7 @@ export default component$(() => {
               }}
               class={
                 "decoration-none cursor-pointer rounded-md px-3 py-2 text-sm font-medium " +
-                (tab.current
-                  ? "bg-gray-100 text-gray-700"
-                  : "text-gray-500 hover:text-gray-700")
+                (tab.current ? "bg-gray-100 text-gray-700" : "text-gray-500 hover:text-gray-700")
               }
               aria-current={tab.current ? "page" : undefined}
             >
@@ -107,10 +100,7 @@ export default component$(() => {
       {zoomType.value === "wheel" && (
         <>
           <p>Scroll inside the image to see zoom in-out effect</p>
-          <div
-            ref={imageWheelContainerRef}
-            class="h-[300px] w-[300px] cursor-crosshair"
-          >
+          <div ref={imageWheelContainerRef} class="h-[300px] w-[300px] cursor-crosshair">
             <img
               class="h-full w-full"
               alt="Large Pic"
@@ -121,10 +111,7 @@ export default component$(() => {
       )}
 
       {zoomType.value === "hover" && (
-        <div
-          ref={imageHoverContainerRef}
-          class="relative flex h-[250px] w-[250px] items-start"
-        >
+        <div ref={imageHoverContainerRef} class="relative flex h-[250px] w-[250px] items-start">
           <img
             class="h-full w-full"
             alt="Small Pic"

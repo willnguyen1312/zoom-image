@@ -21,10 +21,7 @@ type RequiredExcept<T, K extends keyof T> = Omit<Required<T>, K> & {
   [P in K]?: T[P]
 }
 
-export function createZoomImageHover(
-  container: HTMLElement,
-  options: ZoomImageHoverOptions = {},
-) {
+export function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOptions = {}) {
   const sourceImgElement = getSourceImage(container)
   const zoomedImgWrapper = document.createElement("div")
   zoomedImgWrapper.style.overflow = "hidden"
@@ -32,10 +29,7 @@ export function createZoomImageHover(
   zoomedImg.style.maxWidth = "none"
   const zoomLens = container.appendChild(document.createElement("div"))
 
-  const finalOptions: RequiredExcept<
-    ZoomImageHoverOptions,
-    "zoomTarget" | "customZoom"
-  > = {
+  const finalOptions: RequiredExcept<ZoomImageHoverOptions, "zoomTarget" | "customZoom"> = {
     zoomImageSource: options.zoomImageSource || sourceImgElement.src,
     zoomLensClass: options.zoomLensClass || "",
     customZoom: options.customZoom,
@@ -44,9 +38,7 @@ export function createZoomImageHover(
   }
 
   const store = createStore<ZoomImageHoverState>({
-    zoomedImgStatus: imageCache.checkImageLoaded(finalOptions.zoomImageSource)
-      ? "loaded"
-      : "idle",
+    zoomedImgStatus: imageCache.checkImageLoaded(finalOptions.zoomImageSource) ? "loaded" : "idle",
     enabled: true,
   })
 
@@ -109,11 +101,9 @@ export function createZoomImageHover(
 
     if (finalOptions.customZoom) {
       zoomLens.style.width =
-        (finalOptions.customZoom.width / scaleX) * finalOptions.scaleFactor +
-        "px"
+        (finalOptions.customZoom.width / scaleX) * finalOptions.scaleFactor + "px"
       zoomLens.style.height =
-        (finalOptions.customZoom.height / scaleY) * finalOptions.scaleFactor +
-        "px"
+        (finalOptions.customZoom.height / scaleY) * finalOptions.scaleFactor + "px"
       return
     }
 
@@ -159,15 +149,9 @@ export function createZoomImageHover(
       offsetY = zoomLensTop(event.clientY - offset.top)
       backgroundTop = (offsetX * scaleX) / finalOptions.scaleFactor
       backgroundRight = (offsetY * scaleY) / finalOptions.scaleFactor
-      zoomedImg.style.transform =
-        "translate(" + -backgroundTop + "px," + -backgroundRight + "px)"
+      zoomedImg.style.transform = "translate(" + -backgroundTop + "px," + -backgroundRight + "px)"
       zoomLens.style.cssText +=
-        "transform:" +
-        "translate(" +
-        offsetX +
-        "px," +
-        offsetY +
-        "px); top: 0; left: 0;"
+        "transform:" + "translate(" + offsetX + "px," + offsetY + "px); top: 0; left: 0;"
     }
   }
 

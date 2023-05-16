@@ -28,24 +28,14 @@ function createSimpleState<T>(initialState: T) {
   }
 }
 
-const zoomWheelLink = document.getElementById(
-  "zoom-image-wheel",
-) as HTMLAnchorElement
-const zoomHoverLink = document.getElementById(
-  "zoom-image-hover",
-) as HTMLAnchorElement
-const zoomMouseLink = document.getElementById(
-  "zoom-image-move",
-) as HTMLAnchorElement
-const zoomClickLink = document.getElementById(
-  "zoom-image-click",
-) as HTMLAnchorElement
+const zoomWheelLink = document.getElementById("zoom-image-wheel") as HTMLAnchorElement
+const zoomHoverLink = document.getElementById("zoom-image-hover") as HTMLAnchorElement
+const zoomMouseLink = document.getElementById("zoom-image-move") as HTMLAnchorElement
+const zoomClickLink = document.getElementById("zoom-image-click") as HTMLAnchorElement
 
 type ZoomType = "wheel" | "hover" | "move" | "click"
 
-const makeImageTemplate = (
-  id: "image-wheel" | "image-hover" | "image-move" | "image-click",
-) => {
+const makeImageTemplate = (id: "image-wheel" | "image-hover" | "image-move" | "image-click") => {
   const template = document.getElementById(id) as HTMLTemplateElement
   return template.content.cloneNode(true)
 }
@@ -67,9 +57,7 @@ const makeUpdateUIFunc = () => {
     if (state === "wheel") {
       const imageWheel = makeImageTemplate("image-wheel")
       parent.replaceChildren(imageWheel)
-      const container = document.getElementById(
-        "image-wheel-container",
-      ) as HTMLDivElement
+      const container = document.getElementById("image-wheel-container") as HTMLDivElement
 
       cleanupZoom = createZoomImageWheel(container).cleanup
     }
@@ -78,12 +66,8 @@ const makeUpdateUIFunc = () => {
       const imageHover = makeImageTemplate("image-hover")
       parent.replaceChildren(imageHover)
 
-      const container = document.getElementById(
-        "image-hover-container",
-      ) as HTMLDivElement
-      const zoomTarget = document.getElementById(
-        "zoom-hover-target",
-      ) as HTMLDivElement
+      const container = document.getElementById("image-hover-container") as HTMLDivElement
+      const zoomTarget = document.getElementById("zoom-hover-target") as HTMLDivElement
 
       cleanupZoom = createZoomImageHover(container, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
@@ -97,9 +81,7 @@ const makeUpdateUIFunc = () => {
       const imageHover = makeImageTemplate("image-move")
       parent.replaceChildren(imageHover)
 
-      const container = document.getElementById(
-        "image-move-container",
-      ) as HTMLDivElement
+      const container = document.getElementById("image-move-container") as HTMLDivElement
 
       cleanupZoom = createZoomImageMove(container, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
@@ -110,9 +92,7 @@ const makeUpdateUIFunc = () => {
       const imageClick = makeImageTemplate("image-click")
       parent.replaceChildren(imageClick)
 
-      const container = document.getElementById(
-        "image-click-container",
-      ) as HTMLDivElement
+      const container = document.getElementById("image-click-container") as HTMLDivElement
 
       cleanupZoom = createZoomImageClick(container, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",

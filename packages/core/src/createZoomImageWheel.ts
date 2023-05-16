@@ -29,10 +29,7 @@ export type ZoomImageWheelState = {
 
 type StateUpdate = Partial<{ enable: boolean; currentZoom: number }>
 
-export function createZoomImageWheel(
-  container: HTMLElement,
-  options: ZoomImageWheelOptions = {},
-) {
+export function createZoomImageWheel(container: HTMLElement, options: ZoomImageWheelOptions = {}) {
   const store = createStore<ZoomImageWheelState>({
     currentZoom: 1,
     enable: true,
@@ -51,8 +48,7 @@ export function createZoomImageWheel(
   const calculatePositionX = (newPositionX: number, currentZoom: number) => {
     const width = container.clientWidth
     if (newPositionX > 0) return 0
-    if (newPositionX + width * currentZoom < width)
-      return -width * (currentZoom - 1)
+    if (newPositionX + width * currentZoom < width) return -width * (currentZoom - 1)
     return newPositionX
   }
 
@@ -60,8 +56,7 @@ export function createZoomImageWheel(
     const height = container.clientHeight
 
     if (newPositionY > 0) return 0
-    if (newPositionY + height * currentZoom < height)
-      return -height * (currentZoom - 1)
+    if (newPositionY + height * currentZoom < height) return -height * (currentZoom - 1)
     return newPositionY
   }
 
@@ -80,9 +75,9 @@ export function createZoomImageWheel(
   sourceImgElement.style.transformOrigin = "0 0"
 
   function updateZoom() {
-    sourceImgElement.style.transform = `translate(${
-      state.currentPositionX
-    }px, ${state.currentPositionY}px) scale(${store.getState().currentZoom})`
+    sourceImgElement.style.transform = `translate(${state.currentPositionX}px, ${
+      state.currentPositionY
+    }px) scale(${store.getState().currentZoom})`
   }
 
   function processZoomMiddle() {
@@ -103,15 +98,7 @@ export function createZoomImageWheel(
     updateZoom()
   }
 
-  function processZoomWheel({
-    delta,
-    x,
-    y,
-  }: {
-    delta: number
-    x: number
-    y: number
-  }) {
+  function processZoomWheel({ delta, x, y }: { delta: number; x: number; y: number }) {
     const containerRect = container.getBoundingClientRect()
     const zoomPointX = x - containerRect.left
     const zoomPointY = y - containerRect.top
@@ -185,14 +172,8 @@ export function createZoomImageWheel(
       const offsetX = clientX - startX
       const offsetY = clientY - startY
       const { currentZoom } = store.getState()
-      state.currentPositionX = calculatePositionX(
-        lastPositionX + offsetX,
-        currentZoom,
-      )
-      state.currentPositionY = calculatePositionY(
-        lastPositionY + offsetY,
-        currentZoom,
-      )
+      state.currentPositionX = calculatePositionX(lastPositionX + offsetX, currentZoom)
+      state.currentPositionY = calculatePositionY(lastPositionY + offsetY, currentZoom)
       updateZoom()
     }
   }
@@ -258,22 +239,10 @@ export function createZoomImageWheel(
   }
 
   const onWheel = makeMaybeCallFunction(checkZoomEnabled, _onWheel)
-  const handlePointerDown = makeMaybeCallFunction(
-    checkZoomEnabled,
-    _handlePointerDown,
-  )
-  const handlePointerLeave = makeMaybeCallFunction(
-    checkZoomEnabled,
-    _handlePointerLeave,
-  )
-  const handlePointerMove = makeMaybeCallFunction(
-    checkZoomEnabled,
-    _handlePointerMove,
-  )
-  const handlePointerUp = makeMaybeCallFunction(
-    checkZoomEnabled,
-    _handlePointerUp,
-  )
+  const handlePointerDown = makeMaybeCallFunction(checkZoomEnabled, _handlePointerDown)
+  const handlePointerLeave = makeMaybeCallFunction(checkZoomEnabled, _handlePointerLeave)
+  const handlePointerMove = makeMaybeCallFunction(checkZoomEnabled, _handlePointerMove)
+  const handlePointerUp = makeMaybeCallFunction(checkZoomEnabled, _handlePointerUp)
 
   container.addEventListener("wheel", onWheel)
   container.addEventListener("pointerdown", handlePointerDown)
@@ -295,10 +264,7 @@ export function createZoomImageWheel(
       const oldState = store.getState()
 
       store.update({
-        enable:
-          typeof newState.enable === "boolean"
-            ? newState.enable
-            : oldState.enable,
+        enable: typeof newState.enable === "boolean" ? newState.enable : oldState.enable,
         currentZoom:
           typeof newState.currentZoom === "number"
             ? clamp(newState.currentZoom, 1, finalOptions.maxZoom)

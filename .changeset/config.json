@@ -1,22 +1,11 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
-  "changelog": [
-    "@changesets/changelog-github",
-    { "repo": "willnguyen1312/zoom-image" }
-  ],
+  "changelog": ["@changesets/changelog-github", { "repo": "willnguyen1312/zoom-image" }],
   "commit": false,
   "fixed": [],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": [
-    "vanilla-ts",
-    "vue-ts",
-    "react-ts",
-    "solid-ts",
-    "svelte-ts",
-    "preact-ts",
-    "qwik-ts"
-  ]
+  "ignore": ["vanilla-ts", "vue-ts", "react-ts", "solid-ts", "svelte-ts", "preact-ts", "qwik-ts"]
 }

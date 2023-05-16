@@ -93,9 +93,7 @@ function App() {
               href={tab.href}
               className={
                 "decoration-none rounded-md px-3 py-2 text-sm font-medium " +
-                (tab.current
-                  ? "bg-gray-100 text-gray-700"
-                  : "text-gray-500 hover:text-gray-700")
+                (tab.current ? "bg-gray-100 text-gray-700" : "text-gray-500 hover:text-gray-700")
               }
               aria-current={tab.current ? "page" : undefined}
             >
@@ -108,10 +106,7 @@ function App() {
       {zoomType === "wheel" && (
         <>
           <p>Scroll inside the image to see zoom in-out effect</p>
-          <div
-            ref={imageWheelContainerRef}
-            className="h-[300px] w-[300px] cursor-crosshair"
-          >
+          <div ref={imageWheelContainerRef} className="h-[300px] w-[300px] cursor-crosshair">
             <img
               className="h-full w-full"
               alt="Large Pic"
@@ -122,10 +117,7 @@ function App() {
       )}
 
       {zoomType === "hover" && (
-        <div
-          ref={imageHoverContainerRef}
-          className="relative flex h-[250px] w-[250px] items-start"
-        >
+        <div ref={imageHoverContainerRef} className="relative flex h-[250px] w-[250px] items-start">
           <img
             className="h-full w-full"
             alt="Small Pic"

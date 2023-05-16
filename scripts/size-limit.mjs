@@ -32,12 +32,11 @@ async function main() {
 
   const bundleInfos = await Promise.all(
     listOfFunction.map((funcName) => {
-      return sizeLimit(
-        [presetSmallLib],
-        [`packages/core/dist/${funcName}.global.js`],
-      ).then((result) => {
-        return formatBytes(result[0].size)
-      })
+      return sizeLimit([presetSmallLib], [`packages/core/dist/${funcName}.global.js`]).then(
+        (result) => {
+          return formatBytes(result[0].size)
+        },
+      )
     }),
   )
 

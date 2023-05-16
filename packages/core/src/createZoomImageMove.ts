@@ -11,10 +11,7 @@ export type ZoomImageMoveState = {
   zoomedImgStatus: ZoomedImgStatus
 }
 
-export function createZoomImageMove(
-  container: HTMLElement,
-  options: ZoomImageMoveOptions = {},
-) {
+export function createZoomImageMove(container: HTMLElement, options: ZoomImageMoveOptions = {}) {
   const sourceImgElement = getSourceImage(container)
   const finalOptions: Required<ZoomImageMoveOptions> = {
     zoomFactor: options.zoomFactor ?? 4,
@@ -22,14 +19,11 @@ export function createZoomImageMove(
   }
 
   const store = createStore<ZoomImageMoveState>({
-    zoomedImgStatus: imageCache.checkImageLoaded(finalOptions.zoomImageSource)
-      ? "loaded"
-      : "idle",
+    zoomedImgStatus: imageCache.checkImageLoaded(finalOptions.zoomImageSource) ? "loaded" : "idle",
   })
 
   const zoomedImgWidth = sourceImgElement.clientWidth * finalOptions.zoomFactor
-  const zoomedImgHeight =
-    sourceImgElement.clientHeight * finalOptions.zoomFactor
+  const zoomedImgHeight = sourceImgElement.clientHeight * finalOptions.zoomFactor
   const zoomedImg = container.appendChild(document.createElement("img"))
   zoomedImg.style.maxWidth = "none"
   zoomedImg.style.width = `${zoomedImgWidth}px`
@@ -88,12 +82,8 @@ export function createZoomImageMove(
     const zoomPointX = event.clientX - containerRect.left
     const zoomPointY = event.clientY - containerRect.top
 
-    const currentPositionX = calculatePositionX(
-      -zoomPointX * finalOptions.zoomFactor + zoomPointX,
-    )
-    const currentPositionY = calculatePositionY(
-      -zoomPointY * finalOptions.zoomFactor + zoomPointY,
-    )
+    const currentPositionX = calculatePositionX(-zoomPointX * finalOptions.zoomFactor + zoomPointX)
+    const currentPositionY = calculatePositionY(-zoomPointY * finalOptions.zoomFactor + zoomPointY)
     zoomedImg.style.transform = `translate(${currentPositionX}px, ${currentPositionY}px)`
   }
 
