@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { createZoomImageHover, createZoomImageWheel, createZoomImageMove, createZoomImageClick } from "@zoom-image/core"
+import {
+  createZoomImageHover,
+  createZoomImageWheel,
+  createZoomImageMove,
+  createZoomImageClick,
+  cropImage,
+} from "@zoom-image/core"
 import { computed, nextTick, onUnmounted, ref, watch } from "vue"
 
 let cleanup: () => void = () => {}
@@ -36,6 +42,8 @@ const handleTabClick = (tab: { name: string; href: string; current: boolean }) =
   tab.current = true
 }
 
+let handleCropWheelZoomImage = () => {}
+
 watch(
   zoomType,
   async () => {
@@ -60,6 +68,20 @@ watch(
 
       const result = createZoomImageWheel(imageContainer)
       cleanup = result.cleanup
+
+      handleCropWheelZoomImage = () => {
+        const state = result.getState()
+        const croppedImage = cropImage({
+          container: imageContainer,
+          currentZoom: state.currentZoom,
+          image: imageContainer.querySelector("img") as HTMLImageElement,
+          positionX: state.currentPositionX,
+          positionY: state.currentPositionY,
+        })
+        const cropImageElement = document.getElementById("crop-image") as HTMLImageElement
+        cropImageElement.src = croppedImage
+        console.log(croppedImage)
+      }
     }
 
     if (zoomType.value === "move") {
@@ -108,9 +130,15 @@ onUnmounted(() => {
 
       <div class="space-y-4" v-if="zoomType === 'wheel'">
         <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
-        <div ref="imageWheelContainerRef" class="mt-1 h-[300px] w-[300px] cursor-crosshair">
-          <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/large.webp" />
+        <div class="mt-1 flex space-x-2">
+          <div ref="imageWheelContainerRef" class="h-[300px] w-[300px] cursor-crosshair">
+            <img class="h-full w-full" crossorigin="anonymous" alt="Large Pic" src="/large.webp" />
+          </div>
+          <img class="h-[300px] w-[300px]" id="crop-image" />
         </div>
+        <button class="text-dark-500 rounded bg-gray-100 p-2 font-medium" @click="handleCropWheelZoomImage">
+          Crop image
+        </button>
       </div>
 
       <div class="space-y-4" v-if="zoomType === 'hover'">
