@@ -8,7 +8,7 @@
       "vitest/globals",
       "@testing-library/jest-dom",
       "@vitejs/plugin-vue",
-      "./vite-env.d.ts"
+      "./env.d.ts"
     ]
   }
 }

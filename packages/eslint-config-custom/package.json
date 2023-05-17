@@ -2,7 +2,11 @@
   "name": "eslint-config-custom",
   "private": true,
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "eslint": "8.40.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-config-turbo": "^1.9.3"
+    "eslint-config-turbo": "^1.9.3",
+    "tsconfig": "workspace:*"
   }
 }

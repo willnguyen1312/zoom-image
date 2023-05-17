@@ -11,8 +11,7 @@ export function createStore<TState>(initialState: TState) {
       prevState = { ...state }
     }
 
-    // @ts-ignore
-    state = Object.assign(state, updatedState)
+    state = Object.assign({}, state, updatedState)
 
     flush()
   }

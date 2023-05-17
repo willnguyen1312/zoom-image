@@ -8,13 +8,14 @@
   "scripts": {
     "build-fast": "tsup src",
     "dev": "pnpm build --watch",
-    "build": "tsup src terser",
+    "build": "tsup src terser && node scripts/size-limit.mjs",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --coverage",
     "test:watch": "vitest",
     "test:ui": "vitest --ui"
   },
+  "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -31,10 +32,12 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^14.4.3",
     "@testing-library/vue": "^7.0.0",
+    "@types/node": "^20.1.4",
     "@types/testing-library__jest-dom": "^5.14.5",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitest/coverage-c8": "^0.31.0",
     "@vue/test-utils": "^2.3.2",
+    "eslint-config-custom": "workspace:*",
     "fast-check": "^3.8.1",
     "happy-dom": "^9.18.3",
     "size-limit": "^8.2.4",
@@ -44,49 +47,5 @@
     "vite": "^4.3.6",
     "vitest": "^0.31.0",
     "vue": "^3.3.2"
-  },
-  "size-limit": [
-    {
-      "name": "createZoomImageWheel",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ createZoomImageWheel }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "createZoomImageHover",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ createZoomImageHover }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "createZoomImageMove",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ createZoomImageMove }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "createZoomImageClick",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ createZoomImageClick }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "cropImage",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ cropImage }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "makeCalculatePercentage",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ makeCalculatePercentage }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "makeCalculateZoom",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ makeCalculateZoom }",
-      "limit": "1.5KB"
-    }
-  ]
+  }
 }

@@ -23,11 +23,8 @@
   "license": "MIT",
   "scripts": {
     "test": "turbo run test",
-    "test:watch": "pnpm --filter=@zoom-image/core test:watch",
     "build": "turbo run build",
-    "size": "pnpm --filter=@zoom-image/core build && node ./scripts/size-limit.mjs",
-    "core": "turbo run dev --filter=@zoom-image/core",
-    "start-preact": "turbo run dev --filter=@zoom-image/core --filter=preact-ts",
+    "start-docs": "turbo run dev --filter=@zoom-image/core --filter=docs",
     "start-react": "turbo run dev --filter=@zoom-image/core --filter=react-ts",
     "start-svelte": "turbo run dev --filter=@zoom-image/core --filter=svelte-ts",
     "start-vanilla": "turbo run dev --filter=@zoom-image/core --filter=vanilla-ts",
@@ -38,21 +35,17 @@
     "format:check": "prettier --check ./**/*.{js,ts,tsx,mjs,json}",
     "format:fix": "prettier --write ./**/*.{js,ts,tsx,mjs,json}",
     "lint": "turbo run lint",
-    "docs:start": "run-p core docs:dev",
-    "docs:dev": "vitepress dev docs --open --host",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs",
-    "docs:deploy": "pnpm docs:build && netlify deploy --prod --dir=./docs/.vitepress/dist",
     "changeset": "changeset",
     "release": "turbo run build lint test && changeset version && changeset publish"
   },
   "dependencies": {
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
-    "eslint": "8.40.0",
+    "@zoom-image/core": "workspace:*",
     "eslint-config-custom": "workspace:*",
-    "prettier": "2.8.8",
+    "eslint": "8.40.0",
     "prettier-plugin-tailwindcss": "^0.3.0",
+    "prettier": "2.8.8",
     "turbo": "^1.9.6"
   }
 }

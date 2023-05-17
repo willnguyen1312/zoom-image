@@ -33,7 +33,7 @@ features:
 
 <script setup>
 import HomePageShow from './components/HomePageShow.vue'
-import Footer from './components/Footer.vue'
+import Footer from './components/FooterComp.vue'
 </script>
 
 <HomePageShow />

@@ -5,11 +5,18 @@
     "dev": "vitepress dev docs --open --host",
     "build": "vitepress build docs",
     "preview": "vitepress preview docs",
-    "demo": "pnpm build && netlify deploy --prod --dir=docs/.vitepress/dist"
+    "demo": "pnpm build && netlify deploy --prod --dir=docs/.vitepress/dist",
+    "lint": "eslint --ext .vue ."
   },
   "dependencies": {
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@vue/eslint-config-prettier": "^7.1.0",
+    "@vue/eslint-config-typescript": "^11.0.3",
     "@zoom-image/core": "workspace:*",
+    "eslint-config-custom": "workspace:*",
+    "eslint-plugin-vue": "^9.11.0",
     "unocss": "^0.51.13",
-    "vitepress": "1.0.0-alpha.75"
+    "vitepress": "1.0.0-alpha.75",
+    "vue": "^3.3.2"
   }
 }
