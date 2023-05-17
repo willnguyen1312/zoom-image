@@ -26,6 +26,7 @@
     "build": "turbo run build",
     "core": "pnpm --filter=@zoom-image/core",
     "start-docs": "turbo run dev --filter=@zoom-image/core --filter=docs",
+    "start-preact": "turbo run dev --filter=@zoom-image/core --filter=preact-ts",
     "start-react": "turbo run dev --filter=@zoom-image/core --filter=react-ts",
     "start-svelte": "turbo run dev --filter=@zoom-image/core --filter=svelte-ts",
     "start-vanilla": "turbo run dev --filter=@zoom-image/core --filter=vanilla-ts",

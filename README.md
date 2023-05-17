@@ -9,6 +9,7 @@
 - [Zoom Image](#zoom-image)
 - [Development](#development)
 - [Commands](#commands)
+  - [With Docs](#with-docs)
   - [With Preact](#with-preact)
   - [With React](#with-react)
   - [With Svelte](#with-svelte)
@@ -37,6 +38,11 @@ pnpm install
 ```
 
 ## Commands
+
+### With Docs
+```bash
+pnpm start-docs
+```
 
 ### With Preact
 

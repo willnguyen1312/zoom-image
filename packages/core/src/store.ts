@@ -6,12 +6,14 @@ export function createStore<TState>(initialState: TState) {
   let state: TState = initialState
   let prevState: TState | undefined
 
-  const setState = (updatedState: Partial<TState>) => {
+  const setState = (updatedState: Partial<TState> = {}) => {
     if (!prevState) {
       prevState = { ...state }
     }
 
-    state = Object.assign({}, state, updatedState)
+    for (const key in updatedState) {
+      state[key] = updatedState[key] as TState[Extract<keyof TState, string>]
+    }
 
     flush()
   }

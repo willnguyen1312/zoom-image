@@ -66,15 +66,9 @@ importers:
       '@types/node':
         specifier: ^20.1.4
         version: 20.1.4
-      prettier:
-        specifier: 2.8.8
-        version: 2.8.8
       typescript:
         specifier: 5.0.4
         version: 5.0.4
-      undici:
-        specifier: 5.22.1
-        version: 5.22.1
       unocss:
         specifier: ^0.51.13
         version: 0.51.13(postcss@8.4.23)(vite@4.3.6)
@@ -5543,6 +5537,7 @@ packages:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
     hasBin: true
+    dev: false
 
   /pretty-format@27.5.1:
     resolution: {integrity: sha512-Qb1gy5OrP5+zDf2Bvnzdl3jsTf1qXVMazbvCoKhtKqVs4/YK4ozX4gKQJJVyNe+cajNPn0KoC0MC3FUmaHWEmQ==}
