@@ -25,7 +25,9 @@
     "dist",
     "src"
   ],
-  "dependencies": {
+  "devDependencies": {
+    "tsconfig": "workspace:*",
+    "eslint-config-custom": "workspace:*",
     "@faker-js/faker": "^8.0.1",
     "@size-limit/preset-small-lib": "^8.2.4",
     "@testing-library/dom": "^9.3.0",
@@ -37,11 +39,9 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitest/coverage-c8": "^0.31.1",
     "@vue/test-utils": "^2.3.2",
-    "eslint-config-custom": "workspace:*",
     "fast-check": "^3.8.2",
     "happy-dom": "^9.18.3",
     "size-limit": "^8.2.4",
-    "tsconfig": "workspace:*",
     "tsup": "6.7.0",
     "typescript": "^5.0.4",
     "vite": "^4.3.7",

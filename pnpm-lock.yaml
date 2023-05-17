@@ -266,9 +266,6 @@ importers:
       size-limit:
         specifier: ^8.2.4
         version: 8.2.4
-      tsconfig:
-        specifier: workspace:*
-        version: link:../tsconfig
       tsup:
         specifier: 6.7.0
         version: 6.7.0(typescript@5.0.4)
@@ -284,6 +281,10 @@ importers:
       vue:
         specifier: ^3.3.2
         version: 3.3.2
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
 
   packages/docs:
     dependencies:
