@@ -8,5 +8,8 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-turbo": "^1.9.3",
     "tsconfig": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
