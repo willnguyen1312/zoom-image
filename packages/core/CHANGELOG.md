@@ -1,5 +1,14 @@
 # @zoom-image/core
 
+## 0.11.0
+
+### Minor Changes
+
+- [#102](https://github.com/willnguyen1312/zoom-image/pull/102)
+  [`77beb52`](https://github.com/willnguyen1312/zoom-image/commit/77beb52e7bbcf676cb0f7b38e0157a940061a09c)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Changes: ✅ Refactor internal store
+  ✅ Restructure codebase into monorepos to onboard libraries adapters
+
 ## 0.10.0
 
 ### Minor Changes
