@@ -23,10 +23,11 @@
   "license": "MIT",
   "scripts": {
     "test": "turbo run test",
-    "test:watch": "pnpm --filter=@zoom-image/core test:watch",
     "build": "turbo run build",
-    "size": "pnpm --filter=@zoom-image/core build && node ./scripts/size-limit.mjs",
-    "core": "turbo run dev --filter=@zoom-image/core",
+    "core": "pnpm --filter=@zoom-image/core",
+    "docs": "pnpm --filter=docs",
+    "build:docs": "turbo run build --filter=docs --force",
+    "start-docs": "turbo run dev --filter=@zoom-image/core --filter=docs",
     "start-preact": "turbo run dev --filter=@zoom-image/core --filter=preact-ts",
     "start-react": "turbo run dev --filter=@zoom-image/core --filter=react-ts",
     "start-svelte": "turbo run dev --filter=@zoom-image/core --filter=svelte-ts",
@@ -35,81 +36,21 @@
     "start-solid": "turbo run dev --filter=@zoom-image/core --filter=solid-ts",
     "start-qwik": "turbo run dev --filter=@zoom-image/core --filter=qwik-ts",
     "typecheck": "turbo run typecheck",
-    "format:check": "prettier --check ./**/*.{js,ts,tsx,mjs,cjs,json}",
-    "format:fix": "prettier --write ./**/*.{js,ts,tsx,mjs,cjs,json}",
+    "format:check": "prettier --check ./**/*.{js,ts,tsx,mjs,json,vue,svelte}",
+    "format:fix": "prettier --write ./**/*.{js,ts,tsx,mjs,json,vue,svelte}",
     "lint": "turbo run lint",
-    "docs:start": "run-p core docs:dev",
-    "docs:dev": "vitepress dev docs --open --host",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs",
-    "docs:deploy": "pnpm docs:build && netlify deploy --prod --dir=./docs/.vitepress/dist",
     "changeset": "changeset",
     "release": "turbo run build lint test && changeset version && changeset publish"
   },
   "dependencies": {
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
-    "@size-limit/preset-small-lib": "^8.2.4",
     "@zoom-image/core": "workspace:*",
-    "eslint": "8.40.0",
-    "eslint-config-prettier": "8.8.0",
-    "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-prettier": "4.2.1",
-    "npm-run-all": "^4.1.5",
-    "prettier": "2.8.8",
+    "eslint": "^8.40.0",
+    "eslint-config-custom": "workspace:*",
+    "prettier": "^2.8.8",
+    "prettier-plugin-svelte": "^2.10.0",
     "prettier-plugin-tailwindcss": "^0.3.0",
-    "size-limit": "^8.2.4",
-    "ts-morph": "^18.0.0",
-    "tsup": "6.7.0",
-    "tsx": "3.12.7",
-    "turbo": "^1.9.6",
-    "typescript": "5.0.4",
-    "unocss": "^0.51.13",
-    "vitepress": "1.0.0-alpha.75",
-    "vue": "^3.3.2"
-  },
-  "size-limit": [
-    {
-      "name": "createZoomImageWheel",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ createZoomImageWheel }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "createZoomImageHover",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ createZoomImageHover }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "createZoomImageMove",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ createZoomImageMove }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "createZoomImageClick",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ createZoomImageClick }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "cropImage",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ cropImage }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "makeCalculatePercentage",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ makeCalculatePercentage }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "makeCalculateZoom",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ makeCalculateZoom }",
-      "limit": "1.5KB"
-    }
-  ]
+    "turbo": "^1.9.7"
+  }
 }

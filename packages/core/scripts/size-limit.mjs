@@ -1,9 +1,18 @@
-// @ts-check
 import Zoom from "@zoom-image/core"
 import sizeLimit from "size-limit"
 import presetSmallLib from "@size-limit/preset-small-lib"
 import fs from "fs"
+import path from "path"
+import url from "url"
 
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
+
+/**
+ * Formats a given number of bytes into a human-readable string.
+ * @param {number} bytes - The number of bytes to format.
+ * @param {number} [decimals=2] - The number of decimal places to include in the formatted string.
+ * @returns {string} A human-readable string representing the given number of bytes.
+ */
 function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) return "0 Bytes"
   var k = 1024,
@@ -32,11 +41,12 @@ async function main() {
 
   const bundleInfos = await Promise.all(
     listOfFunction.map((funcName) => {
-      return sizeLimit([presetSmallLib], [`packages/core/dist/${funcName}.global.js`]).then(
-        (result) => {
-          return formatBytes(result[0].size)
-        },
-      )
+      return sizeLimit(
+        [presetSmallLib],
+        [path.join(__dirname, `/../dist/${funcName}.global.js`)],
+      ).then((result) => {
+        return formatBytes(result[0].size)
+      })
     }),
   )
 

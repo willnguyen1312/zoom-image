@@ -8,7 +8,9 @@ import {
 } from "@zoom-image/core"
 import { computed, nextTick, onUnmounted, ref, watch } from "vue"
 
-let cleanup: () => void = () => {}
+let cleanup: () => void = () => {
+  //
+}
 
 const tabs = ref<
   {
@@ -45,9 +47,15 @@ const handleTabClick = (tab: { name: string; href: string; current: boolean }) =
   tab.current = true
 }
 
-let handleCropWheelZoomImage = () => {}
-let zoomIn = () => {}
-let zoomOut = () => {}
+let handleCropWheelZoomImage = () => {
+  //
+}
+let zoomIn = () => {
+  //
+}
+let zoomOut = () => {
+  //
+}
 
 watch(
   zoomType,

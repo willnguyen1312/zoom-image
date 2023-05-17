@@ -10,10 +10,6 @@
       "outputs": ["coverage/**"],
       "dependsOn": []
     },
-    "test:watch": {
-      "cache": false,
-      "persistent": true
-    },
     "dev": {
       "cache": false,
       "persistent": true
