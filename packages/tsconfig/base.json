@@ -1,6 +1,6 @@
 {
-  "exclude": ["node_modules"],
-  "include": ["packages"],
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
   "compilerOptions": {
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
@@ -24,5 +24,6 @@
     "ignoreDeprecations": "5.0",
     "suppressImplicitAnyIndexErrors": true,
     "types": []
-  }
+  },
+  "exclude": ["node_modules"]
 }

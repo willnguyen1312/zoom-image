@@ -49,67 +49,10 @@
   "dependencies": {
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
-    "@size-limit/preset-small-lib": "^8.2.4",
-    "@zoom-image/core": "workspace:*",
     "eslint": "8.40.0",
-    "eslint-config-prettier": "8.8.0",
-    "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-prettier": "4.2.1",
-    "npm-run-all": "^4.1.5",
+    "eslint-config-custom": "workspace:*",
     "prettier": "2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
-    "size-limit": "^8.2.4",
-    "ts-morph": "^18.0.0",
-    "tsup": "6.7.0",
-    "tsx": "3.12.7",
-    "turbo": "^1.9.6",
-    "typescript": "5.0.4",
-    "unocss": "^0.51.13",
-    "vitepress": "1.0.0-alpha.75",
-    "vue": "^3.3.2"
-  },
-  "size-limit": [
-    {
-      "name": "createZoomImageWheel",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ createZoomImageWheel }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "createZoomImageHover",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ createZoomImageHover }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "createZoomImageMove",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ createZoomImageMove }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "createZoomImageClick",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ createZoomImageClick }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "cropImage",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ cropImage }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "makeCalculatePercentage",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ makeCalculatePercentage }",
-      "limit": "1.5KB"
-    },
-    {
-      "name": "makeCalculateZoom",
-      "path": "packages/core/dist/index.mjs",
-      "import": "{ makeCalculateZoom }",
-      "limit": "1.5KB"
-    }
-  ]
+    "turbo": "^1.9.6"
+  }
 }

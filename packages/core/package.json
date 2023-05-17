@@ -24,8 +24,9 @@
     "dist",
     "src"
   ],
-  "devDependencies": {
+  "dependencies": {
     "@faker-js/faker": "^8.0.1",
+    "@size-limit/preset-small-lib": "^8.2.4",
     "@testing-library/dom": "^9.3.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^14.4.3",
@@ -36,8 +37,56 @@
     "@vue/test-utils": "^2.3.2",
     "fast-check": "^3.8.1",
     "happy-dom": "^9.18.3",
+    "size-limit": "^8.2.4",
+    "tsconfig": "workspace:*",
+    "tsup": "6.7.0",
+    "typescript": "^5.0.4",
     "vite": "^4.3.6",
     "vitest": "^0.31.0",
     "vue": "^3.3.2"
-  }
+  },
+  "size-limit": [
+    {
+      "name": "createZoomImageWheel",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ createZoomImageWheel }",
+      "limit": "1.5KB"
+    },
+    {
+      "name": "createZoomImageHover",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ createZoomImageHover }",
+      "limit": "1.5KB"
+    },
+    {
+      "name": "createZoomImageMove",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ createZoomImageMove }",
+      "limit": "1.5KB"
+    },
+    {
+      "name": "createZoomImageClick",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ createZoomImageClick }",
+      "limit": "1.5KB"
+    },
+    {
+      "name": "cropImage",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ cropImage }",
+      "limit": "1.5KB"
+    },
+    {
+      "name": "makeCalculatePercentage",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ makeCalculatePercentage }",
+      "limit": "1.5KB"
+    },
+    {
+      "name": "makeCalculateZoom",
+      "path": "packages/core/dist/index.mjs",
+      "import": "{ makeCalculateZoom }",
+      "limit": "1.5KB"
+    }
+  ]
 }

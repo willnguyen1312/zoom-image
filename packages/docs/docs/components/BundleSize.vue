@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import size from "../../size.json"
+import size from "./size.json"
 defineProps<{ func: string }>()
 </script>
 

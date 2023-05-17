@@ -1,0 +1,15 @@
+{
+  "name": "docs",
+  "private": true,
+  "scripts": {
+    "dev": "vitepress dev docs --open --host",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs",
+    "demo": "pnpm build && netlify deploy --prod --dir=docs/.vitepress/dist"
+  },
+  "dependencies": {
+    "@zoom-image/core": "workspace:*",
+    "unocss": "^0.51.13",
+    "vitepress": "1.0.0-alpha.75"
+  }
+}

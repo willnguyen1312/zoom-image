@@ -1,6 +1,6 @@
 import Unocss from "unocss/vite"
 import { defineConfig } from "vitepress"
-const pkg = require("../../packages/core/package.json")
+import pkg from "@zoom-image/core/package.json"
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
