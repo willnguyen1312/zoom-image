@@ -3,7 +3,7 @@ export type Listener<TState> = (currentState: TState) => void
 export function createStore<TState>(initialState: TState) {
   let batching = false
   const listeners = new Set<Listener<TState>>()
-  let state: TState = initialState
+  const state: TState = initialState
   let prevState: TState | undefined
 
   const setState = (updatedState: Partial<TState> = {}) => {
