@@ -2,10 +2,10 @@
   "name": "docs",
   "private": true,
   "scripts": {
-    "dev": "vitepress dev docs --open --host",
-    "build": "vitepress build docs",
-    "preview": "vitepress preview docs",
-    "demo": "pnpm build && netlify deploy --prod --dir=docs/.vitepress/dist",
+    "dev": "vitepress dev src --open --host",
+    "build": "vitepress build src",
+    "preview": "vitepress preview src",
+    "demo": "pnpm build && netlify deploy --prod --dir=src/.vitepress/dist",
     "lint": "eslint --ext .vue ."
   },
   "dependencies": {

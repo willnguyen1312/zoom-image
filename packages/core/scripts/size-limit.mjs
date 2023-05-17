@@ -2,6 +2,10 @@ import Zoom from "@zoom-image/core"
 import sizeLimit from "size-limit"
 import presetSmallLib from "@size-limit/preset-small-lib"
 import fs from "fs"
+import path from "path"
+import url from "url"
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
 /**
  * Formats a given number of bytes into a human-readable string.
@@ -37,7 +41,10 @@ async function main() {
 
   const bundleInfos = await Promise.all(
     listOfFunction.map((funcName) => {
-      return sizeLimit([presetSmallLib], [`./dist/${funcName}.global.js`]).then((result) => {
+      return sizeLimit(
+        [presetSmallLib],
+        [path.join(__dirname, `/../dist/${funcName}.global.js`)],
+      ).then((result) => {
         return formatBytes(result[0].size)
       })
     }),

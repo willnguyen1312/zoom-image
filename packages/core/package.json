@@ -8,14 +8,14 @@
   "scripts": {
     "build-fast": "tsup src",
     "dev": "pnpm build --watch",
-    "build": "tsup src terser && node scripts/size-limit.mjs",
+    "build": "tsup src terser",
+    "size": "node scripts/size-limit.mjs",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --coverage",
     "test:watch": "vitest",
     "test:ui": "vitest --ui"
   },
-  "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

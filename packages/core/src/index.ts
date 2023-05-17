@@ -39,13 +39,3 @@ import { cropImage } from "./cropImage"
 
 export { makeCalculatePercentage, makeCalculateZoom, cropImage }
 // Stop importing utils
-
-export default {
-  createZoomImageClick,
-  createZoomImageHover,
-  createZoomImageMove,
-  createZoomImageWheel,
-  cropImage,
-  makeCalculatePercentage,
-  makeCalculateZoom,
-}

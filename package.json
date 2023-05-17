@@ -24,6 +24,7 @@
   "scripts": {
     "test": "turbo run test",
     "build": "turbo run build",
+    "core": "pnpm --filter=@zoom-image/core",
     "start-docs": "turbo run dev --filter=@zoom-image/core --filter=docs",
     "start-react": "turbo run dev --filter=@zoom-image/core --filter=react-ts",
     "start-svelte": "turbo run dev --filter=@zoom-image/core --filter=svelte-ts",
