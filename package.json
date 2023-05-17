@@ -25,6 +25,7 @@
     "test": "turbo run test",
     "build": "turbo run build",
     "core": "pnpm --filter=@zoom-image/core",
+    "build:docs": "turbo run build --filter=docs --force",
     "start-docs": "turbo run dev --filter=@zoom-image/core --filter=docs",
     "start-preact": "turbo run dev --filter=@zoom-image/core --filter=preact-ts",
     "start-react": "turbo run dev --filter=@zoom-image/core --filter=react-ts",
