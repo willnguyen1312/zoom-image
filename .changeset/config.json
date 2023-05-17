@@ -7,5 +7,14 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["vanilla-ts", "vue-ts", "react-ts", "solid-ts", "svelte-ts", "preact-ts", "qwik-ts"]
+  "ignore": [
+    "docs",
+    "vanilla-ts",
+    "vue-ts",
+    "react-ts",
+    "solid-ts",
+    "svelte-ts",
+    "preact-ts",
+    "qwik-ts"
+  ]
 }
