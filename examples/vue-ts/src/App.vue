@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { createZoomImageHover, createZoomImageWheel, createZoomImageMove, createZoomImageClick } from "@zoom-image/core"
+import {
+  createZoomImageHover,
+  createZoomImageWheel,
+  createZoomImageMove,
+  createZoomImageClick,
+} from "@zoom-image/core"
 import { computed, nextTick, onUnmounted, ref, watch } from "vue"
 
 let cleanup: () => void = () => {}
@@ -97,7 +102,7 @@ onUnmounted(() => {
         :key="tab.name"
         :href="tab.href"
         :class="[
-          tab.current ? 'bg-gray-100 text-gray-700' : 'text-gray-500 hover:text-gray-700',
+          tab.current ? 'bg-gray-100 text-gray-700' : 'text-gray-500 hover:text-gray-700 ',
           'decoration-none rounded-md px-3 py-2 text-sm font-medium',
         ]"
         :aria-current="tab.current ? 'page' : undefined"
@@ -108,12 +113,24 @@ onUnmounted(() => {
     <template v-if="zoomType === 'wheel'">
       <p>Scroll inside the image to see zoom in-out effect</p>
       <div ref="imageWheelContainerRef" class="h-[300px] w-[300px] cursor-crosshair">
-        <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/large.webp" />
+        <img
+          class="h-full w-full"
+          alt="Large Pic"
+          src="https://nam-assets.netlify.app/static/large.webp"
+        />
       </div>
     </template>
 
-    <div v-if="zoomType === 'hover'" ref="imageHoverContainerRef" class="relative flex h-[250px] w-[250px] items-start">
-      <img class="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+    <div
+      v-if="zoomType === 'hover'"
+      ref="imageHoverContainerRef"
+      class="relative flex h-[250px] w-[250px] items-start"
+    >
+      <img
+        class="h-full w-full"
+        alt="Small Pic"
+        src="https://nam-assets.netlify.app/static/small.webp"
+      />
       <div ref="zoomTargetRef" class="absolute left-[300px]"></div>
     </div>
 
@@ -122,7 +139,11 @@ onUnmounted(() => {
       ref="imageMoveContainerRef"
       class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
     >
-      <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+      <img
+        class="h-full w-full"
+        alt="Large Pic"
+        src="https://nam-assets.netlify.app/static/small.webp"
+      />
     </div>
 
     <div
@@ -130,7 +151,11 @@ onUnmounted(() => {
       ref="imageClickContainerRef"
       class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
     >
-      <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+      <img
+        class="h-full w-full"
+        alt="Large Pic"
+        src="https://nam-assets.netlify.app/static/small.webp"
+      />
     </div>
   </div>
 </template>

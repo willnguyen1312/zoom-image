@@ -78,7 +78,7 @@
         }}
         aria-current={tab.current ? "page" : undefined}
         href={tab.href}
-        class={`rounded-md px-3 py-2 text-sm font-medium decoration-none ${
+        class={`decoration-none rounded-md px-3 py-2 text-sm font-medium ${
           tab.current ? "bg-gray-100 text-gray-700" : "text-gray-500 hover:text-gray-700"
         }`}>{tab.name}</a
       >
@@ -87,27 +87,49 @@
 
   {#if zoomType === "wheel"}
     <p>Scroll inside the image to see zoom in-out effect</p>
-    <div bind:this={imageWheelContainer} class="w-[300px] h-[300px] cursor-crosshair">
-      <img class="w-full h-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/large.webp" />
+    <div bind:this={imageWheelContainer} class="h-[300px] w-[300px] cursor-crosshair">
+      <img
+        class="h-full w-full"
+        alt="Large Pic"
+        src="https://nam-assets.netlify.app/static/large.webp"
+      />
     </div>
   {/if}
 
   {#if zoomType === "hover"}
-    <div bind:this={imageHoverContainer} class="relative flex items-start w-[250px] h-[250px]">
-      <img class="w-full h-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+    <div bind:this={imageHoverContainer} class="relative flex h-[250px] w-[250px] items-start">
+      <img
+        class="h-full w-full"
+        alt="Small Pic"
+        src="https://nam-assets.netlify.app/static/small.webp"
+      />
       <div bind:this={zoomTarget} class="absolute left-[300px]" />
     </div>
   {/if}
 
   {#if zoomType === "move"}
-    <div bind:this={imageMoveContainer} class="w-[300px] h-[300px] cursor-crosshair relative overflow-hidden">
-      <img class="w-full h-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+    <div
+      bind:this={imageMoveContainer}
+      class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
+    >
+      <img
+        class="h-full w-full"
+        alt="Large Pic"
+        src="https://nam-assets.netlify.app/static/small.webp"
+      />
     </div>
   {/if}
 
   {#if zoomType === "click"}
-    <div bind:this={imageClickContainer} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-      <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+    <div
+      bind:this={imageClickContainer}
+      class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
+    >
+      <img
+        class="h-full w-full"
+        alt="Large Pic"
+        src="https://nam-assets.netlify.app/static/small.webp"
+      />
     </div>
   {/if}
 </div>
