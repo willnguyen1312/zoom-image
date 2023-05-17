@@ -1,5 +1,12 @@
 # @zoom-image/core
 
+## 0.11.1
+
+### Patch Changes
+
+- [`9c8b1de`](https://github.com/willnguyen1312/zoom-image/commit/9c8b1de883a72bcb1b294d24b80be2c1d7844cd9)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - fix package dependencies 💞
+
 ## 0.11.0
 
 ### Minor Changes
