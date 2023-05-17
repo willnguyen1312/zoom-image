@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { setupServiceWorker } from "@builder.io/qwik-city/service-worker"
 
 setupServiceWorker()
