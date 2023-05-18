@@ -1,41 +1,30 @@
 // Start importing createZoomImageHover
-import { createZoomImageHover } from "./createZoomImageHover"
-import type { ZoomImageHoverOptions } from "./createZoomImageHover"
-
-export { createZoomImageHover }
-export type { ZoomImageHoverOptions }
+export { createZoomImageHover } from "./createZoomImageHover"
+export type { ZoomImageHoverOptions, ZoomImageHoverState } from "./createZoomImageHover"
 // End importing createZoomImageHover
 
 // Start importing createZoomImageMove
-import { createZoomImageMove } from "./createZoomImageMove"
-import type { ZoomImageMoveOptions } from "./createZoomImageMove"
-// import type { ZoomImageHoverOptions } from "./createZoomImageHover"
-
-export { createZoomImageMove }
-export type { ZoomImageMoveOptions }
-// export type { ZoomImageHoverOptions }
+export { createZoomImageMove } from "./createZoomImageMove"
+export type { ZoomImageMoveOptions, ZoomImageMoveState } from "./createZoomImageMove"
+// export type { ZoomImageHoverOptions } from "./createZoomImageHover"
 // End importing createZoomImageHover
 
 // Start importing createZoomImageWheel
-import { createZoomImageWheel } from "./createZoomImageWheel"
-import type { ZoomImageWheelOptions } from "./createZoomImageWheel"
-
-export { createZoomImageWheel }
-export type { ZoomImageWheelOptions }
+export { createZoomImageWheel } from "./createZoomImageWheel"
+export type { ZoomImageWheelOptions, ZoomImageWheelState } from "./createZoomImageWheel"
 // End importing createZoomImageWheel
 
 // Start importing createZoomImageClick
-import { createZoomImageClick } from "./createZoomImageClick"
-import type { ZoomImageClickOptions } from "./createZoomImageClick"
-
-export { createZoomImageClick }
-export type { ZoomImageClickOptions }
+export { createZoomImageClick } from "./createZoomImageClick"
+export type { ZoomImageClickOptions, ZoomImageClickState } from "./createZoomImageClick"
 // End importing createZoomImageClick
 
 // Start importing utils
-import { makeCalculatePercentage } from "./makeCalculatePercentage"
-import { makeCalculateZoom } from "./makeCalculateZoom"
-import { cropImage } from "./cropImage"
-
-export { makeCalculatePercentage, makeCalculateZoom, cropImage }
+export { makeCalculatePercentage } from "./makeCalculatePercentage"
+export { makeCalculateZoom } from "./makeCalculateZoom"
+export { cropImage } from "./cropImage"
 // Stop importing utils
+
+// Start importing shared
+export type { ZoomedImgStatus } from "./types"
+// Stop importing shared

@@ -1,0 +1,37 @@
+{
+  "name": "@zoom-image/react",
+  "version": "0.0.0",
+  "description": "Adapter of zoom image core for React",
+  "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
+  "license": "MIT",
+  "repository": "willnguyen1312/zoom-image",
+  "homepage": "https://zoom-images.netlify.app",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/willnguyen1312"
+  },
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup src terser",
+    "dev": "pnpm build --watch"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.6",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "tsup": "6.7.0"
+  },
+  "dependencies": {
+    "@zoom-image/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  }
+}

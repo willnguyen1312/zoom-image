@@ -80,7 +80,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     }px) scale(${store.getState().currentZoom})`
   }
 
-  function update(newState: StateUpdate) {
+  function setState(newState: StateUpdate) {
     store.batch(() => {
       if (typeof newState.enable === "boolean" && newState.enable !== state.enable) {
         store.setState({
@@ -196,8 +196,10 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       const offsetX = clientX - startX
       const offsetY = clientY - startY
       const { currentZoom } = store.getState()
-      state.currentPositionX = calculatePositionX(lastPositionX + offsetX, currentZoom)
-      state.currentPositionY = calculatePositionY(lastPositionY + offsetY, currentZoom)
+      store.setState({
+        currentPositionX: calculatePositionX(lastPositionX + offsetX, currentZoom),
+        currentPositionY: calculatePositionY(lastPositionY + offsetY, currentZoom),
+      })
       updateZoom()
     }
   }
@@ -284,7 +286,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       store.cleanup()
     },
     subscribe: store.subscribe,
-    update,
+    setState,
     getState(): ZoomImageWheelState {
       return structuredClone(store.getState())
     },
