@@ -1,5 +1,14 @@
 # @zoom-image/core
 
+## 0.12.0
+
+### Minor Changes
+
+- [#113](https://github.com/willnguyen1312/zoom-image/pull/113)
+  [`b7ba701`](https://github.com/willnguyen1312/zoom-image/commit/b7ba701ecc2accf90142798987896052eb7fbec2)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Expose more internal types to
+  client code
+
 ## 0.11.1
 
 ### Patch Changes
