@@ -27,7 +27,6 @@ export default defineConfig({
       },
       {
         text: "Examples",
-        collapsed: false,
         items: [
           {
             text: "Vanilla JS",
@@ -61,7 +60,6 @@ export default defineConfig({
       },
       {
         text: "Core API",
-        collapsed: true,
         link: "/api/",
         items: [
           { text: "createZoomImageClick", link: "/api/createZoomImageClick" },
