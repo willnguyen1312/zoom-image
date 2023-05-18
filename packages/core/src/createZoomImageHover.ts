@@ -203,7 +203,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     },
     subscribe: store.subscribe,
     getState: store.getState,
-    update: (newState: StateUpdate) => {
+    setState: (newState: StateUpdate) => {
       store.setState(newState)
     },
   }

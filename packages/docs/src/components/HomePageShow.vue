@@ -82,13 +82,13 @@ watch(
       }
 
       zoomIn = () => {
-        result.update({
+        result.setState({
           currentZoom: result.getState().currentZoom + 0.5,
         })
       }
 
       zoomOut = () => {
-        result.update({
+        result.setState({
           currentZoom: result.getState().currentZoom - 0.5,
         })
       }
@@ -172,14 +172,17 @@ onUnmounted(() => {
           />
         </div>
         <div class="flex space-x-2">
-          <button @click="zoomIn" class="text-dark-500 rounded bg-gray-100 p-2 font-medium">
+          <button @click="zoomIn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">
             Zoom in
           </button>
-          <button @click="zoomOut" class="text-dark-500 rounded bg-gray-100 p-2 font-medium">
+          <button
+            @click="zoomOut"
+            class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
+          >
             Zoom out
           </button>
           <button
-            class="text-dark-500 rounded bg-gray-100 p-2 font-medium"
+            class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
             @click="handleCropWheelZoomImage"
           >
             Crop image

@@ -5,4 +5,8 @@ module.exports = {
     ecmaVersion: "latest",
   },
   plugins: ["@typescript-eslint"],
+  env: {
+    browser: true,
+    node: true,
+  },
 }

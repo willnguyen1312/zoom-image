@@ -87,9 +87,15 @@ importers:
 
   examples/react-ts:
     dependencies:
+      '@unocss/reset':
+        specifier: ^0.51.13
+        version: 0.51.13
       '@zoom-image/core':
         specifier: latest
         version: link:../../packages/core
+      '@zoom-image/react':
+        specifier: workspace:^
+        version: link:../../packages/react
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -338,6 +344,31 @@ importers:
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
+
+  packages/react:
+    dependencies:
+      '@zoom-image/core':
+        specifier: workspace:*
+        version: link:../core
+      react:
+        specifier: ^18.0.0
+        version: 18.2.0
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.6
+        version: 18.2.6
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      tsup:
+        specifier: 6.7.0
+        version: 6.7.0(typescript@5.0.4)
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
 
   packages/tsconfig: {}
 

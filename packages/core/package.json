@@ -4,17 +4,11 @@
   "description": "A core implementation of zoom image",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "license": "MIT",
-  "sideEffects": false,
-  "scripts": {
-    "build-fast": "tsup src",
-    "dev": "pnpm build --watch",
-    "build": "tsup src terser",
-    "size": "node scripts/size-limit.mjs",
-    "lint": "eslint src --ext .ts,.tsx",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run --coverage",
-    "test:watch": "vitest",
-    "test:ui": "vitest --ui"
+  "repository": "willnguyen1312/zoom-image",
+  "homepage": "https://zoom-images.netlify.app",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/willnguyen1312"
   },
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -25,6 +19,17 @@
     "dist",
     "src"
   ],
+  "sideEffects": false,
+  "scripts": {
+    "dev": "pnpm build --watch",
+    "build": "tsup src terser",
+    "size": "node scripts/size-limit.mjs",
+    "lint": "eslint src --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui"
+  },
   "devDependencies": {
     "tsconfig": "workspace:*",
     "eslint-config-custom": "workspace:*",
