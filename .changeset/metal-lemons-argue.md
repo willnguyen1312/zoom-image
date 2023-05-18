@@ -2,4 +2,4 @@
 "@zoom-image/core": minor
 ---
 
-Expose more interal typres to client code
+Expose more internal types to client code
