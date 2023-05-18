@@ -19,14 +19,18 @@
   ],
   "sideEffects": false,
   "scripts": {
+    "dev": "pnpm build --watch",
     "build": "tsup src terser",
-    "dev": "pnpm build --watch"
+    "size": "node scripts/size-limit.mjs",
+    "lint": "eslint src --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/react": "^18.2.6",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
-    "tsup": "6.7.0"
+    "tsup": "6.7.0",
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "@zoom-image/core": "workspace:*"
