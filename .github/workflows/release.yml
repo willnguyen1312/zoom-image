@@ -26,8 +26,11 @@ jobs:
       - name: Setup npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
 
-      - name: install dependencies
+      - name: Install dependencies
         run: pnpm install
+
+      - name: Build packages
+        run: pnpm build
 
       - name: Publish packages
         id: changesets

@@ -41,8 +41,7 @@
     "format:fix": "prettier --write ./**/*.{js,ts,tsx,mjs,json,vue,svelte}",
     "lint": "turbo run lint",
     "changeset": "changeset",
-    "release": "pnpm check && changeset version && changeset publish",
-    "check": "turbo run build typecheck lint test"
+    "release": "turbo run typecheck lint test && changeset version && changeset publish"
   },
   "dependencies": {
     "@changesets/changelog-github": "^0.4.8",
