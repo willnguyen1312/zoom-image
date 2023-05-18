@@ -1,4 +1,4 @@
-# API Reference
+# Core API Reference
 
 - [createZoomImageWheel](/api/createZoomImageWheel)
 - [createZoomImageMove](/api/createZoomImageMove)

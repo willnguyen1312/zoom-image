@@ -27,6 +27,7 @@ export default defineConfig({
       },
       {
         text: "Examples",
+        collapsed: false,
         items: [
           {
             text: "Vanilla JS",
@@ -59,7 +60,8 @@ export default defineConfig({
         ],
       },
       {
-        text: "API",
+        text: "Core API",
+        collapsed: true,
         link: "/api/",
         items: [
           { text: "createZoomImageClick", link: "/api/createZoomImageClick" },
@@ -73,6 +75,30 @@ export default defineConfig({
             link: "/api/makeCalculatePercentage",
           },
         ],
+      },
+      {
+        text: "Vue Adapter",
+        link: "/api/adapters/vue",
+      },
+      {
+        text: "React Adapter",
+        link: "/api/adapters/react",
+      },
+      {
+        text: "Preact Adapter",
+        link: "/api/adapters/preact",
+      },
+      {
+        text: "Svelte Adapter",
+        link: "/api/adapters/svelte",
+      },
+      {
+        text: "Solid Adapter",
+        link: "/api/adapters/solid",
+      },
+      {
+        text: "Qwik Adapter",
+        link: "/api/adapters/qwik",
       },
     ],
 
