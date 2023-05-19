@@ -18,12 +18,13 @@
   - [With Solid](#with-solid)
   - [With Qwik](#with-qwik)
 - [Relevant projects](#relevant-projects)
+- [Sponsor](#sponsor)
 - [License](#license)
 
 ## Zoom Image
 
-A little yet powerful framework agnostic library to zoom image on the web. It is a typical experience on e-commerce
-sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
+A little yet powerful framework agnostic library to zoom image on the web. It is a typical
+experience on e-commerce sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 
 - ✅ Zoom on wheel (scroll & pinch)
 - ✅ Zoom on hover
@@ -41,6 +42,7 @@ pnpm install
 ## Commands
 
 ### With Docs
+
 ```bash
 pnpm start-docs
 ```
@@ -89,12 +91,16 @@ pnpm start-qwik
 
 ## Relevant projects
 
-- [react-zoomable-media](https://github.com/willnguyen1312/react-zoomable-media) - The library I wrote for my previous
-  company
+- [react-zoomable-media](https://github.com/willnguyen1312/react-zoomable-media) - The library I
+  wrote for my previous company
 - [zagjs](https://github.com/chakra-ui/zag) - The project's architecture is inspired by this library
-- [js-image-zoom](https://github.com/malaman/js-image-zoom) - The internal working of zoom image on hover is inspired by
-  this library
+- [js-image-zoom](https://github.com/malaman/js-image-zoom) - The internal working of zoom image on
+  hover is inspired by this library
+
+## Sponsor
+
+<a href="https://www.buymeacoffee.com/namnguyenle" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## License
 
-MIT © [Nam Nguyen](https://namnguyen.design)
+MIT © [Nam Nguyen](https://github.com/willnguyen1312)
