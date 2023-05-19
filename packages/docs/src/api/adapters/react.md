@@ -1,8 +1,12 @@
+<script setup>
+import BundleSize from '../../components/BundleSize.vue'
+</script>
+
 # Zoom Image React
 
 The @zoom-image/react adapter is a wrapper around the core zoom image logic.
 
-## `useZoomImageWheel`
+## `useZoomImageWheel` - <BundleSize func="useZoomImageWheel" pkg="@zoom-image/react" />
 
 ```ts
 function useZoomImageWheel(): {
@@ -12,7 +16,7 @@ function useZoomImageWheel(): {
 }
 ```
 
-## `useZoomImageHover`
+## `useZoomImageHover` - <BundleSize func="useZoomImageHover" pkg="@zoom-image/react" />
 
 ```ts
 function useZoomImageHover(): {
@@ -22,7 +26,7 @@ function useZoomImageHover(): {
 }
 ```
 
-## `useZoomImageMove`
+## `useZoomImageMove` - <BundleSize func="useZoomImageMove" pkg="@zoom-image/react" />
 
 ```ts
 function useZoomImageMove(): {
@@ -31,7 +35,7 @@ function useZoomImageMove(): {
 }
 ```
 
-## `useZoomImageClick`
+## `useZoomImageClick` - <BundleSize func="useZoomImageClick" pkg="@zoom-image/react" />
 
 ```ts
 function useZoomImageClick(): {

@@ -2,7 +2,7 @@
 import BundleSize from '../components/BundleSize.vue'
 </script>
 
-<BundleSize func="makeCalculateZoom" />
+## `makeCalculateZoom` - <BundleSize func="makeCalculateZoom" pkg="@zoom-image/core" />
 
 Calculate the current zoom level based on the percentage
 

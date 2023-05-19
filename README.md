@@ -1,5 +1,4 @@
 <p align="center">
-  <img alt="Bundle Size" src="https://badgen.net/bundlephobia/minzip/@zoom-image/core"/>
   <img alt="Github Checks" src="https://badgen.net/github/checks/willnguyen1312/zoom-image/main"/>
   <img alt="Github Stars" src="https://badgen.net/github/stars/willnguyen1312/zoom-image" />
 </p>

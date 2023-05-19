@@ -1,9 +1,0 @@
-{
-  "createZoomImageClick": "1.1 KB",
-  "createZoomImageHover": "1.49 KB",
-  "createZoomImageMove": "1.09 KB",
-  "createZoomImageWheel": "1.7 KB",
-  "cropImage": "250 B",
-  "makeCalculatePercentage": "145 B",
-  "makeCalculateZoom": "141 B"
-}

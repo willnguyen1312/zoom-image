@@ -24,6 +24,7 @@
   "scripts": {
     "test": "turbo run test",
     "build": "turbo run build",
+    "size": "esno scripts/size-limit.ts",
     "core": "pnpm --filter=@zoom-image/core",
     "react": "pnpm --filter=@zoom-image/react",
     "docs": "pnpm --filter=docs",
@@ -50,9 +51,11 @@
     "@zoom-image/core": "workspace:*",
     "eslint": "^8.40.0",
     "eslint-config-custom": "workspace:*",
+    "esno": "^0.16.3",
+    "export-size": "^0.5.2",
     "prettier": "^2.8.8",
     "prettier-plugin-svelte": "^2.10.0",
     "prettier-plugin-tailwindcss": "^0.3.0",
-    "turbo": "^1.9.7"
+    "turbo": "^1.9.8"
   }
 }

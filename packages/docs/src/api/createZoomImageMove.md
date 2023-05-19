@@ -2,7 +2,7 @@
 import BundleSize from '../components/BundleSize.vue'
 </script>
 
-<BundleSize func="createZoomImageMove" />
+## `createZoomImageMove` - <BundleSize func="createZoomImageMove" pkg="@zoom-image/core" />
 
 ### Basic Usage
 
