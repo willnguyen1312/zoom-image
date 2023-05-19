@@ -21,7 +21,6 @@
   "scripts": {
     "dev": "pnpm build --watch",
     "build": "tsup src terser",
-    "size": "node scripts/size-limit.mjs",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit"
   },
