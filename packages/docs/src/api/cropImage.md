@@ -2,7 +2,7 @@
 import BundleSize from '../components/BundleSize.vue'
 </script>
 
-<BundleSize func="cropImage" />
+## `cropImage` - <BundleSize func="cropImage" pkg="@zoom-image/core" />
 
 Crop the current image based on the zoom level
 

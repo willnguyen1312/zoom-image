@@ -1,0 +1,17 @@
+{
+  "@zoom-image/core": {
+    "createZoomImageWheel": "1.55 KB",
+    "createZoomImageHover": "1.31 KB",
+    "createZoomImageClick": "992 B",
+    "createZoomImageMove": "984 B",
+    "cropImage": "203 B",
+    "makeCalculateZoom": "143 B",
+    "makeCalculatePercentage": "140 B"
+  },
+  "@zoom-image/react": {
+    "useZoomImageWheel": "1.7 KB",
+    "useZoomImageHover": "1.48 KB",
+    "useZoomImageClick": "1.1 KB",
+    "useZoomImageMove": "1.09 KB"
+  }
+}

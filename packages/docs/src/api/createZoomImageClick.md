@@ -2,7 +2,7 @@
 import BundleSize from '../components/BundleSize.vue'
 </script>
 
-<BundleSize func="createZoomImageClick" />
+## `createZoomImageClick` - <BundleSize func="createZoomImageClick" pkg="@zoom-image/core" />
 
 ### Basic Usage
 
