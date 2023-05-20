@@ -19,7 +19,7 @@ export function useZoomImageWheel() {
     updateZoomImageState(result.current.getState())
 
     result.current.subscribe((state) => {
-      updateZoomImageState(structuredClone(state))
+      updateZoomImageState(state)
     })
   }, [])
 

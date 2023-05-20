@@ -24,6 +24,7 @@
   "scripts": {
     "test": "turbo run test",
     "build": "turbo run build",
+    "postbuild": "pnpm run size",
     "size": "esno scripts/size-limit.ts",
     "core": "pnpm --filter=@zoom-image/core",
     "react": "pnpm --filter=@zoom-image/react",

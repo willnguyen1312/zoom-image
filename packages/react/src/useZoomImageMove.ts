@@ -15,7 +15,7 @@ export function useZoomImageMove() {
     updateZoomImageState(result.current.getState())
 
     result.current.subscribe((state) => {
-      updateZoomImageState(structuredClone(state))
+      updateZoomImageState(state)
     })
   }, [])
 

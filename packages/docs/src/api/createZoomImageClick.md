@@ -18,7 +18,7 @@ cleanup()
 ### Type Declaration
 
 ```ts
-type Listener = (state: ZoomImageClickState) => void
+type Listener = (state: ZoomImageClickState, prevState: ZoomImageClickState) => void
 
 type ZoomImageClickState = {
   zoomedImgStatus: ZoomedImgStatus

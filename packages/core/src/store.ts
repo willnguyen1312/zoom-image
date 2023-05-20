@@ -1,20 +1,13 @@
-export type Listener<TState> = (currentState: TState) => void
+export type Listener<TState> = (currentState: TState, prevState: TState) => void
 
 export function createStore<TState>(initialState: TState) {
-  let batching = false
   const listeners = new Set<Listener<TState>>()
-  const state: TState = initialState
-  let prevState: TState | undefined
+  let batching = false
+  let state: TState = initialState
+  let prevState: TState = { ...initialState }
 
   const setState = (updatedState: Partial<TState> = {}) => {
-    if (!prevState) {
-      prevState = { ...state }
-    }
-
-    for (const key in updatedState) {
-      state[key] = updatedState[key] as TState[Extract<keyof TState, string>]
-    }
-
+    state = { ...state, ...updatedState }
     flush()
   }
 
@@ -32,13 +25,12 @@ export function createStore<TState>(initialState: TState) {
       }
     }
 
-    prevState = undefined
-
     if (!hasChanged) {
       return
     }
 
-    listeners.forEach((listener) => listener(state))
+    listeners.forEach((listener) => listener(state, prevState))
+    prevState = { ...state }
   }
 
   const batch = (cb: () => void) => {

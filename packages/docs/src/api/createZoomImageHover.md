@@ -25,7 +25,7 @@ type ZoomImageHoverState = {
   enabled: boolean
 }
 
-type Listener = (state: ZoomImageHoverState) => void
+type Listener = (state: ZoomImageClickState, prevState: ZoomImageClickState) => void
 type StateUpdate = { enabled: boolean }
 
 type ZoomImageHoverOptions = {
