@@ -1,9 +1,14 @@
 {
   "name": "zoom-image",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/willnguyen1312/zoom-image"
+  "description": "A core implementation of zoom image",
+  "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
+  "license": "MIT",
+  "repository": "willnguyen1312/zoom-image",
+  "homepage": "https://zoom-images.netlify.app",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/willnguyen1312"
   },
   "keywords": [
     "javascript",
@@ -19,8 +24,6 @@
     "mobile",
     "desktop"
   ],
-  "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
-  "license": "MIT",
   "scripts": {
     "test": "turbo run test",
     "build": "turbo run build",

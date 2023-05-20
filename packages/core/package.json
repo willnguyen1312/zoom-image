@@ -10,6 +10,20 @@
     "type": "github",
     "url": "https://github.com/sponsors/willnguyen1312"
   },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "zoom",
+    "image",
+    "hover",
+    "move",
+    "wheel",
+    "pinch",
+    "touch",
+    "scroll",
+    "mobile",
+    "desktop"
+  ],
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
