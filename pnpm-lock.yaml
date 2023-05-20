@@ -357,7 +357,7 @@ importers:
   packages/react:
     dependencies:
       '@zoom-image/core':
-        specifier: latest
+        specifier: workspace:*
         version: link:../core
       react:
         specifier: ^18.0.0

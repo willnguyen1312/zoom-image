@@ -44,7 +44,7 @@
     "lint": "turbo run lint",
     "changeset": "changeset",
     "release": "pnpm check && changeset version && changeset publish",
-    "check": "turbo run build typecheck lint test"
+    "check": "turbo run build typecheck lint test --filter=!docs"
   },
   "dependencies": {
     "@changesets/changelog-github": "^0.4.8",

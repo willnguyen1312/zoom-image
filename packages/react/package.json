@@ -32,7 +32,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@zoom-image/core": "latest"
+    "@zoom-image/core": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18.0.0"
