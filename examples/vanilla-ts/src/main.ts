@@ -1,4 +1,4 @@
-import "uno.css"
+import "virtual:uno.css"
 import {
   createZoomImageHover,
   createZoomImageWheel,
@@ -43,7 +43,9 @@ const parent = document.getElementById("parent") as HTMLDivElement
 const state = createSimpleState<ZoomType | "">("")
 
 const makeUpdateUIFunc = () => {
-  let cleanupZoom: () => void = () => {}
+  let cleanupZoom: () => void = () => {
+    // noop
+  }
 
   return (state: ZoomType | "") => {
     if (state === "") {
