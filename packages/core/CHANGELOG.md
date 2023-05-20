@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.13.0
+
+### Minor Changes
+
+- [`7561641`](https://github.com/willnguyen1312/zoom-image/commit/7561641036d1c7d7115132402792429a662e861a)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Add immutability and cut down
+  bundle size 🚀
+
 ## 0.12.0
 
 ### Minor Changes
