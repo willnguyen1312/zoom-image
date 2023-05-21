@@ -1,10 +1,5 @@
 import "virtual:uno.css"
-import {
-  createZoomImageHover,
-  createZoomImageWheel,
-  createZoomImageMove,
-  createZoomImageClick,
-} from "@zoom-image/core"
+import { createZoomImageHover, createZoomImageWheel, createZoomImageMove, createZoomImageClick } from "@zoom-image/core"
 
 function createSimpleState<T>(initialState: T) {
   const listeners = new Set<(value: T) => void>()
