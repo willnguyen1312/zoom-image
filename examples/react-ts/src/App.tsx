@@ -1,10 +1,5 @@
 import { useRef, useEffect, useState, useMemo } from "react"
-import {
-  useZoomImageWheel,
-  useZoomImageHover,
-  useZoomImageMove,
-  useZoomImageClick,
-} from "@zoom-image/react"
+import { useZoomImageWheel, useZoomImageHover, useZoomImageMove, useZoomImageClick } from "@zoom-image/react"
 import { cropImage } from "@zoom-image/core"
 
 function App() {
@@ -135,32 +130,17 @@ function App() {
             <div ref={imageWheelContainerRef} className="h-[300px] w-[300px] cursor-crosshair">
               <img className="h-full w-full" alt="Large Pic" src="/large.webp" />
             </div>
-            {croppedImage && (
-              <img
-                src={croppedImage}
-                className="h-[300px] w-[300px]"
-                alt="Cropped image placeholder"
-              />
-            )}
+            {croppedImage && <img src={croppedImage} className="h-[300px] w-[300px]" alt="Cropped image placeholder" />}
           </div>
 
           <div className="flex space-x-2">
-            <button
-              onClick={zoomInWheel}
-              className="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
-            >
+            <button onClick={zoomInWheel} className="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">
               Zoom in
             </button>
-            <button
-              onClick={zoomOutWheel}
-              className="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
-            >
+            <button onClick={zoomOutWheel} className="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">
               Zoom out
             </button>
-            <button
-              className="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
-              onClick={handleCropImage}
-            >
+            <button className="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium" onClick={handleCropImage}>
               Crop image
             </button>
           </div>
@@ -170,15 +150,8 @@ function App() {
       {zoomType === "hover" && (
         <>
           <p>Hover inside the image to see zoom effect</p>
-          <div
-            ref={imageHoverContainerRef}
-            className="relative flex h-[250px] w-[250px] items-start"
-          >
-            <img
-              className="h-full w-full"
-              alt="Small Pic"
-              src="https://nam-assets.netlify.app/static/small.webp"
-            />
+          <div ref={imageHoverContainerRef} className="relative flex h-[250px] w-[250px] items-start">
+            <img className="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
             <div ref={zoomTargetRef} className="absolute left-[300px]"></div>
           </div>
         </>
@@ -187,15 +160,8 @@ function App() {
       {zoomType === "move" && (
         <>
           <p>Move mouse inside the image to see zoom effect</p>
-          <div
-            ref={imageMoveContainerRef}
-            className="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
-          >
-            <img
-              className="h-full w-full"
-              alt="Large Pic"
-              src="https://nam-assets.netlify.app/static/small.webp"
-            />
+          <div ref={imageMoveContainerRef} className="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+            <img className="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
           </div>
         </>
       )}
@@ -203,15 +169,8 @@ function App() {
       {zoomType === "click" && (
         <>
           <p>Click inside the image to see zoom effect</p>
-          <div
-            ref={imageClickContainerRef}
-            className="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
-          >
-            <img
-              className="h-full w-full"
-              alt="Large Pic"
-              src="https://nam-assets.netlify.app/static/small.webp"
-            />
+          <div ref={imageClickContainerRef} className="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+            <img className="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
           </div>
         </>
       )}

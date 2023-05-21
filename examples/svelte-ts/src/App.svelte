@@ -88,48 +88,26 @@
   {#if zoomType === "wheel"}
     <p>Scroll inside the image to see zoom in-out effect</p>
     <div bind:this={imageWheelContainer} class="h-[300px] w-[300px] cursor-crosshair">
-      <img
-        class="h-full w-full"
-        alt="Large Pic"
-        src="https://nam-assets.netlify.app/static/large.webp"
-      />
+      <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/large.webp" />
     </div>
   {/if}
 
   {#if zoomType === "hover"}
     <div bind:this={imageHoverContainer} class="relative flex h-[250px] w-[250px] items-start">
-      <img
-        class="h-full w-full"
-        alt="Small Pic"
-        src="https://nam-assets.netlify.app/static/small.webp"
-      />
+      <img class="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
       <div bind:this={zoomTarget} class="absolute left-[300px]" />
     </div>
   {/if}
 
   {#if zoomType === "move"}
-    <div
-      bind:this={imageMoveContainer}
-      class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
-    >
-      <img
-        class="h-full w-full"
-        alt="Large Pic"
-        src="https://nam-assets.netlify.app/static/small.webp"
-      />
+    <div bind:this={imageMoveContainer} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+      <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
     </div>
   {/if}
 
   {#if zoomType === "click"}
-    <div
-      bind:this={imageClickContainer}
-      class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
-    >
-      <img
-        class="h-full w-full"
-        alt="Large Pic"
-        src="https://nam-assets.netlify.app/static/small.webp"
-      />
+    <div bind:this={imageClickContainer} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+      <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
     </div>
   {/if}
 </div>
