@@ -14,18 +14,19 @@ function preventDefaultForScrollKeys(event: KeyboardEvent) {
   }
 }
 
+let controller: AbortController | undefined
+
 export function disableScroll() {
-  window.addEventListener("DOMMouseScroll", preventDefault)
-  window.addEventListener("wheel", preventDefault, { passive: false })
-  window.addEventListener("touchmove", preventDefault, { passive: false })
-  window.addEventListener("keydown", preventDefaultForScrollKeys)
+  controller = new AbortController()
+  const { signal } = controller
+  window.addEventListener("DOMMouseScroll", preventDefault, { signal })
+  window.addEventListener("wheel", preventDefault, { passive: false, signal })
+  window.addEventListener("touchmove", preventDefault, { passive: false, signal })
+  window.addEventListener("keydown", preventDefaultForScrollKeys, { signal })
 }
 
 export function enableScroll() {
-  window.removeEventListener("DOMMouseScroll", preventDefault)
-  window.removeEventListener("wheel", preventDefault)
-  window.removeEventListener("touchmove", preventDefault)
-  window.removeEventListener("keydown", preventDefaultForScrollKeys)
+  controller?.abort()
 }
 
 export function getSourceImage(container: HTMLElement) {

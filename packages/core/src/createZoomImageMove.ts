@@ -57,16 +57,14 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   const calculatePositionX = (newPositionX: number) => {
     const width = container.clientWidth
     if (newPositionX > 0) return 0
-    if (newPositionX + width * finalOptions.zoomFactor < width)
-      return -width * (finalOptions.zoomFactor - 1)
+    if (newPositionX + width * finalOptions.zoomFactor < width) return -width * (finalOptions.zoomFactor - 1)
     return newPositionX
   }
 
   const calculatePositionY = (newPositionY: number) => {
     const height = container.clientHeight
     if (newPositionY > 0) return 0
-    if (newPositionY + height * finalOptions.zoomFactor < height)
-      return -height * (finalOptions.zoomFactor - 1)
+    if (newPositionY + height * finalOptions.zoomFactor < height) return -height * (finalOptions.zoomFactor - 1)
     return newPositionY
   }
 
@@ -87,15 +85,15 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
     zoomedImg.style.transform = `translate(${currentPositionX}px, ${currentPositionY}px)`
   }
 
-  container.addEventListener("pointerenter", handlePointerEnter)
-  container.addEventListener("pointermove", handlePointerMove)
-  container.addEventListener("pointerleave", handlePointerLeave)
+  const controller = new AbortController()
+  const { signal } = controller
+  container.addEventListener("pointerenter", handlePointerEnter, { signal })
+  container.addEventListener("pointermove", handlePointerMove, { signal })
+  container.addEventListener("pointerleave", handlePointerLeave, { signal })
 
   return {
     cleanup: () => {
-      container.removeEventListener("pointerenter", handlePointerEnter)
-      container.removeEventListener("pointermove", handlePointerMove)
-      container.removeEventListener("pointerleave", handlePointerLeave)
+      controller.abort()
       container.removeChild(zoomedImg)
       store.cleanup()
     },
