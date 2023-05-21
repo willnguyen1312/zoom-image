@@ -139,9 +139,7 @@ onUnmounted(() => {
 
 <template>
   <div class="hidden px-12 lg:block">
-    <div
-      class="min-h-xl m-x-auto rounded-4 container mt-4 flex flex-col bg-white p-4 font-sans text-black"
-    >
+    <div class="min-h-xl m-x-auto rounded-4 container mt-4 flex flex-col bg-white p-4 font-sans text-black">
       <nav class="mb-4 flex space-x-4" aria-label="Tabs">
         <a
           v-for="tab in tabs"
@@ -164,27 +162,12 @@ onUnmounted(() => {
           <div ref="imageWheelContainerRef" class="h-[300px] w-[300px] cursor-crosshair">
             <img class="h-full w-full" crossorigin="anonymous" alt="Large Pic" src="/large.webp" />
           </div>
-          <img
-            :src="croppedImage"
-            v-if="!!croppedImage"
-            class="h-[300px] w-[300px]"
-            alt="Cropped image placeholder"
-          />
+          <img :src="croppedImage" v-if="!!croppedImage" class="h-[300px] w-[300px]" alt="Cropped image placeholder" />
         </div>
         <div class="flex space-x-2">
-          <button @click="zoomIn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">
-            Zoom in
-          </button>
-          <button
-            @click="zoomOut"
-            class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
-          >
-            Zoom out
-          </button>
-          <button
-            class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
-            @click="handleCropWheelZoomImage"
-          >
+          <button @click="zoomIn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom in</button>
+          <button @click="zoomOut" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom out</button>
+          <button class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium" @click="handleCropWheelZoomImage">
             Crop image
           </button>
         </div>
@@ -192,59 +175,29 @@ onUnmounted(() => {
 
       <div class="space-y-4" v-if="zoomType === 'hover'">
         <p>Hover inside the image to see zoom effect</p>
-        <div
-          ref="imageHoverContainerRef"
-          class="relative mt-1 flex h-[300px] w-[300px] items-start"
-        >
-          <img
-            class="h-full w-full"
-            alt="Small Pic"
-            src="https://nam-assets.netlify.app/static/small.webp"
-          />
+        <div ref="imageHoverContainerRef" class="relative mt-1 flex h-[300px] w-[300px] items-start">
+          <img class="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
           <div ref="zoomTargetRef" class="absolute left-[350px]"></div>
         </div>
       </div>
 
       <div class="space-y-4" v-if="zoomType === 'move'">
         <p>Move mouse inside the image to see zoom effect</p>
-        <div
-          ref="imageMoveContainerRef"
-          class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden"
-        >
-          <img
-            class="h-full w-full"
-            alt="Large Pic"
-            src="https://nam-assets.netlify.app/static/small.webp"
-          />
+        <div ref="imageMoveContainerRef" class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+          <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
         </div>
       </div>
 
       <div class="space-y-4" v-if="zoomType === 'click'">
         <p>Click inside the image to see zoom effect</p>
-        <div
-          ref="imageClickContainerRef"
-          class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden"
-        >
-          <img
-            class="h-full w-full"
-            alt="Large Pic"
-            src="https://nam-assets.netlify.app/static/small.webp"
-          />
+        <div ref="imageClickContainerRef" class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+          <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
         </div>
       </div>
     </div>
   </div>
 
   <div class="mt-4 px-6 md:px-12 lg:hidden">
-    <video
-      src="/demo.mp4"
-      class="rounded-4"
-      muted
-      autoplay
-      loop
-      playsinline
-      controls
-      preload="auto"
-    />
+    <video src="/demo.mp4" class="rounded-4" muted autoplay loop playsinline controls preload="auto" />
   </div>
 </template>

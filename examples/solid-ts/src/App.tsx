@@ -1,11 +1,6 @@
 import type { Component } from "solid-js"
 import { createSignal, createMemo, createEffect, For } from "solid-js"
-import {
-  createZoomImageHover,
-  createZoomImageWheel,
-  createZoomImageMove,
-  createZoomImageClick,
-} from "@zoom-image/core"
+import { createZoomImageHover, createZoomImageWheel, createZoomImageMove, createZoomImageClick } from "@zoom-image/core"
 
 type Tab = {
   name: string
@@ -127,10 +122,7 @@ const App: Component = () => {
       )}
 
       {zoomType() === "move" && (
-        <div
-          ref={imageMoveContainer}
-          class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
-        >
+        <div ref={imageMoveContainer} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
           <img
             class="h-full w-full"
             alt="Large Pic"
@@ -142,15 +134,8 @@ const App: Component = () => {
       )}
 
       {zoomType() === "click" && (
-        <div
-          ref={imageClickContainer}
-          class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden"
-        >
-          <img
-            class="h-full w-full"
-            alt="Large Pic"
-            src="https://nam-assets.netlify.app/static/small.webp"
-          />
+        <div ref={imageClickContainer} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+          <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
         </div>
       )}
     </div>

@@ -22,6 +22,8 @@ type RequiredExcept<T, K extends keyof T> = Omit<Required<T>, K> & {
 }
 
 export function createZoomImageHover(container: HTMLElement, options: ZoomImageHoverOptions = {}) {
+  const controller = new AbortController()
+  const { signal } = controller
   const sourceImgElement = getSourceImage(container)
   const zoomedImgWrapper = document.createElement("div")
   zoomedImgWrapper.style.overflow = "hidden"
@@ -100,10 +102,8 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     }
 
     if (finalOptions.customZoom) {
-      zoomLens.style.width =
-        (finalOptions.customZoom.width / scaleX) * finalOptions.scaleFactor + "px"
-      zoomLens.style.height =
-        (finalOptions.customZoom.height / scaleY) * finalOptions.scaleFactor + "px"
+      zoomLens.style.width = (finalOptions.customZoom.width / scaleX) * finalOptions.scaleFactor + "px"
+      zoomLens.style.height = (finalOptions.customZoom.height / scaleY) * finalOptions.scaleFactor + "px"
       return
     }
 
@@ -119,11 +119,11 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     }
 
     // setup event listeners
-    container.addEventListener("pointerdown", processZoom)
-    container.addEventListener("pointermove", processZoom)
-    container.addEventListener("pointerenter", handlePointerEnter)
-    container.addEventListener("pointerleave", handlePointerLeave)
-    window.addEventListener("scroll", handleScroll)
+    container.addEventListener("pointerdown", processZoom, { signal })
+    container.addEventListener("pointermove", processZoom, { signal })
+    container.addEventListener("pointerenter", handlePointerEnter, { signal })
+    container.addEventListener("pointerleave", handlePointerLeave, { signal })
+    window.addEventListener("scroll", handleScroll, { signal })
 
     // Setup zoomed image position if zoom target is specified
     if (finalOptions.zoomTarget) {
@@ -150,8 +150,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
       backgroundTop = (offsetX * scaleX) / finalOptions.scaleFactor
       backgroundRight = (offsetY * scaleY) / finalOptions.scaleFactor
       zoomedImg.style.transform = "translate(" + -backgroundTop + "px," + -backgroundRight + "px)"
-      zoomLens.style.cssText +=
-        "transform:" + "translate(" + offsetX + "px," + offsetY + "px); top: 0; left: 0;"
+      zoomLens.style.cssText += "transform:" + "translate(" + offsetX + "px," + offsetY + "px); top: 0; left: 0;"
     }
   }
 
@@ -187,11 +186,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
 
   return {
     cleanup: () => {
-      container.removeEventListener("pointermove", processZoom)
-      container.removeEventListener("pointerdown", processZoom)
-      container.removeEventListener("pointerenter", handlePointerEnter)
-      container.removeEventListener("pointerleave", handlePointerLeave)
-      window.removeEventListener("scroll", handleScroll)
+      controller.abort()
       container.removeChild(zoomLens)
 
       if (finalOptions.zoomTarget) {

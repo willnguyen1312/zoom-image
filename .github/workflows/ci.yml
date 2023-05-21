@@ -8,7 +8,9 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    strategy:
+      matrix:
+        node: [18, 20]
     # To use Turborepo Remote Caching, set the following environment variables for the job.
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -28,7 +30,7 @@ jobs:
       - name: Set node
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: ${{ matrix.node-version }}
           cache: pnpm
 
       - name: Install dependencies

@@ -45,16 +45,14 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
   const calculatePositionX = (newPositionX: number) => {
     const width = container.clientWidth
     if (newPositionX > 0) return 0
-    if (newPositionX + width * finalOptions.zoomFactor < width)
-      return -width * (finalOptions.zoomFactor - 1)
+    if (newPositionX + width * finalOptions.zoomFactor < width) return -width * (finalOptions.zoomFactor - 1)
     return newPositionX
   }
 
   const calculatePositionY = (newPositionY: number) => {
     const height = container.clientHeight
     if (newPositionY > 0) return 0
-    if (newPositionY + height * finalOptions.zoomFactor < height)
-      return -height * (finalOptions.zoomFactor - 1)
+    if (newPositionY + height * finalOptions.zoomFactor < height) return -height * (finalOptions.zoomFactor - 1)
     return newPositionY
   }
 
@@ -87,18 +85,16 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
     isOnMove = true
   }
 
-  container.addEventListener("pointerdown", handlePointerDown)
-  container.addEventListener("pointerenter", disableScroll)
-  container.addEventListener("pointerleave", enableScroll)
-  container.addEventListener("pointermove", handlePointerMove)
+  const controller = new AbortController()
+  const { signal } = controller
+  container.addEventListener("pointerdown", handlePointerDown, { signal })
+  container.addEventListener("pointerenter", disableScroll, { signal })
+  container.addEventListener("pointerleave", enableScroll, { signal })
+  container.addEventListener("pointermove", handlePointerMove, { signal })
 
   return {
     cleanup: () => {
-      container.removeEventListener("pointerdown", handlePointerDown)
-      container.removeEventListener("pointerenter", disableScroll)
-      container.removeEventListener("pointerleave", enableScroll)
-      container.removeEventListener("pointermove", handlePointerMove)
-
+      controller.abort()
       container.removeChild(zoomedImg)
       store.cleanup()
     },
