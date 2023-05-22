@@ -35,13 +35,14 @@ const App: Component = () => {
     )
   }
 
-  let cleanup: () => void = () => {}
+  let cleanup: () => void = () => {
+    // noop
+  }
   createEffect(() => {
     cleanup()
 
     if (zoomType() === "hover") {
-      const imageContainer = imageHoverContainer
-      const result = createZoomImageHover(imageContainer, {
+      const result = createZoomImageHover(imageHoverContainer, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
@@ -51,22 +52,19 @@ const App: Component = () => {
     }
 
     if (zoomType() === "wheel") {
-      const imageContainer = imageWheelContainer
-      const result = createZoomImageWheel(imageContainer)
+      const result = createZoomImageWheel(imageWheelContainer)
       cleanup = result.cleanup
     }
 
     if (zoomType() === "move") {
-      const imageContainer = imageMoveContainer
-      const result = createZoomImageMove(imageContainer, {
+      const result = createZoomImageMove(imageMoveContainer, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
       })
       cleanup = result.cleanup
     }
 
     if (zoomType() === "click") {
-      const imageContainer = imageClickContainer
-      const result = createZoomImageClick(imageContainer, {
+      const result = createZoomImageClick(imageClickContainer, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
       })
       cleanup = result.cleanup

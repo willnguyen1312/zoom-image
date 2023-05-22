@@ -142,7 +142,48 @@ function App() {
 }
 ```
 
-Refer to [Preact Adapter section](/api/adapters/preact) for more details.
+Refer to [Preact Adapter section](/api/adapters/preact) for more details
+
+## Example with Qwik Adapter
+
+Simply importing the utilities you need from `@zoom-image/qwik`
+
+```css
+/* styles.css */
+.imageContainer {
+  width: var(--imageContainerWidth);
+  height: var(--imageContainerHeight);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+```
+
+```tsx
+import "style.css"
+import { useSignal } from "@builder.io/qwik"
+import { useZoomImageWheel } from "@zoom-image/qwik"
+
+function App() {
+  const containerRef = useSignal<HTMLDivElement>()
+  const { createZoomImage } = useZoomImageWheel()
+
+  useEffect(() => {
+    const container = containerRef.value
+    createZoomImage(container)
+  }, [])
+
+  return (
+    <div class="imageContainer" ref={containerRef}>
+      <img class="image" alt="Large Pic" src="/image.webp" />
+    </div>
+  )
+}
+```
+
+Refer to [Qwik Adapter section](/api/adapters/qwik) for more details
 
 ## Demos
 
