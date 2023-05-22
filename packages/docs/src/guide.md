@@ -8,12 +8,12 @@ even without
 
 ::: code-group
 
-```sh [npm]
-$ npm install @zoom-image/core
-```
-
 ```sh [pnpm]
 $ pnpm add @zoom-image/core
+```
+
+```sh [npm]
+$ npm install @zoom-image/core
 ```
 
 ```sh [yarn]
@@ -204,7 +204,6 @@ Simply importing the utilities you need from `@zoom-image/qwik`
 
 ```tsx
 import "style.css"
-import { useSignal } from "solid-js"
 import { useZoomImageWheel } from "@zoom-image/solid"
 
 function App() {
