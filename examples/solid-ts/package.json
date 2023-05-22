@@ -6,14 +6,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@unocss/preset-mini": "^0.52.1",
-    "@unocss/vite": "^0.52.1",
+    "@unocss/reset": "^0.52.1",
     "typescript": "^5.0.4",
+    "unocss": "^0.52.1",
     "vite": "^4.3.8",
     "vite-plugin-solid": "^2.7.0"
   },
   "dependencies": {
     "@zoom-image/core": "latest",
+    "@zoom-image/solid": "latest",
     "solid-js": "^1.7.5"
   }
 }

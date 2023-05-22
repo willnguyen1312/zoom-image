@@ -1,9 +1,9 @@
 import { defineConfig } from "vite"
 import solidPlugin from "vite-plugin-solid"
-import UnocssPlugin from "@unocss/vite"
+import UnoCSS from "unocss/vite"
 
 export default defineConfig({
-  plugins: [solidPlugin(), UnocssPlugin({})],
+  plugins: [solidPlugin(), UnoCSS()],
   build: {
     target: "esnext",
   },
