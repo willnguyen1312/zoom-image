@@ -21,9 +21,9 @@
     "useZoomImageMove": "1.09 KB"
   },
   "@zoom-image/qwik": {
-    "useZoomImageWheel": "1.71 KB",
-    "useZoomImageHover": "1.47 KB",
-    "useZoomImageClick": "1.1 KB",
-    "useZoomImageMove": "1.09 KB"
+    "useZoomImageWheel": "1.97 KB",
+    "useZoomImageHover": "1.74 KB",
+    "useZoomImageClick": "1.36 KB",
+    "useZoomImageMove": "1.35 KB"
   }
 }
