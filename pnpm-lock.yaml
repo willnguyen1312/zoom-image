@@ -354,6 +354,28 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/preact:
+    dependencies:
+      '@zoom-image/core':
+        specifier: workspace:*
+        version: link:../core
+      preact:
+        specifier: ^10.0.0
+        version: 10.14.1
+    devDependencies:
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      tsup:
+        specifier: 6.7.0
+        version: 6.7.0(postcss@8.4.23)(typescript@5.0.4)
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+
   packages/react:
     dependencies:
       '@zoom-image/core':
