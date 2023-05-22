@@ -9,13 +9,13 @@
     "@zoom-image/core": "latest"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^2.2.0",
+    "@sveltejs/vite-plugin-svelte": "^2.3.0",
     "@tsconfig/svelte": "^4.0.1",
     "svelte": "^3.59.1",
     "svelte-check": "^3.3.2",
-    "tslib": "^2.5.1",
+    "tslib": "^2.5.2",
     "typescript": "^5.0.4",
-    "unocss": "^0.51.13",
-    "vite": "^4.3.7"
+    "unocss": "^0.52.1",
+    "vite": "^4.3.8"
   }
 }
