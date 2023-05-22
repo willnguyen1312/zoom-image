@@ -46,6 +46,9 @@ importers:
       '@zoom-image/core':
         specifier: latest
         version: link:../../packages/core
+      '@zoom-image/preact':
+        specifier: latest
+        version: link:../../packages/preact
       preact:
         specifier: ^10.14.1
         version: 10.14.1
@@ -53,6 +56,9 @@ importers:
       '@preact/preset-vite':
         specifier: ^2.5.0
         version: 2.5.0(@babel/core@7.21.8)(preact@10.14.1)(vite@4.3.7)
+      '@unocss/reset':
+        specifier: ^0.51.13
+        version: 0.51.13
       typescript:
         specifier: ^5.0.4
         version: 5.0.4
