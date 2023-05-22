@@ -4,6 +4,7 @@ import { createZoomImageClick as _createZoomImageClick } from "@zoom-image/core"
 import type { ZoomImageMoveState } from "@zoom-image/core"
 
 export function useZoomImageClick() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const result = {} as any
   const zoomImageState = useStore<ZoomImageMoveState>({
     zoomedImgStatus: "idle",

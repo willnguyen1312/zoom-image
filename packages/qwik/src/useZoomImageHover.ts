@@ -4,6 +4,7 @@ import { createZoomImageHover as _createZoomImageHover } from "@zoom-image/core"
 import type { ZoomImageHoverState, ZoomImageHoverStateUpdate } from "@zoom-image/core"
 
 export function useZoomImageHover() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const result = {} as any
   const zoomImageState = useStore<ZoomImageHoverState>({
     enabled: false,
