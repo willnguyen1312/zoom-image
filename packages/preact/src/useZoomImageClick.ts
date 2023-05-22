@@ -11,7 +11,7 @@ export function useZoomImageClick() {
 
   const createZoomImage = useCallback((...arg: Parameters<typeof _createZoomImageClick>) => {
     result.current?.cleanup()
-    result.current = _createZoomImageClick(arg[0], arg[1])
+    result.current = _createZoomImageClick(...arg)
     updateZoomImageState(result.current.getState())
 
     result.current.subscribe((state) => {

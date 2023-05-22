@@ -52,7 +52,7 @@
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
     "@zoom-image/core": "workspace:*",
-    "eslint": "^8.40.0",
+    "eslint": "^8.41.0",
     "eslint-config-custom": "workspace:*",
     "esno": "^0.16.3",
     "export-size": "^0.5.2",
@@ -60,6 +60,6 @@
     "prettier-plugin-svelte": "^2.10.0",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "turbo": "^1.9.8",
-    "unocss": "^0.51.13"
+    "unocss": "^0.52.1"
   }
 }

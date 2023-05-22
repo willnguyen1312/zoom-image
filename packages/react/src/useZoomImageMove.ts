@@ -11,7 +11,7 @@ export function useZoomImageMove() {
 
   const createZoomImage = useCallback((...arg: Parameters<typeof _createZoomImageMove>) => {
     result.current?.cleanup()
-    result.current = _createZoomImageMove(arg[0], arg[1])
+    result.current = _createZoomImageMove(...arg)
     updateZoomImageState(result.current.getState())
 
     result.current.subscribe((state) => {

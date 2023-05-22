@@ -13,7 +13,7 @@ export function useZoomImageHover() {
 
   const createZoomImage = useCallback((...arg: Parameters<typeof _createZoomImageHover>) => {
     result.current?.cleanup()
-    result.current = _createZoomImageHover(arg[0], arg[1])
+    result.current = _createZoomImageHover(...arg)
     updateZoomImageState(result.current.getState())
 
     result.current.subscribe((state) => {
