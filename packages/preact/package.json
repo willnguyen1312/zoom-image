@@ -1,7 +1,7 @@
 {
-  "name": "@zoom-image/react",
-  "version": "0.2.1",
-  "description": "Adapter of zoom image core for React",
+  "name": "@zoom-image/preact",
+  "version": "0.0.0",
+  "description": "Adapter of zoom image core for Preact",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "license": "MIT",
   "repository": "willnguyen1312/zoom-image",
@@ -23,7 +23,7 @@
     "scroll",
     "mobile",
     "desktop",
-    "react"
+    "preact"
   ],
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -40,7 +40,6 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/react": "^18.2.6",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "tsup": "6.7.0",
@@ -50,6 +49,6 @@
     "@zoom-image/core": "workspace:*"
   },
   "peerDependencies": {
-    "react": "^18.0.0"
+    "preact": "^10.0.0"
   }
 }
