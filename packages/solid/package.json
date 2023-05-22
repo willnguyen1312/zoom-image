@@ -1,6 +1,6 @@
 {
   "name": "@zoom-image/solid",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Adapter of zoom image core for Solid",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "license": "MIT",
