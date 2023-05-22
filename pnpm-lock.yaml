@@ -148,19 +148,22 @@ importers:
       '@zoom-image/core':
         specifier: latest
         version: link:../../packages/core
+      '@zoom-image/solid':
+        specifier: latest
+        version: link:../../packages/solid
       solid-js:
         specifier: ^1.7.5
         version: 1.7.5
     devDependencies:
-      '@unocss/preset-mini':
+      '@unocss/reset':
         specifier: ^0.52.1
         version: 0.52.1
-      '@unocss/vite':
-        specifier: ^0.52.1
-        version: 0.52.1(rollup@2.79.1)(vite@4.3.8)
       typescript:
         specifier: ^5.0.4
         version: 5.0.4
+      unocss:
+        specifier: ^0.52.1
+        version: 0.52.1(postcss@8.4.23)(rollup@2.79.1)(vite@4.3.8)
       vite:
         specifier: ^4.3.8
         version: 4.3.8(@types/node@20.2.3)
@@ -428,6 +431,28 @@ importers:
       '@types/react':
         specifier: ^18.2.6
         version: 18.2.6
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      tsup:
+        specifier: 6.7.0
+        version: 6.7.0(postcss@8.4.23)(typescript@5.0.4)
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+
+  packages/solid:
+    dependencies:
+      '@zoom-image/core':
+        specifier: workspace:*
+        version: link:../core
+      solid-js:
+        specifier: ^1.0.0
+        version: 1.7.5
+    devDependencies:
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom

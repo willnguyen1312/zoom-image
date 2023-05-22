@@ -25,5 +25,11 @@
     "useZoomImageHover": "1.74 KB",
     "useZoomImageClick": "1.36 KB",
     "useZoomImageMove": "1.35 KB"
+  },
+  "@zoom-image/solid": {
+    "useZoomImageWheel": "1.65 KB",
+    "useZoomImageHover": "1.44 KB",
+    "useZoomImageClick": "1.07 KB",
+    "useZoomImageMove": "1.06 KB"
   }
 }
