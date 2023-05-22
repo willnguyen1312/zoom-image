@@ -1,10 +1,10 @@
-import { useSignal, useStore, useVisibleTask$ } from "@builder.io/qwik"
-import { createZoomImageHover as _createZoomImageHover, ZoomImageHoverStateUpdate } from "@zoom-image/core"
+import { useStore, useVisibleTask$, $ } from "@builder.io/qwik"
+import { createZoomImageHover as _createZoomImageHover } from "@zoom-image/core"
 
-import type { ZoomImageHoverState } from "@zoom-image/core"
+import type { ZoomImageHoverState, ZoomImageHoverStateUpdate } from "@zoom-image/core"
 
 export function useZoomImageHover() {
-  const result = useSignal<ReturnType<typeof _createZoomImageHover>>()
+  const result = {} as any
   const zoomImageState = useStore<ZoomImageHoverState>({
     enabled: false,
     zoomedImgStatus: "idle",
@@ -16,22 +16,22 @@ export function useZoomImageHover() {
     })
   })
 
-  const createZoomImage = (...arg: Parameters<typeof _createZoomImageHover>) => {
+  const createZoomImage = $((...arg: Parameters<typeof _createZoomImageHover>) => {
     result.value?.cleanup()
     result.value = _createZoomImageHover(...arg)
     const currentState = result.value.getState()
     zoomImageState.enabled = currentState.enabled
     zoomImageState.zoomedImgStatus = currentState.zoomedImgStatus
 
-    result.value.subscribe((state) => {
+    result.value.subscribe((state: ZoomImageHoverState) => {
       zoomImageState.enabled = state.enabled
       zoomImageState.zoomedImgStatus = state.zoomedImgStatus
     })
-  }
+  })
 
-  const setZoomImageState = (state: ZoomImageHoverStateUpdate) => {
+  const setZoomImageState = $((state: ZoomImageHoverStateUpdate) => {
     result.value?.setState(state)
-  }
+  })
 
   return {
     createZoomImage,

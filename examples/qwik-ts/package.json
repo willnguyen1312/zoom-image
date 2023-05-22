@@ -17,6 +17,6 @@
   },
   "dependencies": {
     "@zoom-image/core": "latest",
-    "@zoom-image/qwik": "latest"
+    "@zoom-image/qwik": "workspace:^"
   }
 }
