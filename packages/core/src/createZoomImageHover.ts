@@ -15,7 +15,7 @@ export type ZoomImageHoverState = {
   enabled: boolean
 }
 
-type StateUpdate = { enabled: boolean }
+export type ZoomImageHoverStateUpdate = { enabled: boolean }
 
 type RequiredExcept<T, K extends keyof T> = Omit<Required<T>, K> & {
   [P in K]?: T[P]
@@ -198,7 +198,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     },
     subscribe: store.subscribe,
     getState: store.getState,
-    setState: (newState: StateUpdate) => {
+    setState: (newState: ZoomImageHoverStateUpdate) => {
       store.setState(newState)
     },
   }

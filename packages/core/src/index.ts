@@ -1,6 +1,6 @@
 // Start importing createZoomImageHover
 export { createZoomImageHover } from "./createZoomImageHover"
-export type { ZoomImageHoverOptions, ZoomImageHoverState } from "./createZoomImageHover"
+export type { ZoomImageHoverOptions, ZoomImageHoverState, ZoomImageHoverStateUpdate } from "./createZoomImageHover"
 // End importing createZoomImageHover
 
 // Start importing createZoomImageMove
@@ -11,7 +11,7 @@ export type { ZoomImageMoveOptions, ZoomImageMoveState } from "./createZoomImage
 
 // Start importing createZoomImageWheel
 export { createZoomImageWheel } from "./createZoomImageWheel"
-export type { ZoomImageWheelOptions, ZoomImageWheelState } from "./createZoomImageWheel"
+export type { ZoomImageWheelOptions, ZoomImageWheelState, ZoomImageWheelStateUpdate } from "./createZoomImageWheel"
 // End importing createZoomImageWheel
 
 // Start importing createZoomImageClick

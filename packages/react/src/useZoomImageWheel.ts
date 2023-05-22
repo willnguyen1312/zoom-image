@@ -15,7 +15,7 @@ export function useZoomImageWheel() {
 
   const createZoomImage = useCallback((...arg: Parameters<typeof _createZoomImageWheel>) => {
     result.current?.cleanup()
-    result.current = _createZoomImageWheel(arg[0], arg[1])
+    result.current = _createZoomImageWheel(...arg)
     updateZoomImageState(result.current.getState())
 
     result.current.subscribe((state) => {
