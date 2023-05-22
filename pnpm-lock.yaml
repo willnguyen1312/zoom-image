@@ -158,9 +158,6 @@ importers:
       '@unocss/reset':
         specifier: ^0.52.1
         version: 0.52.1
-      '@unocss/vite':
-        specifier: ^0.52.1
-        version: 0.52.1(rollup@2.79.1)(vite@4.3.8)
       typescript:
         specifier: ^5.0.4
         version: 5.0.4
