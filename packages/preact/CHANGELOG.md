@@ -1,5 +1,13 @@
 # @zoom-image/preact
 
+## 0.2.0
+
+### Minor Changes
+
+- [#132](https://github.com/willnguyen1312/zoom-image/pull/132)
+  [`674afb5`](https://github.com/willnguyen1312/zoom-image/commit/674afb5164887e9a68c9dfa9b49dd600460d2c1c) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Refactor usage of arguments grouping on function call 🚀
+
 ## 0.1.0
 
 ### Minor Changes
