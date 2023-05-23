@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "@zoom-image/core": "latest",
-    "@zoom-image/vue": "workspace:^",
+    "@zoom-image/vue": "latest",
     "vue": "^3.3.4"
   },
   "devDependencies": {

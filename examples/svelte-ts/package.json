@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@zoom-image/core": "latest",
-    "@zoom-image/svelte": "workspace:^"
+    "@zoom-image/svelte": "latest"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.3.0",

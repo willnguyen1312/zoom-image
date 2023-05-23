@@ -177,7 +177,7 @@ importers:
         specifier: latest
         version: link:../../packages/core
       '@zoom-image/svelte':
-        specifier: workspace:^
+        specifier: latest
         version: link:../../packages/svelte
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
@@ -230,7 +230,7 @@ importers:
         specifier: latest
         version: link:../../packages/core
       '@zoom-image/vue':
-        specifier: workspace:^
+        specifier: latest
         version: link:../../packages/vue
       vue:
         specifier: ^3.3.4
@@ -344,6 +344,9 @@ importers:
       '@zoom-image/core':
         specifier: workspace:*
         version: link:../core
+      '@zoom-image/vue':
+        specifier: workspace:*
+        version: link:../vue
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
