@@ -342,8 +342,11 @@ importers:
         specifier: ^11.0.3
         version: 11.0.3(eslint-plugin-vue@9.14.0)(eslint@8.41.0)(typescript@5.0.4)
       '@zoom-image/core':
-        specifier: ^0.14.0
+        specifier: workspace:*
         version: link:../core
+      '@zoom-image/vue':
+        specifier: workspace:*
+        version: link:../vue
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
