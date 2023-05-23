@@ -1,7 +1,16 @@
 <script setup lang="ts">
-import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/vue"
-import { cropImage } from "@zoom-image/core"
-import { computed, nextTick, ref, watch } from "vue"
+import {
+  createZoomImageHover,
+  createZoomImageWheel,
+  createZoomImageMove,
+  createZoomImageClick,
+  cropImage,
+} from "@zoom-image/core"
+import { computed, nextTick, onUnmounted, ref, watch } from "vue"
+
+let cleanup: () => void = () => {
+  //
+}
 
 const tabs = ref<
   {
@@ -18,14 +27,7 @@ const tabs = ref<
 ])
 
 const croppedImage = ref<string>()
-const {
-  createZoomImage: createZoomImageWheel,
-  zoomImageState: zoomImageWheelState,
-  setZoomImageState: setZoomImageWheelState,
-} = useZoomImageWheel()
-const { createZoomImage: createZoomImageHover } = useZoomImageHover()
-const { createZoomImage: createZoomImageMove } = useZoomImageMove()
-const { createZoomImage: createZoomImageClick } = useZoomImageClick()
+const currentZoom = ref(1)
 
 const zoomType = computed(() => {
   const found = tabs.value.find((tab) => tab.current)
@@ -45,58 +47,94 @@ const handleTabClick = (tab: { name: string; href: string; current: boolean }) =
   tab.current = true
 }
 
-const handleCropWheelZoomImage = () => {
-  croppedImage.value = cropImage({
-    currentZoom: zoomImageWheelState.currentZoom,
-    image: (imageWheelContainerRef.value as HTMLDivElement).querySelector("img") as HTMLImageElement,
-    positionX: zoomImageWheelState.currentPositionX,
-    positionY: zoomImageWheelState.currentPositionY,
-  })
+let handleCropWheelZoomImage = () => {
+  //
 }
-const zoomIn = () => {
-  setZoomImageWheelState({
-    currentZoom: zoomImageWheelState.currentZoom + 0.5,
-  })
+let zoomIn = () => {
+  //
 }
-const zoomOut = () => {
-  setZoomImageWheelState({
-    currentZoom: zoomImageWheelState.currentZoom - 0.5,
-  })
+let zoomOut = () => {
+  //
 }
 
 watch(
   zoomType,
   async () => {
+    cleanup()
     croppedImage.value = ""
+    currentZoom.value = 1
     await nextTick()
 
-    if (zoomType.value === "hover") {
-      createZoomImageHover(imageHoverContainerRef.value as HTMLDivElement, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
-        customZoom: { width: 300, height: 450 },
-        zoomTarget: zoomTargetRef.value as HTMLDivElement,
-        scaleFactor: 0.5,
+    if (zoomType.value === "wheel") {
+      const imageContainer = imageWheelContainerRef.value as HTMLDivElement
+
+      const result = createZoomImageWheel(imageContainer)
+      cleanup = result.cleanup
+
+      handleCropWheelZoomImage = () => {
+        const state = result.getState()
+        croppedImage.value = cropImage({
+          currentZoom: state.currentZoom,
+          image: imageContainer.querySelector("img") as HTMLImageElement,
+          positionX: state.currentPositionX,
+          positionY: state.currentPositionY,
+        })
+      }
+
+      zoomIn = () => {
+        result.setState({
+          currentZoom: result.getState().currentZoom + 0.5,
+        })
+      }
+
+      zoomOut = () => {
+        result.setState({
+          currentZoom: result.getState().currentZoom - 0.5,
+        })
+      }
+
+      result.subscribe(({ state }) => {
+        currentZoom.value = state.currentZoom
       })
     }
 
-    if (zoomType.value === "wheel") {
-      createZoomImageWheel(imageWheelContainerRef.value as HTMLDivElement)
+    if (zoomType.value === "hover") {
+      const imageContainer = imageHoverContainerRef.value as HTMLDivElement
+      const zoomTarget = zoomTargetRef.value
+
+      const result = createZoomImageHover(imageContainer, {
+        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        customZoom: { width: 300, height: 450 },
+        zoomTarget,
+        scaleFactor: 0.5,
+      })
+      cleanup = result.cleanup
     }
 
     if (zoomType.value === "move") {
-      createZoomImageMove(imageMoveContainerRef.value as HTMLDivElement, {
+      const imageContainer = imageMoveContainerRef.value as HTMLDivElement
+
+      const result = createZoomImageMove(imageContainer, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
       })
+      cleanup = result.cleanup
     }
 
     if (zoomType.value === "click") {
-      createZoomImageClick(imageClickContainerRef.value as HTMLDivElement, {
+      const imageContainer = imageClickContainerRef.value as HTMLDivElement
+
+      const result = createZoomImageClick(imageContainer, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
       })
+      cleanup = result.cleanup
     }
   },
   { immediate: true },
 )
+
+onUnmounted(() => {
+  cleanup()
+})
 </script>
 
 <template>
@@ -119,12 +157,12 @@ watch(
 
       <div class="space-y-4" v-if="zoomType === 'wheel'">
         <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
-        <p>Current zoom: {{ `${Math.round(zoomImageWheelState.currentZoom * 100)}%` }}</p>
+        <p>Current zoom: {{ `${Math.round(currentZoom * 100)}%` }}</p>
         <div class="mt-1 flex space-x-2">
           <div ref="imageWheelContainerRef" class="h-[300px] w-[300px] cursor-crosshair">
             <img class="h-full w-full" crossorigin="anonymous" alt="Large Pic" src="/large.webp" />
           </div>
-          <img :src="croppedImage" v-if="!!croppedImage" class="h-[300px] w-[300px]" alt="Cropped placeholder" />
+          <img :src="croppedImage" v-if="!!croppedImage" class="h-[300px] w-[300px]" alt="Cropped image placeholder" />
         </div>
         <div class="flex space-x-2">
           <button @click="zoomIn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom in</button>
