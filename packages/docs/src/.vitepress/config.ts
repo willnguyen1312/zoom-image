@@ -6,6 +6,7 @@ import pkg from "@zoom-image/core/package.json"
 export default defineConfig({
   title: "Zoom Image",
   description: "A little yet powerful framework agnostic library to zoom image on the web",
+  base: "/zoom-image/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
