@@ -1,9 +1,9 @@
 [build.environment]
-  NODE_VERSION = "16"
+  NODE_VERSION = "18"
 
 [build]
-  publish = "dist"
-  command = "pnpm run build"
+  publish = "src/.vitepress/dist"
+  command = "yarn run build"
 
 [[redirects]]
   from = "/*"
