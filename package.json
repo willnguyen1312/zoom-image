@@ -31,7 +31,7 @@
     "core": "pnpm --filter=@zoom-image/core",
     "react": "pnpm --filter=@zoom-image/react",
     "docs": "pnpm --filter=docs",
-    "build:docs": "pnpm run docs build",
+    "build:docs": "turbo run build --filter=docs...",
     "start-docs": "turbo run dev --filter=docs...",
     "start-preact": "turbo run dev --filter=preact-ts...",
     "start-react": "turbo run dev --filter=@zoom-image/react --filter=react-ts...",
