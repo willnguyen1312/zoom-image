@@ -131,7 +131,7 @@ function App() {
             <div ref={imageWheelContainerRef} className="h-[300px] w-[300px] cursor-crosshair">
               <img className="h-full w-full" alt="Large Pic" src="/large.webp" />
             </div>
-            {croppedImage && <img src={croppedImage} className="h-[300px] w-[300px]" alt="Cropped image placeholder" />}
+            {croppedImage && <img src={croppedImage} className="h-[300px] w-[300px]" alt="Cropped placeholder" />}
           </div>
 
           <div className="flex space-x-2">

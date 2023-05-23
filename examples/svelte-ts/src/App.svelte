@@ -1,11 +1,7 @@
 <script lang="ts">
-  import { onDestroy, tick } from "svelte"
-  import {
-    createZoomImageHover,
-    createZoomImageWheel,
-    createZoomImageMove,
-    createZoomImageClick,
-  } from "@zoom-image/core"
+  import { tick } from "svelte"
+  import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/svelte"
+  import { cropImage } from "@zoom-image/core"
 
   const tabs: {
     name: string
@@ -19,54 +15,56 @@
     { name: "Click", href: "#", current: false, value: "click" },
   ]
   $: zoomType = tabs.find((tab) => tab.current)?.value as "wheel" | "hover" | "move" | "click"
+  let croppedImage: string = ""
 
   let imageWheelContainer: HTMLDivElement
   let imageMoveContainer: HTMLDivElement
   let imageHoverContainer: HTMLDivElement
   let imageClickContainer: HTMLDivElement
   let zoomTarget: HTMLDivElement
-  let cleanup: () => void = () => {}
+  const {
+    createZoomImage: createZoomImageWheel,
+    zoomImageState: zoomImageWheelState,
+    setZoomImageState: setZoomImageWheelState,
+  } = useZoomImageWheel()
+  const { createZoomImage: createZoomImageHover } = useZoomImageHover()
+  const { createZoomImage: createZoomImageMove } = useZoomImageMove()
+  const { createZoomImage: createZoomImageClick } = useZoomImageClick()
 
   async function processZoom(zoomType: "wheel" | "hover" | "move" | "click") {
-    cleanup()
+    croppedImage = ""
     await tick()
 
     if (zoomType === "hover") {
-      const result = createZoomImageHover(imageHoverContainer, {
+      createZoomImageHover(imageHoverContainer, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
         scaleFactor: 0.5,
       })
-      cleanup = result.cleanup
     }
 
     if (zoomType === "wheel") {
-      const result = createZoomImageWheel(imageWheelContainer)
-      cleanup = result.cleanup
+      createZoomImageWheel(imageWheelContainer)
     }
 
     if (zoomType === "move") {
-      cleanup = createZoomImageMove(imageMoveContainer, {
+      createZoomImageMove(imageMoveContainer, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
-      }).cleanup
+      })
     }
 
     if (zoomType === "click") {
-      cleanup = createZoomImageClick(imageClickContainer, {
+      createZoomImageClick(imageClickContainer, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
-      }).cleanup
+      })
     }
   }
 
   $: processZoom(zoomType)
-
-  onDestroy(() => {
-    cleanup()
-  })
 </script>
 
-<div class="font-sans">
+<div class="p-4 font-sans">
   <nav class="flex space-x-4 pb-4" aria-label="Tabs">
     {#each tabs as tab (tab.name)}
       <a
@@ -86,9 +84,53 @@
   </nav>
 
   {#if zoomType === "wheel"}
-    <p>Scroll inside the image to see zoom in-out effect</p>
-    <div bind:this={imageWheelContainer} class="h-[300px] w-[300px] cursor-crosshair">
-      <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/large.webp" />
+    <div class="space-y-4">
+      <p>Current zoom: {`${Math.round($zoomImageWheelState.currentZoom * 100)}%`}</p>
+      <p>Scroll inside the image to see zoom in-out effect</p>
+      <div class="mt-1 flex space-x-2">
+        <div bind:this={imageWheelContainer} class="h-[300px] w-[300px] cursor-crosshair">
+          <img class="h-full w-full" alt="Large Pic" src="/large.webp" />
+        </div>
+
+        {#if croppedImage !== ""}
+          <img src={croppedImage} class="h-[300px] w-[300px]" alt="Cropped placeholder" />
+        {/if}
+      </div>
+      <div class="flex space-x-2">
+        <button
+          on:click={() => {
+            setZoomImageWheelState({
+              currentZoom: $zoomImageWheelState.currentZoom + 0.5,
+            })
+          }}
+          class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
+        >
+          Zoom in
+        </button>
+        <button
+          on:click={() => {
+            setZoomImageWheelState({
+              currentZoom: $zoomImageWheelState.currentZoom - 0.5,
+            })
+          }}
+          class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
+        >
+          Zoom out
+        </button>
+        <button
+          class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
+          on:click={() => {
+            croppedImage = cropImage({
+              currentZoom: $zoomImageWheelState.currentZoom,
+              image: imageWheelContainer.querySelector("img"),
+              positionX: $zoomImageWheelState.currentPositionX,
+              positionY: $zoomImageWheelState.currentPositionY,
+            })
+          }}
+        >
+          Crop image
+        </button>
+      </div>
     </div>
   {/if}
 

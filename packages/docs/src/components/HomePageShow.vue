@@ -162,7 +162,7 @@ onUnmounted(() => {
           <div ref="imageWheelContainerRef" class="h-[300px] w-[300px] cursor-crosshair">
             <img class="h-full w-full" crossorigin="anonymous" alt="Large Pic" src="/large.webp" />
           </div>
-          <img :src="croppedImage" v-if="!!croppedImage" class="h-[300px] w-[300px]" alt="Cropped image placeholder" />
+          <img :src="croppedImage" v-if="!!croppedImage" class="h-[300px] w-[300px]" alt="Cropped placeholder" />
         </div>
         <div class="flex space-x-2">
           <button @click="zoomIn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom in</button>

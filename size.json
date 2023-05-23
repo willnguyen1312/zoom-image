@@ -10,13 +10,13 @@
   },
   "@zoom-image/react": {
     "useZoomImageWheel": "1.71 KB",
-    "useZoomImageHover": "1.48 KB",
-    "useZoomImageMove": "1.11 KB",
-    "useZoomImageClick": "1.1 KB"
+    "useZoomImageHover": "1.49 KB",
+    "useZoomImageClick": "1.11 KB",
+    "useZoomImageMove": "1.1 KB"
   },
   "@zoom-image/preact": {
     "useZoomImageWheel": "1.72 KB",
-    "useZoomImageHover": "1.49 KB",
+    "useZoomImageHover": "1.5 KB",
     "useZoomImageMove": "1.11 KB",
     "useZoomImageClick": "1.11 KB"
   },
@@ -28,8 +28,14 @@
   },
   "@zoom-image/solid": {
     "useZoomImageWheel": "1.69 KB",
-    "useZoomImageHover": "1.45 KB",
-    "useZoomImageClick": "1.09 KB",
+    "useZoomImageHover": "1.46 KB",
+    "useZoomImageClick": "1.1 KB",
     "useZoomImageMove": "1.09 KB"
+  },
+  "@zoom-image/svelte": {
+    "useZoomImageWheel": "1.69 KB",
+    "useZoomImageHover": "1.46 KB",
+    "useZoomImageClick": "1.11 KB",
+    "useZoomImageMove": "1.08 KB"
   }
 }

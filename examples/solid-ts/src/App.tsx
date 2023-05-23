@@ -126,7 +126,7 @@ const App: Component = () => {
             <div ref={imageWheelContainer} class="h-[300px] w-[300px] cursor-crosshair">
               <img class="h-full w-full" alt="Large Pic" src="/large.webp" />
             </div>
-            {croppedImage() && <img src={croppedImage()} class="h-[300px] w-[300px]" alt="Cropped image placeholder" />}
+            {croppedImage() && <img src={croppedImage()} class="h-[300px] w-[300px]" alt="Cropped placeholder" />}
           </div>
 
           <div class="flex space-x-2">
