@@ -226,7 +226,7 @@ Refer to [Solid Adapter section](/api/adapters/solid) for more details
 Simply importing the utilities you need from `@zoom-image/svelte`
 
 ```svelte
-<script>
+<script lang="ts">
   import { onMount } from "svelte"
   import { useZoomImageWheel } from "@zoom-image/svelte"
 
@@ -256,6 +256,44 @@ Simply importing the utilities you need from `@zoom-image/svelte`
 ```
 
 Refer to [Svelte Adapter section](/api/adapters/svelte) for more details
+
+## Example with Vue Adapter
+
+Simply importing the utilities you need from `@zoom-image/vue`
+
+```vue
+<script lang="ts" setup>
+import { onMounted } from "vue"
+import { useZoomImageWheel } from "@zoom-image/vue"
+
+const imageWheelContainerRef = ref<HTMLDivElement>()
+const { createZoomImage } = useZoomImageWheel()
+
+onMounted(() => {
+  createZoomImage(imageWheelContainerRef.value)
+})
+</script>
+
+<template>
+  <div class="imageContainer" ref="imageWheelContainerRef">
+    <img class="image" alt="Large Pic" src="/image.webp" />
+  </div>
+</template>
+
+<style>
+.imageContainer {
+  width: var(--imageContainerWidth);
+  height: var(--imageContainerHeight);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+</style>
+```
+
+Refer to [Svelte Adapter section](/api/adapters/vue) for more details
 
 ## Demos
 

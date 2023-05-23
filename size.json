@@ -35,7 +35,13 @@
   "@zoom-image/svelte": {
     "useZoomImageWheel": "1.69 KB",
     "useZoomImageHover": "1.46 KB",
-    "useZoomImageClick": "1.11 KB",
+    "useZoomImageClick": "1.09 KB",
     "useZoomImageMove": "1.08 KB"
+  },
+  "@zoom-image/vue": {
+    "useZoomImageWheel": "1.7 KB",
+    "useZoomImageHover": "1.46 KB",
+    "useZoomImageClick": "1.09 KB",
+    "useZoomImageMove": "1.09 KB"
   }
 }

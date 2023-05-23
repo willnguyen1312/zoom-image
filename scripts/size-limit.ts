@@ -1,7 +1,7 @@
 import fs from "fs/promises"
 import { getExportsSize } from "export-size"
 
-const packages = ["core", "react", "preact", "qwik", "solid", "svelte"]
+const packages = ["core", "react", "preact", "qwik", "solid", "svelte", "vue"]
 
 function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) return "0 Bytes"
