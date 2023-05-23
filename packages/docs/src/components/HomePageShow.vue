@@ -93,7 +93,7 @@ watch(
         })
       }
 
-      result.subscribe((state) => {
+      result.subscribe(({ state }) => {
         currentZoom.value = state.currentZoom
       })
     }
