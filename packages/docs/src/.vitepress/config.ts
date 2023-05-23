@@ -7,6 +7,7 @@ export default defineConfig({
   title: "Zoom Image",
   description: "A little yet powerful framework agnostic library to zoom image on the web",
   base: "/zoom-image/",
+  head: [["link", { rel: "shortcut icon", href: "/zoom-image/favicon.ico", type: "image/x-icon" }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
