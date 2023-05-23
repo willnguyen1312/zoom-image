@@ -16,7 +16,7 @@ export function useZoomImageHover() {
     result = _createZoomImageHover(...arg)
     updateZoomImageState(result.getState())
 
-    result.subscribe((state) => {
+    result.subscribe(({ state }) => {
       updateZoomImageState(state)
     })
   }

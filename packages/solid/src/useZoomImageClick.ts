@@ -15,7 +15,7 @@ export function useZoomImageClick() {
     result = _createZoomImageClick(...arg)
     updateZoomImageState(result.getState())
 
-    result.subscribe((state) => {
+    result.subscribe(({ state }) => {
       updateZoomImageState(state)
     })
   }
