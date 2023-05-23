@@ -38,6 +38,7 @@ export default component$(() => {
 
   useVisibleTask$(({ track }) => {
     track(() => zoomType.value)
+    croppedImage.value = ""
 
     if (zoomType.value === "wheel" && imageWheelContainerRef.value) {
       const imageContainer = imageWheelContainerRef.value

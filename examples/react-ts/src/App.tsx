@@ -58,6 +58,7 @@ function App() {
   }
 
   useEffect(() => {
+    setCroppedImage("")
     if (zoomType === "wheel") {
       const imageContainer = imageWheelContainerRef.current as HTMLDivElement
       createZoomImageWheel(imageContainer)

@@ -59,6 +59,7 @@ const App: Component = () => {
   }
 
   createEffect(() => {
+    setCroppedImage("")
     if (zoomType() === "hover") {
       createZoomImageHover(imageHoverContainer, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
