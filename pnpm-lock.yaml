@@ -344,6 +344,9 @@ importers:
       '@zoom-image/core':
         specifier: workspace:*
         version: link:../core
+      '@zoom-image/vue':
+        specifier: workspace:*
+        version: link:../vue
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
