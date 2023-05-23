@@ -89,8 +89,7 @@ function App() {
   const { createZoomImage } = useZoomImageWheel()
 
   useEffect(() => {
-    const container = containerRef.current
-    createZoomImage(container)
+    createZoomImage(containerRef.value)
   }, [])
 
   return (
@@ -130,8 +129,7 @@ function App() {
   const { createZoomImage } = useZoomImageWheel()
 
   useEffect(() => {
-    const container = containerRef.current
-    createZoomImage(container)
+    createZoomImage(containerRef.value)
   }, [])
 
   return (
@@ -163,17 +161,16 @@ Simply importing the utilities you need from `@zoom-image/qwik`
 
 ```tsx
 import "style.css"
-import { useSignal } from "@builder.io/qwik"
+import { useSignal, useVisibleTask$ } from "@builder.io/qwik"
 import { useZoomImageWheel } from "@zoom-image/qwik"
 
 function App() {
   const containerRef = useSignal<HTMLDivElement>()
   const { createZoomImage } = useZoomImageWheel()
 
-  useEffect(() => {
-    const container = containerRef.value
-    createZoomImage(container)
-  }, [])
+  useVisibleTask$(() => {
+    createZoomImage(containerRef.value)
+  })
 
   return (
     <div class="imageContainer" ref={containerRef}>
@@ -210,9 +207,9 @@ function App() {
   let container: HTMLDivElement
   const { createZoomImage } = useZoomImageWheel()
 
-  useEffect(() => {
+  onMount(() => {
     createZoomImage(container)
-  }, [])
+  })
 
   return (
     <div class="imageContainer" ref={container}>
@@ -223,6 +220,80 @@ function App() {
 ```
 
 Refer to [Solid Adapter section](/api/adapters/solid) for more details
+
+## Example with Svelte Adapter
+
+Simply importing the utilities you need from `@zoom-image/svelte`
+
+```svelte
+<script lang="ts">
+  import { onMount } from "svelte"
+  import { useZoomImageWheel } from "@zoom-image/svelte"
+
+  let container: HTMLDivElement
+  const { createZoomImage } = useZoomImageWheel()
+
+  onMount(() => {
+    createZoomImage(container)
+  })
+</script>
+
+<div class="imageContainer" bind:this={imageWheelContainer}>
+  <img class="image" alt="Large Pic" src="/image.webp" />
+</div>
+
+<style>
+  .imageContainer {
+    width: var(--imageContainerWidth);
+    height: var(--imageContainerHeight);
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+```
+
+Refer to [Svelte Adapter section](/api/adapters/svelte) for more details
+
+## Example with Vue Adapter
+
+Simply importing the utilities you need from `@zoom-image/vue`
+
+```vue
+<script lang="ts" setup>
+import { onMounted } from "vue"
+import { useZoomImageWheel } from "@zoom-image/vue"
+
+const imageWheelContainerRef = ref<HTMLDivElement>()
+const { createZoomImage } = useZoomImageWheel()
+
+onMounted(() => {
+  createZoomImage(imageWheelContainerRef.value)
+})
+</script>
+
+<template>
+  <div class="imageContainer" ref="imageWheelContainerRef">
+    <img class="image" alt="Large Pic" src="/image.webp" />
+  </div>
+</template>
+
+<style>
+.imageContainer {
+  width: var(--imageContainerWidth);
+  height: var(--imageContainerHeight);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+</style>
+```
+
+Refer to [Svelte Adapter section](/api/adapters/vue) for more details
 
 ## Demos
 

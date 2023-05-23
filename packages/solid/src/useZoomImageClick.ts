@@ -1,12 +1,12 @@
 import { onCleanup } from "solid-js"
 import { createZoomImageClick as _createZoomImageClick } from "@zoom-image/core"
 
-import type { ZoomImageMoveState } from "@zoom-image/core"
+import type { ZoomImageClickState } from "@zoom-image/core"
 import { createStore } from "solid-js/store"
 
 export function useZoomImageClick() {
   let result: ReturnType<typeof _createZoomImageClick> | undefined
-  const [zoomImageState, updateZoomImageState] = createStore<ZoomImageMoveState>({
+  const [zoomImageState, updateZoomImageState] = createStore<ZoomImageClickState>({
     zoomedImgStatus: "idle",
   })
 
@@ -15,7 +15,7 @@ export function useZoomImageClick() {
     result = _createZoomImageClick(...arg)
     updateZoomImageState(result.getState())
 
-    result.subscribe((state) => {
+    result.subscribe(({ state }) => {
       updateZoomImageState(state)
     })
   }

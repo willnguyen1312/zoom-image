@@ -1,13 +1,13 @@
-export type Listener<TState> = (currentState: TState, prevState: TState) => void
+export type Listener<TState> = (arg: { state: TState; updatedProperties: Partial<TState> }) => void
 
 export function createStore<TState>(initialState: TState) {
   const listeners = new Set<Listener<TState>>()
   let batching = false
   let state: TState = initialState
-  let prevState: TState = { ...initialState }
+  let updatedProperties: Partial<TState> | undefined
 
-  const setState = (updatedState: Partial<TState> = {}) => {
-    state = { ...state, ...updatedState }
+  const setState = (extraState: Partial<TState> = {}) => {
+    updatedProperties = { ...updatedProperties, ...extraState }
     flush()
   }
 
@@ -16,9 +16,9 @@ export function createStore<TState>(initialState: TState) {
 
     let hasChanged = false
 
-    if (prevState) {
-      for (const key in state) {
-        if (state[key] !== prevState[key]) {
+    if (updatedProperties) {
+      for (const key in updatedProperties) {
+        if (state[key] !== updatedProperties[key]) {
           hasChanged = true
           break
         }
@@ -29,8 +29,10 @@ export function createStore<TState>(initialState: TState) {
       return
     }
 
-    listeners.forEach((listener) => listener(state, prevState))
-    prevState = { ...state }
+    state = { ...state, ...updatedProperties }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    listeners.forEach((listener) => listener({ state, updatedProperties } as any))
+    updatedProperties = undefined
   }
 
   const batch = (cb: () => void) => {
@@ -42,7 +44,9 @@ export function createStore<TState>(initialState: TState) {
 
   const subscribe = (listener: Listener<TState>) => {
     listeners.add(listener)
-    return () => listeners.delete(listener)
+    return () => {
+      listeners.delete(listener)
+    }
   }
 
   const cleanup = () => listeners.clear()

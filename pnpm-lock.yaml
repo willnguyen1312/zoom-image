@@ -176,6 +176,9 @@ importers:
       '@zoom-image/core':
         specifier: latest
         version: link:../../packages/core
+      '@zoom-image/svelte':
+        specifier: latest
+        version: link:../../packages/svelte
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^2.3.0
@@ -183,6 +186,9 @@ importers:
       '@tsconfig/svelte':
         specifier: ^4.0.1
         version: 4.0.1
+      '@unocss/reset':
+        specifier: ^0.52.1
+        version: 0.52.1
       svelte:
         specifier: ^3.59.1
         version: 3.59.1
@@ -223,6 +229,9 @@ importers:
       '@zoom-image/core':
         specifier: latest
         version: link:../../packages/core
+      '@zoom-image/vue':
+        specifier: latest
+        version: link:../../packages/vue
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -230,6 +239,9 @@ importers:
       '@types/node':
         specifier: ^20.2.3
         version: 20.2.3
+      '@unocss/reset':
+        specifier: ^0.52.1
+        version: 0.52.1
       '@vitejs/plugin-vue':
         specifier: ^4.2.3
         version: 4.2.3(vite@4.3.8)(vue@3.3.4)
@@ -332,6 +344,9 @@ importers:
       '@zoom-image/core':
         specifier: workspace:*
         version: link:../core
+      '@zoom-image/vue':
+        specifier: workspace:*
+        version: link:../vue
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
@@ -466,7 +481,51 @@ importers:
         specifier: ^5.0.4
         version: 5.0.4
 
+  packages/svelte:
+    dependencies:
+      '@zoom-image/core':
+        specifier: workspace:*
+        version: link:../core
+      svelte:
+        specifier: ^3.0.0
+        version: 3.59.1
+    devDependencies:
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      tsup:
+        specifier: 6.7.0
+        version: 6.7.0(postcss@8.4.23)(typescript@5.0.4)
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+
   packages/tsconfig: {}
+
+  packages/vue:
+    dependencies:
+      '@zoom-image/core':
+        specifier: workspace:*
+        version: link:../core
+      vue:
+        specifier: ^3.0.0
+        version: 3.3.4
+    devDependencies:
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      tsup:
+        specifier: 6.7.0
+        version: 6.7.0(postcss@8.4.23)(typescript@5.0.4)
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
 
 packages:
 

@@ -1,0 +1,54 @@
+{
+  "name": "@zoom-image/vue",
+  "version": "0.1.0",
+  "description": "Adapter of zoom image core for Vue",
+  "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
+  "license": "MIT",
+  "repository": "willnguyen1312/zoom-image",
+  "homepage": "https://zoom-images.netlify.app",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/willnguyen1312"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "zoom",
+    "image",
+    "hover",
+    "move",
+    "wheel",
+    "pinch",
+    "touch",
+    "scroll",
+    "mobile",
+    "desktop",
+    "vue"
+  ],
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "dev": "pnpm build --watch",
+    "build": "tsup src terser",
+    "lint": "eslint src --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "tsup": "6.7.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@zoom-image/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  }
+}

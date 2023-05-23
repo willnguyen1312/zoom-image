@@ -4,16 +4,15 @@ import { createZoomImageWheel as _createZoomImageWheel } from "@zoom-image/core"
 import type { ZoomImageWheelState, ZoomImageWheelStateUpdate } from "@zoom-image/core"
 
 export function useZoomImageWheel() {
-  // const result = useSignal<CreateZoomImageWheelResult>()
+  const result: { value: ReturnType<typeof _createZoomImageWheel> } = {} as {
+    value: ReturnType<typeof _createZoomImageWheel>
+  }
   const zoomImageState = useStore<ZoomImageWheelState>({
     currentPositionX: -1,
     currentPositionY: -1,
     currentZoom: -1,
     enable: false,
   })
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const result = {} as any
 
   useVisibleTask$(({ cleanup }) => {
     cleanup(() => {
@@ -26,15 +25,18 @@ export function useZoomImageWheel() {
     result.value = _createZoomImageWheel(...arg)
 
     const currentState = result.value.getState()
-    zoomImageState.currentPositionX = currentState.currentPositionX
-    zoomImageState.currentPositionY = currentState.currentPositionY
-    zoomImageState.currentZoom = currentState.currentZoom
-    zoomImageState.enable = currentState.enable
-    result.value.subscribe((state: ZoomImageWheelState) => {
-      zoomImageState.currentPositionX = state.currentPositionX
-      zoomImageState.currentPositionY = state.currentPositionY
-      zoomImageState.currentZoom = state.currentZoom
-      zoomImageState.enable = state.enable
+    for (const key in currentState) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      zoomImageState[key] = currentState[key]
+    }
+
+    result.value.subscribe(({ updatedProperties }) => {
+      for (const key in updatedProperties) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        zoomImageState[key] = updatedProperties[key]
+      }
     })
   })
 

@@ -18,7 +18,7 @@ export function useZoomImageWheel() {
     result.current = _createZoomImageWheel(...arg)
     updateZoomImageState(result.current.getState())
 
-    result.current.subscribe((state) => {
+    result.current.subscribe(({ state }) => {
       updateZoomImageState(state)
     })
   }, [])

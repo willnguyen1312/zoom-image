@@ -4,8 +4,9 @@ import { createZoomImageMove as _createZoomImageMove } from "@zoom-image/core"
 import type { ZoomImageMoveState } from "@zoom-image/core"
 
 export function useZoomImageMove() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const result = {} as any
+  const result: { value: ReturnType<typeof _createZoomImageMove> } = {} as {
+    value: ReturnType<typeof _createZoomImageMove>
+  }
   const zoomImageState = useStore<ZoomImageMoveState>({
     zoomedImgStatus: "idle",
   })
@@ -13,10 +14,19 @@ export function useZoomImageMove() {
   const createZoomImage = $((...arg: Parameters<typeof _createZoomImageMove>) => {
     result.value?.cleanup()
     result.value = _createZoomImageMove(...arg)
-    zoomImageState.zoomedImgStatus = result.value.getState().zoomedImgStatus
+    const currentState = result.value.getState()
+    for (const key in currentState) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      zoomImageState[key] = currentState[key]
+    }
 
-    result.value.subscribe((state: ZoomImageMoveState) => {
-      zoomImageState.zoomedImgStatus = state.zoomedImgStatus
+    result.value.subscribe(({ updatedProperties }) => {
+      for (const key in updatedProperties) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        zoomImageState[key] = updatedProperties[key]
+      }
     })
   })
 

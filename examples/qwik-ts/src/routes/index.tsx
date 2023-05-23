@@ -38,6 +38,7 @@ export default component$(() => {
 
   useVisibleTask$(({ track }) => {
     track(() => zoomType.value)
+    croppedImage.value = ""
 
     if (zoomType.value === "wheel" && imageWheelContainerRef.value) {
       const imageContainer = imageWheelContainerRef.value
@@ -109,7 +110,7 @@ export default component$(() => {
               <img class="h-full w-full" alt="Large Pic" src="/large.webp" />
             </div>
             {croppedImage.value && (
-              <img src={croppedImage.value} class="h-[300px] w-[300px]" alt="Cropped image placeholder" />
+              <img src={croppedImage.value} class="h-[300px] w-[300px]" alt="Cropped placeholder" />
             )}
           </div>
 
