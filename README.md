@@ -22,8 +22,8 @@
 
 ## Zoom Image
 
-A little yet powerful framework agnostic library to zoom image on the web. It is a typical
-experience on e-commerce sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
+A little yet powerful framework agnostic library to zoom image on the web. It is a typical experience on e-commerce
+sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 
 - ✅ Zoom on wheel (scroll & pinch)
 - ✅ Zoom on hover
@@ -90,11 +90,11 @@ pnpm start-qwik
 
 ## Relevant projects
 
-- [react-zoomable-media](https://github.com/willnguyen1312/react-zoomable-media) - The library I
-  wrote for my previous company
+- [react-zoomable-media](https://github.com/willnguyen1312/react-zoomable-media) - The library I wrote for my previous
+  company
 - [zagjs](https://github.com/chakra-ui/zag) - The project's architecture is inspired by this library
-- [js-image-zoom](https://github.com/malaman/js-image-zoom) - The internal working of zoom image on
-  hover is inspired by this library
+- [js-image-zoom](https://github.com/malaman/js-image-zoom) - The internal working of zoom image on hover is inspired by
+  this library
 
 ## Sponsor
 
