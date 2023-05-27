@@ -26,10 +26,9 @@ $ yarn add @zoom-image/core
 
 ```html
 <script src="https://unpkg.com/@zoom-image/core"></script>
-<script src="https://unpkg.com/@zoom-image/core"></script>
 ```
 
-It will be exposed to global as `window.ZoomImage`
+Everything will be exposed to global as `window.ZoomImage`
 
 ## Example with Vanilla JS
 
