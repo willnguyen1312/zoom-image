@@ -214,6 +214,9 @@ importers:
         specifier: latest
         version: link:../../packages/core
     devDependencies:
+      '@unocss/reset':
+        specifier: ^0.52.4
+        version: 0.52.4
       typescript:
         specifier: ^5.0.4
         version: 5.0.4

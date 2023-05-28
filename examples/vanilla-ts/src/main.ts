@@ -1,5 +1,12 @@
 import "virtual:uno.css"
-import { createZoomImageHover, createZoomImageWheel, createZoomImageMove, createZoomImageClick } from "@zoom-image/core"
+import "@unocss/reset/tailwind.css"
+import {
+  createZoomImageHover,
+  createZoomImageWheel,
+  createZoomImageMove,
+  createZoomImageClick,
+  cropImage,
+} from "@zoom-image/core"
 
 function createSimpleState<T>(initialState: T) {
   const listeners = new Set<(value: T) => void>()
@@ -55,7 +62,60 @@ const makeUpdateUIFunc = () => {
       parent.replaceChildren(imageWheel)
       const container = document.getElementById("image-wheel-container") as HTMLDivElement
 
-      cleanupZoom = createZoomImageWheel(container).cleanup
+      const result = createZoomImageWheel(container)
+
+      const controller = new AbortController()
+      const cropImg = document.getElementById("cropImg") as HTMLImageElement
+      const cropImgBtn = document.getElementById("cropImgBtn") as HTMLButtonElement
+      const zoomInBtn = document.getElementById("zoomInBtn") as HTMLInputElement
+      const zoomOutBtn = document.getElementById("zoomOutBtn") as HTMLInputElement
+      const currentZoom = document.getElementById("currentZoom") as HTMLParagraphElement
+
+      result.subscribe(({ state }) => {
+        currentZoom.textContent = `Current zoom: ${Math.round(state.currentZoom * 100)}%`
+      })
+
+      zoomInBtn.addEventListener(
+        "click",
+        () => {
+          result.setState({
+            currentZoom: result.getState().currentZoom + 0.5,
+          })
+        },
+        { signal: controller.signal },
+      )
+
+      zoomOutBtn.addEventListener(
+        "click",
+        () => {
+          result.setState({
+            currentZoom: result.getState().currentZoom - 0.5,
+          })
+        },
+        { signal: controller.signal },
+      )
+
+      cropImgBtn.addEventListener(
+        "click",
+        () => {
+          const currentState = result.getState()
+          const croppedImage = cropImage({
+            image: container.querySelector("img") as HTMLImageElement,
+            currentZoom: currentState.currentZoom,
+            positionX: currentState.currentPositionX,
+            positionY: currentState.currentPositionY,
+          })
+
+          cropImg.src = croppedImage
+          cropImg.hidden = false
+        },
+        { signal: controller.signal },
+      )
+
+      cleanupZoom = () => {
+        result.cleanup()
+        controller.abort()
+      }
     }
 
     if (state === "hover") {
