@@ -1,4 +1,5 @@
-import { createStore, imageCache } from "./store"
+import { imageCache } from "./store"
+import { createStore } from "@namnode/store"
 import { ZoomedImgStatus } from "./types"
 import { disableScroll, enableScroll, getSourceImage } from "./utils"
 

@@ -1,4 +1,4 @@
-import { createStore } from "./store"
+import { createStore } from "@namnode/store"
 import { clamp, disableScroll, enableScroll, getPointersCenter, getSourceImage, makeMaybeCallFunction } from "./utils"
 import type { PointerPosition } from "./utils"
 
