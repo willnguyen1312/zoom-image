@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.16.0
+
+### Minor Changes
+
+- [#145](https://github.com/willnguyen1312/zoom-image/pull/145)
+  [`cc6de17`](https://github.com/willnguyen1312/zoom-image/commit/cc6de17c355161271e24d25a8f31e16ea1938746) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Switch to @namnode/store 💞
+
 ## 0.15.0
 
 ### Minor Changes
