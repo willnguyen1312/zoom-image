@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.16.1
+
+### Patch Changes
+
+- [#147](https://github.com/willnguyen1312/zoom-image/pull/147)
+  [`d268de3`](https://github.com/willnguyen1312/zoom-image/commit/d268de332324fc00398cd58609e03f0e5f239222) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Patch zoom image core 🚀
+
 ## 0.16.0
 
 ### Minor Changes
