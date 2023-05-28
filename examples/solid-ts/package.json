@@ -6,10 +6,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@unocss/reset": "^0.52.1",
+    "@unocss/reset": "^0.52.4",
     "typescript": "^5.0.4",
-    "unocss": "^0.52.1",
-    "vite": "^4.3.8",
+    "unocss": "^0.52.4",
+    "vite": "^4.3.9",
     "vite-plugin-solid": "^2.7.0"
   },
   "dependencies": {

@@ -12,12 +12,12 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.6",
+    "@types/react": "^18.2.7",
     "@types/react-dom": "^18.2.4",
-    "@unocss/reset": "^0.52.1",
+    "@unocss/reset": "^0.52.4",
     "@vitejs/plugin-react": "^4.0.0",
     "typescript": "^5.0.4",
-    "unocss": "^0.52.1",
-    "vite": "^4.3.8"
+    "unocss": "^0.52.4",
+    "vite": "^4.3.9"
   }
 }
