@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.15.0
+
+### Minor Changes
+
+- [#143](https://github.com/willnguyen1312/zoom-image/pull/143)
+  [`a4911a0`](https://github.com/willnguyen1312/zoom-image/commit/a4911a0a4027a75305c11570fa798143c34f9014) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Pump core minor version 🚀
+
 ## 0.14.0
 
 ### Minor Changes
