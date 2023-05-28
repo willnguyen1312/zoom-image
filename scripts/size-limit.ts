@@ -19,7 +19,7 @@ async function main() {
         getExportsSize({
           pkg: `./packages/${pkg}`,
           output: false,
-          bundler: "esbuild",
+          bundler: "rollup",
           includes: ["@zoom-image/core"],
         }),
       )

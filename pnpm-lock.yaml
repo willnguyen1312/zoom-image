@@ -272,6 +272,9 @@ importers:
       '@faker-js/faker':
         specifier: ^8.0.1
         version: 8.0.1
+      '@namnode/store':
+        specifier: ^0.0.0
+        version: 0.0.0
       '@size-limit/preset-small-lib':
         specifier: ^8.2.4
         version: 8.2.4(size-limit@8.2.4)
@@ -1691,6 +1694,10 @@ packages:
       vfile: 5.3.7
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@namnode/store@0.0.0:
+    resolution: {integrity: sha512-lm0Qjcc219KymaFJ3LHHACKGyOIL5CbqAMF408IYCGnbswsDyi7CsPmkdfa/eHWxkJKoqBHR3AtfFYKBqrZgnw==}
     dev: true
 
   /@nodelib/fs.scandir@2.1.5:

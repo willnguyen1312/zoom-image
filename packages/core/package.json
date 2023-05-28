@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.1",
+    "@namnode/store": "^0.0.0",
     "@size-limit/preset-small-lib": "^8.2.4",
     "@testing-library/dom": "^9.3.0",
     "@testing-library/jest-dom": "^5.16.5",
