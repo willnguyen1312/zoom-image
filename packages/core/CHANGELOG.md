@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.17.0
+
+### Minor Changes
+
+- [#149](https://github.com/willnguyen1312/zoom-image/pull/149)
+  [`69a8446`](https://github.com/willnguyen1312/zoom-image/commit/69a8446472479f199ecf84e2521d1bff8b4a02bb) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Update internal TypeScript compiler 🚀
+
 ## 0.16.1
 
 ### Patch Changes
