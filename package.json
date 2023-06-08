@@ -60,7 +60,7 @@
     "prettier": "^2.8.8",
     "prettier-plugin-svelte": "^2.10.1",
     "prettier-plugin-tailwindcss": "^0.3.0",
-    "turbo": "^1.10.1",
-    "unocss": "^0.52.7"
+    "turbo": "^1.10.2",
+    "unocss": "^0.53.1"
   }
 }
