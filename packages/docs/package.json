@@ -9,14 +9,14 @@
     "lint": "eslint --ext .vue ."
   },
   "dependencies": {
-    "@rushstack/eslint-patch": "^1.3.0",
+    "@rushstack/eslint-patch": "^1.3.1",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.3",
     "@zoom-image/core": "workspace:*",
     "@zoom-image/vue": "workspace:*",
     "eslint-config-custom": "workspace:*",
     "eslint-plugin-vue": "^9.14.1",
-    "unocss": "^0.52.7",
+    "unocss": "^0.53.1",
     "vitepress": "1.0.0-beta.1",
     "vue": "^3.3.4"
   }
