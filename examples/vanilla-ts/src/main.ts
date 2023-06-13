@@ -1,12 +1,12 @@
-import "virtual:uno.css"
 import "@unocss/reset/tailwind.css"
 import {
-  createZoomImageHover,
-  createZoomImageWheel,
-  createZoomImageMove,
   createZoomImageClick,
+  createZoomImageHover,
+  createZoomImageMove,
+  createZoomImageWheel,
   cropImage,
 } from "@zoom-image/core"
+import "virtual:uno.css"
 
 function createSimpleState<T>(initialState: T) {
   const listeners = new Set<(value: T) => void>()
@@ -36,7 +36,7 @@ const zoomClickLink = document.getElementById("zoom-image-click") as HTMLAnchorE
 
 type ZoomType = "wheel" | "hover" | "move" | "click"
 
-const makeImageTemplate = (id: "image-wheel" | "image-hover" | "image-move" | "image-click") => {
+const getImageTemplate = (id: "image-wheel" | "image-hover" | "image-move" | "image-click") => {
   const template = document.getElementById(id) as HTMLTemplateElement
   return template.content.cloneNode(true)
 }
@@ -58,7 +58,7 @@ const makeUpdateUIFunc = () => {
     parent.replaceChildren()
 
     if (state === "wheel") {
-      const imageWheel = makeImageTemplate("image-wheel")
+      const imageWheel = getImageTemplate("image-wheel")
       parent.replaceChildren(imageWheel)
       const container = document.getElementById("image-wheel-container") as HTMLDivElement
 
@@ -119,7 +119,7 @@ const makeUpdateUIFunc = () => {
     }
 
     if (state === "hover") {
-      const imageHover = makeImageTemplate("image-hover")
+      const imageHover = getImageTemplate("image-hover")
       parent.replaceChildren(imageHover)
 
       const container = document.getElementById("image-hover-container") as HTMLDivElement
@@ -134,7 +134,7 @@ const makeUpdateUIFunc = () => {
     }
 
     if (state === "move") {
-      const imageHover = makeImageTemplate("image-move")
+      const imageHover = getImageTemplate("image-move")
       parent.replaceChildren(imageHover)
 
       const container = document.getElementById("image-move-container") as HTMLDivElement
@@ -145,7 +145,7 @@ const makeUpdateUIFunc = () => {
     }
 
     if (state === "click") {
-      const imageClick = makeImageTemplate("image-click")
+      const imageClick = getImageTemplate("image-click")
       parent.replaceChildren(imageClick)
 
       const container = document.getElementById("image-click-container") as HTMLDivElement
