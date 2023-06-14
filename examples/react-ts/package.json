@@ -12,8 +12,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.9",
-    "@types/react-dom": "^18.2.4",
+    "@types/react": "^18.2.12",
+    "@types/react-dom": "^18.2.5",
     "@unocss/reset": "^0.53.1",
     "@vitejs/plugin-react": "^4.0.0",
     "typescript": "^5.1.3",
