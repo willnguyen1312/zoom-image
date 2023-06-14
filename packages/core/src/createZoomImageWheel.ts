@@ -1,6 +1,6 @@
 import { createStore } from "@namnode/store"
-import { clamp, disableScroll, enableScroll, getPointersCenter, getSourceImage, makeMaybeCallFunction } from "./utils"
 import type { PointerPosition } from "./utils"
+import { clamp, disableScroll, enableScroll, getPointersCenter, getSourceImage, makeMaybeCallFunction } from "./utils"
 
 export type ZoomImageWheelOptions = {
   maxZoom?: number
@@ -183,8 +183,83 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     }
   }
 
+  let touchTimer: NodeJS.Timeout | null = null
+  let start = 0
+  const endValue = 100
+  let zoomDirection: "in" | "out" = "in"
+  let value = 0
+  let x = 0
+  let y = 0
+  const animationDuration = 300
+  const durationBetweenTap = 300
+
+  function animateZoom(timestamp: number) {
+    const currentState = store.getState()
+    const containerRect = container.getBoundingClientRect()
+    const zoomPointX = x - containerRect.left
+    const zoomPointY = y - containerRect.top
+    const zoomTargetX = (zoomPointX - currentState.currentPositionX) / currentState.currentZoom
+    const zoomTargetY = (zoomPointY - currentState.currentPositionY) / currentState.currentZoom
+
+    if (!start) {
+      start = timestamp
+      zoomDirection = currentState.currentZoom > 1 ? "out" : "in"
+    }
+
+    const progress = timestamp - start
+    value = Math.min((progress / animationDuration) * endValue, endValue)
+
+    if (zoomDirection === "in") {
+      const newCurrentZoom = clamp(1 + (finalOptions.maxZoom - 1) * (value / 100), 1, finalOptions.maxZoom)
+
+      store.setState({
+        currentZoom: newCurrentZoom,
+        currentPositionX: calculatePositionX(-zoomTargetX * newCurrentZoom + zoomPointX, newCurrentZoom),
+        currentPositionY: calculatePositionY(-zoomTargetY * newCurrentZoom + zoomPointY, newCurrentZoom),
+      })
+
+      updateZoom()
+    }
+
+    if (zoomDirection === "out") {
+      const newCurrentZoom = clamp(
+        1 + (finalOptions.maxZoom - 1) - (finalOptions.maxZoom - 1) * (value / 100),
+        1,
+        finalOptions.maxZoom,
+      )
+      store.setState({
+        currentZoom: newCurrentZoom,
+        currentPositionX: calculatePositionX(-zoomTargetX * newCurrentZoom + zoomPointX, newCurrentZoom),
+        currentPositionY: calculatePositionY(-zoomTargetY * newCurrentZoom + zoomPointY, newCurrentZoom),
+      })
+
+      updateZoom()
+    }
+
+    if (progress < animationDuration) {
+      requestAnimationFrame(animateZoom)
+    } else {
+      value = 0
+      start = 0
+    }
+  }
+
   function _handlePointerDown(event: PointerEvent) {
     event.preventDefault()
+    event.stopPropagation()
+    x = event.clientX
+    y = event.clientY
+
+    if (touchTimer === null) {
+      touchTimer = setTimeout(() => {
+        touchTimer = null
+      }, durationBetweenTap)
+    } else {
+      clearTimeout(touchTimer)
+      touchTimer = null
+      requestAnimationFrame(animateZoom)
+      return
+    }
 
     if (pointerMap.size === 2) {
       return
