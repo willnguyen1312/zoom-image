@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.18.0
+
+### Minor Changes
+
+- [#153](https://github.com/willnguyen1312/zoom-image/pull/153)
+  [`d383c31`](https://github.com/willnguyen1312/zoom-image/commit/d383c31cbfd81d29f2b1f842598f9684d44bc996) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Enhance zoom wheel 💞
+
 ## 0.17.0
 
 ### Minor Changes
