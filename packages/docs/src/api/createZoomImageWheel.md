@@ -32,6 +32,9 @@ type ZoomImageWheelOptions = {
 
   // Zoom ratio when scrolling, default is 0.1
   wheelZoomRatio?: number
+
+  // Animation duration for zooming on double tap, default is 300 ms
+  dblTapAnimationDuration?: number
 }
 
 function createZoomImageWheel(

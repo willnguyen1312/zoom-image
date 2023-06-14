@@ -5,6 +5,7 @@ import { clamp, disableScroll, enableScroll, getPointersCenter, getSourceImage, 
 export type ZoomImageWheelOptions = {
   maxZoom?: number
   wheelZoomRatio?: number
+  dblTapAnimationDuration?: number
 }
 
 /* The delta values are not consistent across browsers.
@@ -34,6 +35,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   const finalOptions: Required<ZoomImageWheelOptions> = {
     maxZoom: options.maxZoom || 4,
     wheelZoomRatio: options.wheelZoomRatio || 0.1,
+    dblTapAnimationDuration: options.dblTapAnimationDuration || 300,
   }
 
   const calculatePositionX = (newPositionX: number, currentZoom: number) => {
@@ -183,7 +185,6 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   let zoomDirection: "in" | "out" = "in"
   let x = 0
   let y = 0
-  const animationDuration = 300
   const durationBetweenTap = 300
 
   function animateZoom(timestamp: number) {
@@ -200,7 +201,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     }
 
     const progress = timestamp - startTimestamp
-    currentValue = Math.min((progress / animationDuration) * endValue, endValue)
+    currentValue = Math.min((progress / finalOptions.dblTapAnimationDuration) * endValue, endValue)
 
     if (zoomDirection === "in") {
       const newCurrentZoom = clamp(1 + (finalOptions.maxZoom - 1) * (currentValue / 100), 1, finalOptions.maxZoom)
@@ -229,7 +230,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       updateZoom()
     }
 
-    if (progress < animationDuration) {
+    if (progress < finalOptions.dblTapAnimationDuration) {
       requestAnimationFrame(animateZoom)
     } else {
       currentValue = 0
