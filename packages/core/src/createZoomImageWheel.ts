@@ -175,11 +175,12 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     }
   }
 
+  // These variables are used for zooming on double tap
   let touchTimer: NodeJS.Timeout | null = null
-  let start = 0
+  let startTimestamp = 0
+  let currentValue = 0
   const endValue = 100
   let zoomDirection: "in" | "out" = "in"
-  let value = 0
   let x = 0
   let y = 0
   const animationDuration = 300
@@ -193,16 +194,16 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     const zoomTargetX = (zoomPointX - currentState.currentPositionX) / currentState.currentZoom
     const zoomTargetY = (zoomPointY - currentState.currentPositionY) / currentState.currentZoom
 
-    if (!start) {
-      start = timestamp
+    if (!startTimestamp) {
+      startTimestamp = timestamp
       zoomDirection = currentState.currentZoom > 1 ? "out" : "in"
     }
 
-    const progress = timestamp - start
-    value = Math.min((progress / animationDuration) * endValue, endValue)
+    const progress = timestamp - startTimestamp
+    currentValue = Math.min((progress / animationDuration) * endValue, endValue)
 
     if (zoomDirection === "in") {
-      const newCurrentZoom = clamp(1 + (finalOptions.maxZoom - 1) * (value / 100), 1, finalOptions.maxZoom)
+      const newCurrentZoom = clamp(1 + (finalOptions.maxZoom - 1) * (currentValue / 100), 1, finalOptions.maxZoom)
 
       store.setState({
         currentZoom: newCurrentZoom,
@@ -215,7 +216,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
 
     if (zoomDirection === "out") {
       const newCurrentZoom = clamp(
-        1 + (finalOptions.maxZoom - 1) - (finalOptions.maxZoom - 1) * (value / 100),
+        1 + (finalOptions.maxZoom - 1) - (finalOptions.maxZoom - 1) * (currentValue / 100),
         1,
         finalOptions.maxZoom,
       )
@@ -231,8 +232,8 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     if (progress < animationDuration) {
       requestAnimationFrame(animateZoom)
     } else {
-      value = 0
-      start = 0
+      currentValue = 0
+      startTimestamp = 0
     }
   }
 
