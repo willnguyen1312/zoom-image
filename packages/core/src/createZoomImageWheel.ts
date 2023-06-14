@@ -244,11 +244,15 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     }
   }
 
-  function _handlePointerDown(event: PointerEvent) {
+  function _handleTouchStart(event: TouchEvent) {
     event.preventDefault()
-    event.stopPropagation()
-    x = event.clientX
-    y = event.clientY
+
+    if (event.touches.length > 1) {
+      return
+    }
+
+    x = event.touches[0].clientX
+    y = event.touches[0].clientY
 
     if (touchTimer === null) {
       touchTimer = setTimeout(() => {
@@ -260,6 +264,10 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       requestAnimationFrame(animateZoom)
       return
     }
+  }
+
+  function _handlePointerDown(event: PointerEvent) {
+    event.preventDefault()
 
     if (pointerMap.size === 2) {
       return
@@ -325,10 +333,12 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   const handlePointerLeave = makeMaybeCallFunction(checkZoomEnabled, _handlePointerLeave)
   const handlePointerMove = makeMaybeCallFunction(checkZoomEnabled, _handlePointerMove)
   const handlePointerUp = makeMaybeCallFunction(checkZoomEnabled, _handlePointerUp)
+  const handleTouchStart = makeMaybeCallFunction(checkZoomEnabled, _handleTouchStart)
 
   const controller = new AbortController()
   const { signal } = controller
   container.addEventListener("wheel", onWheel, { signal })
+  container.addEventListener("touchstart", handleTouchStart, { signal })
   container.addEventListener("pointerdown", handlePointerDown, { signal })
   container.addEventListener("pointerleave", handlePointerLeave, { signal })
   container.addEventListener("pointermove", handlePointerMove, { signal })
