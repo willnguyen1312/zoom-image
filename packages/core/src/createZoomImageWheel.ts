@@ -53,10 +53,8 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
 
   let prevDistance = -1
   let enabledScroll = true
-  let zoomType: "wheel" | "pinch" | "" = ""
   const pointerMap = new Map<number, { x: number; y: number }>()
 
-  let isOnMove = false
   let lastPositionX = 0
   let lastPositionY = 0
   let startX = 0
@@ -130,14 +128,12 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function _onWheel(event: WheelEvent) {
-    event.preventDefault()
     const delta = -clamp(event.deltaY, -ZOOM_DELTA, ZOOM_DELTA)
     processZoomWheel({ delta, x: event.clientX, y: event.clientY })
     updateZoom()
   }
 
   function _handlePointerMove(event: PointerEvent) {
-    event.preventDefault()
     const { clientX, clientY, pointerId } = event
     for (const [cachedPointerid] of pointerMap.entries()) {
       if (cachedPointerid === pointerId) {
@@ -145,11 +141,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       }
     }
 
-    if (!isOnMove) {
-      return
-    }
-
-    if (pointerMap.size === 2 && zoomType === "pinch") {
+    if (pointerMap.size === 2) {
       const pointersIterator = pointerMap.values()
       const first = pointersIterator.next().value as PointerPosition
       const second = pointersIterator.next().value as PointerPosition
@@ -171,7 +163,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       return
     }
 
-    if (pointerMap.size === 1 && zoomType !== "pinch") {
+    if (pointerMap.size === 1) {
       const offsetX = clientX - startX
       const offsetY = clientY - startY
       const { currentZoom } = store.getState()
@@ -245,8 +237,6 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function _handleTouchStart(event: TouchEvent) {
-    event.preventDefault()
-
     if (event.touches.length > 1) {
       return
     }
@@ -267,8 +257,6 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function _handlePointerDown(event: PointerEvent) {
-    event.preventDefault()
-
     if (pointerMap.size === 2) {
       return
     }
@@ -279,24 +267,19 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     }
 
     const { clientX, clientY, pointerId } = event
-    isOnMove = true
+
     const currentState = store.getState()
     lastPositionX = currentState.currentPositionX
     lastPositionY = currentState.currentPositionY
     startX = clientX
     startY = clientY
     pointerMap.set(pointerId, { x: clientX, y: clientY })
-
-    if (pointerMap.size === 2) {
-      zoomType = "pinch"
-    }
   }
 
   function _handlePointerUp(event: PointerEvent) {
     pointerMap.delete(event.pointerId)
 
     if (pointerMap.size === 0) {
-      isOnMove = false
       prevDistance = -1
     }
 
@@ -305,18 +288,13 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       enabledScroll = true
     }
 
-    if (pointerMap.size === 0 && zoomType === "pinch") {
-      zoomType = ""
-    }
-
     const currentState = store.getState()
     lastPositionX = currentState.currentPositionX
     lastPositionY = currentState.currentPositionY
   }
 
-  function _handlePointerLeave() {
-    pointerMap.clear()
-    isOnMove = false
+  function _handlePointerLeave(event: PointerEvent) {
+    pointerMap.delete(event.pointerId)
     prevDistance = -1
     if (!enabledScroll) {
       enableScroll()
