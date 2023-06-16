@@ -1,5 +1,13 @@
 # @zoom-image/preact
 
+## 0.2.6
+
+### Patch Changes
+
+- Updated dependencies
+  [[`8b862fb`](https://github.com/willnguyen1312/zoom-image/commit/8b862fb07b715d4a1a5ad692ef7fa10472a296cf)]:
+  - @zoom-image/core@0.18.1
+
 ## 0.2.5
 
 ### Patch Changes
