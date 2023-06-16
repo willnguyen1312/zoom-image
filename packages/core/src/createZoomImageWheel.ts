@@ -129,7 +129,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     })
   }
 
-  function _onWheel(event: WheelEvent) {
+  function _handleWheel(event: WheelEvent) {
     event.preventDefault()
     const delta = -clamp(event.deltaY, -ZOOM_DELTA, ZOOM_DELTA)
     processZoomWheel({ delta, x: event.clientX, y: event.clientY })
@@ -137,6 +137,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function _handlePointerMove(event: PointerEvent) {
+    event.preventDefault()
     const { clientX, clientY, pointerId } = event
     for (const [cachedPointerid] of pointerMap.entries()) {
       if (cachedPointerid === pointerId) {
@@ -240,6 +241,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function _handleTouchStart(event: TouchEvent) {
+    event.preventDefault()
     if (event.touches.length > 1) {
       return
     }
@@ -260,6 +262,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function _handlePointerDown(event: PointerEvent) {
+    event.preventDefault()
     if (pointerMap.size === 2) {
       return
     }
@@ -280,6 +283,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function _handlePointerUp(event: PointerEvent) {
+    event.preventDefault()
     pointerMap.delete(event.pointerId)
 
     if (pointerMap.size === 0) {
@@ -297,6 +301,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function _handlePointerLeave(event: PointerEvent) {
+    event.preventDefault()
     pointerMap.delete(event.pointerId)
     prevDistance = -1
     if (!enabledScroll) {
@@ -309,7 +314,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     return store.getState().enable
   }
 
-  const onWheel = makeMaybeCallFunction(checkZoomEnabled, _onWheel)
+  const handleWheel = makeMaybeCallFunction(checkZoomEnabled, _handleWheel)
   const handlePointerDown = makeMaybeCallFunction(checkZoomEnabled, _handlePointerDown)
   const handlePointerLeave = makeMaybeCallFunction(checkZoomEnabled, _handlePointerLeave)
   const handlePointerMove = makeMaybeCallFunction(checkZoomEnabled, _handlePointerMove)
@@ -318,7 +323,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
 
   const controller = new AbortController()
   const { signal } = controller
-  container.addEventListener("wheel", onWheel, { signal })
+  container.addEventListener("wheel", handleWheel, { signal })
   container.addEventListener("touchstart", handleTouchStart, { signal })
   container.addEventListener("pointerdown", handlePointerDown, { signal })
   container.addEventListener("pointerleave", handlePointerLeave, { signal })
