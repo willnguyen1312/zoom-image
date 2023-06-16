@@ -1,6 +1,6 @@
 {
   "name": "@zoom-image/svelte",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Adapter of zoom image core for Svelte",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "license": "MIT",

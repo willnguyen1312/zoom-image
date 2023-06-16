@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.18.1
+
+### Patch Changes
+
+- [#155](https://github.com/willnguyen1312/zoom-image/pull/155)
+  [`8b862fb`](https://github.com/willnguyen1312/zoom-image/commit/8b862fb07b715d4a1a5ad692ef7fa10472a296cf) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix wheel zoom over scroll on document 🚀
+
 ## 0.18.0
 
 ### Minor Changes
