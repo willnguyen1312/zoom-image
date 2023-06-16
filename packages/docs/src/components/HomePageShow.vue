@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/vue"
 import { cropImage } from "@zoom-image/core"
+import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/vue"
 import { computed, nextTick, ref, watch } from "vue"
 
 const tabs = ref<

@@ -130,6 +130,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function _onWheel(event: WheelEvent) {
+    event.preventDefault()
     const delta = -clamp(event.deltaY, -ZOOM_DELTA, ZOOM_DELTA)
     processZoomWheel({ delta, x: event.clientX, y: event.clientY })
     updateZoom()
