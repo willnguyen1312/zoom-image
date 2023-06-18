@@ -53,7 +53,7 @@
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
     "@zoom-image/core": "workspace:*",
-    "eslint": "^8.42.0",
+    "eslint": "^8.43.0",
     "eslint-config-custom": "workspace:*",
     "esno": "^0.16.3",
     "export-size": "^0.5.2",
