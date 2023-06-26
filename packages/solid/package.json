@@ -42,7 +42,7 @@
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
-    "tsup": "7.0.0",
+    "tsup": "7.1.0",
     "typescript": "^5.1.3"
   },
   "dependencies": {
