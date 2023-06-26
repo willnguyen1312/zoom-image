@@ -183,7 +183,7 @@ Refer to [Qwik Adapter section](/api/adapters/qwik) for more details
 
 ## Example with Solid Adapter
 
-Simply importing the utilities you need from `@zoom-image/qwik`
+Simply importing the utilities you need from `@zoom-image/solid`
 
 ```css
 /* styles.css */
