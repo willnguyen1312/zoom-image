@@ -17,7 +17,7 @@
   "@zoom-image/preact": {
     "useZoomImageWheel": "2.71 KB",
     "useZoomImageHover": "2.38 KB",
-    "useZoomImageMove": "2.02 KB",
+    "useZoomImageMove": "2.03 KB",
     "useZoomImageClick": "2.02 KB"
   },
   "@zoom-image/qwik": {
