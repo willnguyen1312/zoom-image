@@ -44,7 +44,7 @@ importers:
         specifier: ^0.53.4
         version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.3.9)
 
-  examples/preact-ts:
+  examples/with-preact:
     dependencies:
       "@zoom-image/core":
         specifier: latest
@@ -72,7 +72,7 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9(@types/node@20.3.3)
 
-  examples/qwik-ts:
+  examples/with-qwik:
     dependencies:
       "@zoom-image/core":
         specifier: latest
@@ -109,7 +109,7 @@ importers:
         specifier: 4.2.0
         version: 4.2.0(typescript@5.1.3)(vite@4.3.9)
 
-  examples/react-ts:
+  examples/with-react:
     dependencies:
       "@zoom-image/core":
         specifier: latest
@@ -146,7 +146,7 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9(@types/node@20.3.3)
 
-  examples/solid-ts:
+  examples/with-solid:
     dependencies:
       "@zoom-image/core":
         specifier: latest
@@ -174,7 +174,7 @@ importers:
         specifier: ^2.7.0
         version: 2.7.0(solid-js@1.7.7)(vite@4.3.9)
 
-  examples/svelte-ts:
+  examples/with-svelte:
     dependencies:
       "@zoom-image/core":
         specifier: latest
@@ -211,7 +211,7 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9(@types/node@20.3.3)
 
-  examples/vanilla-ts:
+  examples/with-vanilla:
     dependencies:
       "@zoom-image/core":
         specifier: latest
@@ -230,7 +230,7 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9(@types/node@20.3.3)
 
-  examples/vue-ts:
+  examples/with-vue:
     dependencies:
       "@zoom-image/core":
         specifier: latest

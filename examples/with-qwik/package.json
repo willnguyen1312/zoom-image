@@ -1,5 +1,5 @@
 {
-  "name": "qwik-ts",
+  "name": "with-qwik",
   "private": true,
   "scripts": {
     "dev": "vite --mode ssr"

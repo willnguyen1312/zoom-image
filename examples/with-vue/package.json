@@ -1,5 +1,5 @@
 {
-  "name": "vue-ts",
+  "name": "with-vue",
   "private": true,
   "scripts": {
     "dev": "vite"

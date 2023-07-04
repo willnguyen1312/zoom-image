@@ -8,4 +8,4 @@ aside: false
 import Demo from '../components/DemoComp.vue'
 </script>
 
-<Demo url="https://stackblitz.com/github/willnguyen1312/zoom-image/tree/main/examples/qwik-ts?embed=1&theme=dark" />
+<Demo url="https://stackblitz.com/github/willnguyen1312/zoom-image/tree/main/examples/with-qwik?embed=1&theme=dark" />

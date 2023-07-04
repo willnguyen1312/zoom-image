@@ -1,5 +1,5 @@
 {
-  "name": "solid-ts",
+  "name": "with-solid",
   "private": true,
   "scripts": {
     "dev": "vite"

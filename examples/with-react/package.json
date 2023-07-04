@@ -1,5 +1,5 @@
 {
-  "name": "preact-ts",
+  "name": "with-react",
   "private": true,
   "type": "module",
   "scripts": {
@@ -7,12 +7,15 @@
   },
   "dependencies": {
     "@zoom-image/core": "latest",
-    "@zoom-image/preact": "latest",
-    "preact": "^10.15.1"
+    "@zoom-image/react": "latest",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.5.0",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
     "@unocss/reset": "^0.53.4",
+    "@vitejs/plugin-react": "^4.0.1",
     "typescript": "^5.1.6",
     "unocss": "^0.53.4",
     "vite": "^4.3.9"
