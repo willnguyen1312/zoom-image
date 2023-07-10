@@ -6,7 +6,6 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@zoom-image/core": "latest",
     "@zoom-image/svelte": "latest"
   },
   "devDependencies": {
