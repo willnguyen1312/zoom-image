@@ -1,5 +1,13 @@
 # @zoom-image/svelte
 
+## 0.1.9
+
+### Patch Changes
+
+- [#171](https://github.com/willnguyen1312/zoom-image/pull/171)
+  [`9624123`](https://github.com/willnguyen1312/zoom-image/commit/9624123f14d918d7da7aaf6705ef98e5107de638) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix integration issue with Svelte 4 💞
+
 ## 0.1.8
 
 ### Patch Changes
