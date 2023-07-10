@@ -496,8 +496,8 @@ importers:
         specifier: workspace:*
         version: link:../core
       svelte:
-        specifier: ^3.0.0
-        version: 3.59.2
+        specifier: ^3.0.0 || ^4.0.0
+        version: 4.0.5
     devDependencies:
       eslint-config-custom:
         specifier: workspace:*
@@ -8502,12 +8502,6 @@ packages:
       svelte: 4.0.5
       typescript: 5.1.6
     dev: true
-
-  /svelte@3.59.2:
-    resolution:
-      { integrity: sha512-vzSyuGr3eEoAtT/A6bmajosJZIUWySzY2CzB3w2pgPvnkUjGqlDnsNnA0PMO+mMAhuyMul6C2uuZzY6ELSkzyA== }
-    engines: { node: ">= 8" }
-    dev: false
 
   /svelte@4.0.5:
     resolution:
