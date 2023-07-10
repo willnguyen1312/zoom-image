@@ -16,7 +16,6 @@
     "vite-tsconfig-paths": "4.2.0"
   },
   "dependencies": {
-    "@zoom-image/core": "latest",
     "@zoom-image/qwik": "latest"
   }
 }

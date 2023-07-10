@@ -46,9 +46,6 @@ importers:
 
   examples/with-preact:
     dependencies:
-      "@zoom-image/core":
-        specifier: latest
-        version: link:../../packages/core
       "@zoom-image/preact":
         specifier: latest
         version: link:../../packages/preact
@@ -74,9 +71,6 @@ importers:
 
   examples/with-qwik:
     dependencies:
-      "@zoom-image/core":
-        specifier: latest
-        version: link:../../packages/core
       "@zoom-image/qwik":
         specifier: latest
         version: link:../../packages/qwik
@@ -111,9 +105,6 @@ importers:
 
   examples/with-react:
     dependencies:
-      "@zoom-image/core":
-        specifier: latest
-        version: link:../../packages/core
       "@zoom-image/react":
         specifier: latest
         version: link:../../packages/react
@@ -148,9 +139,6 @@ importers:
 
   examples/with-solid:
     dependencies:
-      "@zoom-image/core":
-        specifier: latest
-        version: link:../../packages/core
       "@zoom-image/solid":
         specifier: latest
         version: link:../../packages/solid
@@ -176,9 +164,6 @@ importers:
 
   examples/with-svelte:
     dependencies:
-      "@zoom-image/core":
-        specifier: latest
-        version: link:../../packages/core
       "@zoom-image/svelte":
         specifier: latest
         version: link:../../packages/svelte
@@ -232,9 +217,6 @@ importers:
 
   examples/with-vue:
     dependencies:
-      "@zoom-image/core":
-        specifier: latest
-        version: link:../../packages/core
       "@zoom-image/vue":
         specifier: latest
         version: link:../../packages/vue
