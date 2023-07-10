@@ -1,0 +1,49 @@
+name: 🐞 Bug report
+description: Report an issue with Zoom Image
+labels: [pending triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report :)
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Describe the bug
+      description: A description of what the bug is. Thanks :)
+      placeholder: Bug description
+    validations:
+      required: true
+  - type: input
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description:
+        Please provide a minimal reproduction of the bug. You can use CodeSandbox, Stackblitz or a GitHub repository.
+        Thanks :)
+      placeholder: Reproduction
+    validations:
+      required: true
+  - type: dropdown
+    id: package-manager
+    attributes:
+      label: Used Package Manager
+      description: Select the used package manager
+      options:
+        - npm
+        - yarn
+        - pnpm
+    validations:
+      required: true
+  - type: checkboxes
+    id: checkboxes
+    attributes:
+      label: Validations
+      description: Before submitting the issue, please make sure you do the following
+      options:
+        - label:
+            Check that there isn't [already an issue](https://github.com/willnguyen1312/zoom-image/issues) that reports
+            the same bug to avoid creating a duplicate.
+          required: true
+        - label: The provided reproduction is available
+          required: true
