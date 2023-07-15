@@ -13,10 +13,10 @@ export function useZoomImageWheel() {
   const result = useSignal<ReturnType<typeof _createZoomImageWheel> | undefined>(undefined)
 
   const zoomImageState = useStore<ZoomImageWheelState>({
-    currentPositionX: -1,
-    currentPositionY: -1,
     currentZoom: 1,
-    enable: false,
+    enable: true,
+    currentPositionX: 0,
+    currentPositionY: 0,
   })
 
   useVisibleTask$(({ cleanup }) => {
