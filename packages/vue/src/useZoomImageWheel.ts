@@ -1,5 +1,5 @@
-import { reactive, onUnmounted } from "vue"
 import { createZoomImageWheel as _createZoomImageWheel } from "@zoom-image/core"
+import { onUnmounted, reactive } from "vue"
 
 import type { ZoomImageWheelState, ZoomImageWheelStateUpdate } from "@zoom-image/core"
 
@@ -7,10 +7,10 @@ export function useZoomImageWheel() {
   let result: ReturnType<typeof _createZoomImageWheel> | undefined
 
   const zoomImageState = reactive<ZoomImageWheelState>({
+    currentZoom: 1,
+    enable: false,
     currentPositionX: -1,
     currentPositionY: -1,
-    currentZoom: -1,
-    enable: false,
   })
 
   const createZoomImage = (...arg: Parameters<typeof _createZoomImageWheel>) => {

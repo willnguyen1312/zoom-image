@@ -1,6 +1,6 @@
-import { writable } from "svelte/store"
-import { onDestroy } from "svelte"
 import { createZoomImageWheel as _createZoomImageWheel } from "@zoom-image/core"
+import { onDestroy } from "svelte"
+import { writable } from "svelte/store"
 
 import type { ZoomImageWheelState, ZoomImageWheelStateUpdate } from "@zoom-image/core"
 
@@ -8,10 +8,10 @@ export function useZoomImageWheel() {
   let result: ReturnType<typeof _createZoomImageWheel> | undefined
 
   const { set, subscribe } = writable<ZoomImageWheelState>({
+    currentZoom: 1,
+    enable: false,
     currentPositionX: -1,
     currentPositionY: -1,
-    currentZoom: -1,
-    enable: false,
   })
 
   const createZoomImage = (...arg: Parameters<typeof _createZoomImageWheel>) => {
