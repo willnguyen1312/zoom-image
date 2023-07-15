@@ -14,9 +14,9 @@ export function useZoomImageWheel() {
 
   const zoomImageState = useStore<ZoomImageWheelState>({
     currentZoom: 1,
-    enable: true,
-    currentPositionX: 0,
-    currentPositionY: 0,
+    enable: false,
+    currentPositionX: -1,
+    currentPositionY: -1,
   })
 
   useVisibleTask$(({ cleanup }) => {
