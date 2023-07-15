@@ -1,6 +1,6 @@
-import { component$, useSignal, useComputed$, useVisibleTask$ } from "@builder.io/qwik"
-import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/qwik"
+import { component$, useComputed$, useSignal, useVisibleTask$ } from "@builder.io/qwik"
 import { cropImage } from "@zoom-image/core"
+import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/qwik"
 
 type Tab = {
   name: string
