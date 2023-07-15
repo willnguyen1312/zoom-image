@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.20.0
+
+### Minor Changes
+
+- [#180](https://github.com/willnguyen1312/zoom-image/pull/180)
+  [`cbd7b0f`](https://github.com/willnguyen1312/zoom-image/commit/cbd7b0f84e875092a8df69f522f57c65203087e4) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix state initialization and update internal dependencies 💞
+
 ## 0.19.0
 
 ### Minor Changes
