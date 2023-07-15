@@ -64,6 +64,6 @@
   },
   "dependencies": {
     "@namnode/utils": "^0.4.0",
-    "@zoom-image/core": "initialization:*"
+    "@zoom-image/core": "workspace:*"
   }
 }
