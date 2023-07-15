@@ -1,5 +1,13 @@
 # @zoom-image/qwik
 
+## 0.1.9
+
+### Patch Changes
+
+- [#178](https://github.com/willnguyen1312/zoom-image/pull/178)
+  [`a8b2995`](https://github.com/willnguyen1312/zoom-image/commit/a8b2995e31fba56fcbb2fc61dc9db74b17c19662) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix Qwik integration adapter 💞
+
 ## 0.1.8
 
 ### Patch Changes
