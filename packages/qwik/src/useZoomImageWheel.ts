@@ -1,17 +1,22 @@
-import { useStore, useVisibleTask$, $ } from "@builder.io/qwik"
+import { $, noSerialize, useSignal, useStore, useVisibleTask$ } from "@builder.io/qwik"
 import { createZoomImageWheel as _createZoomImageWheel } from "@zoom-image/core"
 
 import type { ZoomImageWheelState, ZoomImageWheelStateUpdate } from "@zoom-image/core"
 
-export function useZoomImageWheel() {
-  const result: { value: ReturnType<typeof _createZoomImageWheel> } = {} as {
-    value: ReturnType<typeof _createZoomImageWheel>
+function updateObjectProps(target: Record<string, unknown>, source: Record<string, unknown>) {
+  for (const key in source) {
+    target[key] = source[key]
   }
+}
+
+export function useZoomImageWheel() {
+  const result = useSignal<ReturnType<typeof _createZoomImageWheel> | undefined>(undefined)
+
   const zoomImageState = useStore<ZoomImageWheelState>({
-    currentPositionX: -1,
-    currentPositionY: -1,
-    currentZoom: -1,
-    enable: false,
+    currentZoom: 1,
+    enable: true,
+    currentPositionX: 0,
+    currentPositionY: 0,
   })
 
   useVisibleTask$(({ cleanup }) => {
@@ -21,22 +26,15 @@ export function useZoomImageWheel() {
   })
 
   const createZoomImage = $((...arg: Parameters<typeof _createZoomImageWheel>) => {
-    result.value?.cleanup()
-    result.value = _createZoomImageWheel(...arg)
+    result.value = noSerialize(_createZoomImageWheel(...arg))
+    const currentState = result.value?.getState()
 
-    const currentState = result.value.getState()
-    for (const key in currentState) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      zoomImageState[key] = currentState[key]
+    if (currentState) {
+      updateObjectProps(zoomImageState, currentState)
     }
 
-    result.value.subscribe(({ updatedProperties }) => {
-      for (const key in updatedProperties) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        zoomImageState[key] = updatedProperties[key]
-      }
+    result.value?.subscribe(({ updatedProperties }) => {
+      updateObjectProps(zoomImageState, updatedProperties)
     })
   })
 
