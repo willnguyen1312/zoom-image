@@ -1,4 +1,5 @@
-import { useStore, useVisibleTask$, $ } from "@builder.io/qwik"
+import { $, useStore, useVisibleTask$ } from "@builder.io/qwik"
+import { overrideObjectProps } from "@namnode/utils"
 import { createZoomImageMove as _createZoomImageMove } from "@zoom-image/core"
 
 import type { ZoomImageMoveState } from "@zoom-image/core"
@@ -15,18 +16,10 @@ export function useZoomImageMove() {
     result.value?.cleanup()
     result.value = _createZoomImageMove(...arg)
     const currentState = result.value.getState()
-    for (const key in currentState) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      zoomImageState[key] = currentState[key]
-    }
+    overrideObjectProps(zoomImageState, currentState)
 
     result.value.subscribe(({ updatedProperties }) => {
-      for (const key in updatedProperties) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        zoomImageState[key] = updatedProperties[key]
-      }
+      overrideObjectProps(zoomImageState, updatedProperties)
     })
   })
 
