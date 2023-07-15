@@ -1,13 +1,7 @@
 import { $, noSerialize, useSignal, useStore, useVisibleTask$ } from "@builder.io/qwik"
-import { createZoomImageWheel as _createZoomImageWheel } from "@zoom-image/core"
-
+import { overrideObjectProps } from "@namnode/utils"
 import type { ZoomImageWheelState, ZoomImageWheelStateUpdate } from "@zoom-image/core"
-
-function updateObjectProps(target: Record<string, unknown>, source: Record<string, unknown>) {
-  for (const key in source) {
-    target[key] = source[key]
-  }
-}
+import { createZoomImageWheel as _createZoomImageWheel } from "@zoom-image/core"
 
 export function useZoomImageWheel() {
   const result = useSignal<ReturnType<typeof _createZoomImageWheel> | undefined>(undefined)
@@ -30,11 +24,11 @@ export function useZoomImageWheel() {
     const currentState = result.value?.getState()
 
     if (currentState) {
-      updateObjectProps(zoomImageState, currentState)
+      overrideObjectProps(zoomImageState, currentState)
     }
 
     result.value?.subscribe(({ updatedProperties }) => {
-      updateObjectProps(zoomImageState, updatedProperties)
+      overrideObjectProps(zoomImageState, updatedProperties)
     })
   })
 
