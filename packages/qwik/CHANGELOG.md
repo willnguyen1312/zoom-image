@@ -1,5 +1,13 @@
 # @zoom-image/qwik
 
+## 0.1.11
+
+### Patch Changes
+
+- [#182](https://github.com/willnguyen1312/zoom-image/pull/182)
+  [`e346d8e`](https://github.com/willnguyen1312/zoom-image/commit/e346d8e3ecb8c557eb32fb84000388fc6e8668e4) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Refactor internal state update mechanism 💞
+
 ## 0.1.10
 
 ### Patch Changes
