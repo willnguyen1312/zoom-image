@@ -9,34 +9,34 @@
     "makeCalculatePercentage": "96 B"
   },
   "@zoom-image/react": {
-    "useZoomImageWheel": "1.8 KB",
+    "useZoomImageWheel": "1.79 KB",
     "useZoomImageHover": "1.46 KB",
     "useZoomImageClick": "1.08 KB",
     "useZoomImageMove": "1.08 KB"
   },
   "@zoom-image/preact": {
-    "useZoomImageWheel": "2.71 KB",
+    "useZoomImageWheel": "2.7 KB",
     "useZoomImageHover": "2.38 KB",
     "useZoomImageMove": "2.03 KB",
     "useZoomImageClick": "2.02 KB"
   },
   "@zoom-image/qwik": {
-    "useZoomImageWheel": "1.93 KB",
+    "useZoomImageWheel": "1.96 KB",
     "useZoomImageHover": "1.58 KB",
-    "useZoomImageMove": "1.21 KB",
-    "useZoomImageClick": "1.21 KB"
+    "useZoomImageClick": "1.21 KB",
+    "useZoomImageMove": "1.2 KB"
   },
   "@zoom-image/solid": {
-    "useZoomImageWheel": "2.99 KB",
+    "useZoomImageWheel": "2.98 KB",
     "useZoomImageHover": "2.66 KB",
     "useZoomImageClick": "2.31 KB",
     "useZoomImageMove": "2.3 KB"
   },
   "@zoom-image/svelte": {
     "useZoomImageWheel": "1.98 KB",
-    "useZoomImageHover": "1.65 KB",
+    "useZoomImageHover": "1.66 KB",
     "useZoomImageClick": "1.3 KB",
-    "useZoomImageMove": "1.29 KB"
+    "useZoomImageMove": "1.3 KB"
   },
   "@zoom-image/vue": {
     "useZoomImageWheel": "1.77 KB",
