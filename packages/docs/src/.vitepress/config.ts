@@ -1,6 +1,6 @@
+import pkg from "@zoom-image/core/package.json"
 import Unocss from "unocss/vite"
 import { defineConfig } from "vitepress"
-import pkg from "@zoom-image/core/package.json"
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -41,6 +41,10 @@ export default defineConfig({
           {
             text: "React",
             link: "/examples/react",
+          },
+          {
+            text: "Next",
+            link: "/examples/next",
           },
           {
             text: "Preact",
