@@ -7,5 +7,15 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["docs", "with-vanilla", "with-vue", "with-react", "with-solid", "with-svelte", "with-preact", "with-qwik"]
+  "ignore": [
+    "docs",
+    "with-vanilla",
+    "with-vue",
+    "with-react",
+    "with-next",
+    "with-solid",
+    "with-svelte",
+    "with-preact",
+    "with-qwik"
+  ]
 }
