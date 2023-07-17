@@ -11,6 +11,7 @@
   - [With Docs](#with-docs)
   - [With Preact](#with-preact)
   - [With React](#with-react)
+  - [With Next](#with-next)
   - [With Svelte](#with-svelte)
   - [With Vanilla JS](#with-vanilla-js)
   - [With Vue](#with-vue)
@@ -56,6 +57,12 @@ pnpm start-preact
 
 ```bash
 pnpm start-react
+```
+
+### With Next
+
+```bash
+pnpm start-next
 ```
 
 ### With Svelte
