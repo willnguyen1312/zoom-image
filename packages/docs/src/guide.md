@@ -299,6 +299,7 @@ Refer to [Svelte Adapter section](/api/adapters/vue) for more details
 - [Vanilla JS](/examples/vanilla)
 - [Vue](/examples/vue)
 - [React](/examples/react)
+- [Next](/examples/next)
 - [Preact](/examples/preact)
 - [Svelte](/examples/svelte)
 - [Solid](/examples/solid)
