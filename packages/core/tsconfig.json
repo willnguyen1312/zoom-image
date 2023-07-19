@@ -3,6 +3,6 @@
   "include": ["src", "test", "vite.config.ts", "./vitest.setup.ts"],
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo",
-    "types": ["vitest/importMeta", "vitest/globals", "@testing-library/jest-dom", "@vitejs/plugin-vue", "./env.d.ts"]
+    "types": ["vitest/importMeta", "vitest/globals", "@vitejs/plugin-vue", "./env.d.ts"]
   }
 }
