@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "Zoom Image"
-  tagline: "A little yet powerful framework agnostic library to zoom image on the web"
+  tagline: "A little yet powerful framework agnostic headless-library to zoom image on the web"
   image:
     src: /favicon.svg
     alt: ZoomImage
