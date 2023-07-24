@@ -100,6 +100,7 @@ pnpm start-qwik
 - [react-zoomable-media](https://github.com/willnguyen1312/react-zoomable-media) - The library I wrote for my previous
   company
 - [zagjs](https://github.com/chakra-ui/zag) - The project's architecture is inspired by this library
+- [TanStack](https://tanstack.com) - The project's core pattern is heavily inspired by this project - Headless UI
 - [js-image-zoom](https://github.com/malaman/js-image-zoom) - The internal working of zoom image on hover is inspired by
   this library
 
