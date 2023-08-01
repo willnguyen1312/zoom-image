@@ -23,8 +23,8 @@
 
 ## Zoom Image
 
-A little yet powerful framework agnostic headless-library to zoom image on the web. It is a typical experience on e-commerce
-sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
+A little yet powerful framework agnostic headless-library to zoom image on the web. It is a typical experience on
+e-commerce sites. Examples are written with Preact, React, Svelte, Vanilla JS and Vue.
 
 - ✅ Zoom on wheel (scroll & pinch)
 - ✅ Zoom on hover
