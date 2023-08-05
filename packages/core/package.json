@@ -66,8 +66,5 @@
     "vitest": "^0.33.0",
     "vitest-dom": "^0.1.0",
     "vue": "^3.3.4"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
