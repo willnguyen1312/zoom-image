@@ -1,28 +1,35 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { ZoomImageClickState, createZoomImageClick as _createZoomImageClick } from "@zoom-image/core";
-import { BehaviorSubject } from "rxjs";
+import { Injectable, OnDestroy } from "@angular/core"
+import {
+  ZoomImageHoverState,
+  ZoomImageHoverStateUpdate,
+  createZoomImageHover as _createZoomImageHover,
+} from "@zoom-image/core"
+import { BehaviorSubject } from "rxjs"
 
 @Injectable()
-export class ZoomImageClickService implements OnDestroy {
-  private _zoomImageState = new BehaviorSubject<ZoomImageClickState>({
+export class ZoomImageHoverService implements OnDestroy {
+  private _zoomImageState = new BehaviorSubject<ZoomImageHoverState>({
+    enabled: false,
     zoomedImgStatus: "idle",
   })
 
-  private result: ReturnType<typeof _createZoomImageClick> | undefined
+  private result: ReturnType<typeof _createZoomImageHover> | undefined
 
-  readonly zoomImageState$ = this._zoomImageState.asObservable();
+  readonly zoomImageState$ = this._zoomImageState.asObservable()
 
-  readonly zoomImageState = this._zoomImageState.value;
+  readonly zoomImageState = this._zoomImageState.value
 
-
-  createZoomImage = (...arg: Parameters<typeof _createZoomImageClick>) => {
+  createZoomImage = (...arg: Parameters<typeof _createZoomImageHover>) => {
     this.result?.cleanup()
-    this.result = _createZoomImageClick(...arg)
+    this.result = _createZoomImageHover(...arg)
 
     this.result.subscribe(({ state }) => {
       this._zoomImageState.next(state)
     })
+  }
 
+  setZoomImageState = (state: ZoomImageHoverStateUpdate) => {
+    this.result?.setState(state)
   }
 
   ngOnDestroy() {

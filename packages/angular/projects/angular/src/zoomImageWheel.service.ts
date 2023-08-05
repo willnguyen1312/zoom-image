@@ -1,6 +1,10 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { ZoomImageWheelState, ZoomImageWheelStateUpdate, createZoomImageWheel as _createZoomImageWheel } from "@zoom-image/core";
-import { BehaviorSubject } from "rxjs";
+import { Injectable, OnDestroy } from "@angular/core"
+import {
+  ZoomImageWheelState,
+  ZoomImageWheelStateUpdate,
+  createZoomImageWheel as _createZoomImageWheel,
+} from "@zoom-image/core"
+import { BehaviorSubject } from "rxjs"
 
 @Injectable()
 export class ZoomImageWheelService implements OnDestroy {
@@ -13,10 +17,9 @@ export class ZoomImageWheelService implements OnDestroy {
 
   private result: ReturnType<typeof _createZoomImageWheel> | undefined
 
-  readonly zoomImageState$ = this._zoomImageState.asObservable();
+  readonly zoomImageState$ = this._zoomImageState.asObservable()
 
-  readonly zoomImageState = this._zoomImageState.value;
-
+  readonly zoomImageState = this._zoomImageState.value
 
   createZoomImage = (...arg: Parameters<typeof _createZoomImageWheel>) => {
     this.result?.cleanup()
@@ -25,7 +28,6 @@ export class ZoomImageWheelService implements OnDestroy {
     this.result.subscribe(({ state }) => {
       this._zoomImageState.next(state)
     })
-
   }
 
   setZoomImageState(state: ZoomImageWheelStateUpdate) {

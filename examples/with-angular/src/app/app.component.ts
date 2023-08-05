@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from "@angular/core";
-import { ZoomImageWheelService } from "@zoom-image/angular";
-import { ZoomImageWheelState, cropImage } from "@zoom-image/core";
-
+import { AfterViewInit, Component, ElementRef, ViewChild } from "@angular/core"
+import { ZoomImageWheelService } from "@zoom-image/angular"
+import { ZoomImageWheelState, cropImage } from "@zoom-image/core"
 
 type Tab = {
   name: string
@@ -18,7 +17,7 @@ type ZoomType = "wheel" | "hover" | "move" | "click"
   providers: [ZoomImageWheelService],
 })
 export class AppComponent implements AfterViewInit {
-  @ViewChild('imageWheelContainer') imageWheelContainerRef: ElementRef | undefined;
+  @ViewChild("imageWheelContainer") imageWheelContainerRef: ElementRef | undefined
   // @ViewChild('imageMoveContainer') imageMoveContainerRef: ElementRef;
   // @ViewChild('imageHoverContainer') imageHoverContainerRef: ElementRef;
   // @ViewChild('imageClickContainer') imageClickContainerRef: ElementRef;
@@ -26,13 +25,12 @@ export class AppComponent implements AfterViewInit {
 
   zoomImageWheelState: ZoomImageWheelState = {} as ZoomImageWheelState
 
-  tabs:
-    Tab[] = [
-      { name: "Wheel", href: "#", current: true, value: "wheel" },
-      { name: "Hover", href: "#", current: false, value: "hover" },
-      { name: "Move", href: "#", current: false, value: "move" },
-      { name: "Click", href: "#", current: false, value: "click" },
-    ]
+  tabs: Tab[] = [
+    { name: "Wheel", href: "#", current: true, value: "wheel" },
+    { name: "Hover", href: "#", current: false, value: "hover" },
+    { name: "Move", href: "#", current: false, value: "move" },
+    { name: "Click", href: "#", current: false, value: "click" },
+  ]
 
   zoomType: ZoomType = "wheel"
   croppedImage: string = ""
@@ -40,7 +38,6 @@ export class AppComponent implements AfterViewInit {
   constructor(private zoomImageWheelService: ZoomImageWheelService) {
     this.zoomImageWheelState = zoomImageWheelService.zoomImageState
   }
-
 
   ngAfterViewInit(): void {
     if (this.imageWheelContainerRef) {
@@ -55,13 +52,11 @@ export class AppComponent implements AfterViewInit {
     return `${Math.round(this.zoomImageWheelState.currentZoom * 100)}%`
   }
 
-
   handleTabClick(tab: Tab) {
     const zoomType = tab.value
     if (zoomType === this.zoomType) {
       return
     }
-
 
     this.croppedImage = ""
     this.tabs.forEach((tab) => (tab.current = false))
