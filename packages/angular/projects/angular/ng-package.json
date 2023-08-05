@@ -3,5 +3,9 @@
   "dest": "../../dist/angular",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "allowedNonPeerDependencies": [
+    "rxjs",
+    "@zoom-image/core"
+  ]
 }
