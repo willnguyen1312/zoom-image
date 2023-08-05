@@ -146,9 +146,6 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
-      run-script-os:
-        specifier: ^1.1.6
-        version: 1.1.6
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -13133,12 +13130,6 @@ packages:
       { integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA== }
     dependencies:
       queue-microtask: 1.2.3
-
-  /run-script-os@1.1.6:
-    resolution:
-      { integrity: sha512-ql6P2LzhBTTDfzKts+Qo4H94VUKpxKDFz6QxxwaUZN0mwvi7L3lpOI7BqPCq7lgDh3XLl0dpeXwfcVIitlrYrw== }
-    hasBin: true
-    dev: false
 
   /rxjs@7.8.1:
     resolution:

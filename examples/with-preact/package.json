@@ -1,6 +1,7 @@
 {
   "name": "with-preact",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite"
   },
