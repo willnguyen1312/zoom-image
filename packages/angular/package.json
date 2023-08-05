@@ -1,6 +1,6 @@
 {
   "name": "angular",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "build": "ng build angular --configuration development",
     "dev": "ng build angular --watch --configuration development"
