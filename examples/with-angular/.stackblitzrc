@@ -1,4 +1,4 @@
 {
     "installDependencies": false,
-    "startCommand": "npm install --legacy-peer-deps && npm start"
+    "startCommand": "npm install --legacy-peer-deps && npm run dev"
 }
