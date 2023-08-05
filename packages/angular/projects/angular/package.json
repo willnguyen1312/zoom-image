@@ -10,5 +10,8 @@
     "rxjs": "^7.8.1",
     "@zoom-image/core": "workspace:*"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "publishConfig": {
+    "directory": "../../dist/angular"
+  }
 }
