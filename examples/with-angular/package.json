@@ -13,7 +13,7 @@
     "@angular/platform-browser": "^16.1.8",
     "@angular/platform-browser-dynamic": "^16.1.8",
     "@angular/router": "^16.1.8",
-    "@zoom-image/angular": "latest",
+    "@zoom-image/angular": "../../packages/angular/dist/angular",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.1",
     "zone.js": "~0.13.1"
@@ -22,6 +22,9 @@
     "@angular-devkit/build-angular": "^16.1.8",
     "@angular/cli": "~16.1.8",
     "@angular/compiler-cli": "^16.1.8",
+    "autoprefixer": "10.4.14",
+    "postcss": "8.4.27",
+    "tailwindcss": "^3.3.3",
     "typescript": "~5.1.6"
   }
 }

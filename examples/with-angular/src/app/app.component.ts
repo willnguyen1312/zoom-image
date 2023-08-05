@@ -1,12 +1,14 @@
 import { Component } from "@angular/core"
+import { ZoomImageWheelService } from '@zoom-image/angular'
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"],
+  providers: [ZoomImageWheelService],
 })
 export class AppComponent {
   title = "with-angular"
 
-  constructor() { }
+  constructor(private zoomImageWheelService: ZoomImageWheelService) {
+  }
 }
