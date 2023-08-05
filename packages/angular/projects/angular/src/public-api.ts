@@ -1,2 +1,3 @@
-export * from "./lib/zoomImageClick.service"
-export * from "./lib/zoomImageWheel.service"
+export * from "./zoomImageClick.service"
+export * from "./zoomImageWheel.service"
+
