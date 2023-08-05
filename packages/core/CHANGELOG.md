@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.21.0
+
+### Minor Changes
+
+- [#197](https://github.com/willnguyen1312/zoom-image/pull/197)
+  [`e3c6052`](https://github.com/willnguyen1312/zoom-image/commit/e3c6052faf6835d3444fbde89b0433489c67be00) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Bump core package 💞
+
 ## 0.20.0
 
 ### Minor Changes
