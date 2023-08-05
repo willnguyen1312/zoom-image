@@ -1,6 +1,7 @@
 {
   "name": "with-svelte",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite"
   },
@@ -16,6 +17,6 @@
     "tslib": "^2.6.1",
     "typescript": "^5.1.6",
     "unocss": "^0.54.1",
-    "vite": "^4.4.7"
+    "vite": "^4.4.8"
   }
 }

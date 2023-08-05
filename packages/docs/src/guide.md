@@ -297,6 +297,7 @@ Refer to [Svelte Adapter section](/api/adapters/vue) for more details
 ## Demos
 
 - [Vanilla JS](/examples/vanilla)
+- [Angular](/examples/angular)
 - [Vue](/examples/vue)
 - [React](/examples/react)
 - [Next](/examples/next)

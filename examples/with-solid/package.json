@@ -1,6 +1,7 @@
 {
   "name": "with-solid",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite"
   },
@@ -9,11 +10,11 @@
     "@unocss/reset": "^0.54.1",
     "typescript": "^5.1.6",
     "unocss": "^0.54.1",
-    "vite": "^4.4.7",
+    "vite": "^4.4.8",
     "vite-plugin-solid": "^2.7.0"
   },
   "dependencies": {
     "@zoom-image/solid": "latest",
-    "solid-js": "^1.7.8"
+    "solid-js": "^1.7.9"
   }
 }

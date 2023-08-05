@@ -1,6 +1,7 @@
 {
   "name": "with-react",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite"
   },
@@ -16,6 +17,6 @@
     "@vitejs/plugin-react": "^4.0.4",
     "typescript": "^5.1.6",
     "unocss": "^0.54.1",
-    "vite": "^4.4.7"
+    "vite": "^4.4.8"
   }
 }
