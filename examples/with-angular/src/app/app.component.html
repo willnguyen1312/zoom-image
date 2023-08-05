@@ -33,4 +33,26 @@
       </button>
     </div>
   </div>
+
+  <div class="space-y-4" *ngIf="zoomType === 'hover'">
+    <p>Hover inside the image to see zoom effect</p>
+    <div #imageHoverContainer class="relative mt-1 flex h-[300px] w-[300px] items-start">
+      <img class="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+      <div #zoomTarget class="absolute left-[350px]"></div>
+    </div>
+  </div>
+
+  <div class="space-y-4" *ngIf="zoomType === 'move'">
+    <p>Move mouse inside the image to see zoom effect</p>
+    <div #imageMoveContainer class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+      <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+    </div>
+  </div>
+
+  <div class="space-y-4" *ngIf="zoomType === 'click'">
+    <p>Click inside the image to see zoom effect</p>
+    <div #imageClickContainer class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden">
+      <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+    </div>
+  </div>
 </div>
