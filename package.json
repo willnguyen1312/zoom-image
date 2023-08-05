@@ -33,6 +33,7 @@
     "docs": "pnpm --filter=docs",
     "build:docs": "turbo run build --filter=docs... --force",
     "start-docs": "turbo run dev --filter=docs...",
+    "start-angular": "turbo run dev --filter=with-angular...",
     "start-preact": "turbo run dev --filter=with-preact...",
     "start-react": "turbo run dev --filter=with-react...",
     "start-next": "turbo run dev --filter=with-next...",

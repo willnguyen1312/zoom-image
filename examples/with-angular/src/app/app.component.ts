@@ -1,0 +1,145 @@
+import { AfterViewInit, Component, ElementRef, ViewChild } from "@angular/core"
+import {
+  ZoomImageClickService,
+  ZoomImageHoverService,
+  ZoomImageMoveService,
+  ZoomImageWheelService,
+} from "@zoom-image/angular"
+import {
+  ZoomImageClickState,
+  ZoomImageHoverState,
+  ZoomImageMoveState,
+  ZoomImageWheelState,
+  cropImage,
+} from "@zoom-image/core"
+
+type Tab = {
+  name: string
+  href: string
+  current: boolean
+  value: "wheel" | "hover" | "move" | "click"
+}
+
+type ZoomType = "wheel" | "hover" | "move" | "click"
+
+const sleep = (ms = 0) => new Promise((resolve) => setTimeout(resolve, ms))
+
+@Component({
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  providers: [ZoomImageClickService, ZoomImageHoverService, ZoomImageMoveService, ZoomImageWheelService],
+})
+export class AppComponent implements AfterViewInit {
+  @ViewChild("imageWheelContainer") imageWheelContainerRef: ElementRef | undefined
+  @ViewChild("imageHoverContainer") imageHoverContainerRef: ElementRef | undefined
+  @ViewChild("imageMoveContainer") imageMoveContainerRef: ElementRef | undefined
+  @ViewChild("imageClickContainer") imageClickContainerRef: ElementRef | undefined
+  @ViewChild("zoomTarget") zoomTargetRef: ElementRef | undefined
+
+  tabs: Tab[] = [
+    { name: "Wheel", href: "#", current: true, value: "wheel" },
+    { name: "Hover", href: "#", current: false, value: "hover" },
+    { name: "Move", href: "#", current: false, value: "move" },
+    { name: "Click", href: "#", current: false, value: "click" },
+  ]
+
+  zoomType: ZoomType = "wheel"
+  croppedImage: string = ""
+
+  zoomImageWheelState: ZoomImageWheelState = {} as ZoomImageWheelState
+  zoomImageHoverState: ZoomImageHoverState = {} as ZoomImageHoverState
+  zoomImageMoveState: ZoomImageMoveState = {} as ZoomImageMoveState
+  zoomImageClickState: ZoomImageClickState = {} as ZoomImageClickState
+
+  constructor(
+    private zoomImageWheelService: ZoomImageWheelService,
+    private zoomImageHoverService: ZoomImageHoverService,
+    private zoomImageMoveService: ZoomImageMoveService,
+    private zoomImageClickService: ZoomImageClickService,
+  ) {
+    this.zoomImageWheelState = zoomImageWheelService.zoomImageState
+  }
+
+  ngAfterViewInit(): void {
+    if (this.imageWheelContainerRef) {
+      this.zoomImageWheelService.createZoomImage(this.imageWheelContainerRef.nativeElement)
+      this.zoomImageWheelService.zoomImageState$.subscribe((state) => {
+        this.zoomImageWheelState = state
+      })
+    }
+  }
+
+  getCurrentZoomImageValue() {
+    return `${Math.round(this.zoomImageWheelState.currentZoom * 100)}%`
+  }
+
+  async handleTabClick(tab: Tab) {
+    const zoomType = tab.value
+    if (zoomType === this.zoomType) {
+      return
+    }
+
+    this.croppedImage = ""
+    this.tabs.forEach((tab) => (tab.current = false))
+    tab.current = true
+    this.zoomType = zoomType
+
+    await sleep()
+
+    const handlers: Record<ZoomType, () => void> = {
+      wheel: () => {
+        this.zoomImageWheelService.createZoomImage(this.imageWheelContainerRef?.nativeElement as HTMLDivElement)
+        this.zoomImageWheelService.zoomImageState$.subscribe((state) => {
+          this.zoomImageWheelState = state
+          this.handleCropWheelZoomImage()
+        })
+      },
+      hover: () => {
+        this.zoomImageHoverService.createZoomImage(this.imageHoverContainerRef?.nativeElement as HTMLDivElement, {
+          zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+          customZoom: { width: 300, height: 500 },
+          zoomTarget: this.zoomTargetRef?.nativeElement as HTMLDivElement,
+          scaleFactor: 0.5,
+        })
+        this.zoomImageHoverService.zoomImageState$.subscribe((state) => {
+          this.zoomImageHoverState = state
+        })
+      },
+      move: () => {
+        this.zoomImageMoveService.createZoomImage(this.imageMoveContainerRef?.nativeElement as HTMLDivElement, {
+          zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        })
+        this.zoomImageMoveService.zoomImageState$.subscribe((state) => {
+          this.zoomImageMoveState = state
+        })
+      },
+      click: () => {
+        this.zoomImageClickService.createZoomImage(this.imageClickContainerRef?.nativeElement as HTMLDivElement, {
+          zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        })
+        this.zoomImageClickService.zoomImageState$.subscribe((state) => {
+          this.zoomImageClickState = state
+        })
+      },
+    }
+
+    handlers[zoomType]()
+  }
+
+  zoomIn() {
+    this.zoomImageWheelService.setZoomImageState({ currentZoom: this.zoomImageWheelState.currentZoom + 0.5 })
+  }
+
+  zoomOut() {
+    this.zoomImageWheelService.setZoomImageState({ currentZoom: this.zoomImageWheelState.currentZoom - 0.5 })
+  }
+
+  handleCropWheelZoomImage() {
+    this.croppedImage = cropImage({
+      currentZoom: this.zoomImageWheelState.currentZoom,
+      image: (this.imageWheelContainerRef?.nativeElement as HTMLDivElement).querySelector("img") as HTMLImageElement,
+      positionX: this.zoomImageWheelState.currentPositionX,
+      positionY: this.zoomImageWheelState.currentPositionY,
+    })
+  }
+}
