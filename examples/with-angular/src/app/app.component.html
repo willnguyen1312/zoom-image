@@ -1,1 +1,36 @@
-<h1 class="text-3xl font-bold underline">Hello world!</h1>
+<div class="p-4 font-sans">
+  <!-- Component template -->
+
+  <nav class="flex space-x-4 pb-4" aria-label="Tabs">
+    <a
+      *ngFor="let tab of tabs"
+      (click)="handleTabClick(tab)"
+      [ngClass]="{
+        'text-dark-700 bg-gray-100': tab.current,
+        'text-dark-500 hover:text-dark-700': !tab.current,
+        'decoration-none cursor-pointer rounded-md px-3 py-2 text-sm font-medium': true
+      }"
+      [attr.aria-current]="tab.current ? 'page' : null"
+    >
+      {{ tab.name }}
+    </a>
+  </nav>
+
+  <div class="space-y-4" *ngIf="zoomType === 'wheel'">
+    <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
+    <p>Current zoom: {{ getCurrentZoomImageValue() }}</p>
+    <div class="mt-1 flex space-x-2">
+      <div #imageWheelContainer class="h-[300px] w-[300px] cursor-crosshair">
+        <img class="h-full w-full" crossorigin="anonymous" alt="Large Pic" src="../assets/large.webp" />
+      </div>
+      <img [src]="croppedImage" *ngIf="!!croppedImage" class="h-[300px] w-[300px]" alt="Cropped placeholder" />
+    </div>
+    <div class="flex space-x-2">
+      <button (click)="zoomIn()" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom in</button>
+      <button (click)="zoomOut()" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom out</button>
+      <button class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium" (click)="handleCropWheelZoomImage()">
+        Crop image
+      </button>
+    </div>
+  </div>
+</div>
