@@ -1,1 +1,1 @@
-export * from './lib/zoomImageWheel.service';
+export * from "./lib/zoomImageWheel.service"
