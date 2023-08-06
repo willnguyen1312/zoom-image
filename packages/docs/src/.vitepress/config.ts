@@ -89,6 +89,10 @@ export default defineConfig({
         link: "/api/adapters/vue",
       },
       {
+        text: "Angular Adapter",
+        link: "/api/adapters/angular",
+      },
+      {
         text: "React Adapter",
         link: "/api/adapters/react",
       },
