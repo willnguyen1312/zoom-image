@@ -30,11 +30,11 @@ const sleep = (ms = 0) => new Promise((resolve) => setTimeout(resolve, ms))
   providers: [ZoomImageClickService, ZoomImageHoverService, ZoomImageMoveService, ZoomImageWheelService],
 })
 export class AppComponent implements AfterViewInit {
-  @ViewChild("imageWheelContainer") imageWheelContainerRef: ElementRef | undefined
-  @ViewChild("imageHoverContainer") imageHoverContainerRef: ElementRef | undefined
-  @ViewChild("imageMoveContainer") imageMoveContainerRef: ElementRef | undefined
-  @ViewChild("imageClickContainer") imageClickContainerRef: ElementRef | undefined
-  @ViewChild("zoomTarget") zoomTargetRef: ElementRef | undefined
+  @ViewChild("imageWheelContainer") imageWheelContainerRef?: ElementRef<HTMLDivElement>
+  @ViewChild("imageHoverContainer") imageHoverContainerRef?: ElementRef<HTMLDivElement>
+  @ViewChild("imageMoveContainer") imageMoveContainerRef?: ElementRef<HTMLDivElement>
+  @ViewChild("imageClickContainer") imageClickContainerRef?: ElementRef<HTMLDivElement>
+  @ViewChild("zoomTarget") zoomTargetRef?: ElementRef<HTMLDivElement>
 
   tabs: Tab[] = [
     { name: "Wheel", href: "#", current: true, value: "wheel" },
@@ -46,19 +46,17 @@ export class AppComponent implements AfterViewInit {
   zoomType: ZoomType = "wheel"
   croppedImage: string = ""
 
-  zoomImageWheelState: ZoomImageWheelState = {} as ZoomImageWheelState
-  zoomImageHoverState: ZoomImageHoverState = {} as ZoomImageHoverState
-  zoomImageMoveState: ZoomImageMoveState = {} as ZoomImageMoveState
-  zoomImageClickState: ZoomImageClickState = {} as ZoomImageClickState
+  zoomImageWheelState: ZoomImageWheelState = this.zoomImageWheelService.zoomImageState
+  zoomImageHoverState: ZoomImageHoverState = this.zoomImageHoverService.zoomImageState
+  zoomImageMoveState: ZoomImageMoveState = this.zoomImageMoveService.zoomImageState
+  zoomImageClickState: ZoomImageClickState = this.zoomImageClickService.zoomImageState
 
   constructor(
     private zoomImageWheelService: ZoomImageWheelService,
     private zoomImageHoverService: ZoomImageHoverService,
     private zoomImageMoveService: ZoomImageMoveService,
     private zoomImageClickService: ZoomImageClickService,
-  ) {
-    this.zoomImageWheelState = zoomImageWheelService.zoomImageState
-  }
+  ) {}
 
   ngAfterViewInit(): void {
     if (this.imageWheelContainerRef) {

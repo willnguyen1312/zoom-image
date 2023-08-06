@@ -61,6 +61,55 @@ createZoomImageWheel(container)
 
 Refer to [Core API section](/api/) for more details
 
+## Example with Angular Adapter
+
+Simply importing the utilities you need from `@zoom-image/angular`
+
+```html
+<!-- custom.component.html -->
+<div #imageWheelContainer class="imageContainer">
+  <img class="image" alt="Large Pic" src="/image.webp" />
+</div>
+```
+
+```css
+/* custom.component.css */
+.imageContainer {
+  width: var(--imageContainerWidth);
+  height: var(--imageContainerHeight);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+```
+
+```ts
+import { AfterViewInit, Component, ElementRef, ViewChild } from "@angular/core"
+import { ZoomImageWheelState } from "@zoom-image/core"
+
+@Component({
+  selector: "custom-component",
+  templateUrl: "./custom.component.html",
+  styleUrls: ["./custom.component.css"],
+  providers: [ZoomImageWheelService],
+})
+export class AppComponent implements AfterViewInit {
+  @ViewChild("imageWheelContainer") imageWheelContainerRef?: ElementRef<HTMLDivElement>
+
+  constructor(private zoomImageWheelService: ZoomImageWheelService) {}
+
+  ngAfterViewInit(): void {
+    if (this.imageWheelContainerRef) {
+      this.zoomImageWheelService.createZoomImage(this.imageWheelContainerRef.nativeElement)
+    }
+  }
+}
+```
+
+Refer to [Angular Adapter section](/api/adapters/angular) for more details
+
 ## Example with React Adapter
 
 Simply importing the utilities you need from `@zoom-image/react`
@@ -298,10 +347,10 @@ Refer to [Svelte Adapter section](/api/adapters/vue) for more details
 
 - [Vanilla JS](/examples/vanilla)
 - [Angular](/examples/angular)
-- [Vue](/examples/vue)
 - [React](/examples/react)
-- [Next](/examples/next)
 - [Preact](/examples/preact)
-- [Svelte](/examples/svelte)
-- [Solid](/examples/solid)
+- [Next](/examples/next)
 - [Qwik](/examples/qwik)
+- [Solid](/examples/solid)
+- [Svelte](/examples/svelte)
+- [Vue](/examples/vue)
