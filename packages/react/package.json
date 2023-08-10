@@ -40,7 +40,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/react": "^18.2.18",
+    "@types/react": "^18.2.20",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "tsup": "7.2.0",
