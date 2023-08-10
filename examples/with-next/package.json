@@ -5,11 +5,11 @@
     "dev": "next dev"
   },
   "dependencies": {
-    "@types/node": "^20.4.8",
-    "@types/react": "^18.2.18",
+    "@types/node": "^20.4.9",
+    "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
-    "@unocss/postcss": "^0.54.1",
-    "@unocss/reset": "^0.54.1",
+    "@unocss/postcss": "^0.54.3",
+    "@unocss/reset": "^0.54.3",
     "@zoom-image/react": "latest",
     "autoprefixer": "10.4.14",
     "eslint": "8.46.0",
@@ -19,6 +19,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "5.1.6",
-    "unocss": "^0.54.1"
+    "unocss": "^0.54.3"
   }
 }
