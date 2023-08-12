@@ -5,14 +5,10 @@
     "dev": "ng serve"
   },
   "dependencies": {
-    "@angular/animations": "^16.2.0",
     "@angular/common": "^16.2.0",
-    "@angular/compiler": "^16.2.0",
     "@angular/core": "^16.2.0",
-    "@angular/forms": "^16.2.0",
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
-    "@angular/router": "^16.2.0",
     "@zoom-image/angular": "latest",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.1",
