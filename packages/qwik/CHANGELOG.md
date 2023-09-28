@@ -1,5 +1,13 @@
 # @zoom-image/qwik
 
+## 0.1.13
+
+### Patch Changes
+
+- Updated dependencies
+  [[`50e34c9`](https://github.com/willnguyen1312/zoom-image/commit/50e34c905e4038964500fa78c0c09e7a02dabeb3)]:
+  - @zoom-image/core@0.21.1
+
 ## 0.1.12
 
 ### Patch Changes

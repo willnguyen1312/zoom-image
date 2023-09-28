@@ -1,6 +1,6 @@
 {
   "name": "@zoom-image/react",
-  "version": "0.3.10",
+  "version": "0.3.11",
   "description": "Adapter of zoom image core for React",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "license": "MIT",
