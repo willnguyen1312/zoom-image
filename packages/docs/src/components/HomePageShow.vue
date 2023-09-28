@@ -103,18 +103,18 @@ watch(
 <template>
   <div class="min-h-xl m-x-auto rounded-4 mt-4 flex flex-col bg-white p-4 font-sans text-black sm:container sm:px-12">
     <nav class="mb-4 flex space-x-4" aria-label="Tabs">
-      <a
+      <p
         v-for="tab in tabs"
         @click="handleTabClick(tab)"
         :key="tab.name"
-        :href="tab.href"
         :class="[
           tab.current ? 'text-dark-700 bg-gray-100' : 'text-dark-500 hover:text-dark-700',
-          'decoration-none rounded-md px-3 py-2 text-sm font-medium',
+          'decoration-none cursor-pointer rounded-md px-3 py-2 text-sm font-medium',
         ]"
         :aria-current="tab.current ? 'page' : undefined"
-        >{{ tab.name }}</a
       >
+        {{ tab.name }}
+      </p>
     </nav>
 
     <div class="space-y-4" v-if="zoomType === 'wheel'">
