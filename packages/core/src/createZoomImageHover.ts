@@ -1,7 +1,7 @@
-import { imageCache } from "./store"
 import { createStore } from "@namnode/store"
+import { imageCache } from "./store"
 import { ZoomedImgStatus } from "./types"
-import { enableScroll, disableScroll, clamp, getSourceImage } from "./utils"
+import { clamp, disableScroll, enableScroll, getSourceImage } from "./utils"
 
 export type ZoomImageHoverOptions = {
   customZoom?: { width: number; height: number }
@@ -188,14 +188,14 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   return {
     cleanup: () => {
       controller.abort()
-      container.removeChild(zoomLens)
+      container.contains(zoomLens) && container.removeChild(zoomLens)
 
-      if (finalOptions.zoomTarget) {
+      if (finalOptions.zoomTarget && finalOptions.zoomTarget.contains(zoomedImgWrapper)) {
         finalOptions.zoomTarget.removeChild(zoomedImgWrapper)
         return
       }
 
-      container.removeChild(zoomedImgWrapper)
+      container.contains(zoomedImgWrapper) && container.removeChild(zoomedImgWrapper)
     },
     subscribe: store.subscribe,
     getState: store.getState,
