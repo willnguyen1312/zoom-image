@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.21.1
+
+### Patch Changes
+
+- [#205](https://github.com/willnguyen1312/zoom-image/pull/205)
+  [`50e34c9`](https://github.com/willnguyen1312/zoom-image/commit/50e34c905e4038964500fa78c0c09e7a02dabeb3) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix zoom on hover not working with React 18 💞
+
 ## 0.21.0
 
 ### Minor Changes
