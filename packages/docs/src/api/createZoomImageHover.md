@@ -30,7 +30,7 @@ type StateUpdate = { enabled: boolean }
 
 type ZoomImageHoverOptions = {
   // The size of zoomed window where zoomed image will be displayed
-  customZoom?: { width: number; height: number }
+  customZoom: { width: number; height: number }
 
   // The source of zoomed image, default is the same as the original image
   zoomImageSource?: string
