@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.22.0
+
+### Minor Changes
+
+- [#210](https://github.com/willnguyen1312/zoom-image/pull/210)
+  [`285a099`](https://github.com/willnguyen1312/zoom-image/commit/285a0999e0050fb22028483b0b0ea62f01787315) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add support for zoom lens class list 💞
+
 ## 0.21.2
 
 ### Patch Changes
