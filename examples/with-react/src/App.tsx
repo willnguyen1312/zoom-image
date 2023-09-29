@@ -1,6 +1,6 @@
-import { useRef, useEffect, useState, useMemo } from "react"
-import { useZoomImageWheel, useZoomImageHover, useZoomImageMove, useZoomImageClick } from "@zoom-image/react"
 import { cropImage } from "@zoom-image/core"
+import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/react"
+import { useEffect, useMemo, useRef, useState } from "react"
 
 function App() {
   const [tabs, setTabs] = useState<
@@ -11,8 +11,8 @@ function App() {
       value: "wheel" | "hover" | "move" | "click"
     }[]
   >([
-    { name: "Wheel", href: "#", current: true, value: "wheel" },
-    { name: "Hover", href: "#", current: false, value: "hover" },
+    { name: "Wheel", href: "#", current: false, value: "wheel" },
+    { name: "Hover", href: "#", current: true, value: "hover" },
     { name: "Move", href: "#", current: false, value: "move" },
     { name: "Click", href: "#", current: false, value: "click" },
   ])
@@ -71,7 +71,8 @@ function App() {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
-        scaleFactor: 0.5,
+        scale: 4,
+        zoomLensScale: 0.75,
       })
     }
 

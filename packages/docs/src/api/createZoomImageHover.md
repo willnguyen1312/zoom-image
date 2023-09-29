@@ -38,12 +38,15 @@ type ZoomImageHoverOptions = {
   // The css class will be added to zoom lens element
   zoomLensClass?: string
 
-  // The container of zoomed image
-  zoomTarget?: HTMLElement
-
-  // By default, zoomed image will have a scale of 1
+  // By default, zoomLensScale have a value of 1
   // The smaller the value, the bigger zoomed image and smaller zoom lens
-  scaleFactor?: number
+  zoomLensScale?: Partial<CSSStyleDeclaration>
+
+  // The container of zoomed image
+  zoomTarget: HTMLElement
+
+  // The scale of zoomed image, default is 2
+  scale?: number
 }
 
 function createZoomImageHover(
