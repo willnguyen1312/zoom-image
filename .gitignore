@@ -186,3 +186,6 @@ cache
 # Qwik
 lib
 lib-types
+
+# Custom
+tmp
