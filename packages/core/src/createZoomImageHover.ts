@@ -93,7 +93,12 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     zoomedImg.height = (sourceImgElement.height * scale) / zoomLensScale
 
     // Setup default zoom lens style
+    const fromLeft = sourceImgElement.getBoundingClientRect().left - container.getBoundingClientRect().left
+    const fromTop = sourceImgElement.getBoundingClientRect().top - container.getBoundingClientRect().top
     zoomLens.style.position = "absolute"
+    zoomLens.style.left = fromLeft + "px"
+    zoomLens.style.top = fromTop + "px"
+    zoomTarget.style.pointerEvents = "none"
 
     if (!zoomLensClass) {
       zoomLens.style.background = "rgba(238, 130, 238, 0.5)"
@@ -124,14 +129,14 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   function processZoom(event: PointerEvent) {
     let offsetX: number
     let offsetY: number
-    let backgroundTop: number
-    let backgroundRight: number
+    let backgroundX: number
+    let backgroundY: number
     if (offset) {
       offsetX = zoomLensLeft(event.clientX - offset.left)
       offsetY = zoomLensTop(event.clientY - offset.top)
-      backgroundTop = (offsetX * scale) / zoomLensScale
-      backgroundRight = (offsetY * scale) / zoomLensScale
-      zoomedImg.style.transform = "translate(" + -backgroundTop + "px," + -backgroundRight + "px)"
+      backgroundX = (offsetX * scale) / zoomLensScale
+      backgroundY = (offsetY * scale) / zoomLensScale
+      zoomedImg.style.transform = "translate(" + -backgroundX + "px," + -backgroundY + "px)"
       zoomLens.style.cssText += "transform:" + "translate(" + offsetX + "px," + offsetY + "px);"
     }
   }
@@ -150,8 +155,8 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
 
   function handlePointerLeave() {
     enableScroll()
-    // zoomedImg.style.display = "none"
-    // zoomLens.style.display = "none"
+    zoomedImg.style.display = "none"
+    zoomLens.style.display = "none"
   }
 
   function handleScroll() {
