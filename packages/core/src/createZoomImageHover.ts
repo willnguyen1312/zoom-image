@@ -126,7 +126,6 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     let offsetY: number
     let backgroundTop: number
     let backgroundRight: number
-    // let backgroundPosition: string
     if (offset) {
       offsetX = zoomLensLeft(event.clientX - offset.left)
       offsetY = zoomLensTop(event.clientY - offset.top)
