@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.21.2
+
+### Patch Changes
+
+- [#208](https://github.com/willnguyen1312/zoom-image/pull/208)
+  [`9e187c3`](https://github.com/willnguyen1312/zoom-image/commit/9e187c3799df2578396a589de015d7e17187833e) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Let's make zoom on hover e-com ready 🚀
+
 ## 0.21.1
 
 ### Patch Changes
