@@ -47,8 +47,8 @@ Simply importing the utilities you need from `@zoom-image/core`
 }
 
 .image {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 ```
 
@@ -80,8 +80,8 @@ Simply importing the utilities you need from `@zoom-image/angular`
 }
 
 .image {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 ```
 
@@ -122,8 +122,8 @@ Simply importing the utilities you need from `@zoom-image/react`
 }
 
 .image {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 ```
 
@@ -162,8 +162,8 @@ Simply importing the utilities you need from `@zoom-image/preact`
 }
 
 .image {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 ```
 
@@ -202,8 +202,8 @@ Simply importing the utilities you need from `@zoom-image/qwik`
 }
 
 .image {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 ```
 
@@ -242,8 +242,8 @@ Simply importing the utilities you need from `@zoom-image/solid`
 }
 
 .image {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 ```
 
@@ -297,8 +297,8 @@ Simply importing the utilities you need from `@zoom-image/svelte`
   }
 
   .image {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
   }
 </style>
 ```
@@ -335,8 +335,8 @@ onMounted(() => {
 }
 
 .image {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 </style>
 ```
