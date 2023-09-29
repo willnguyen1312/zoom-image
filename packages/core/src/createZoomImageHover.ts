@@ -112,7 +112,8 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     zoomLens.style.display = "none"
 
     if (zoomLensClass) {
-      zoomLens.classList.add(zoomLensClass)
+      const classes = zoomLensClass.split(" ")
+      classes.forEach((className) => zoomLens.classList.add(className))
     }
 
     // setup event listeners
