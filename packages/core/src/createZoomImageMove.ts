@@ -1,5 +1,5 @@
-import { imageCache } from "./store"
 import { createStore } from "@namnode/store"
+import { imageCache } from "./store"
 import { ZoomedImgStatus } from "./types"
 import { disableScroll, enableScroll, getSourceImage } from "./utils"
 
@@ -23,18 +23,31 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
     zoomedImgStatus: imageCache.checkImageLoaded(finalOptions.zoomImageSource) ? "loaded" : "idle",
   })
 
-  const zoomedImgWidth = sourceImgElement.clientWidth * finalOptions.zoomFactor
-  const zoomedImgHeight = sourceImgElement.clientHeight * finalOptions.zoomFactor
   const zoomedImg = container.appendChild(document.createElement("img"))
   zoomedImg.style.maxWidth = "none"
-  zoomedImg.style.width = `${zoomedImgWidth}px`
-  zoomedImg.style.height = `${zoomedImgHeight}px`
   zoomedImg.style.position = "absolute"
   zoomedImg.style.top = "0"
   zoomedImg.style.left = "0"
 
+  function init() {
+    container.style.width = `${sourceImgElement.clientWidth}px`
+    container.style.height = `${sourceImgElement.clientHeight}px`
+    zoomedImg.style.display = "none"
+    zoomedImg.style.transform = "none"
+  }
+
+  if (sourceImgElement.complete) {
+    init()
+  } else {
+    sourceImgElement.onload = init
+  }
+
   function handlePointerEnter(event: PointerEvent) {
     zoomedImg.style.display = "block"
+    const zoomedImgWidth = sourceImgElement.clientWidth * finalOptions.zoomFactor
+    const zoomedImgHeight = sourceImgElement.clientHeight * finalOptions.zoomFactor
+    zoomedImg.style.width = `${zoomedImgWidth}px`
+    zoomedImg.style.height = `${zoomedImgHeight}px`
     imageCache.createZoomImage({
       img: zoomedImg,
       src: finalOptions.zoomImageSource,
@@ -95,7 +108,9 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   return {
     cleanup: () => {
       controller.abort()
-      container.removeChild(zoomedImg)
+      container.contains(zoomedImg) && container.removeChild(zoomedImg)
+      container.style.width = "100%"
+      container.style.height = "100%"
       store.cleanup()
     },
     subscribe: store.subscribe,
