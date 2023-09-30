@@ -11,8 +11,8 @@ function App() {
       value: "wheel" | "hover" | "move" | "click"
     }[]
   >([
-    { name: "Wheel", href: "#", current: false, value: "wheel" },
-    { name: "Hover", href: "#", current: true, value: "hover" },
+    { name: "Wheel", href: "#", current: true, value: "wheel" },
+    { name: "Hover", href: "#", current: false, value: "hover" },
     { name: "Move", href: "#", current: false, value: "move" },
     { name: "Click", href: "#", current: false, value: "click" },
   ])

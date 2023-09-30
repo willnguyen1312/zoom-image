@@ -1,5 +1,5 @@
-import { imageCache } from "./store"
 import { createStore } from "@namnode/store"
+import { imageCache } from "./store"
 import { ZoomedImgStatus } from "./types"
 import { disableScroll, enableScroll, getSourceImage } from "./utils"
 
@@ -96,7 +96,7 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
   return {
     cleanup: () => {
       controller.abort()
-      container.removeChild(zoomedImg)
+      container.contains(zoomedImg) && container.removeChild(zoomedImg)
       store.cleanup()
     },
     subscribe: store.subscribe,
