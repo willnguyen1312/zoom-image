@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.23.0
+
+### Minor Changes
+
+- [#212](https://github.com/willnguyen1312/zoom-image/pull/212)
+  [`c4eada9`](https://github.com/willnguyen1312/zoom-image/commit/c4eada965e49e1a5465abb50438f4fa514e79b12) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Improve zoom move to support dynamic images 💞
+
 ## 0.22.0
 
 ### Minor Changes
