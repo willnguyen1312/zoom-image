@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.24.0
+
+### Minor Changes
+
+- [#214](https://github.com/willnguyen1312/zoom-image/pull/214)
+  [`8348edd`](https://github.com/willnguyen1312/zoom-image/commit/8348edda1ce465e200c4912a71cfe3d5879a5af3) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add support to style zoom image wrapper on hover 💞
+
 ## 0.23.0
 
 ### Minor Changes
