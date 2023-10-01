@@ -463,8 +463,8 @@ importers:
   packages/docs:
     dependencies:
       "@rushstack/eslint-patch":
-        specifier: ^1.4.0
-        version: 1.4.0
+        specifier: ^1.5.1
+        version: 1.5.1
       "@vue/eslint-config-prettier":
         specifier: ^8.0.0
         version: 8.0.0(eslint@8.46.0)(prettier@3.0.1)
@@ -487,8 +487,8 @@ importers:
         specifier: ^0.54.3
         version: 0.54.3(postcss@8.4.27)(rollup@2.79.1)(vite@4.4.9)
       vitepress:
-        specifier: 1.0.0-rc.14
-        version: 1.0.0-rc.14(@algolia/client-search@4.20.0)(search-insights@2.6.0)
+        specifier: 1.0.0-rc.20
+        version: 1.0.0-rc.20(@algolia/client-search@4.20.0)(postcss@8.4.27)(search-insights@2.6.0)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -4641,9 +4641,9 @@ packages:
       { integrity: sha512-V+MvGwaHH03hYhY+k6Ef/xKd6RYlc4q8WBx+2ANmipHJcKuktNcI/NgEsJgdSUF6Lw32njT6OnrRsKYCdgHjYw== }
     dev: false
 
-  /@rushstack/eslint-patch@1.4.0:
+  /@rushstack/eslint-patch@1.5.1:
     resolution:
-      { integrity: sha512-cEjvTPU32OM9lUFegJagO0mRnIn+rbqrG89vV8/xLnLFX0DoR0r1oy5IlTga71Q7uT3Qus7qm7wgeiMT/+Irlg== }
+      { integrity: sha512-6i/8UoL0P5y4leBIGzvkZdS85RDMG9y1ihZzmTZQ5LdHUYmZ7pKFoj8X0236s3lusPs1Fa5HTQUpwI+UfTcmeA== }
     dev: false
 
   /@schematics/angular@16.1.8:
@@ -5045,12 +5045,30 @@ packages:
       { integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ== }
     dev: false
 
+  /@types/linkify-it@3.0.3:
+    resolution:
+      { integrity: sha512-pTjcqY9E4nOI55Wgpz7eiI8+LzdYnw3qxXCfHyBDdPbYvbyLgWLJGh8EdPvqawwMK1Uo1794AUkkR38Fr0g+2g== }
+    dev: false
+
+  /@types/markdown-it@13.0.2:
+    resolution:
+      { integrity: sha512-Tla7hH9oeXHOlJyBFdoqV61xWE9FZf/y2g+gFVwQ2vE1/eBzjUno5JCd3Hdb5oATve5OF6xNjZ/4VIZhVVx+hA== }
+    dependencies:
+      "@types/linkify-it": 3.0.3
+      "@types/mdurl": 1.0.3
+    dev: false
+
   /@types/mdast@3.0.11:
     resolution:
       { integrity: sha512-Y/uImid8aAwrEA24/1tcRZwpxX3pIFTSilcNDKSPn+Y2iDywSEachzRuvgAYYLR3wpGXAsMbv5lvKLDZLeYPAw== }
     dependencies:
       "@types/unist": 2.0.6
     dev: true
+
+  /@types/mdurl@1.0.3:
+    resolution:
+      { integrity: sha512-T5k6kTXak79gwmIOaDF2UUQXFbnBE0zBUzF20pz7wDYu0RQMzWg+Ml/Pz50214NsFHBITkoi5VtdjFZnJ2ijjA== }
+    dev: false
 
   /@types/mdx@2.0.5:
     resolution:
@@ -15958,24 +15976,29 @@ packages:
       vite: 4.4.9(@types/node@20.4.9)
     dev: true
 
-  /vitepress@1.0.0-rc.14(@algolia/client-search@4.20.0)(search-insights@2.6.0):
+  /vitepress@1.0.0-rc.20(@algolia/client-search@4.20.0)(postcss@8.4.27)(search-insights@2.6.0):
     resolution:
-      { integrity: sha512-yChIeXOAcNvVnSVjhziH1vte0uhKb00PuZf7KdIMfx3ixTMAz73Nn+6gREvCv0SdH+anteGUKz5eljv0ygcgGQ== }
+      { integrity: sha512-CykMUJ8JLxLcGWek0ew3wln4RYbsOd1+0YzXITTpajggpynm2S331TNkJVOkHrMRc6GYe3y4pS40GfgcW0ZwAw== }
     hasBin: true
     peerDependencies:
       markdown-it-mathjax3: ^4.3.2
+      postcss: ^8.4.30
     peerDependenciesMeta:
       markdown-it-mathjax3:
+        optional: true
+      postcss:
         optional: true
     dependencies:
       "@docsearch/css": 3.5.2
       "@docsearch/js": 3.5.2(@algolia/client-search@4.20.0)(search-insights@2.6.0)
+      "@types/markdown-it": 13.0.2
       "@vue/devtools-api": 6.5.0
       "@vueuse/core": 10.4.1(vue@3.3.4)
       "@vueuse/integrations": 10.4.1(focus-trap@7.5.2)(vue@3.3.4)
       focus-trap: 7.5.2
       mark.js: 8.11.1
       minisearch: 6.1.0
+      postcss: 8.4.27
       shiki: 0.14.4
       vite: 4.4.9(@types/node@20.4.9)
       vue: 3.3.4
