@@ -71,6 +71,12 @@ export default defineConfig({
         ],
       },
       {
+        text: "Use Cases",
+        items: [
+          // { text: "createZoomImageClick", link: "/api/createZoomImageClick" },
+        ],
+      },
+      {
         text: "Core API",
         link: "/api/",
         items: [
