@@ -139,10 +139,10 @@ watch(
       <p>Hover inside the image to see zoom effect</p>
       <div
         ref="imageHoverContainerRef"
-        class="relative mt-1 flex h-[250px] w-[250px] items-start lg:h-[300px] lg:w-[300px]"
+        class="relative mt-1 flex h-[200px] w-[200px] items-start sm:h-[250px] sm:w-[250px] lg:h-[300px] lg:w-[300px]"
       >
         <img class="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
-        <div ref="zoomTargetRef" class="absolute left-[300px] lg:left-[350px]"></div>
+        <div ref="zoomTargetRef" class="absolute left-[220px] sm:left-[300px] lg:left-[350px]"></div>
       </div>
     </div>
 
