@@ -1,6 +1,9 @@
 import { createStore } from "@namnode/store"
 import { ZoomedImgStatus } from "./types"
 
+// There is a scenario where the image is already in the cache,
+// we don't want to trigger the loading state too quickly in that case
+// 50ms should be enough to wait before triggering the loading state
 const THRESHOLD = 50
 
 export const makeImageLoader = () => {
