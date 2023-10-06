@@ -97,7 +97,7 @@ export class AppComponent implements AfterViewInit {
           zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
           customZoom: { width: 300, height: 500 },
           zoomTarget: this.zoomTargetRef?.nativeElement as HTMLDivElement,
-          scaleFactor: 0.5,
+          scale: 2,
         })
         this.zoomImageHoverService.zoomImageState$.subscribe((state) => {
           this.zoomImageHoverState = state

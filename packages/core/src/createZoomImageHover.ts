@@ -1,5 +1,5 @@
 import { createStore } from "@namnode/store"
-import { imageCache } from "./store"
+import { imageLoader } from "./imageLoader"
 import { ZoomedImgStatus } from "./types"
 import { clamp, disableScroll, enableScroll, getSourceImage } from "./utils"
 
@@ -43,7 +43,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   const { scale, zoomImageSource, customZoom, zoomLensClass, zoomTarget, zoomLensScale, zoomTargetClass } = finalOptions
 
   const store = createStore<ZoomImageHoverState>({
-    zoomedImgStatus: imageCache.checkImageLoaded(zoomImageSource) ? "loaded" : "idle",
+    zoomedImgStatus: "idle",
     enabled: true,
   })
 
@@ -145,7 +145,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   }
 
   async function handlePointerEnter() {
-    imageCache.createZoomImage({
+    imageLoader.createZoomImage({
       img: zoomedImg,
       src: zoomImageSource,
       store,

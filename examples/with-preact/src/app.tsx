@@ -1,6 +1,6 @@
-import { useRef, useEffect, useState, useMemo } from "preact/hooks"
-import { useZoomImageWheel, useZoomImageHover, useZoomImageMove, useZoomImageClick } from "@zoom-image/preact"
 import { cropImage } from "@zoom-image/core"
+import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/preact"
+import { useEffect, useMemo, useRef, useState } from "preact/hooks"
 
 function App() {
   const [tabs, setTabs] = useState<
@@ -71,7 +71,7 @@ function App() {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
-        scaleFactor: 0.5,
+        scale: 2,
       })
     }
 

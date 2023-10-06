@@ -1,5 +1,5 @@
 import { createStore } from "@namnode/store"
-import { imageCache } from "./store"
+import { imageLoader } from "./imageLoader"
 import { ZoomedImgStatus } from "./types"
 import { disableScroll, enableScroll, getSourceImage } from "./utils"
 
@@ -20,7 +20,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   }
 
   const store = createStore<ZoomImageMoveState>({
-    zoomedImgStatus: imageCache.checkImageLoaded(finalOptions.zoomImageSource) ? "loaded" : "idle",
+    zoomedImgStatus: "idle",
   })
 
   const zoomedImg = container.appendChild(document.createElement("img"))
@@ -48,7 +48,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
     const zoomedImgHeight = sourceImgElement.clientHeight * finalOptions.zoomFactor
     zoomedImg.style.width = `${zoomedImgWidth}px`
     zoomedImg.style.height = `${zoomedImgHeight}px`
-    imageCache.createZoomImage({
+    imageLoader.createZoomImage({
       img: zoomedImg,
       src: finalOptions.zoomImageSource,
       store,
@@ -84,7 +84,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
 
   function processZoom(event: PointerEvent) {
     zoomedImg.style.display = "block"
-    imageCache.createZoomImage({
+    imageLoader.createZoomImage({
       img: zoomedImg,
       src: finalOptions.zoomImageSource,
       store,

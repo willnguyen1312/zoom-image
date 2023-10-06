@@ -75,7 +75,7 @@ watch(
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
         customZoom: { width: 300, height: 500 },
         zoomTarget: zoomTargetRef.value as HTMLDivElement,
-        scaleFactor: 0.5,
+        scale: 2,
       })
     }
 

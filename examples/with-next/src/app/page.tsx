@@ -73,7 +73,7 @@ export default function Home() {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
-        scaleFactor: 0.5,
+        scale: 2,
       })
     }
 
