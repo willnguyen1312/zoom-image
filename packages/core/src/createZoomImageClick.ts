@@ -1,5 +1,5 @@
 import { createStore } from "@namnode/store"
-import { imageCache } from "./store"
+import { imageLoader } from "./store"
 import { ZoomedImgStatus } from "./types"
 import { disableScroll, enableScroll, getSourceImage } from "./utils"
 
@@ -22,7 +22,7 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
   let isOnMove = false
 
   const store = createStore<ZoomImageClickState>({
-    zoomedImgStatus: imageCache.checkImageLoaded(finalOptions.zoomImageSource) ? "loaded" : "idle",
+    zoomedImgStatus: "idle",
   })
 
   const zoomedImgWidth = sourceImgElement.clientWidth * finalOptions.zoomFactor
@@ -59,7 +59,7 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
 
   function processZoom(event: PointerEvent) {
     zoomedImg.style.display = "block"
-    imageCache.createZoomImage({
+    imageLoader.createZoomImage({
       img: zoomedImg,
       src: finalOptions.zoomImageSource,
       store,

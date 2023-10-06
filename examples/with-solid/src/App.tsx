@@ -1,7 +1,7 @@
-import type { Component } from "solid-js"
-import { createSignal, createMemo, createEffect, For } from "solid-js"
-import { useZoomImageWheel, useZoomImageHover, useZoomImageMove, useZoomImageClick } from "@zoom-image/solid"
 import { cropImage } from "@zoom-image/core"
+import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/solid"
+import type { Component } from "solid-js"
+import { For, createEffect, createMemo, createSignal } from "solid-js"
 
 type Tab = {
   name: string
@@ -65,7 +65,7 @@ const App: Component = () => {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
-        scaleFactor: 0.5,
+        scale: 2,
       })
     }
 

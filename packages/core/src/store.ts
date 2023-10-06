@@ -1,39 +1,43 @@
 import { createStore } from "@namnode/store"
+import { ZoomedImgStatus } from "./types"
 
-export const makeImageCache = () => {
-  const loadedImageSet = new Set<string>()
+const THRESHOLD = 50
 
-  const checkImageLoaded = (src: string) => loadedImageSet.has(src)
-
+export const makeImageLoader = () => {
   const createZoomImage = ({
     src,
     store,
     img,
   }: {
     src: string
-    store: ReturnType<typeof createStore>
+    store: ReturnType<
+      typeof createStore<{
+        zoomedImgStatus: ZoomedImgStatus
+      }>
+    >
     img: HTMLImageElement
   }) => {
     img.src = src
-    if (checkImageLoaded(src)) return
+    let complete = false
 
-    loadedImageSet.add(src)
-
-    store.setState({ zoomedImgStatus: "loading" })
-
-    img.addEventListener("load", () => {
+    img.onload = () => {
+      complete = true
       store.setState({ zoomedImgStatus: "loaded" })
-    })
+    }
 
-    img.addEventListener("error", () => {
+    img.onerror = () => {
+      complete = true
       store.setState({ zoomedImgStatus: "error" })
-    })
+    }
+
+    setTimeout(() => {
+      if (!complete) store.setState({ zoomedImgStatus: "loading" })
+    }, THRESHOLD)
   }
 
   return {
     createZoomImage,
-    checkImageLoaded,
   }
 }
 
-export const imageCache = makeImageCache()
+export const imageLoader = makeImageLoader()

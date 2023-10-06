@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { createZoomImageHover, createZoomImageWheel } from "../../src"
 import { computed, nextTick, onUnmounted, ref, watch } from "vue"
+import { createZoomImageHover, createZoomImageWheel } from "../../src"
 
 let cleanup: () => void = () => {}
 
@@ -46,7 +46,7 @@ watch(
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
-        scaleFactor: 0.5,
+        scale: 2,
       })
       cleanup = result.cleanup
     }
