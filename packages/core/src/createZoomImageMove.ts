@@ -1,5 +1,5 @@
 import { createStore } from "@namnode/store"
-import { imageLoader } from "./store"
+import { imageLoader } from "./imageLoader"
 import { ZoomedImgStatus } from "./types"
 import { disableScroll, enableScroll, getSourceImage } from "./utils"
 
