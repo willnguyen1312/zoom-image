@@ -2,7 +2,7 @@
 import BundleSize from '../../components/BundleSize.vue'
 </script>
 
-# Zoom Image Vue
+# Zoom Image Angular
 
 The @zoom-image/angular adapter is a wrapper around the core zoom image logic.
 
