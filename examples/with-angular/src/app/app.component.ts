@@ -56,7 +56,7 @@ export class AppComponent implements AfterViewInit {
     private zoomImageHoverService: ZoomImageHoverService,
     private zoomImageMoveService: ZoomImageMoveService,
     private zoomImageClickService: ZoomImageClickService,
-  ) { }
+  ) {}
 
   ngAfterViewInit(): void {
     if (this.imageWheelContainerRef) {
