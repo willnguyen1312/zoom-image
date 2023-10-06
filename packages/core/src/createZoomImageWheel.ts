@@ -1,6 +1,6 @@
 import { createStore } from "@namnode/store"
 import type { PointerPosition } from "./utils"
-import { clamp, disableScroll, enableScroll, getPointersCenter, getSourceImage, makeMaybeCallFunction } from "./utils"
+import { clamp, getPointersCenter, getSourceImage, makeMaybeCallFunction } from "./utils"
 
 export type ZoomImageWheelOptions = {
   maxZoom?: number
@@ -24,6 +24,7 @@ export type ZoomImageWheelState = {
 export type ZoomImageWheelStateUpdate = Partial<{ enable: boolean; currentZoom: number }>
 
 export function createZoomImageWheel(container: HTMLElement, options: ZoomImageWheelOptions = {}) {
+  container.style.overscrollBehavior = "contain"
   const store = createStore<ZoomImageWheelState>({
     currentZoom: 1,
     enable: true,
@@ -54,7 +55,6 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   let prevDistance = -1
-  let enabledScroll = true
   const pointerMap = new Map<number, { x: number; y: number }>()
 
   let lastPositionX = 0
@@ -267,11 +267,6 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       return
     }
 
-    if (enabledScroll) {
-      disableScroll()
-      enabledScroll = false
-    }
-
     const { clientX, clientY, pointerId } = event
 
     const currentState = store.getState()
@@ -290,11 +285,6 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       prevDistance = -1
     }
 
-    if (pointerMap.size === 0 && !enabledScroll) {
-      enableScroll()
-      enabledScroll = true
-    }
-
     const currentState = store.getState()
     lastPositionX = currentState.currentPositionX
     lastPositionY = currentState.currentPositionY
@@ -304,10 +294,6 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     event.preventDefault()
     pointerMap.delete(event.pointerId)
     prevDistance = -1
-    if (!enabledScroll) {
-      enableScroll()
-      enabledScroll = true
-    }
   }
 
   function checkZoomEnabled() {

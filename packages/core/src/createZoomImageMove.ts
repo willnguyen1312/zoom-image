@@ -1,7 +1,7 @@
 import { createStore } from "@namnode/store"
 import { imageCache } from "./store"
 import { ZoomedImgStatus } from "./types"
-import { disableScroll, enableScroll, getSourceImage } from "./utils"
+import { getSourceImage } from "./utils"
 
 export type ZoomImageMoveOptions = {
   zoomFactor?: number
@@ -55,7 +55,6 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
     })
 
     processZoom(event)
-    disableScroll()
   }
 
   function handlePointerMove(event: PointerEvent) {
@@ -63,7 +62,6 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   }
 
   function handlePointerLeave() {
-    enableScroll()
     zoomedImg.style.display = "none"
     zoomedImg.style.transform = "none"
   }

@@ -1,7 +1,7 @@
 import { createStore } from "@namnode/store"
 import { imageCache } from "./store"
 import { ZoomedImgStatus } from "./types"
-import { clamp, disableScroll, enableScroll, getSourceImage } from "./utils"
+import { clamp, getSourceImage } from "./utils"
 
 export type ZoomImageHoverOptions = {
   customZoom: { width: number; height: number }
@@ -151,7 +151,6 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
       store,
     })
 
-    disableScroll()
     zoomedImg.style.display = "block"
     zoomLens.style.display = "block"
 
@@ -162,7 +161,6 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   }
 
   function handlePointerLeave() {
-    enableScroll()
     zoomedImg.style.display = "none"
     zoomLens.style.display = "none"
 

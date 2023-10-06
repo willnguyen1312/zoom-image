@@ -1,7 +1,7 @@
 import { createStore } from "@namnode/store"
 import { imageCache } from "./store"
 import { ZoomedImgStatus } from "./types"
-import { disableScroll, enableScroll, getSourceImage } from "./utils"
+import { getSourceImage } from "./utils"
 
 export type ZoomImageClickOptions = {
   zoomFactor?: number
@@ -89,8 +89,6 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
   const controller = new AbortController()
   const { signal } = controller
   container.addEventListener("pointerdown", handlePointerDown, { signal })
-  container.addEventListener("pointerenter", disableScroll, { signal })
-  container.addEventListener("pointerleave", enableScroll, { signal })
   container.addEventListener("pointermove", handlePointerMove, { signal })
 
   return {
