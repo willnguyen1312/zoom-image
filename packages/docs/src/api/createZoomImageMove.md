@@ -30,6 +30,9 @@ type ZoomImageMoveOptions = {
 
   // The source of zoomed image, default is the same as the original image
   zoomImageSource?: string
+
+  // Disable scroll lock on zoom, default is false
+  disableScrollLock?: boolean
 }
 
 function createZoomImageMove(
