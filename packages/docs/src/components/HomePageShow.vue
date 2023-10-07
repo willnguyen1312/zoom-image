@@ -87,7 +87,6 @@ watch(
     if (zoomType.value === "move") {
       createZoomImageMove(imageMoveContainerRef.value as HTMLDivElement, {
         zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
-        disableScrollLock: true,
       })
     }
 
