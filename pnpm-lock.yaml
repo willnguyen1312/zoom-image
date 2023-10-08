@@ -483,9 +483,6 @@ importers:
       eslint-plugin-vue:
         specifier: ^9.17.0
         version: 9.17.0(eslint@8.46.0)
-      unocss:
-        specifier: ^0.54.3
-        version: 0.54.3(postcss@8.4.27)(rollup@2.79.1)(vite@4.4.9)
       vitepress:
         specifier: 1.0.0-rc.20
         version: 1.0.0-rc.20(@algolia/client-search@4.20.0)(postcss@8.4.27)(search-insights@2.6.0)
