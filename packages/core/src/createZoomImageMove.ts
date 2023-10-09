@@ -6,6 +6,7 @@ import { disableScroll, enableScroll, getSourceImage } from "./utils"
 export type ZoomImageMoveOptions = {
   zoomFactor?: number
   zoomImageSource?: string
+  disableScrollLock?: boolean
 }
 
 export type ZoomImageMoveState = {
@@ -17,7 +18,10 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   const finalOptions: Required<ZoomImageMoveOptions> = {
     zoomFactor: options.zoomFactor ?? 4,
     zoomImageSource: options.zoomImageSource ?? sourceImgElement.src,
+    disableScrollLock: options.disableScrollLock ?? false,
   }
+
+  const { disableScrollLock, zoomFactor, zoomImageSource } = finalOptions
 
   const store = createStore<ZoomImageMoveState>({
     zoomedImgStatus: "idle",
@@ -44,17 +48,19 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
 
   function handlePointerEnter(event: PointerEvent) {
     zoomedImg.style.display = "block"
-    const zoomedImgWidth = sourceImgElement.clientWidth * finalOptions.zoomFactor
-    const zoomedImgHeight = sourceImgElement.clientHeight * finalOptions.zoomFactor
+    const zoomedImgWidth = sourceImgElement.clientWidth * zoomFactor
+    const zoomedImgHeight = sourceImgElement.clientHeight * zoomFactor
     zoomedImg.style.width = `${zoomedImgWidth}px`
     zoomedImg.style.height = `${zoomedImgHeight}px`
     imageLoader.createZoomImage({
       img: zoomedImg,
-      src: finalOptions.zoomImageSource,
+      src: zoomImageSource,
       store,
     })
 
     processZoom(event)
+
+    if (disableScrollLock) return
     disableScroll()
   }
 
@@ -63,22 +69,23 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   }
 
   function handlePointerLeave() {
-    enableScroll()
     zoomedImg.style.display = "none"
     zoomedImg.style.transform = "none"
+    if (disableScrollLock) return
+    enableScroll()
   }
 
   const calculatePositionX = (newPositionX: number) => {
     const width = container.clientWidth
     if (newPositionX > 0) return 0
-    if (newPositionX + width * finalOptions.zoomFactor < width) return -width * (finalOptions.zoomFactor - 1)
+    if (newPositionX + width * zoomFactor < width) return -width * (zoomFactor - 1)
     return newPositionX
   }
 
   const calculatePositionY = (newPositionY: number) => {
     const height = container.clientHeight
     if (newPositionY > 0) return 0
-    if (newPositionY + height * finalOptions.zoomFactor < height) return -height * (finalOptions.zoomFactor - 1)
+    if (newPositionY + height * zoomFactor < height) return -height * (zoomFactor - 1)
     return newPositionY
   }
 
@@ -86,7 +93,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
     zoomedImg.style.display = "block"
     imageLoader.createZoomImage({
       img: zoomedImg,
-      src: finalOptions.zoomImageSource,
+      src: zoomImageSource,
       store,
     })
 
@@ -94,8 +101,8 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
     const zoomPointX = event.clientX - containerRect.left
     const zoomPointY = event.clientY - containerRect.top
 
-    const currentPositionX = calculatePositionX(-zoomPointX * finalOptions.zoomFactor + zoomPointX)
-    const currentPositionY = calculatePositionY(-zoomPointY * finalOptions.zoomFactor + zoomPointY)
+    const currentPositionX = calculatePositionX(-zoomPointX * zoomFactor + zoomPointX)
+    const currentPositionY = calculatePositionY(-zoomPointY * zoomFactor + zoomPointY)
     zoomedImg.style.transform = `translate(${currentPositionX}px, ${currentPositionY}px)`
   }
 

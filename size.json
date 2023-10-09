@@ -1,53 +1,53 @@
 {
   "@zoom-image/core": {
     "createZoomImageWheel": "1.5 KB",
-    "createZoomImageHover": "1.18 KB",
-    "createZoomImageMove": "863 B",
-    "createZoomImageClick": "826 B",
+    "createZoomImageHover": "1.17 KB",
+    "createZoomImageMove": "880 B",
+    "createZoomImageClick": "827 B",
     "cropImage": "202 B",
     "makeCalculateZoom": "98 B",
     "makeCalculatePercentage": "96 B"
   },
   "@zoom-image/react": {
     "useZoomImageWheel": "1.79 KB",
-    "useZoomImageHover": "1.45 KB",
-    "useZoomImageMove": "1.09 KB",
-    "useZoomImageClick": "1.06 KB"
+    "useZoomImageHover": "1.46 KB",
+    "useZoomImageMove": "1.11 KB",
+    "useZoomImageClick": "1.05 KB"
   },
   "@zoom-image/preact": {
     "useZoomImageWheel": "2.7 KB",
     "useZoomImageHover": "2.38 KB",
-    "useZoomImageMove": "2.05 KB",
-    "useZoomImageClick": "2 KB"
+    "useZoomImageMove": "2.07 KB",
+    "useZoomImageClick": "2.01 KB"
   },
   "@zoom-image/qwik": {
-    "useZoomImageWheel": "1.95 KB",
-    "useZoomImageHover": "1.57 KB",
-    "useZoomImageMove": "1.21 KB",
+    "useZoomImageWheel": "1.94 KB",
+    "useZoomImageHover": "1.56 KB",
+    "useZoomImageMove": "1.2 KB",
     "useZoomImageClick": "1.17 KB"
   },
   "@zoom-image/solid": {
     "useZoomImageWheel": "2.98 KB",
-    "useZoomImageHover": "2.65 KB",
-    "useZoomImageMove": "2.32 KB",
-    "useZoomImageClick": "2.28 KB"
+    "useZoomImageHover": "2.64 KB",
+    "useZoomImageMove": "2.33 KB",
+    "useZoomImageClick": "2.27 KB"
   },
   "@zoom-image/svelte": {
     "useZoomImageWheel": "1.98 KB",
-    "useZoomImageHover": "1.65 KB",
-    "useZoomImageMove": "1.31 KB",
+    "useZoomImageHover": "1.64 KB",
+    "useZoomImageMove": "1.33 KB",
     "useZoomImageClick": "1.27 KB"
   },
   "@zoom-image/vue": {
     "useZoomImageWheel": "1.76 KB",
     "useZoomImageHover": "1.42 KB",
-    "useZoomImageMove": "1.07 KB",
+    "useZoomImageMove": "1.09 KB",
     "useZoomImageClick": "1.05 KB"
   },
   "@zoom-image/angular": {
-    "ZoomImageClickService": "3.21 KB",
-    "ZoomImageHoverService": "3.21 KB",
-    "ZoomImageMoveService": "3.21 KB",
-    "ZoomImageWheelService": "3.21 KB"
+    "ZoomImageClickService": "3.23 KB",
+    "ZoomImageHoverService": "3.23 KB",
+    "ZoomImageWheelService": "3.23 KB",
+    "ZoomImageMoveService": "3.23 KB"
   }
 }
