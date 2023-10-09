@@ -1,5 +1,13 @@
 # @zoom-image/svelte
 
+## 0.1.19
+
+### Patch Changes
+
+- Updated dependencies
+  [[`b0c4793`](https://github.com/willnguyen1312/zoom-image/commit/b0c4793e339ac280a4ab7737b64952bd8b21f26b)]:
+  - @zoom-image/core@0.26.1
+
 ## 0.1.18
 
 ### Patch Changes

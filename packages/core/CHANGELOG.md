@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.26.1
+
+### Patch Changes
+
+- [#228](https://github.com/willnguyen1312/zoom-image/pull/228)
+  [`b0c4793`](https://github.com/willnguyen1312/zoom-image/commit/b0c4793e339ac280a4ab7737b64952bd8b21f26b) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix image loading issue during development mode 💞
+
 ## 0.26.0
 
 ### Minor Changes
