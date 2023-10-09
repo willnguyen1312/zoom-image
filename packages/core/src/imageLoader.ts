@@ -20,6 +20,7 @@ export const makeImageLoader = () => {
     >
     img: HTMLImageElement
   }) => {
+    if (img.src === src) return
     img.src = src
     let complete = false
 
