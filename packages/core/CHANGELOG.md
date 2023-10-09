@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.26.0
+
+### Minor Changes
+
+- [#225](https://github.com/willnguyen1312/zoom-image/pull/225)
+  [`66afea4`](https://github.com/willnguyen1312/zoom-image/commit/66afea4130ea902dfdcb6ade72d6c84289fe9e58) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add disableScrollLock option to zoom on move 💞
+
 ## 0.25.0
 
 ### Minor Changes
