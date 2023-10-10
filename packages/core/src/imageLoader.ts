@@ -7,19 +7,15 @@ import { ZoomedImgStatus } from "./types"
 const THRESHOLD = 50
 
 export const makeImageLoader = () => {
-  const createZoomImage = ({
-    src,
-    store,
-    img,
-  }: {
-    src: string
+  const createZoomImage = (
+    img: HTMLImageElement,
+    src: string,
     store: ReturnType<
       typeof createStore<{
         zoomedImgStatus: ZoomedImgStatus
       }>
-    >
-    img: HTMLImageElement
-  }) => {
+    >,
+  ) => {
     if (img.src === src) return
     img.src = src
     let complete = false

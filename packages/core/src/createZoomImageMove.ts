@@ -52,11 +52,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
     const zoomedImgHeight = sourceImgElement.clientHeight * zoomFactor
     zoomedImg.style.width = `${zoomedImgWidth}px`
     zoomedImg.style.height = `${zoomedImgHeight}px`
-    imageLoader.createZoomImage({
-      img: zoomedImg,
-      src: zoomImageSource,
-      store,
-    })
+    imageLoader.createZoomImage(zoomedImg, zoomImageSource, store)
 
     processZoom(event)
 

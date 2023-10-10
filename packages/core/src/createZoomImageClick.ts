@@ -19,14 +19,16 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
     zoomImageSource: options.zoomImageSource ?? sourceImgElement.src,
   }
 
+  const { zoomFactor, zoomImageSource } = finalOptions
+
   let isOnMove = false
 
   const store = createStore<ZoomImageClickState>({
     zoomedImgStatus: "idle",
   })
 
-  const zoomedImgWidth = sourceImgElement.clientWidth * finalOptions.zoomFactor
-  const zoomedImgHeight = sourceImgElement.clientHeight * finalOptions.zoomFactor
+  const zoomedImgWidth = sourceImgElement.clientWidth * zoomFactor
+  const zoomedImgHeight = sourceImgElement.clientHeight * zoomFactor
   const zoomedImg = container.appendChild(document.createElement("img"))
   zoomedImg.style.maxWidth = "none"
   zoomedImg.style.width = `${zoomedImgWidth}px`
@@ -46,31 +48,27 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
   const calculatePositionX = (newPositionX: number) => {
     const width = container.clientWidth
     if (newPositionX > 0) return 0
-    if (newPositionX + width * finalOptions.zoomFactor < width) return -width * (finalOptions.zoomFactor - 1)
+    if (newPositionX + width * zoomFactor < width) return -width * (zoomFactor - 1)
     return newPositionX
   }
 
   const calculatePositionY = (newPositionY: number) => {
     const height = container.clientHeight
     if (newPositionY > 0) return 0
-    if (newPositionY + height * finalOptions.zoomFactor < height) return -height * (finalOptions.zoomFactor - 1)
+    if (newPositionY + height * zoomFactor < height) return -height * (zoomFactor - 1)
     return newPositionY
   }
 
   function processZoom(event: PointerEvent) {
     zoomedImg.style.display = "block"
-    imageLoader.createZoomImage({
-      img: zoomedImg,
-      src: finalOptions.zoomImageSource,
-      store,
-    })
+    imageLoader.createZoomImage(zoomedImg, zoomImageSource, store)
 
     const containerRect = container.getBoundingClientRect()
     const zoomPointX = event.clientX - containerRect.left
     const zoomPointY = event.clientY - containerRect.top
 
-    const currentPositionX = calculatePositionX(-zoomPointX * finalOptions.zoomFactor + zoomPointX)
-    const currentPositionY = calculatePositionY(-zoomPointY * finalOptions.zoomFactor + zoomPointY)
+    const currentPositionX = calculatePositionX(-zoomPointX * zoomFactor + zoomPointX)
+    const currentPositionY = calculatePositionY(-zoomPointY * zoomFactor + zoomPointY)
 
     zoomedImg.style.transform = `translate(${currentPositionX}px, ${currentPositionY}px)`
   }

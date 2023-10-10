@@ -1,53 +1,53 @@
 {
   "@zoom-image/core": {
     "createZoomImageWheel": "1.5 KB",
-    "createZoomImageHover": "1.18 KB",
-    "createZoomImageMove": "885 B",
-    "createZoomImageClick": "833 B",
+    "createZoomImageHover": "1.16 KB",
+    "createZoomImageMove": "870 B",
+    "createZoomImageClick": "819 B",
     "cropImage": "202 B",
     "makeCalculateZoom": "98 B",
     "makeCalculatePercentage": "96 B"
   },
   "@zoom-image/react": {
     "useZoomImageWheel": "1.79 KB",
-    "useZoomImageHover": "1.45 KB",
-    "useZoomImageMove": "1.12 KB",
-    "useZoomImageClick": "1.06 KB"
+    "useZoomImageHover": "1.43 KB",
+    "useZoomImageMove": "1.1 KB",
+    "useZoomImageClick": "1.04 KB"
   },
   "@zoom-image/preact": {
     "useZoomImageWheel": "2.7 KB",
-    "useZoomImageHover": "2.38 KB",
-    "useZoomImageMove": "2.08 KB",
-    "useZoomImageClick": "2.02 KB"
+    "useZoomImageHover": "2.37 KB",
+    "useZoomImageMove": "2.05 KB",
+    "useZoomImageClick": "1.99 KB"
   },
   "@zoom-image/qwik": {
     "useZoomImageWheel": "1.94 KB",
-    "useZoomImageHover": "1.58 KB",
-    "useZoomImageMove": "1.24 KB",
-    "useZoomImageClick": "1.18 KB"
+    "useZoomImageHover": "1.56 KB",
+    "useZoomImageMove": "1.22 KB",
+    "useZoomImageClick": "1.17 KB"
   },
   "@zoom-image/solid": {
     "useZoomImageWheel": "2.98 KB",
-    "useZoomImageHover": "2.66 KB",
-    "useZoomImageMove": "2.34 KB",
-    "useZoomImageClick": "2.28 KB"
+    "useZoomImageHover": "2.64 KB",
+    "useZoomImageMove": "2.32 KB",
+    "useZoomImageClick": "2.26 KB"
   },
   "@zoom-image/svelte": {
     "useZoomImageWheel": "1.98 KB",
-    "useZoomImageHover": "1.65 KB",
-    "useZoomImageMove": "1.33 KB",
-    "useZoomImageClick": "1.28 KB"
+    "useZoomImageHover": "1.63 KB",
+    "useZoomImageMove": "1.32 KB",
+    "useZoomImageClick": "1.26 KB"
   },
   "@zoom-image/vue": {
     "useZoomImageWheel": "1.76 KB",
-    "useZoomImageHover": "1.44 KB",
-    "useZoomImageMove": "1.1 KB",
-    "useZoomImageClick": "1.05 KB"
+    "useZoomImageHover": "1.42 KB",
+    "useZoomImageMove": "1.08 KB",
+    "useZoomImageClick": "1.04 KB"
   },
   "@zoom-image/angular": {
-    "ZoomImageClickService": "3.25 KB",
-    "ZoomImageHoverService": "3.24 KB",
-    "ZoomImageWheelService": "3.24 KB",
-    "ZoomImageMoveService": "3.24 KB"
+    "ZoomImageClickService": "3.23 KB",
+    "ZoomImageHoverService": "3.23 KB",
+    "ZoomImageMoveService": "3.23 KB",
+    "ZoomImageWheelService": "3.23 KB"
   }
 }
