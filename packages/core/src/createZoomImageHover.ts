@@ -145,7 +145,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   }
 
   async function handlePointerEnter() {
-    imageLoader.createZoomImage(zoomImageSource, store, zoomedImg)
+    imageLoader.createZoomImage(zoomedImg, zoomImageSource, store)
 
     disableScroll()
     zoomedImg.style.display = "block"

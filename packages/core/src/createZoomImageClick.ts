@@ -61,7 +61,7 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
 
   function processZoom(event: PointerEvent) {
     zoomedImg.style.display = "block"
-    imageLoader.createZoomImage(zoomImageSource, store, zoomedImg)
+    imageLoader.createZoomImage(zoomedImg, zoomImageSource, store)
 
     const containerRect = container.getBoundingClientRect()
     const zoomPointX = event.clientX - containerRect.left

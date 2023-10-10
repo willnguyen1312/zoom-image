@@ -8,13 +8,13 @@ const THRESHOLD = 50
 
 export const makeImageLoader = () => {
   const createZoomImage = (
+    img: HTMLImageElement,
     src: string,
     store: ReturnType<
       typeof createStore<{
         zoomedImgStatus: ZoomedImgStatus
       }>
     >,
-    img: HTMLImageElement
   ) => {
     if (img.src === src) return
     img.src = src
