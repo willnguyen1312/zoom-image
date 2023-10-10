@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.27.0
+
+### Minor Changes
+
+- [#230](https://github.com/willnguyen1312/zoom-image/pull/230)
+  [`58e1912`](https://github.com/willnguyen1312/zoom-image/commit/58e19121d7d1173647242f2b0570dbf2c0ccee1d) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Optimize bundle size 🚀
+
 ## 0.26.1
 
 ### Patch Changes
