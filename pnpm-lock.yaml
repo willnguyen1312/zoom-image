@@ -77,6 +77,9 @@ importers:
       "@angular/cli":
         specifier: ~16.1.8
         version: 16.1.8
+      "@angular/compiler":
+        specifier: ^16.2.0
+        version: 16.2.0(@angular/core@16.2.0)
       "@angular/compiler-cli":
         specifier: ^16.2.0
         version: 16.2.0(@angular/compiler@16.2.0)(typescript@5.1.6)
