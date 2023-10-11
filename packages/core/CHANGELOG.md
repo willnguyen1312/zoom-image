@@ -1,5 +1,14 @@
 # @zoom-image/core
 
+## 0.28.0
+
+### Minor Changes
+
+- [#233](https://github.com/willnguyen1312/zoom-image/pull/233)
+  [`5d3131b`](https://github.com/willnguyen1312/zoom-image/commit/5d3131b35252926e01a1dac1461194f9b29ca0a3) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add disableScrollLock option to zoom on hover and zoom on
+  click 💞
+
 ## 0.27.0
 
 ### Minor Changes
