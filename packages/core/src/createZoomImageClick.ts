@@ -16,7 +16,7 @@ export type ZoomImageClickState = {
 export function createZoomImageClick(container: HTMLElement, options: ZoomImageClickOptions = {}) {
   const sourceImgElement = getSourceImage(container)
   const finalOptions: Required<ZoomImageClickOptions> = {
-    zoomFactor: options.zoomFactor ?? 4,
+    zoomFactor: options.zoomFactor ?? 2,
     zoomImageSource: options.zoomImageSource ?? sourceImgElement.src,
     disableScrollLock: options.disableScrollLock ?? false,
   }

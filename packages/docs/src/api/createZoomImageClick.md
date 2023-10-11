@@ -25,11 +25,14 @@ type ZoomImageClickState = {
 }
 
 type ZoomImageClickOptions = {
-  // Zoom scale, default is 4
+  // Zoom scale, default is 2
   zoomFactor?: number
 
   // The source of zoomed image, default is the same as the original image
   zoomImageSource?: string
+
+  // Disable scroll lock on zoom, default is false
+  disableScrollLock?: boolean
 }
 
 function createZoomImageClick(
