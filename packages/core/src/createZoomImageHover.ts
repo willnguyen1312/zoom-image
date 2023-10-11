@@ -11,6 +11,7 @@ export type ZoomImageHoverOptions = {
   zoomTarget: HTMLElement
   zoomTargetClass?: string
   scale?: number
+  disableScrollLock?: boolean
 }
 
 export type ZoomImageHoverState = {
@@ -38,9 +39,19 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     scale: options.scale || 2,
     zoomTarget: options.zoomTarget,
     zoomLensScale: options.zoomLensScale || 1,
+    disableScrollLock: options.disableScrollLock || false,
   }
 
-  const { scale, zoomImageSource, customZoom, zoomLensClass, zoomTarget, zoomLensScale, zoomTargetClass } = finalOptions
+  const {
+    scale,
+    zoomImageSource,
+    customZoom,
+    zoomLensClass,
+    zoomTarget,
+    zoomLensScale,
+    zoomTargetClass,
+    disableScrollLock,
+  } = finalOptions
 
   const store = createStore<ZoomImageHoverState>({
     zoomedImgStatus: "idle",
@@ -146,8 +157,6 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
 
   async function handlePointerEnter() {
     imageLoader.createZoomImage(zoomedImg, zoomImageSource, store)
-
-    disableScroll()
     zoomedImg.style.display = "block"
     zoomLens.style.display = "block"
 
@@ -155,10 +164,11 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
       const classes = zoomTargetClass.split(" ")
       classes.forEach((className) => zoomTarget.classList.add(className))
     }
+
+    if (!disableScrollLock) disableScroll()
   }
 
   function handlePointerLeave() {
-    enableScroll()
     zoomedImg.style.display = "none"
     zoomLens.style.display = "none"
 
@@ -166,6 +176,8 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
       const classes = zoomTargetClass.split(" ")
       classes.forEach((className) => zoomTarget.classList.remove(className))
     }
+
+    if (!disableScrollLock) enableScroll()
   }
 
   function handleScroll() {

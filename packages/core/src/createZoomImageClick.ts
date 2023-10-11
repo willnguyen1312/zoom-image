@@ -1,11 +1,12 @@
 import { createStore } from "@namnode/store"
 import { imageLoader } from "./imageLoader"
 import { ZoomedImgStatus } from "./types"
-import { disableScroll, enableScroll, getSourceImage } from "./utils"
+import { disableScroll, enableScroll, getSourceImage, noop } from "./utils"
 
 export type ZoomImageClickOptions = {
   zoomFactor?: number
   zoomImageSource?: string
+  disableScrollLock?: boolean
 }
 
 export type ZoomImageClickState = {
@@ -17,9 +18,10 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
   const finalOptions: Required<ZoomImageClickOptions> = {
     zoomFactor: options.zoomFactor ?? 4,
     zoomImageSource: options.zoomImageSource ?? sourceImgElement.src,
+    disableScrollLock: options.disableScrollLock ?? false,
   }
 
-  const { zoomFactor, zoomImageSource } = finalOptions
+  const { zoomFactor, zoomImageSource, disableScrollLock } = finalOptions
 
   let isOnMove = false
 
@@ -87,8 +89,8 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
   const controller = new AbortController()
   const { signal } = controller
   container.addEventListener("pointerdown", handlePointerDown, { signal })
-  container.addEventListener("pointerenter", disableScroll, { signal })
-  container.addEventListener("pointerleave", enableScroll, { signal })
+  container.addEventListener("pointerenter", disableScrollLock ? noop : disableScroll, { signal })
+  container.addEventListener("pointerleave", disableScrollLock ? noop : enableScroll, { signal })
   container.addEventListener("pointermove", handlePointerMove, { signal })
 
   return {
