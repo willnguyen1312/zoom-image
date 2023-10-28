@@ -41,6 +41,7 @@
     "start-angular": "turbo run dev --filter=with-angular...",
     "start-docs": "turbo run dev --filter=docs...",
     "start-next": "turbo run dev --filter=with-next...",
+    "start-remix": "turbo run dev --filter=with-remix...",
     "start-preact": "turbo run dev --filter=with-preact...",
     "start-qwik": "turbo run dev --filter=with-qwik...",
     "start-react": "turbo run dev --filter=with-react...",
