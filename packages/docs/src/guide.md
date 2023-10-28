@@ -350,6 +350,7 @@ Refer to [Svelte Adapter section](/api/adapters/vue) for more details
 - [React](/examples/react)
 - [Preact](/examples/preact)
 - [Next](/examples/next)
+- [Remix](/examples/remix)
 - [Qwik](/examples/qwik)
 - [Solid](/examples/solid)
 - [Svelte](/examples/svelte)

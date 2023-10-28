@@ -53,6 +53,10 @@ export default defineConfig({
             link: "/examples/next",
           },
           {
+            text: "Remix",
+            link: "/examples/remix",
+          },
+          {
             text: "Preact",
             link: "/examples/preact",
           },

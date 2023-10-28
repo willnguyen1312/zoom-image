@@ -23,6 +23,7 @@
     "with-solid",
     "with-svelte",
     "with-preact",
-    "with-qwik"
+    "with-qwik",
+    "with-remix"
   ]
 }
