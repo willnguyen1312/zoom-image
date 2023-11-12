@@ -29,7 +29,9 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   zoomedImgWrapper.style.overflow = "hidden"
   const zoomedImg = zoomedImgWrapper.appendChild(document.createElement("img"))
   zoomedImg.style.maxWidth = "none"
+  zoomedImg.style.display = "none"
   const zoomLens = container.appendChild(document.createElement("div"))
+  zoomLens.style.display = "none"
 
   const finalOptions: Required<ZoomImageHoverOptions> = {
     zoomImageSource: options.zoomImageSource || sourceImgElement.src,
@@ -58,7 +60,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     enabled: true,
   })
 
-  let offset: { left: number; top: number }
+  let offset: { left: number; top: number } = getOffset(sourceImgElement)
 
   function getOffset(element: HTMLElement) {
     const elRect = element.getBoundingClientRect()
@@ -81,63 +83,6 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   function zoomLensTop(top: number) {
     const minY = zoomLens.clientHeight / 2
     return clamp(top, minY, getLimitY(minY)) - minY
-  }
-
-  function setZoomedImgSize() {
-    // Custom zoom available
-    if (customZoom) {
-      zoomedImgWrapper.style.width = customZoom.width + "px"
-      zoomedImgWrapper.style.height = customZoom.height + "px"
-      return
-    }
-
-    // Default zoom to source image size
-    zoomedImgWrapper.style.width = sourceImgElement.width + "px"
-    zoomedImgWrapper.style.height = sourceImgElement.height + "px"
-  }
-
-  function onSourceImageReady() {
-    setZoomedImgSize()
-    offset = getOffset(sourceImgElement)
-
-    zoomedImg.style.display = "block"
-    zoomedImg.style.display = "none"
-    zoomedImg.width = (sourceImgElement.width * scale) / zoomLensScale
-    zoomedImg.height = (sourceImgElement.height * scale) / zoomLensScale
-
-    // Setup default zoom lens style
-    const fromLeft = sourceImgElement.getBoundingClientRect().left - container.getBoundingClientRect().left
-    const fromTop = sourceImgElement.getBoundingClientRect().top - container.getBoundingClientRect().top
-    zoomLens.style.position = "absolute"
-    zoomLens.style.left = fromLeft + "px"
-    zoomLens.style.top = fromTop + "px"
-    zoomTarget.style.pointerEvents = "none"
-
-    if (!zoomLensClass) {
-      zoomLens.style.background = "rgba(238, 130, 238, 0.5)"
-    }
-
-    zoomLens.style.width = (customZoom.width / scale) * zoomLensScale + "px"
-    zoomLens.style.height = (customZoom.height / scale) * zoomLensScale + "px"
-  }
-
-  function setup() {
-    zoomLens.style.display = "none"
-
-    if (zoomLensClass) {
-      const classes = zoomLensClass.split(" ")
-      classes.forEach((className) => zoomLens.classList.add(className))
-    }
-
-    // setup event listeners
-    container.addEventListener("pointerdown", processZoom, { signal })
-    container.addEventListener("pointermove", processZoom, { signal })
-    container.addEventListener("pointerenter", handlePointerEnter, { signal })
-    container.addEventListener("pointerleave", handlePointerLeave, { signal })
-    window.addEventListener("scroll", handleScroll, { signal })
-
-    // Setup zoomed image position if zoom target is specified
-    zoomTarget.appendChild(zoomedImgWrapper)
   }
 
   function processZoom(event: PointerEvent) {
@@ -184,10 +129,45 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     offset = getOffset(sourceImgElement)
   }
 
-  if (sourceImgElement.complete) {
-    onSourceImageReady()
-  } else {
-    sourceImgElement.onload = onSourceImageReady
+  function setup() {
+    if (zoomLensClass) {
+      zoomLens.className = zoomLensClass
+    } else {
+      zoomLens.style.background = "rgba(238, 130, 238, 0.5)"
+    }
+
+    // setup event listeners
+    container.addEventListener("pointerdown", processZoom, { signal })
+    container.addEventListener("pointermove", processZoom, { signal })
+    container.addEventListener("pointerenter", handlePointerEnter, { signal })
+    container.addEventListener("pointerleave", handlePointerLeave, { signal })
+    window.addEventListener("scroll", handleScroll, { signal })
+
+    // Append zoomed image wrapper to zoom target
+    zoomTarget.appendChild(zoomedImgWrapper)
+
+    // Set up styles if custom zoom available
+    if (customZoom) {
+      zoomedImgWrapper.style.width = customZoom.width + "px"
+      zoomedImgWrapper.style.height = customZoom.height + "px"
+    } else {
+      // Else default zoom to source image size
+      zoomedImgWrapper.style.width = sourceImgElement.width + "px"
+      zoomedImgWrapper.style.height = sourceImgElement.height + "px"
+    }
+
+    zoomedImg.width = (sourceImgElement.width * scale) / zoomLensScale
+    zoomedImg.height = (sourceImgElement.height * scale) / zoomLensScale
+
+    // Setup default zoom lens style
+    const fromLeft = sourceImgElement.getBoundingClientRect().left - container.getBoundingClientRect().left
+    const fromTop = sourceImgElement.getBoundingClientRect().top - container.getBoundingClientRect().top
+    zoomTarget.style.pointerEvents = "none"
+    zoomLens.style.position = "absolute"
+    zoomLens.style.left = fromLeft + "px"
+    zoomLens.style.top = fromTop + "px"
+    zoomLens.style.width = (customZoom.width / scale) * zoomLensScale + "px"
+    zoomLens.style.height = (customZoom.height / scale) * zoomLensScale + "px"
   }
 
   setup()
