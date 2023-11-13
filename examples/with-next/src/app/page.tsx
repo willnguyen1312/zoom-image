@@ -70,7 +70,7 @@ export default function Home() {
       const imageContainer = imageHoverContainerRef.current as HTMLDivElement
       const zoomTarget = zoomTargetRef.current as HTMLDivElement
       createZoomImageHover(imageContainer, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        zoomImageSource: "/sample.avif",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
         scale: 2,
@@ -80,14 +80,14 @@ export default function Home() {
     if (zoomType === "move") {
       const imageContainer = imageMoveContainerRef.current as HTMLDivElement
       createZoomImageMove(imageContainer, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        zoomImageSource: "/sample.avif",
       })
     }
 
     if (zoomType === "click") {
       const imageContainer = imageClickContainerRef.current as HTMLDivElement
       createZoomImageClick(imageContainer, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        zoomImageSource: "/sample.avif",
       })
     }
   }, [zoomType])
@@ -130,10 +130,10 @@ export default function Home() {
           <p>Current zoom: {`${Math.round(zoomImageWheelState.currentZoom * 100)}%`}</p>
           <p>Scroll inside the image to see zoom in-out effect</p>
           <div className="mt-1 flex space-x-2">
-            <div ref={imageWheelContainerRef} className="h-[300px] w-[300px] cursor-crosshair">
-              <img className="h-full w-full" alt="Large Pic" src="/large.webp" />
+            <div ref={imageWheelContainerRef} className="h-[300px] w-[200px] cursor-crosshair">
+              <img className="h-full w-full" alt="Large Pic" src="/sample.avif" />
             </div>
-            {croppedImage && <img src={croppedImage} className="h-[300px] w-[300px]" alt="Cropped placeholder" />}
+            {croppedImage && <img src={croppedImage} className="h-[300px] w-[200px]" alt="Cropped placeholder" />}
           </div>
 
           <div className="flex space-x-2">
@@ -154,7 +154,7 @@ export default function Home() {
         <>
           <p>Hover inside the image to see zoom effect</p>
           <div ref={imageHoverContainerRef} className="relative flex h-[250px] w-[250px] items-start">
-            <img className="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+            <img className="h-full w-full" alt="Small Pic" src="/sample.avif" />
             <div ref={zoomTargetRef} className="absolute left-[300px]"></div>
           </div>
         </>
@@ -163,8 +163,8 @@ export default function Home() {
       {zoomType === "move" && (
         <>
           <p>Move mouse inside the image to see zoom effect</p>
-          <div ref={imageMoveContainerRef} className="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-            <img className="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+          <div ref={imageMoveContainerRef} className="relative h-[300px] w-[200px] cursor-crosshair overflow-hidden">
+            <img className="h-full w-full" alt="Large Pic" src="/sample.avif" />
           </div>
         </>
       )}
@@ -172,8 +172,8 @@ export default function Home() {
       {zoomType === "click" && (
         <>
           <p>Click inside the image to see zoom effect</p>
-          <div ref={imageClickContainerRef} className="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-            <img className="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+          <div ref={imageClickContainerRef} className="relative h-[300px] w-[200px] cursor-crosshair overflow-hidden">
+            <img className="h-full w-full" alt="Large Pic" src="/sample.avif" />
           </div>
         </>
       )}

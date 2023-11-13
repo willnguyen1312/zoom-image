@@ -39,10 +39,10 @@
         <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
         <p id="currentZoom">Current zoom: 100%</p>
         <div class="mt-1 flex space-x-2">
-          <div id="image-wheel-container" class="h-[300px] w-[300px] cursor-crosshair">
-            <img class="h-full w-full" alt="Large Pic" src="/large.webp" />
+          <div id="image-wheel-container" class="h-[300px] w-[200px] cursor-crosshair">
+            <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
           </div>
-          <img id="cropImg" hidden class="h-[300px] w-[300px]" alt="Cropped placeholder" />
+          <img id="cropImg" hidden class="h-[300px] w-[200px]" alt="Cropped placeholder" />
         </div>
 
         <div class="flex space-x-2">
@@ -55,20 +55,20 @@
 
     <template id="image-hover">
       <div id="image-hover-container" class="relative flex h-[250px] w-[250px] items-start">
-        <img class="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+        <img class="h-full w-full" alt="Small Pic" src="/sample.avif" />
         <div id="zoom-hover-target" class="absolute left-[300px]"></div>
       </div>
     </template>
 
     <template id="image-move">
-      <div id="image-move-container" class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-        <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+      <div id="image-move-container" class="relative h-[300px] w-[200px] cursor-crosshair overflow-hidden">
+        <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
       </div>
     </template>
 
     <template id="image-click">
-      <div id="image-click-container" class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-        <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+      <div id="image-click-container" class="relative h-[300px] w-[200px] cursor-crosshair overflow-hidden">
+        <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
       </div>
     </template>
 

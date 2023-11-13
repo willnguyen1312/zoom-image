@@ -94,7 +94,7 @@ export class AppComponent implements AfterViewInit {
       },
       hover: () => {
         this.zoomImageHoverService.createZoomImage(this.imageHoverContainerRef?.nativeElement as HTMLDivElement, {
-          zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+          zoomImageSource: "/sample.avif",
           customZoom: { width: 300, height: 500 },
           zoomTarget: this.zoomTargetRef?.nativeElement as HTMLDivElement,
           scale: 2,
@@ -105,7 +105,7 @@ export class AppComponent implements AfterViewInit {
       },
       move: () => {
         this.zoomImageMoveService.createZoomImage(this.imageMoveContainerRef?.nativeElement as HTMLDivElement, {
-          zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+          zoomImageSource: "/sample.avif",
         })
         this.zoomImageMoveService.zoomImageState$.subscribe((state) => {
           this.zoomImageMoveState = state
@@ -113,7 +113,7 @@ export class AppComponent implements AfterViewInit {
       },
       click: () => {
         this.zoomImageClickService.createZoomImage(this.imageClickContainerRef?.nativeElement as HTMLDivElement, {
-          zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+          zoomImageSource: "/sample.avif",
         })
         this.zoomImageClickService.zoomImageState$.subscribe((state) => {
           this.zoomImageClickState = state

@@ -3,10 +3,10 @@ type CropImageArg = {
   image: HTMLImageElement
   positionX: number
   positionY: number
-  rotation: number
+  rotation?: number
 }
 
-export const cropImage = async ({ image, positionX, positionY, currentZoom, rotation }: CropImageArg) => {
+export const cropImage = async ({ image, positionX, positionY, currentZoom, rotation = 0 }: CropImageArg) => {
   const canvas = document.createElement("canvas")
   const scale = image.naturalWidth / (image.clientWidth * currentZoom)
   const croppedImageWidth = image.clientWidth * scale

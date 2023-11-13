@@ -45,12 +45,13 @@ const handleTabClick = (tab: { name: string; href: string; current: boolean }) =
   tab.current = true
 }
 
-const handleCropWheelZoomImage = () => {
-  croppedImage.value = cropImage({
+const handleCropWheelZoomImage = async () => {
+  croppedImage.value = await cropImage({
     currentZoom: zoomImageWheelState.currentZoom,
     image: (imageWheelContainerRef.value as HTMLDivElement).querySelector("img") as HTMLImageElement,
     positionX: zoomImageWheelState.currentPositionX,
     positionY: zoomImageWheelState.currentPositionY,
+    rotation: zoomImageWheelState.currentRotation,
   })
 }
 const zoomIn = () => {
@@ -64,6 +65,28 @@ const zoomOut = () => {
   })
 }
 
+const rotate = () => {
+  setZoomImageWheelState({
+    currentRotation: zoomImageWheelState.currentRotation + 90,
+  })
+}
+
+const croppedImageClasses = computed(() => {
+  if (zoomImageWheelState.currentRotation === 90 || zoomImageWheelState.currentRotation === 270) {
+    return "h-[200px] w-[300px]"
+  } else {
+    return "h-[300px] w-[200px]"
+  }
+})
+
+watch(
+  () => zoomImageWheelState.currentRotation,
+  () => {
+    if (!croppedImage.value) return
+    handleCropWheelZoomImage()
+  },
+)
+
 watch(
   zoomType,
   async () => {
@@ -73,7 +96,7 @@ watch(
     if (zoomType.value === "hover") {
       const isMobile = window.innerWidth < 768
       createZoomImageHover(imageHoverContainerRef.value as HTMLDivElement, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        zoomImageSource: "/sample.avif",
         customZoom: isMobile ? { width: 100, height: 150 } : { width: 300, height: 450 },
         zoomTarget: zoomTargetRef.value as HTMLDivElement,
         scale: 2,
@@ -86,13 +109,13 @@ watch(
 
     if (zoomType.value === "move") {
       createZoomImageMove(imageMoveContainerRef.value as HTMLDivElement, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        zoomImageSource: "/sample.avif",
       })
     }
 
     if (zoomType.value === "click") {
       createZoomImageClick(imageClickContainerRef.value as HTMLDivElement, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        zoomImageSource: "/sample.avif",
       })
     }
   },
@@ -120,18 +143,22 @@ watch(
     <div class="space-y-4" v-if="zoomType === 'wheel'">
       <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
       <p>Current zoom: {{ `${Math.round(zoomImageWheelState.currentZoom * 100)}%` }}</p>
-      <div class="mt-1 flex w-[300px] flex-col gap-2 sm:w-auto sm:flex-row">
-        <div ref="imageWheelContainerRef" class="h-[300px] w-[300px] cursor-crosshair">
-          <img class="h-full w-full" crossorigin="anonymous" alt="Large Pic" src="/large.webp" />
+      <div class="flex items-center gap-4">
+        <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
+          <div ref="imageWheelContainerRef" class="h-[300px] w-[200px] cursor-crosshair">
+            <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
+          </div>
         </div>
-        <img :src="croppedImage" v-if="!!croppedImage" class="h-[300px] w-[300px]" alt="Cropped placeholder" />
+        <img :src="croppedImage" v-if="!!croppedImage" :class="croppedImageClasses" alt="Cropped placeholder" />
       </div>
+
       <div class="flex space-x-2">
         <button @click="zoomIn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom in</button>
         <button @click="zoomOut" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom out</button>
         <button class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium" @click="handleCropWheelZoomImage">
           Crop image
         </button>
+        <button @click="rotate" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Rotate</button>
       </div>
     </div>
 
@@ -141,22 +168,22 @@ watch(
         ref="imageHoverContainerRef"
         class="relative mt-1 flex h-[200px] w-[200px] items-start sm:h-[250px] sm:w-[250px] lg:h-[300px] lg:w-[300px]"
       >
-        <img class="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+        <img class="h-full w-full" alt="Small Pic" src="/sample.avif" />
         <div ref="zoomTargetRef" class="absolute left-[220px] sm:left-[300px] lg:left-[350px]"></div>
       </div>
     </div>
 
     <div class="space-y-4" v-if="zoomType === 'move'">
       <p>Move mouse inside the image to see zoom effect</p>
-      <div ref="imageMoveContainerRef" class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-        <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+      <div ref="imageMoveContainerRef" class="relative mt-1 h-[300px] w-[200px] cursor-crosshair overflow-hidden">
+        <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
       </div>
     </div>
 
     <div class="space-y-4" v-if="zoomType === 'click'">
       <p>Click inside the image to see zoom effect</p>
-      <div ref="imageClickContainerRef" class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-        <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+      <div ref="imageClickContainerRef" class="relative mt-1 h-[300px] w-[200px] cursor-crosshair overflow-hidden">
+        <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
       </div>
     </div>
   </div>

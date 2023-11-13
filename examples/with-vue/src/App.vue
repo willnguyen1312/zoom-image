@@ -95,7 +95,7 @@ watch(
 
     if (zoomType.value === "hover") {
       createZoomImageHover(imageHoverContainerRef.value as HTMLDivElement, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        zoomImageSource: "/sample.avif",
         customZoom: { width: 300, height: 500 },
         zoomTarget: zoomTargetRef.value as HTMLDivElement,
         scale: 2,
@@ -108,13 +108,13 @@ watch(
 
     if (zoomType.value === "move") {
       createZoomImageMove(imageMoveContainerRef.value as HTMLDivElement, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        zoomImageSource: "/sample.avif",
       })
     }
 
     if (zoomType.value === "click") {
       createZoomImageClick(imageClickContainerRef.value as HTMLDivElement, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        zoomImageSource: "/sample.avif",
       })
     }
   },
@@ -142,11 +142,15 @@ watch(
     <div class="space-y-4" v-if="zoomType === 'wheel'">
       <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
       <p>Current zoom: {{ `${Math.round(zoomImageWheelState.currentZoom * 100)}%` }}</p>
-      <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
-        <div ref="imageWheelContainerRef" class="h-[300px] w-[200px] cursor-crosshair">
-          <img class="h-full w-full" crossorigin="anonymous" alt="Large Pic" src="/large.avif" />
+      <div class="flex items-center gap-4">
+        <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
+          <div ref="imageWheelContainerRef" class="h-[300px] w-[200px] cursor-crosshair">
+            <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
+          </div>
         </div>
+        <img :src="croppedImage" v-if="!!croppedImage" :class="croppedImageClasses" alt="Cropped placeholder" />
       </div>
+
       <div class="flex space-x-2">
         <button @click="zoomIn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom in</button>
         <button @click="zoomOut" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom out</button>
@@ -155,28 +159,27 @@ watch(
         </button>
         <button @click="rotate" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Rotate</button>
       </div>
-      <img :src="croppedImage" v-if="!!croppedImage" :class="croppedImageClasses" alt="Cropped placeholder" />
     </div>
 
     <div class="space-y-4" v-if="zoomType === 'hover'">
       <p>Hover inside the image to see zoom effect</p>
-      <div ref="imageHoverContainerRef" class="relative mt-1 flex h-[300px] w-[300px] items-start">
-        <img class="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+      <div ref="imageHoverContainerRef" class="relative mt-1 flex h-[300px] w-[200px] items-start">
+        <img class="h-full w-full" alt="Small Pic" src="/sample.avif" />
         <div ref="zoomTargetRef" class="absolute left-[350px]"></div>
       </div>
     </div>
 
     <div class="space-y-4" v-if="zoomType === 'move'">
       <p>Move mouse inside the image to see zoom effect</p>
-      <div ref="imageMoveContainerRef" class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-        <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+      <div ref="imageMoveContainerRef" class="relative mt-1 h-[300px] w-[200px] cursor-crosshair overflow-hidden">
+        <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
       </div>
     </div>
 
     <div class="space-y-4" v-if="zoomType === 'click'">
       <p>Click inside the image to see zoom effect</p>
-      <div ref="imageClickContainerRef" class="relative mt-1 h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-        <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+      <div ref="imageClickContainerRef" class="relative mt-1 h-[300px] w-[200px] cursor-crosshair overflow-hidden">
+        <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
       </div>
     </div>
   </div>
