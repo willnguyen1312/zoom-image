@@ -166,7 +166,7 @@ watch(
       <p>Hover inside the image to see zoom effect</p>
       <div
         ref="imageHoverContainerRef"
-        class="relative mt-1 flex h-[200px] w-[200px] items-start sm:h-[250px] sm:w-[250px] lg:h-[300px] lg:w-[300px]"
+        class="relative mt-1 flex h-[200px] w-[133.33px] items-start sm:h-[250px] sm:w-[166.66px] lg:h-[300px] lg:w-[200px]"
       >
         <img class="h-full w-full" alt="Small Pic" src="/sample.avif" />
         <div ref="zoomTargetRef" class="absolute left-[220px] sm:left-[300px] lg:left-[350px]"></div>
