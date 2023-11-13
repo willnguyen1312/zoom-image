@@ -142,11 +142,10 @@ watch(
     <div class="space-y-4" v-if="zoomType === 'wheel'">
       <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
       <p>Current zoom: {{ `${Math.round(zoomImageWheelState.currentZoom * 100)}%` }}</p>
-      <div class="mt-1 grid place-content-center">
+      <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
         <div ref="imageWheelContainerRef" class="h-[300px] w-[200px] cursor-crosshair">
           <img class="h-full w-full" crossorigin="anonymous" alt="Large Pic" src="/large.avif" />
         </div>
-        <img :src="croppedImage" v-if="!!croppedImage" :class="croppedImageClasses" alt="Cropped placeholder" />
       </div>
       <div class="flex space-x-2">
         <button @click="zoomIn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom in</button>
@@ -156,6 +155,7 @@ watch(
         </button>
         <button @click="rotate" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Rotate</button>
       </div>
+      <img :src="croppedImage" v-if="!!croppedImage" :class="croppedImageClasses" alt="Cropped placeholder" />
     </div>
 
     <div class="space-y-4" v-if="zoomType === 'hover'">
