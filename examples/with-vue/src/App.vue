@@ -45,8 +45,8 @@ const handleTabClick = (tab: { name: string; href: string; current: boolean }) =
   tab.current = true
 }
 
-const handleCropWheelZoomImage = () => {
-  croppedImage.value = cropImage({
+const handleCropWheelZoomImage = async () => {
+  croppedImage.value = await cropImage({
     currentZoom: zoomImageWheelState.currentZoom,
     image: (imageWheelContainerRef.value as HTMLDivElement).querySelector("img") as HTMLImageElement,
     positionX: zoomImageWheelState.currentPositionX,
@@ -70,6 +70,22 @@ const rotate = () => {
     currentRotation: zoomImageWheelState.currentRotation + 90,
   })
 }
+
+const croppedImageClasses = computed(() => {
+  if (zoomImageWheelState.currentRotation === 90 || zoomImageWheelState.currentRotation === 270) {
+    return "h-[200px] w-[300px]"
+  } else {
+    return "h-[300px] w-[200px]"
+  }
+})
+
+watch(
+  () => zoomImageWheelState.currentRotation,
+  () => {
+    if (!croppedImage.value) return
+    handleCropWheelZoomImage()
+  },
+)
 
 watch(
   zoomType,
@@ -130,7 +146,7 @@ watch(
         <div ref="imageWheelContainerRef" class="h-[300px] w-[200px] cursor-crosshair">
           <img class="h-full w-full" crossorigin="anonymous" alt="Large Pic" src="/large.avif" />
         </div>
-        <img :src="croppedImage" v-if="!!croppedImage" class="h-[300px] w-[200px]" alt="Cropped placeholder" />
+        <img :src="croppedImage" v-if="!!croppedImage" :class="croppedImageClasses" alt="Cropped placeholder" />
       </div>
       <div class="flex space-x-2">
         <button @click="zoomIn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom in</button>
