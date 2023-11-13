@@ -66,7 +66,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   function handlePointerLeave() {
     zoomedImg.style.display = "none"
     zoomedImg.style.transform = "none"
-    if (disableScrollLock) enableScroll()
+    if (!disableScrollLock) enableScroll()
   }
 
   const calculatePositionX = (newPositionX: number) => {
