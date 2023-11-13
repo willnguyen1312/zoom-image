@@ -51,6 +51,7 @@ const handleCropWheelZoomImage = () => {
     image: (imageWheelContainerRef.value as HTMLDivElement).querySelector("img") as HTMLImageElement,
     positionX: zoomImageWheelState.currentPositionX,
     positionY: zoomImageWheelState.currentPositionY,
+    rotation: zoomImageWheelState.currentRotation,
   })
 }
 const zoomIn = () => {
@@ -61,6 +62,12 @@ const zoomIn = () => {
 const zoomOut = () => {
   setZoomImageWheelState({
     currentZoom: zoomImageWheelState.currentZoom - 0.5,
+  })
+}
+
+const rotate = () => {
+  setZoomImageWheelState({
+    currentRotation: zoomImageWheelState.currentRotation + 90,
   })
 }
 
@@ -119,11 +126,11 @@ watch(
     <div class="space-y-4" v-if="zoomType === 'wheel'">
       <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
       <p>Current zoom: {{ `${Math.round(zoomImageWheelState.currentZoom * 100)}%` }}</p>
-      <div class="mt-1 flex space-x-2">
-        <div ref="imageWheelContainerRef" class="h-[300px] w-[300px] cursor-crosshair">
-          <img class="h-full w-full" crossorigin="anonymous" alt="Large Pic" src="/large.webp" />
+      <div class="mt-1 grid place-content-center">
+        <div ref="imageWheelContainerRef" class="h-[300px] w-[200px] cursor-crosshair">
+          <img class="h-full w-full" crossorigin="anonymous" alt="Large Pic" src="/large.avif" />
         </div>
-        <img :src="croppedImage" v-if="!!croppedImage" class="h-[300px] w-[300px]" alt="Cropped placeholder" />
+        <img :src="croppedImage" v-if="!!croppedImage" class="h-[300px] w-[200px]" alt="Cropped placeholder" />
       </div>
       <div class="flex space-x-2">
         <button @click="zoomIn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom in</button>
@@ -131,6 +138,7 @@ watch(
         <button class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium" @click="handleCropWheelZoomImage">
           Crop image
         </button>
+        <button @click="rotate" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Rotate</button>
       </div>
     </div>
 

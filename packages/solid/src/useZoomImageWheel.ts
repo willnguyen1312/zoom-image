@@ -9,8 +9,9 @@ export function useZoomImageWheel() {
   const [zoomImageState, updateZoomImageState] = createStore<ZoomImageWheelState>({
     currentZoom: 1,
     enable: true,
-    currentPositionX: 0,
-    currentPositionY: 0,
+    currentPositionX: -1,
+    currentPositionY: -1,
+    currentRotation: 0,
   })
 
   const createZoomImage = (...arg: Parameters<typeof _createZoomImageWheel>) => {

@@ -12,6 +12,7 @@ export function useZoomImageWheel() {
     enable: false,
     currentPositionX: -1,
     currentPositionY: -1,
+    currentRotation: 0,
   })
 
   const createZoomImage = (...arg: Parameters<typeof _createZoomImageWheel>) => {
