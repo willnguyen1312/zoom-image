@@ -1,5 +1,13 @@
 # @zoom-image/solid
 
+## 0.1.21
+
+### Patch Changes
+
+- Updated dependencies
+  [[`cafb5f8`](https://github.com/willnguyen1312/zoom-image/commit/cafb5f8e0d55dcf266a56f12f00c329be68477d5)]:
+  - @zoom-image/core@0.29.0
+
 ## 0.1.20
 
 ### Patch Changes

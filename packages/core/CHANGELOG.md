@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.29.0
+
+### Minor Changes
+
+- [#236](https://github.com/willnguyen1312/zoom-image/pull/236)
+  [`cafb5f8`](https://github.com/willnguyen1312/zoom-image/commit/cafb5f8e0d55dcf266a56f12f00c329be68477d5) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Improve zoom image on hover performance 🚀
+
 ## 0.28.0
 
 ### Minor Changes
