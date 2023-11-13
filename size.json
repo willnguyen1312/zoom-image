@@ -4,7 +4,7 @@
     "createZoomImageHover": "1.14 KB",
     "createZoomImageMove": "870 B",
     "createZoomImageClick": "847 B",
-    "cropImage": "202 B",
+    "cropImage": "368 B",
     "makeCalculateZoom": "97 B",
     "makeCalculatePercentage": "95 B"
   },
