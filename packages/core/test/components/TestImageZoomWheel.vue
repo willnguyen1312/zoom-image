@@ -43,7 +43,7 @@ watch(
       const zoomTarget = zoomTargetRef.value
 
       const result = createZoomImageHover(imageContainer, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        zoomImageSource: "/sample.avif",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
         scale: 2,
@@ -80,11 +80,11 @@ onUnmounted(() => {
     </nav>
 
     <div v-if="zoomType === 'wheel'" ref="imageWheelContainerRef">
-      <img alt="Large Pic" src="https://nam-assets.netlify.app/static/large.webp" />
+      <img alt="Large Pic" src="/sample.avif" />
     </div>
 
     <div v-if="zoomType === 'hover'" ref="imageHoverContainerRef">
-      <img alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+      <img alt="Small Pic" src="/sample.avif" />
       <div ref="zoomTargetRef" data-testid="zoomTarget"></div>
     </div>
   </div>

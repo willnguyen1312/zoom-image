@@ -11,6 +11,7 @@ export function useZoomImageWheel() {
     enable: false,
     currentPositionX: -1,
     currentPositionY: -1,
+    currentRotation: 0,
   })
 
   useVisibleTask$(({ cleanup }) => {

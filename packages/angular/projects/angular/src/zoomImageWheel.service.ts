@@ -13,6 +13,7 @@ export class ZoomImageWheelService implements OnDestroy {
     enable: false,
     currentPositionX: -1,
     currentPositionY: -1,
+    currentRotation: 0,
   })
 
   private result: ReturnType<typeof _createZoomImageWheel> | undefined

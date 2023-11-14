@@ -21,10 +21,11 @@ type ZoomImageWheelState = {
   enable: boolean
   currentPositionX: number
   currentPositionY: number
+  currentRotation: number
 }
 
 type Listener = (state: ZoomImageWheelState) => void
-type StateUpdate = { currentZoom: number; enabled: boolean }
+type ZoomImageWheelStateUpdate = { currentZoom: number; enabled: boolean; currentRotation: number }
 
 type ZoomImageWheelOptions = {
   // Maximum zoom scale, default is 4
@@ -47,8 +48,8 @@ function createZoomImageWheel(
   // Subscribe to state changes, returns a function to unsubscribe
   subscribe: (listener: Listener) => () => void
 
-  // Update state, can be used to enable/disable the zoom
-  update(value: StateUpdate): void
+  // Update current state
+  setState(value: ZoomImageWheelStateUpdate): void
 
   // Get current state
   getState: () => ZoomImageWheelState

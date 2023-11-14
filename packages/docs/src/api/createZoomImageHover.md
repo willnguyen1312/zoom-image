@@ -25,8 +25,8 @@ type ZoomImageHoverState = {
   enabled: boolean
 }
 
-type Listener = (state: ZoomImageClickState, prevState: ZoomImageClickState) => void
-type StateUpdate = { enabled: boolean }
+type Listener = (state: ZoomImageHoverState, prevState: ZoomImageHoverState) => void
+type ZoomImageHoverStateUpdate = { enabled: boolean }
 
 type ZoomImageHoverOptions = {
   // The size of zoomed window where zoomed image will be displayed
@@ -67,7 +67,7 @@ function createZoomImageHover(
   // Get current state
   getState: () => ZoomImageHoverState
 
-  // Update state, can be used to enable/disable the zoom
-  update(value: StateUpdate): void
+  // Update current state
+  setState(value: ZoomImageHoverStateUpdate): void
 }
 ```

@@ -46,6 +46,6 @@ function createZoomImageMove(
   subscribe: (listener: Listener) => () => void
 
   // Get current state
-  getState: () => ZoomImageHoverState
+  getState: () => ZoomImageMoveState
 }
 ```

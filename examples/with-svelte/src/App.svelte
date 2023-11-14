@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { tick } from "svelte"
-  import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/svelte"
   import { cropImage } from "@zoom-image/core"
+  import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/svelte"
+  import { tick } from "svelte"
 
   const tabs: {
     name: string
@@ -37,7 +37,7 @@
 
     if (zoomType === "hover") {
       createZoomImageHover(imageHoverContainer, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        zoomImageSource: "/sample.avif",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
         scale: 2,
@@ -50,13 +50,13 @@
 
     if (zoomType === "move") {
       createZoomImageMove(imageMoveContainer, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        zoomImageSource: "/sample.avif",
       })
     }
 
     if (zoomType === "click") {
       createZoomImageClick(imageClickContainer, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
+        zoomImageSource: "/sample.avif",
       })
     }
   }
@@ -88,12 +88,12 @@
       <p>Current zoom: {`${Math.round($zoomImageWheelState.currentZoom * 100)}%`}</p>
       <p>Scroll inside the image to see zoom in-out effect</p>
       <div class="mt-1 flex space-x-2">
-        <div bind:this={imageWheelContainer} class="h-[300px] w-[300px] cursor-crosshair">
-          <img class="h-full w-full" alt="Large Pic" src="/large.webp" />
+        <div bind:this={imageWheelContainer} class="h-[300px] w-[200px] cursor-crosshair">
+          <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
         </div>
 
         {#if croppedImage !== ""}
-          <img src={croppedImage} class="h-[300px] w-[300px]" alt="Cropped placeholder" />
+          <img src={croppedImage} class="h-[300px] w-[200px]" alt="Cropped placeholder" />
         {/if}
       </div>
       <div class="flex space-x-2">
@@ -136,20 +136,20 @@
 
   {#if zoomType === "hover"}
     <div bind:this={imageHoverContainer} class="relative flex h-[250px] w-[250px] items-start">
-      <img class="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+      <img class="h-full w-full" alt="Small Pic" src="/sample.avif" />
       <div bind:this={zoomTarget} class="absolute left-[300px]" />
     </div>
   {/if}
 
   {#if zoomType === "move"}
-    <div bind:this={imageMoveContainer} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-      <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+    <div bind:this={imageMoveContainer} class="relative h-[300px] w-[200px] cursor-crosshair overflow-hidden">
+      <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
     </div>
   {/if}
 
   {#if zoomType === "click"}
-    <div bind:this={imageClickContainer} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-      <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
+    <div bind:this={imageClickContainer} class="relative h-[300px] w-[200px] cursor-crosshair overflow-hidden">
+      <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
     </div>
   {/if}
 </div>
