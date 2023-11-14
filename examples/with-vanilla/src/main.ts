@@ -97,9 +97,9 @@ const makeUpdateUIFunc = () => {
 
       cropImgBtn.addEventListener(
         "click",
-        () => {
+        async () => {
           const currentState = result.getState()
-          const croppedImage = cropImage({
+          const croppedImage = await cropImage({
             image: container.querySelector("img") as HTMLImageElement,
             currentZoom: currentState.currentZoom,
             positionX: currentState.currentPositionX,

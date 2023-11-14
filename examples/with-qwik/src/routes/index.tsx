@@ -47,7 +47,7 @@ export default component$(() => {
 
     if (zoomType.value === "hover" && imageHoverContainerRef.value) {
       const imageContainer = imageHoverContainerRef.value
-      const zoomTarget = zoomTargetRef.value
+      const zoomTarget = zoomTargetRef.value as HTMLDivElement
       createZoomImageHover(imageContainer, {
         zoomImageSource: "/sample.avif",
         customZoom: { width: 300, height: 500 },
@@ -137,8 +137,8 @@ export default component$(() => {
             </button>
             <button
               class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
-              onClick$={() => {
-                croppedImage.value = cropImage({
+              onClick$={async () => {
+                croppedImage.value = await cropImage({
                   currentZoom: zoomImageWheelState.currentZoom,
                   image: imageWheelContainerRef.value?.querySelector("img") as HTMLImageElement,
                   positionX: zoomImageWheelState.currentPositionX,
@@ -155,9 +155,9 @@ export default component$(() => {
       {zoomType.value === "hover" && (
         <>
           <p>Hover inside the image to see zoom effect</p>
-          <div ref={imageHoverContainerRef} class="relative flex h-[250px] w-[250px] items-start">
+          <div ref={imageHoverContainerRef} class="relative flex h-[300px] w-[200px] items-start">
             <img class="h-full w-full" alt="Small Pic" src="/sample.avif" />
-            <div ref={zoomTargetRef} class="absolute left-[300px]"></div>
+            <div ref={zoomTargetRef} class="absolute left-[350px]"></div>
           </div>
         </>
       )}

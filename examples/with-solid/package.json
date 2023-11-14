@@ -10,7 +10,7 @@
     "@unocss/reset": "^0.54.3",
     "typescript": "^5.1.6",
     "unocss": "^0.54.3",
-    "vite": "^4.4.9",
+    "vite": "^4.5.0",
     "vite-plugin-solid": "^2.7.0"
   },
   "dependencies": {

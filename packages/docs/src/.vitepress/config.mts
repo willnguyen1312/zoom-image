@@ -1,5 +1,6 @@
 import { createRequire } from "node:module"
 import Unocss from "unocss/vite"
+import { PluginOption } from "vite"
 import { defineConfig } from "vitepress"
 const require = createRequire(import.meta.url)
 const pkg = require("@zoom-image/core/package.json")
@@ -144,6 +145,6 @@ export default defineConfig({
           },
         },
       }),
-    ],
+    ] as PluginOption[],
   },
 })

@@ -119,8 +119,8 @@
         </button>
         <button
           class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
-          on:click={() => {
-            croppedImage = cropImage({
+          on:click={async () => {
+            croppedImage = await cropImage({
               currentZoom: $zoomImageWheelState.currentZoom,
               image: imageWheelContainer.querySelector("img"),
               positionX: $zoomImageWheelState.currentPositionX,
@@ -135,9 +135,9 @@
   {/if}
 
   {#if zoomType === "hover"}
-    <div bind:this={imageHoverContainer} class="relative flex h-[250px] w-[250px] items-start">
+    <div bind:this={imageHoverContainer} class="relative flex h-[300px] w-[200px] items-start">
       <img class="h-full w-full" alt="Small Pic" src="/sample.avif" />
-      <div bind:this={zoomTarget} class="absolute left-[300px]" />
+      <div bind:this={zoomTarget} class="absolute left-[350px]" />
     </div>
   {/if}
 

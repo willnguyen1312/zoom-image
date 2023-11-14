@@ -3,6 +3,10 @@ import { cropImage } from "@zoom-image/core"
 import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/vue"
 import { computed, nextTick, ref, watch } from "vue"
 
+// @ts-ignore
+const BASE_URL = import.meta.env.BASE_URL
+const imageURL = BASE_URL + "sample.avif"
+
 const tabs = ref<
   {
     name: string
@@ -96,7 +100,7 @@ watch(
     if (zoomType.value === "hover") {
       const isMobile = window.innerWidth < 768
       createZoomImageHover(imageHoverContainerRef.value as HTMLDivElement, {
-        zoomImageSource: "/sample.avif",
+        zoomImageSource: imageURL,
         customZoom: isMobile ? { width: 100, height: 150 } : { width: 300, height: 450 },
         zoomTarget: zoomTargetRef.value as HTMLDivElement,
         scale: 2,
@@ -109,13 +113,13 @@ watch(
 
     if (zoomType.value === "move") {
       createZoomImageMove(imageMoveContainerRef.value as HTMLDivElement, {
-        zoomImageSource: "/sample.avif",
+        zoomImageSource: imageURL,
       })
     }
 
     if (zoomType.value === "click") {
       createZoomImageClick(imageClickContainerRef.value as HTMLDivElement, {
-        zoomImageSource: "/sample.avif",
+        zoomImageSource: imageURL,
       })
     }
   },
@@ -146,7 +150,7 @@ watch(
       <div class="flex items-center gap-4">
         <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
           <div ref="imageWheelContainerRef" class="h-[300px] w-[200px] cursor-crosshair">
-            <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
+            <img class="h-full w-full" alt="Large Pic" :src="imageURL" />
           </div>
         </div>
         <img :src="croppedImage" v-if="!!croppedImage" :class="croppedImageClasses" alt="Cropped placeholder" />
@@ -168,7 +172,7 @@ watch(
         ref="imageHoverContainerRef"
         class="relative mt-1 flex h-[200px] w-[133.33px] items-start sm:h-[250px] sm:w-[166.66px] lg:h-[300px] lg:w-[200px]"
       >
-        <img class="h-full w-full" alt="Small Pic" src="/sample.avif" />
+        <img class="h-full w-full" alt="Small Pic" :src="imageURL" />
         <div ref="zoomTargetRef" class="absolute left-[220px] sm:left-[300px] lg:left-[350px]"></div>
       </div>
     </div>
@@ -176,14 +180,14 @@ watch(
     <div class="space-y-4" v-if="zoomType === 'move'">
       <p>Move mouse inside the image to see zoom effect</p>
       <div ref="imageMoveContainerRef" class="relative mt-1 h-[300px] w-[200px] cursor-crosshair overflow-hidden">
-        <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
+        <img class="h-full w-full" alt="Large Pic" :src="imageURL" />
       </div>
     </div>
 
     <div class="space-y-4" v-if="zoomType === 'click'">
       <p>Click inside the image to see zoom effect</p>
       <div ref="imageClickContainerRef" class="relative mt-1 h-[300px] w-[200px] cursor-crosshair overflow-hidden">
-        <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
+        <img class="h-full w-full" alt="Large Pic" :src="imageURL" />
       </div>
     </div>
   </div>

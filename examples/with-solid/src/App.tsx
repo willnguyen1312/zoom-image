@@ -47,9 +47,9 @@ const App: Component = () => {
     )
   }
 
-  function handleCropImage() {
+  async function handleCropImage() {
     setCroppedImage(
-      cropImage({
+      await cropImage({
         currentZoom: zoomImageWheelState.currentZoom,
         image: imageWheelContainer.querySelector("img") as HTMLImageElement,
         positionX: zoomImageWheelState.currentPositionX,
@@ -146,9 +146,9 @@ const App: Component = () => {
       {zoomType() === "hover" && (
         <>
           <p>Hover inside the image to see zoom effect</p>
-          <div ref={imageHoverContainer} class="relative flex h-[250px] w-[250px] items-start">
+          <div ref={imageHoverContainer} class="relative flex h-[300px] w-[200px] items-start">
             <img class="h-full w-full" alt="Small Pic" src="/sample.avif" />
-            <div ref={zoomTarget} class="absolute left-[300px]"></div>
+            <div ref={zoomTarget} class="absolute left-[350px]"></div>
           </div>
         </>
       )}

@@ -154,7 +154,7 @@ function App() {
           <p>Hover inside the image to see zoom effect</p>
           <div ref={imageHoverContainerRef} className="relative flex h-[250px] w-[166.66px] items-start">
             <img className="h-full w-full" alt="Small Pic" src="/sample.avif" />
-            <div ref={zoomTargetRef} className="absolute left-[300px]"></div>
+            <div ref={zoomTargetRef} className="absolute left-[350px]"></div>
           </div>
         </>
       )}

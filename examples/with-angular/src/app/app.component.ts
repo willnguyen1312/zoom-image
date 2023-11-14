@@ -89,12 +89,11 @@ export class AppComponent implements AfterViewInit {
         this.zoomImageWheelService.createZoomImage(this.imageWheelContainerRef?.nativeElement as HTMLDivElement)
         this.zoomImageWheelService.zoomImageState$.subscribe((state) => {
           this.zoomImageWheelState = state
-          this.handleCropWheelZoomImage()
         })
       },
       hover: () => {
         this.zoomImageHoverService.createZoomImage(this.imageHoverContainerRef?.nativeElement as HTMLDivElement, {
-          zoomImageSource: "/sample.avif",
+          zoomImageSource: "/assets/sample.avif",
           customZoom: { width: 300, height: 500 },
           zoomTarget: this.zoomTargetRef?.nativeElement as HTMLDivElement,
           scale: 2,
@@ -105,7 +104,7 @@ export class AppComponent implements AfterViewInit {
       },
       move: () => {
         this.zoomImageMoveService.createZoomImage(this.imageMoveContainerRef?.nativeElement as HTMLDivElement, {
-          zoomImageSource: "/sample.avif",
+          zoomImageSource: "/assets/sample.avif",
         })
         this.zoomImageMoveService.zoomImageState$.subscribe((state) => {
           this.zoomImageMoveState = state
@@ -113,7 +112,7 @@ export class AppComponent implements AfterViewInit {
       },
       click: () => {
         this.zoomImageClickService.createZoomImage(this.imageClickContainerRef?.nativeElement as HTMLDivElement, {
-          zoomImageSource: "/sample.avif",
+          zoomImageSource: "/assets/sample.avif",
         })
         this.zoomImageClickService.zoomImageState$.subscribe((state) => {
           this.zoomImageClickState = state
@@ -132,8 +131,8 @@ export class AppComponent implements AfterViewInit {
     this.zoomImageWheelService.setZoomImageState({ currentZoom: this.zoomImageWheelState.currentZoom - 0.5 })
   }
 
-  handleCropWheelZoomImage() {
-    this.croppedImage = cropImage({
+  async handleCropWheelZoomImage() {
+    this.croppedImage = await cropImage({
       currentZoom: this.zoomImageWheelState.currentZoom,
       image: (this.imageWheelContainerRef?.nativeElement as HTMLDivElement).querySelector("img") as HTMLImageElement,
       positionX: this.zoomImageWheelState.currentPositionX,

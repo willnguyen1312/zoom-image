@@ -36,9 +36,9 @@ export default function Home() {
   const { createZoomImage: createZoomImageMove } = useZoomImageMove()
   const { createZoomImage: createZoomImageClick } = useZoomImageClick()
 
-  function handleCropImage() {
+  async function handleCropImage() {
     setCroppedImage(
-      cropImage({
+      await cropImage({
         currentZoom: zoomImageWheelState.currentZoom,
         image: imageWheelContainerRef.current?.querySelector("img") as HTMLImageElement,
         positionX: zoomImageWheelState.currentPositionX,
@@ -153,9 +153,9 @@ export default function Home() {
       {zoomType === "hover" && (
         <>
           <p>Hover inside the image to see zoom effect</p>
-          <div ref={imageHoverContainerRef} className="relative flex h-[250px] w-[250px] items-start">
+          <div ref={imageHoverContainerRef} className="relative flex h-[300px] w-[200px] items-start">
             <img className="h-full w-full" alt="Small Pic" src="/sample.avif" />
-            <div ref={zoomTargetRef} className="absolute left-[300px]"></div>
+            <div ref={zoomTargetRef} className="absolute left-[350px]"></div>
           </div>
         </>
       )}
