@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.31.0
+
+### Minor Changes
+
+- [#243](https://github.com/willnguyen1312/zoom-image/pull/243)
+  [`f42d4bc`](https://github.com/willnguyen1312/zoom-image/commit/f42d4bc4dbe72ec8effd47b1d94843063eb62d8e) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Improve zoom move performance 🚀
+
 ## 0.30.0
 
 ### Minor Changes
