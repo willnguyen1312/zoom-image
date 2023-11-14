@@ -1,5 +1,19 @@
 # @zoom-image/angular
 
+## 0.2.0
+
+### Minor Changes
+
+- [#239](https://github.com/willnguyen1312/zoom-image/pull/239)
+  [`647ad9b`](https://github.com/willnguyen1312/zoom-image/commit/647ad9bbfce0749bb1fb1f67505c8b898ed485aa) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add rotation feature to zoom image wheel 🚀
+
+### Patch Changes
+
+- Updated dependencies
+  [[`647ad9b`](https://github.com/willnguyen1312/zoom-image/commit/647ad9bbfce0749bb1fb1f67505c8b898ed485aa)]:
+  - @zoom-image/core@0.30.0
+
 ## 0.1.13
 
 ### Patch Changes
