@@ -22,6 +22,7 @@ type ZoomImageWheelState = {
   currentPositionX: number
   currentPositionY: number
   // rotation in degree - https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotate
+  // Supported values: 0, 90, 180, 270
   currentRotation: number
 }
 
