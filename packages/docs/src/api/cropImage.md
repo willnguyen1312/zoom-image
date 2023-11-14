@@ -9,12 +9,7 @@ Crop the current image based on the zoom level
 ### Basic Usage
 
 ```ts
-const croppedImage = cropImage({
-  currentZoom: number
-  image: HTMLImageElement
-  positionX: number
-  positionY: number
-})
+const croppedImage = await cropImage(arg: CropImageArg)
 ```
 
 ### Type Declaration
@@ -29,7 +24,9 @@ type CropImageArg = {
   positionY: number
   // Current zoom level from createZoomImageWheel
   currentZoom: number
+  // Current rotation from createZoomImageWheel - default 0
+  rotation?: number
 }
 
-function cropImage = (arg: CropImageArg) => string
+async function cropImage = (arg: CropImageArg) => string
 ```
