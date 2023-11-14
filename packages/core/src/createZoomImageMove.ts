@@ -33,19 +33,6 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   zoomedImg.style.top = "0"
   zoomedImg.style.left = "0"
 
-  function init() {
-    container.style.width = `${sourceImgElement.clientWidth}px`
-    container.style.height = `${sourceImgElement.clientHeight}px`
-    zoomedImg.style.display = "none"
-    zoomedImg.style.transform = "none"
-  }
-
-  if (sourceImgElement.complete) {
-    init()
-  } else {
-    sourceImgElement.onload = init
-  }
-
   function handlePointerEnter(event: PointerEvent) {
     zoomedImg.style.display = "block"
     const zoomedImgWidth = sourceImgElement.clientWidth * zoomFactor
