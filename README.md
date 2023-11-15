@@ -38,6 +38,7 @@ e-commerce sites. Examples are written with Preact, React, Svelte, Vanilla JS an
 git clone https://github.com/willnguyen1312/zoom-image
 cd zoom-image
 pnpm install
+pnpm build
 ```
 
 ## Commands

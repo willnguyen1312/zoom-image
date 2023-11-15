@@ -136,7 +136,9 @@ export class AppComponent implements AfterViewInit {
       currentRotation: this.zoomImageWheelState.currentRotation + 90,
     })
 
-    this.handleCropWheelZoomImage()
+    if (this.croppedImage) {
+      this.handleCropWheelZoomImage()
+    }
   }
 
   getCroppedImageClasses() {

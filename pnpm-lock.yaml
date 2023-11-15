@@ -101,6 +101,9 @@ importers:
       "@unocss/postcss":
         specifier: ^0.54.3
         version: 0.54.3(postcss@8.4.27)
+      "@unocss/reset":
+        specifier: ^0.54.3
+        version: 0.54.3
       "@zoom-image/react":
         specifier: latest
         version: link:../../packages/react
@@ -128,6 +131,9 @@ importers:
       typescript:
         specifier: 5.1.6
         version: 5.1.6
+      unocss:
+        specifier: ^0.54.3
+        version: 0.54.3(postcss@8.4.27)(rollup@2.79.1)(vite@4.5.0)
 
   examples/with-preact:
     dependencies:
@@ -6391,7 +6397,7 @@ packages:
       colorette: 2.0.20
       consola: 3.2.3
       fast-glob: 3.3.1
-      magic-string: 0.30.3
+      magic-string: 0.30.5
       pathe: 1.1.1
       perfect-debounce: 1.0.0
     transitivePeerDependencies:
@@ -6548,7 +6554,7 @@ packages:
       "@unocss/transformer-directives": 0.54.3
       chokidar: 3.5.3
       fast-glob: 3.3.1
-      magic-string: 0.30.3
+      magic-string: 0.30.5
       vite: 4.5.0(@types/node@20.4.9)
     transitivePeerDependencies:
       - rollup
