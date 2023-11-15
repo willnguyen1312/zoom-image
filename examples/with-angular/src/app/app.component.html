@@ -19,11 +19,13 @@
   <div class="space-y-4" *ngIf="zoomType === 'wheel'">
     <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
     <p>Current zoom: {{ getCurrentZoomImageValue() }}</p>
-    <div class="mt-1 flex space-x-2">
-      <div #imageWheelContainer class="h-[300px] w-[200px] cursor-crosshair">
-        <img class="h-full w-full" alt="Large Pic" src="/assets/sample.avif" />
+    <div class="flex items-center gap-4">
+      <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
+        <div #imageWheelContainer class="h-[300px] w-[200px] cursor-crosshair">
+          <img class="h-full w-full" alt="Large Pic" src="/assets/sample.avif" />
+        </div>
       </div>
-      <img [src]="croppedImage" *ngIf="!!croppedImage" class="h-[300px] w-[200px]" alt="Cropped placeholder" />
+      <img [src]="croppedImage" *ngIf="!!croppedImage" [class]="getCroppedImageClasses()" alt="Cropped placeholder" />
     </div>
     <div class="flex space-x-2">
       <button (click)="zoomIn()" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom in</button>
@@ -31,6 +33,7 @@
       <button class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium" (click)="handleCropWheelZoomImage()">
         Crop image
       </button>
+      <button (click)="rotate()" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Rotate</button>
     </div>
   </div>
 

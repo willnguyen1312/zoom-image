@@ -131,12 +131,29 @@ export class AppComponent implements AfterViewInit {
     this.zoomImageWheelService.setZoomImageState({ currentZoom: this.zoomImageWheelState.currentZoom - 0.5 })
   }
 
+  rotate = () => {
+    this.zoomImageWheelService.setZoomImageState({
+      currentRotation: this.zoomImageWheelState.currentRotation + 90,
+    })
+
+    this.handleCropWheelZoomImage()
+  }
+
+  getCroppedImageClasses() {
+    if (this.zoomImageWheelState.currentRotation === 90 || this.zoomImageWheelState.currentRotation === 270) {
+      return "h-[200px] w-[300px]"
+    } else {
+      return "h-[300px] w-[200px]"
+    }
+  }
+
   async handleCropWheelZoomImage() {
     this.croppedImage = await cropImage({
       currentZoom: this.zoomImageWheelState.currentZoom,
       image: (this.imageWheelContainerRef?.nativeElement as HTMLDivElement).querySelector("img") as HTMLImageElement,
       positionX: this.zoomImageWheelState.currentPositionX,
       positionY: this.zoomImageWheelState.currentPositionY,
+      rotation: this.zoomImageWheelState.currentRotation,
     })
   }
 }

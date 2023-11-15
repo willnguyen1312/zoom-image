@@ -73,6 +73,10 @@ const rotate = () => {
   setZoomImageWheelState({
     currentRotation: zoomImageWheelState.currentRotation + 90,
   })
+
+  if (croppedImage.value) {
+    handleCropWheelZoomImage()
+  }
 }
 
 const croppedImageClasses = computed(() => {
@@ -82,14 +86,6 @@ const croppedImageClasses = computed(() => {
     return "h-[300px] w-[200px]"
   }
 })
-
-watch(
-  () => zoomImageWheelState.currentRotation,
-  () => {
-    if (!croppedImage.value) return
-    handleCropWheelZoomImage()
-  },
-)
 
 watch(
   zoomType,
