@@ -34,13 +34,14 @@ function App() {
   const { createZoomImage: createZoomImageMove } = useZoomImageMove()
   const { createZoomImage: createZoomImageClick } = useZoomImageClick()
 
-  async function handleCropImage() {
+  async function handleCropWheelZoomImage() {
     setCroppedImage(
       await cropImage({
         currentZoom: zoomImageWheelState.currentZoom,
         image: imageWheelContainerRef.current?.querySelector("img") as HTMLImageElement,
         positionX: zoomImageWheelState.currentPositionX,
         positionY: zoomImageWheelState.currentPositionY,
+        rotation: zoomImageWheelState.currentRotation,
       }),
     )
   }
@@ -57,6 +58,14 @@ function App() {
     )
   }
 
+  const croppedImageClasses = useMemo(() => {
+    if (zoomImageWheelState.currentRotation === 90 || zoomImageWheelState.currentRotation === 270) {
+      return "h-[200px] w-[300px]"
+    } else {
+      return "h-[300px] w-[200px]"
+    }
+  }, [zoomImageWheelState.currentRotation])
+
   useEffect(() => {
     setCroppedImage("")
     if (zoomType === "wheel") {
@@ -71,8 +80,7 @@ function App() {
         zoomImageSource: "/sample.avif",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
-        scale: 4,
-        zoomLensScale: 0.75,
+        scale: 2,
       })
     }
 
@@ -91,6 +99,12 @@ function App() {
     }
   }, [zoomType])
 
+  useEffect(() => {
+    if (croppedImage) {
+      handleCropWheelZoomImage()
+    }
+  }, [zoomImageWheelState.currentRotation])
+
   function zoomInWheel() {
     setZoomImageWheelState({
       currentZoom: zoomImageWheelState.currentZoom + 0.5,
@@ -100,6 +114,12 @@ function App() {
   function zoomOutWheel() {
     setZoomImageWheelState({
       currentZoom: zoomImageWheelState.currentZoom - 0.5,
+    })
+  }
+
+  function rotate() {
+    setZoomImageWheelState({
+      currentRotation: zoomImageWheelState.currentRotation + 90,
     })
   }
 
@@ -128,11 +148,13 @@ function App() {
         <div className="space-y-4">
           <p>Current zoom: {`${Math.round(zoomImageWheelState.currentZoom * 100)}%`}</p>
           <p>Scroll inside the image to see zoom in-out effect</p>
-          <div className="mt-1 flex space-x-2">
-            <div ref={imageWheelContainerRef} className="h-[300px] w-[200px] cursor-crosshair">
-              <img className="h-full w-full" alt="Large Pic" src="/sample.avif" />
+          <div className="flex items-center gap-4">
+            <div className="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
+              <div ref={imageWheelContainerRef} className="h-[300px] w-[200px] cursor-crosshair">
+                <img className="h-full w-full" alt="Large Pic" src="/sample.avif" />
+              </div>
             </div>
-            {croppedImage && <img src={croppedImage} className="h-[300px] w-[200px]" alt="Cropped placeholder" />}
+            {croppedImage && <img src={croppedImage} className={croppedImageClasses} alt="Cropped placeholder" />}
           </div>
 
           <div className="flex space-x-2">
@@ -142,8 +164,15 @@ function App() {
             <button onClick={zoomOutWheel} className="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">
               Zoom out
             </button>
-            <button className="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium" onClick={handleCropImage}>
+            <button
+              className="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
+              onClick={handleCropWheelZoomImage}
+            >
               Crop image
+            </button>
+
+            <button onClick={rotate} className="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">
+              Rotate
             </button>
           </div>
         </div>
@@ -152,7 +181,7 @@ function App() {
       {zoomType === "hover" && (
         <>
           <p>Hover inside the image to see zoom effect</p>
-          <div ref={imageHoverContainerRef} className="relative flex h-[250px] w-[166.66px] items-start">
+          <div ref={imageHoverContainerRef} className="relative flex h-[300px] w-[200px] items-start">
             <img className="h-full w-full" alt="Small Pic" src="/sample.avif" />
             <div ref={zoomTargetRef} className="absolute left-[350px]"></div>
           </div>
