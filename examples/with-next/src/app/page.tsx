@@ -123,10 +123,6 @@ export default function Home() {
     setZoomImageWheelState({
       currentRotation: zoomImageWheelState.currentRotation + 90,
     })
-
-    if (croppedImage) {
-      handleCropWheelZoomImage()
-    }
   }
 
   return (
