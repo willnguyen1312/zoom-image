@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cropImage } from "@zoom-image/core"
+  import { cropImage, type ZoomImageWheelState } from "@zoom-image/core"
   import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/svelte"
   import { tick } from "svelte"
 
@@ -30,6 +30,12 @@
   const { createZoomImage: createZoomImageHover } = useZoomImageHover()
   const { createZoomImage: createZoomImageMove } = useZoomImageMove()
   const { createZoomImage: createZoomImageClick } = useZoomImageClick()
+
+  let zoomImageWheelState_value: ZoomImageWheelState
+
+  zoomImageWheelState.subscribe((value) => {
+    zoomImageWheelState_value = value
+  })
 
   async function processZoom(zoomType: "wheel" | "hover" | "move" | "click") {
     croppedImage = ""
@@ -62,6 +68,31 @@
   }
 
   $: processZoom(zoomType)
+
+  $: croppedImageClasses =
+    zoomImageWheelState_value.currentRotation === 90 || zoomImageWheelState_value.currentRotation === 270
+      ? "h-[200px] w-[300px]"
+      : "h-[300px] w-[200px]"
+
+  async function handleCropImage() {
+    croppedImage = await cropImage({
+      currentZoom: zoomImageWheelState_value.currentZoom,
+      image: imageWheelContainer.querySelector("img"),
+      positionX: zoomImageWheelState_value.currentPositionX,
+      positionY: zoomImageWheelState_value.currentPositionY,
+      rotation: zoomImageWheelState_value.currentRotation,
+    })
+  }
+
+  function rotate() {
+    setZoomImageWheelState({
+      currentRotation: zoomImageWheelState_value.currentRotation + 90,
+    })
+
+    if (croppedImage) {
+      handleCropImage()
+    }
+  }
 </script>
 
 <div class="p-4 font-sans">
@@ -85,22 +116,24 @@
 
   {#if zoomType === "wheel"}
     <div class="space-y-4">
-      <p>Current zoom: {`${Math.round($zoomImageWheelState.currentZoom * 100)}%`}</p>
+      <p>Current zoom: {`${Math.round(zoomImageWheelState_value.currentZoom * 100)}%`}</p>
       <p>Scroll inside the image to see zoom in-out effect</p>
-      <div class="mt-1 flex space-x-2">
-        <div bind:this={imageWheelContainer} class="h-[300px] w-[200px] cursor-crosshair">
-          <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
+      <div class="flex items-center gap-4">
+        <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
+          <div bind:this={imageWheelContainer} class="h-[300px] w-[200px] cursor-crosshair">
+            <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
+          </div>
         </div>
 
         {#if croppedImage !== ""}
-          <img src={croppedImage} class="h-[300px] w-[200px]" alt="Cropped placeholder" />
+          <img src={croppedImage} class={croppedImageClasses} alt="Cropped placeholder" />
         {/if}
       </div>
       <div class="flex space-x-2">
         <button
           on:click={() => {
             setZoomImageWheelState({
-              currentZoom: $zoomImageWheelState.currentZoom + 0.5,
+              currentZoom: zoomImageWheelState_value.currentZoom + 0.5,
             })
           }}
           class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
@@ -110,26 +143,17 @@
         <button
           on:click={() => {
             setZoomImageWheelState({
-              currentZoom: $zoomImageWheelState.currentZoom - 0.5,
+              currentZoom: zoomImageWheelState_value.currentZoom - 0.5,
             })
           }}
           class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
         >
           Zoom out
         </button>
-        <button
-          class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
-          on:click={async () => {
-            croppedImage = await cropImage({
-              currentZoom: $zoomImageWheelState.currentZoom,
-              image: imageWheelContainer.querySelector("img"),
-              positionX: $zoomImageWheelState.currentPositionX,
-              positionY: $zoomImageWheelState.currentPositionY,
-            })
-          }}
-        >
+        <button class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium" on:click={handleCropImage}>
           Crop image
         </button>
+        <button on:click={rotate} class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Rotate</button>
       </div>
     </div>
   {/if}
