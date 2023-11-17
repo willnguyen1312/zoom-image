@@ -54,6 +54,7 @@ const App: Component = () => {
         image: imageWheelContainer.querySelector("img") as HTMLImageElement,
         positionX: zoomImageWheelState.currentPositionX,
         positionY: zoomImageWheelState.currentPositionY,
+        rotation: zoomImageWheelState.currentRotation,
       }),
     )
   }
@@ -98,6 +99,24 @@ const App: Component = () => {
     })
   }
 
+  const rotate = () => {
+    setZoomImageWheelState({
+      currentRotation: zoomImageWheelState.currentRotation + 90,
+    })
+
+    if (croppedImage()) {
+      handleCropImage()
+    }
+  }
+
+  const croppedImageClasses = createMemo(() => {
+    if (zoomImageWheelState.currentRotation === 90 || zoomImageWheelState.currentRotation === 270) {
+      return "h-[200px] w-[300px]"
+    } else {
+      return "h-[300px] w-[200px]"
+    }
+  })
+
   return (
     <div class="p-4 font-sans">
       <nav class="flex space-x-4 pb-4" aria-label="Tabs">
@@ -122,11 +141,14 @@ const App: Component = () => {
         <div class="space-y-4">
           <p>Current zoom: {`${Math.round(zoomImageWheelState.currentZoom * 100)}%`}</p>
           <p>Scroll inside the image to see zoom in-out effect</p>
-          <div class="mt-1 flex space-x-2">
-            <div ref={imageWheelContainer} class="h-[300px] w-[200px] cursor-crosshair">
-              <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
+          <div class="flex items-center gap-4">
+            <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
+              <div ref={imageWheelContainer} class="h-[300px] w-[200px] cursor-crosshair">
+                <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
+              </div>
             </div>
-            {croppedImage() && <img src={croppedImage()} class="h-[300px] w-[200px]" alt="Cropped placeholder" />}
+
+            {croppedImage() && <img src={croppedImage()} class={croppedImageClasses()} alt="Cropped placeholder" />}
           </div>
 
           <div class="flex space-x-2">
@@ -138,6 +160,10 @@ const App: Component = () => {
             </button>
             <button class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium" onClick={handleCropImage}>
               Crop image
+            </button>
+
+            <button onClick={rotate} class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">
+              Rotate
             </button>
           </div>
         </div>
