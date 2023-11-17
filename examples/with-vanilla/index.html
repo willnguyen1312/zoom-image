@@ -38,10 +38,13 @@
       <div class="space-y-4">
         <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
         <p id="currentZoom">Current zoom: 100%</p>
-        <div class="mt-1 flex space-x-2">
-          <div id="image-wheel-container" class="h-[300px] w-[200px] cursor-crosshair">
-            <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
+        <div class="flex items-center gap-4">
+          <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
+            <div id="image-wheel-container" class="h-[300px] w-[200px] cursor-crosshair">
+              <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
+            </div>
           </div>
+
           <img id="cropImg" hidden class="h-[300px] w-[200px]" alt="Cropped placeholder" />
         </div>
 
@@ -49,6 +52,7 @@
           <button id="zoomInBtn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom in</button>
           <button id="zoomOutBtn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom out</button>
           <button id="cropImgBtn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Crop image</button>
+          <button id="rotateImgBtn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Rotate</button>
         </div>
       </div>
     </template>

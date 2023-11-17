@@ -67,6 +67,7 @@ const makeUpdateUIFunc = () => {
       const controller = new AbortController()
       const cropImg = document.getElementById("cropImg") as HTMLImageElement
       const cropImgBtn = document.getElementById("cropImgBtn") as HTMLButtonElement
+      const rotateImgBtn = document.getElementById("rotateImgBtn") as HTMLButtonElement
       const zoomInBtn = document.getElementById("zoomInBtn") as HTMLInputElement
       const zoomOutBtn = document.getElementById("zoomOutBtn") as HTMLInputElement
       const currentZoom = document.getElementById("currentZoom") as HTMLParagraphElement
@@ -95,19 +96,39 @@ const makeUpdateUIFunc = () => {
         { signal: controller.signal },
       )
 
-      cropImgBtn.addEventListener(
+      // eslint-disable-next-line no-inner-declarations
+      async function handleCropImage() {
+        const currentState = result.getState()
+        const cropImageClasses =
+          currentState.currentRotation === 90 || currentState.currentRotation === 270
+            ? "h-[200px] w-[300px]"
+            : "h-[300px] w-[200px]"
+
+        const croppedImage = await cropImage({
+          image: container.querySelector("img") as HTMLImageElement,
+          currentZoom: currentState.currentZoom,
+          positionX: currentState.currentPositionX,
+          positionY: currentState.currentPositionY,
+          rotation: currentState.currentRotation,
+        })
+
+        cropImg.src = croppedImage
+        cropImg.hidden = false
+        cropImg.className = cropImageClasses
+      }
+
+      cropImgBtn.addEventListener("click", handleCropImage, { signal: controller.signal })
+
+      rotateImgBtn.addEventListener(
         "click",
-        async () => {
-          const currentState = result.getState()
-          const croppedImage = await cropImage({
-            image: container.querySelector("img") as HTMLImageElement,
-            currentZoom: currentState.currentZoom,
-            positionX: currentState.currentPositionX,
-            positionY: currentState.currentPositionY,
+        () => {
+          result.setState({
+            currentRotation: result.getState().currentRotation + 90,
           })
 
-          cropImg.src = croppedImage
-          cropImg.hidden = false
+          if (cropImg.src) {
+            handleCropImage()
+          }
         },
         { signal: controller.signal },
       )
