@@ -6,15 +6,15 @@
     "dev": "vite --mode ssr"
   },
   "devDependencies": {
-    "@builder.io/qwik": "1.2.6",
-    "@builder.io/qwik-city": "^1.2.6",
-    "@types/node": "^20.4.9",
-    "@unocss/reset": "^0.54.3",
-    "typescript": "5.1.6",
-    "undici": "^5.23.0",
-    "unocss": "^0.54.3",
-    "vite": "^4.5.0",
-    "vite-tsconfig-paths": "4.2.0"
+    "@builder.io/qwik": "1.2.18",
+    "@builder.io/qwik-city": "^1.2.18",
+    "@types/node": "^20.9.1",
+    "@unocss/reset": "^0.57.4",
+    "typescript": "5.2.2",
+    "undici": "^5.27.2",
+    "unocss": "^0.57.4",
+    "vite": "^5.0.0",
+    "vite-tsconfig-paths": "4.2.1"
   },
   "dependencies": {
     "@zoom-image/qwik": "latest"

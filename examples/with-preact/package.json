@@ -7,13 +7,13 @@
   },
   "dependencies": {
     "@zoom-image/preact": "latest",
-    "preact": "^10.16.0"
+    "preact": "^10.19.2"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.5.0",
-    "@unocss/reset": "^0.54.3",
-    "typescript": "^5.1.6",
-    "unocss": "^0.54.3",
-    "vite": "^4.5.0"
+    "@preact/preset-vite": "^2.7.0",
+    "@unocss/reset": "^0.57.4",
+    "typescript": "^5.2.2",
+    "unocss": "^0.57.4",
+    "vite": "^5.0.0"
   }
 }
