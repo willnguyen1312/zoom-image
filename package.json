@@ -57,14 +57,14 @@
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.2",
     "@zoom-image/core": "workspace:*",
-    "eslint": "^8.46.0",
+    "eslint": "^8.53.0",
     "eslint-config-custom": "workspace:*",
-    "esno": "^0.17.0",
-    "export-size": "^0.5.2",
-    "prettier": "^3.0.1",
-    "prettier-plugin-svelte": "^3.0.3",
-    "prettier-plugin-tailwindcss": "^0.4.1",
+    "esno": "^4.0.0",
+    "export-size": "^0.7.0",
+    "prettier": "^3.1.0",
+    "prettier-plugin-svelte": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.7",
     "turbo": "^1.10.16",
-    "unocss": "^0.54.3"
+    "unocss": "^0.57.4"
   }
 }

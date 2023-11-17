@@ -4,11 +4,11 @@
   "private": true,
   "main": "index.js",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.3.0",
-    "@typescript-eslint/parser": "^6.3.0",
-    "eslint": "8.46.0",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "eslint": "8.53.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-config-turbo": "^1.10.12",
+    "eslint-config-turbo": "^1.10.16",
     "tsconfig": "workspace:*"
   }
 }

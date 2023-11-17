@@ -16,8 +16,8 @@
     "@zoom-image/vue": "workspace:*",
     "eslint-config-custom": "workspace:*",
     "eslint-plugin-vue": "^9.18.1",
-    "vite": "^4.5.0",
-    "vitepress": "1.0.0-rc.25",
+    "vite": "^5.0.0",
+    "vitepress": "1.0.0-rc.27",
     "vue": "^3.3.8"
   }
 }
