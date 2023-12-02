@@ -45,7 +45,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   const checkDimensionSwitched = () => {
-    return [90, 270].includes(store.getState().currentRotation)
+    return [90, 270].includes(store.getState().currentRotation % 360)
   }
 
   const calculatePositionX = (newPositionX: number, currentZoom: number) => {
@@ -93,7 +93,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       }
 
       if (typeof newState.currentRotation === "number") {
-        const newCurrentRotation = newState.currentRotation % 360
+        const newCurrentRotation = newState.currentRotation
         store.setState({
           currentRotation: newCurrentRotation,
         })
@@ -136,7 +136,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     let zoomPointX = -1
     let zoomPointY = -1
 
-    switch (currentState.currentRotation) {
+    switch (currentState.currentRotation % 360) {
       case 0:
         zoomPointX = x - containerRect.left
         zoomPointY = y - containerRect.top
@@ -229,7 +229,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       let offsetX = -1
       let offsetY = -1
 
-      switch (currentRotation) {
+      switch (currentRotation % 360) {
         case 0:
           offsetX = normalizedClientX - startX
           offsetY = normalizedClientY - startY
