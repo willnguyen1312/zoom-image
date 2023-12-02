@@ -143,7 +143,7 @@ const App: Component = () => {
           <p>Scroll inside the image to see zoom in-out effect</p>
           <div class="flex items-center gap-4">
             <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
-              <div ref={imageWheelContainer} class="h-[300px] w-[200px] cursor-crosshair">
+              <div ref={imageWheelContainer} class="h-[300px] w-[200px] cursor-crosshair duration-500">
                 <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
               </div>
             </div>

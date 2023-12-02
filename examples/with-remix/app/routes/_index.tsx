@@ -155,7 +155,7 @@ export default function Index() {
           <p>Scroll inside the image to see zoom in-out effect</p>
           <div className="flex items-center gap-4">
             <div className="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
-              <div ref={imageWheelContainerRef} className="h-[300px] w-[200px] cursor-crosshair">
+              <div ref={imageWheelContainerRef} className="h-[300px] w-[200px] cursor-crosshair duration-500">
                 <img className="h-full w-full" alt="Large Pic" src="/sample.avif" />
               </div>
             </div>
