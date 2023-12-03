@@ -152,7 +152,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     zoomTarget.appendChild(zoomedImgWrapper)
 
     // Wait for next tick to get container size
-    await new Promise((resolve) => setTimeout(resolve, 0))
+    await new Promise((resolve) => setTimeout(resolve, 1))
     const containerRect = container.getBoundingClientRect()
     sourceImageElementWidth = containerRect.width
     sourceImageElementHeight = containerRect.height
