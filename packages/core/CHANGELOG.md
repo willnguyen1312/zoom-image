@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.32.0
+
+### Minor Changes
+
+- [#250](https://github.com/willnguyen1312/zoom-image/pull/250)
+  [`725ceaf`](https://github.com/willnguyen1312/zoom-image/commit/725ceaf96c5472d49162e8f5d517794db06a86af) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Improve zoom on hover - handle dynamic dimensions 💞
+
 ## 0.31.1
 
 ### Patch Changes
