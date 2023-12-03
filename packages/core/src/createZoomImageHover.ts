@@ -33,6 +33,11 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   const zoomLens = container.appendChild(document.createElement("div"))
   zoomLens.style.display = "none"
 
+  // Sometimes, source image element's width and height are not available until the image is loaded
+  // and container size is set. These values are expected to be same as the container's width and height
+  let sourceImageElementWidth = 0
+  let sourceImageElementHeight = 0
+
   const finalOptions: Required<ZoomImageHoverOptions> = {
     zoomImageSource: options.zoomImageSource || sourceImgElement.src,
     zoomLensClass: options.zoomLensClass || "",
@@ -68,11 +73,11 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   }
 
   function getLimitX(value: number) {
-    return sourceImgElement.width - value
+    return sourceImageElementWidth - value
   }
 
   function getLimitY(value: number) {
-    return sourceImgElement.height - value
+    return sourceImageElementHeight - value
   }
 
   function zoomLensLeft(left: number) {
@@ -129,7 +134,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     offset = getOffset(sourceImgElement)
   }
 
-  function setup() {
+  async function setup() {
     if (zoomLensClass) {
       zoomLens.className = zoomLensClass
     } else {
@@ -146,22 +151,29 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     // Append zoomed image wrapper to zoom target
     zoomTarget.appendChild(zoomedImgWrapper)
 
+    // Wait for next tick to get container size
+    await new Promise((resolve) => setTimeout(resolve, 0))
+    const containerRect = container.getBoundingClientRect()
+    sourceImageElementWidth = containerRect.width
+    sourceImageElementHeight = containerRect.height
+
     // Set up styles if custom zoom available
     if (customZoom) {
       zoomedImgWrapper.style.width = customZoom.width + "px"
       zoomedImgWrapper.style.height = customZoom.height + "px"
     } else {
       // Else default zoom to source image size
-      zoomedImgWrapper.style.width = sourceImgElement.width + "px"
-      zoomedImgWrapper.style.height = sourceImgElement.height + "px"
+      zoomedImgWrapper.style.width = sourceImageElementWidth + "px"
+      zoomedImgWrapper.style.height = sourceImageElementHeight + "px"
     }
 
-    zoomedImg.width = (sourceImgElement.width * scale) / zoomLensScale
-    zoomedImg.height = (sourceImgElement.height * scale) / zoomLensScale
+    zoomedImg.width = (sourceImageElementWidth * scale) / zoomLensScale
+    zoomedImg.height = (sourceImageElementHeight * scale) / zoomLensScale
 
     // Setup default zoom lens style
-    const fromLeft = sourceImgElement.getBoundingClientRect().left - container.getBoundingClientRect().left
-    const fromTop = sourceImgElement.getBoundingClientRect().top - container.getBoundingClientRect().top
+    const sourceImageRect = sourceImgElement.getBoundingClientRect()
+    const fromLeft = sourceImageRect.left - containerRect.left
+    const fromTop = sourceImageRect.top - containerRect.top
     zoomTarget.style.pointerEvents = "none"
     zoomLens.style.position = "absolute"
     zoomLens.style.left = fromLeft + "px"

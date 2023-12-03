@@ -1,7 +1,7 @@
 {
   "@zoom-image/core": {
     "createZoomImageWheel": "1.76 KB",
-    "createZoomImageHover": "1.14 KB",
+    "createZoomImageHover": "1.18 KB",
     "createZoomImageClick": "847 B",
     "createZoomImageMove": "841 B",
     "cropImage": "369 B",
@@ -10,44 +10,44 @@
   },
   "@zoom-image/react": {
     "useZoomImageWheel": "2.05 KB",
-    "useZoomImageHover": "1.42 KB",
+    "useZoomImageHover": "1.45 KB",
     "useZoomImageMove": "1.08 KB",
     "useZoomImageClick": "1.08 KB"
   },
   "@zoom-image/preact": {
     "useZoomImageWheel": "2.95 KB",
-    "useZoomImageHover": "2.35 KB",
+    "useZoomImageHover": "2.38 KB",
     "useZoomImageMove": "2.02 KB",
     "useZoomImageClick": "2.02 KB"
   },
   "@zoom-image/qwik": {
     "useZoomImageWheel": "2.2 KB",
-    "useZoomImageHover": "1.55 KB",
+    "useZoomImageHover": "1.58 KB",
     "useZoomImageClick": "1.2 KB",
     "useZoomImageMove": "1.19 KB"
   },
   "@zoom-image/solid": {
     "useZoomImageWheel": "3.25 KB",
-    "useZoomImageHover": "2.62 KB",
+    "useZoomImageHover": "2.65 KB",
     "useZoomImageClick": "2.29 KB",
     "useZoomImageMove": "2.29 KB"
   },
   "@zoom-image/svelte": {
     "useZoomImageWheel": "2.24 KB",
-    "useZoomImageHover": "1.63 KB",
+    "useZoomImageHover": "1.66 KB",
     "useZoomImageClick": "1.29 KB",
     "useZoomImageMove": "1.29 KB"
   },
   "@zoom-image/vue": {
     "useZoomImageWheel": "2.02 KB",
-    "useZoomImageHover": "1.41 KB",
+    "useZoomImageHover": "1.44 KB",
     "useZoomImageClick": "1.07 KB",
     "useZoomImageMove": "1.06 KB"
   },
   "@zoom-image/angular": {
-    "ZoomImageHoverService": "3.43 KB",
-    "ZoomImageWheelService": "3.43 KB",
-    "ZoomImageClickService": "3.43 KB",
-    "ZoomImageMoveService": "3.43 KB"
+    "ZoomImageClickService": "3.46 KB",
+    "ZoomImageHoverService": "3.46 KB",
+    "ZoomImageWheelService": "3.46 KB",
+    "ZoomImageMoveService": "3.46 KB"
   }
 }
