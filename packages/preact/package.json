@@ -1,6 +1,6 @@
 {
   "name": "@zoom-image/preact",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Adapter of zoom image core for Preact",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "license": "MIT",
