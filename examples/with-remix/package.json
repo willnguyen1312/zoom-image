@@ -7,25 +7,25 @@
     "dev": "remix dev --manual"
   },
   "dependencies": {
-    "@remix-run/css-bundle": "^2.3.0",
-    "@remix-run/node": "^2.3.0",
-    "@remix-run/react": "^2.3.0",
-    "@remix-run/serve": "^2.3.0",
-    "@unocss/reset": "^0.57.4",
+    "@remix-run/css-bundle": "^2.3.1",
+    "@remix-run/node": "^2.3.1",
+    "@remix-run/react": "^2.3.1",
+    "@remix-run/serve": "^2.3.1",
+    "@unocss/reset": "^0.58.0",
     "@zoom-image/react": "latest",
     "isbot": "^3.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.3.0",
-    "@remix-run/eslint-config": "^2.3.0",
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "eslint": "^8.53.0",
+    "@remix-run/dev": "^2.3.1",
+    "@remix-run/eslint-config": "^2.3.1",
+    "@types/react": "^18.2.41",
+    "@types/react-dom": "^18.2.17",
+    "eslint": "^8.55.0",
     "tailwindcss": "^3.3.5",
-    "typescript": "^5.2.2",
-    "unocss": "^0.57.4"
+    "typescript": "^5.3.2",
+    "unocss": "^0.58.0"
   },
   "engines": {
     "node": ">=18.0.0"
