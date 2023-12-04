@@ -40,10 +40,10 @@ watch(
 
     if (zoomType.value === "hover") {
       const imageContainer = imageHoverContainerRef.value as HTMLDivElement
-      const zoomTarget = zoomTargetRef.value
+      const zoomTarget = zoomTargetRef.value as HTMLDivElement
 
       const result = createZoomImageHover(imageContainer, {
-        zoomImageSource: "/sample.avif",
+        zoomImageSource: "",
         customZoom: { width: 300, height: 500 },
         zoomTarget,
         scale: 2,
@@ -80,11 +80,11 @@ onUnmounted(() => {
     </nav>
 
     <div v-if="zoomType === 'wheel'" ref="imageWheelContainerRef">
-      <img alt="Large Pic" src="/sample.avif" />
+      <img alt="Large Pic" src="" />
     </div>
 
     <div v-if="zoomType === 'hover'" ref="imageHoverContainerRef">
-      <img alt="Small Pic" src="/sample.avif" />
+      <img alt="Small Pic" src="" />
       <div ref="zoomTargetRef" data-testid="zoomTarget"></div>
     </div>
   </div>

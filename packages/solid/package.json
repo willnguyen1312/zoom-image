@@ -42,8 +42,8 @@
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
-    "tsup": "7.3.0",
-    "typescript": "^5.2.2"
+    "tsup": "8.0.1",
+    "typescript": "^5.3.2"
   },
   "dependencies": {
     "@zoom-image/core": "workspace:*"

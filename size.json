@@ -47,7 +47,7 @@
   "@zoom-image/angular": {
     "ZoomImageClickService": "3.46 KB",
     "ZoomImageHoverService": "3.46 KB",
-    "ZoomImageWheelService": "3.46 KB",
-    "ZoomImageMoveService": "3.46 KB"
+    "ZoomImageMoveService": "3.46 KB",
+    "ZoomImageWheelService": "3.45 KB"
   }
 }
