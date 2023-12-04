@@ -40,7 +40,7 @@ watch(
 
     if (zoomType.value === "hover") {
       const imageContainer = imageHoverContainerRef.value as HTMLDivElement
-      const zoomTarget = zoomTargetRef.value
+      const zoomTarget = zoomTargetRef.value as HTMLDivElement
 
       const result = createZoomImageHover(imageContainer, {
         zoomImageSource: "",
