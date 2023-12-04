@@ -286,7 +286,7 @@ Simply importing the utilities you need from `@zoom-image/svelte`
   })
 </script>
 
-<div class="imageContainer" bind:this={imageWheelContainer}>
+<div class="imageContainer" bind:this={container}>
   <img class="image" alt="Large Pic" src="/image.webp" />
 </div>
 
