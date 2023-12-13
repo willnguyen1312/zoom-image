@@ -43,7 +43,7 @@
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "tsup": "8.0.1",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "@zoom-image/core": "workspace:*"
