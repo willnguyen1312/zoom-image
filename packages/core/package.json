@@ -53,20 +53,20 @@
     "@testing-library/dom": "^9.3.3",
     "@testing-library/user-event": "^14.5.1",
     "@testing-library/vue": "^8.0.1",
-    "@types/node": "^20.10.4",
-    "@vitejs/plugin-vue": "^4.5.2",
-    "@vitest/coverage-v8": "^1.0.4",
+    "@types/node": "^20.10.5",
+    "@vitejs/plugin-vue": "^4.6.0",
+    "@vitest/coverage-v8": "^1.1.0",
     "@vue/test-utils": "^2.4.3",
     "eslint-config-custom": "workspace:*",
-    "fast-check": "^3.14.0",
+    "fast-check": "^3.15.0",
     "happy-dom": "^12.10.3",
     "size-limit": "^11.0.1",
     "tsconfig": "workspace:*",
     "tsup": "8.0.1",
     "typescript": "^5.3.3",
-    "vite": "^5.0.8",
-    "vitest": "^1.0.4",
+    "vite": "^5.0.10",
+    "vitest": "^1.1.0",
     "vitest-dom": "^0.1.1",
-    "vue": "^3.3.11"
+    "vue": "^3.3.13"
   }
 }
