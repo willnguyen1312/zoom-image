@@ -10,14 +10,14 @@
   },
   "dependencies": {
     "@rushstack/eslint-patch": "^1.6.1",
-    "@vue/eslint-config-prettier": "^8.0.0",
+    "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^12.0.0",
     "@zoom-image/core": "workspace:*",
     "@zoom-image/vue": "workspace:*",
     "eslint-config-custom": "workspace:*",
     "eslint-plugin-vue": "^9.19.2",
     "vite": "^5.0.10",
-    "vitepress": "1.0.0-rc.33",
-    "vue": "^3.3.13"
+    "vitepress": "1.0.0-rc.35",
+    "vue": "^3.4.5"
   }
 }

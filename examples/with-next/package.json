@@ -6,11 +6,11 @@
     "dev": "next dev"
   },
   "dependencies": {
-    "@types/node": "^20.10.5",
-    "@types/react": "^18.2.45",
+    "@types/node": "^20.10.6",
+    "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
-    "@unocss/postcss": "^0.58.1",
-    "@unocss/reset": "^0.58.1",
+    "@unocss/postcss": "^0.58.3",
+    "@unocss/reset": "^0.58.3",
     "@zoom-image/react": "latest",
     "autoprefixer": "10.4.16",
     "eslint": "8.56.0",
@@ -20,6 +20,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "5.3.3",
-    "unocss": "^0.58.1"
+    "unocss": "^0.58.3"
   }
 }

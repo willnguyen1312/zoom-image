@@ -11,21 +11,21 @@
     "@remix-run/node": "^2.4.1",
     "@remix-run/react": "^2.4.1",
     "@remix-run/serve": "^2.4.1",
-    "@unocss/reset": "^0.58.1",
+    "@unocss/reset": "^0.58.3",
     "@zoom-image/react": "latest",
-    "isbot": "^4.1.0",
+    "isbot": "^4.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.4.1",
     "@remix-run/eslint-config": "^2.4.1",
-    "@types/react": "^18.2.45",
+    "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
     "eslint": "^8.56.0",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.3.3",
-    "unocss": "^0.58.1"
+    "unocss": "^0.58.3"
   },
   "engines": {
     "node": ">=18.0.0"
