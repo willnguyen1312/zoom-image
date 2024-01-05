@@ -63,8 +63,8 @@
     "export-size": "^0.7.0",
     "prettier": "^3.1.1",
     "prettier-plugin-svelte": "^3.1.2",
-    "prettier-plugin-tailwindcss": "^0.5.9",
+    "prettier-plugin-tailwindcss": "^0.5.10",
     "turbo": "^1.11.2",
-    "unocss": "^0.58.1"
+    "unocss": "^0.58.3"
   }
 }
