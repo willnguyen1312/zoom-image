@@ -18,8 +18,8 @@
     "noEmit": true,
     "types": ["node", "vite/client"],
     "paths": {
-      "~/*": ["./src/*"]
-    }
+      "~/*": ["./src/*"],
+    },
   },
-  "include": ["src", "./*.d.ts"]
+  "include": ["src", "./*.d.ts"],
 }
