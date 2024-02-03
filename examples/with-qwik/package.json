@@ -6,12 +6,12 @@
     "dev": "vite --mode ssr"
   },
   "devDependencies": {
-    "@builder.io/qwik": "1.4.2",
-    "@builder.io/qwik-city": "^1.4.2",
-    "@types/node": "^20.11.7",
+    "@builder.io/qwik": "1.4.3",
+    "@builder.io/qwik-city": "^1.4.3",
+    "@types/node": "^20.11.16",
     "@unocss/reset": "^0.58.4",
     "typescript": "5.3.3",
-    "undici": "^6.5.0",
+    "undici": "^6.6.0",
     "unocss": "^0.58.4",
     "vite": "^5.0.12",
     "vite-tsconfig-paths": "4.3.1"
