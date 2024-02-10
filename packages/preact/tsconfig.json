@@ -3,6 +3,6 @@
   "include": ["src"],
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo",
-    "types": [],
-  },
+    "types": []
+  }
 }
