@@ -59,10 +59,10 @@
     "eslint": "^8.56.0",
     "esno": "^4.0.0",
     "export-size": "^0.7.0",
-    "prettier": "^3.2.4",
+    "prettier": "^3.2.5",
     "prettier-plugin-svelte": "^3.1.2",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "turbo": "^1.12.2",
-    "unocss": "^0.58.4"
+    "turbo": "^1.12.3",
+    "unocss": "^0.58.5"
   }
 }
