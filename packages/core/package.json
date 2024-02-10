@@ -48,13 +48,13 @@
     "@namnode/store": "^0.1.0"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.4.0",
+    "@faker-js/faker": "^8.4.1",
     "@size-limit/preset-small-lib": "^11.0.2",
     "@testing-library/dom": "^9.3.4",
     "@testing-library/user-event": "^14.5.2",
-    "@testing-library/vue": "^8.0.1",
-    "@types/node": "^20.11.16",
-    "@vitejs/plugin-vue": "^5.0.3",
+    "@testing-library/vue": "^8.0.2",
+    "@types/node": "^20.11.17",
+    "@vitejs/plugin-vue": "^5.0.4",
     "@vitest/coverage-v8": "^1.2.2",
     "@vue/test-utils": "^2.4.4",
     "eslint-config-custom": "workspace:*",
@@ -62,11 +62,11 @@
     "happy-dom": "^13.3.8",
     "size-limit": "^11.0.2",
     "tsconfig": "workspace:*",
-    "tsup": "8.0.1",
+    "tsup": "8.0.2",
     "typescript": "^5.3.3",
-    "vite": "^5.0.12",
+    "vite": "^5.1.1",
     "vitest": "^1.2.2",
     "vitest-dom": "^0.1.1",
-    "vue": "^3.4.15"
+    "vue": "^3.4.18"
   }
 }

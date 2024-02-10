@@ -7,14 +7,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@unocss/reset": "^0.58.4",
+    "@unocss/reset": "^0.58.5",
     "typescript": "^5.3.3",
-    "unocss": "^0.58.4",
-    "vite": "^5.0.12",
+    "unocss": "^0.58.5",
+    "vite": "^5.1.1",
     "vite-plugin-solid": "^2.9.1"
   },
   "dependencies": {
     "@zoom-image/solid": "latest",
-    "solid-js": "^1.8.12"
+    "solid-js": "^1.8.14"
   }
 }
