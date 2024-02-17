@@ -12,6 +12,7 @@
     "@remix-run/react": "^2.6.0",
     "@remix-run/serve": "^2.6.0",
     "@unocss/reset": "^0.58.5",
+    "@zoom-image/core": "latest",
     "@zoom-image/react": "latest",
     "isbot": "^4.4.0",
     "react": "^18.2.0",
