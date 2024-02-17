@@ -7,6 +7,9 @@ export type ZoomImageMoveOptions = {
   zoomFactor?: number
   zoomImageSource?: string
   disableScrollLock?: boolean
+  zoomImageProps?: {
+    alt?: string
+  }
 }
 
 export type ZoomImageMoveState = {
@@ -15,7 +18,7 @@ export type ZoomImageMoveState = {
 
 export function createZoomImageMove(container: HTMLElement, options: ZoomImageMoveOptions = {}) {
   const sourceImgElement = getSourceImage(container)
-  const finalOptions: Required<ZoomImageMoveOptions> = {
+  const finalOptions: Omit<Required<ZoomImageMoveOptions>, "zoomImageProps"> = {
     zoomFactor: options.zoomFactor ?? 4,
     zoomImageSource: options.zoomImageSource ?? sourceImgElement.src,
     disableScrollLock: options.disableScrollLock ?? false,
@@ -28,6 +31,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   })
 
   const zoomedImg = container.appendChild(document.createElement("img"))
+  zoomedImg.alt = options.zoomImageProps?.alt || ""
   zoomedImg.style.maxWidth = "none"
   zoomedImg.style.position = "absolute"
   zoomedImg.style.top = "0"

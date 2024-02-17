@@ -7,6 +7,9 @@ export type ZoomImageClickOptions = {
   zoomFactor?: number
   zoomImageSource?: string
   disableScrollLock?: boolean
+  zoomImageProps?: {
+    alt?: string
+  }
 }
 
 export type ZoomImageClickState = {
@@ -15,7 +18,7 @@ export type ZoomImageClickState = {
 
 export function createZoomImageClick(container: HTMLElement, options: ZoomImageClickOptions = {}) {
   const sourceImgElement = getSourceImage(container)
-  const finalOptions: Required<ZoomImageClickOptions> = {
+  const finalOptions: Omit<Required<ZoomImageClickOptions>, "zoomImageProps"> = {
     zoomFactor: options.zoomFactor ?? 2,
     zoomImageSource: options.zoomImageSource ?? sourceImgElement.src,
     disableScrollLock: options.disableScrollLock ?? false,
@@ -32,6 +35,7 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
   const zoomedImgWidth = sourceImgElement.clientWidth * zoomFactor
   const zoomedImgHeight = sourceImgElement.clientHeight * zoomFactor
   const zoomedImg = container.appendChild(document.createElement("img"))
+  zoomedImg.alt = options.zoomImageProps?.alt || ""
   zoomedImg.style.maxWidth = "none"
   zoomedImg.style.width = `${zoomedImgWidth}px`
   zoomedImg.style.height = `${zoomedImgHeight}px`

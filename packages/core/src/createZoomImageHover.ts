@@ -12,6 +12,9 @@ export type ZoomImageHoverOptions = {
   zoomTargetClass?: string
   scale?: number
   disableScrollLock?: boolean
+  zoomImageProps?: {
+    alt?: string
+  }
 }
 
 export type ZoomImageHoverState = {
@@ -28,6 +31,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   const zoomedImgWrapper = document.createElement("div")
   zoomedImgWrapper.style.overflow = "hidden"
   const zoomedImg = zoomedImgWrapper.appendChild(document.createElement("img"))
+  zoomedImg.alt = options.zoomImageProps?.alt || ""
   zoomedImg.style.maxWidth = "none"
   zoomedImg.style.display = "none"
   const zoomLens = container.appendChild(document.createElement("div"))
@@ -38,7 +42,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
   let sourceImageElementWidth = 0
   let sourceImageElementHeight = 0
 
-  const finalOptions: Required<ZoomImageHoverOptions> = {
+  const finalOptions: Omit<Required<ZoomImageHoverOptions>, "zoomImageProps"> = {
     zoomImageSource: options.zoomImageSource || sourceImgElement.src,
     zoomLensClass: options.zoomLensClass || "",
     zoomTargetClass: options.zoomTargetClass || "",
