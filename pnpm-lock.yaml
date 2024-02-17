@@ -32,8 +32,8 @@ importers:
         specifier: ^0.5.11
         version: 0.5.11(prettier-plugin-svelte@3.1.2)(prettier@3.2.5)
       turbo:
-        specifier: ^1.12.3
-        version: 1.12.3
+        specifier: ^1.12.4
+        version: 1.12.4
       unocss:
         specifier: ^0.58.5
         version: 0.58.5(postcss@8.4.35)(vite@4.5.2)
@@ -5640,6 +5640,7 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.1
       rollup: 3.29.4
+    dev: false
 
   /@rollup/pluginutils@5.1.0(rollup@4.6.1):
     resolution:
@@ -5655,7 +5656,6 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.1
       rollup: 4.6.1
-    dev: true
 
   /@rollup/rollup-android-arm-eabi@4.6.1:
     resolution:
@@ -6843,7 +6843,7 @@ packages:
     hasBin: true
     dependencies:
       "@ampproject/remapping": 2.2.1
-      "@rollup/pluginutils": 5.1.0(rollup@3.29.4)
+      "@rollup/pluginutils": 5.1.0(rollup@4.6.1)
       "@unocss/config": 0.58.5
       "@unocss/core": 0.58.5
       "@unocss/preset-uno": 0.58.5
@@ -7021,7 +7021,7 @@ packages:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0
     dependencies:
       "@ampproject/remapping": 2.2.1
-      "@rollup/pluginutils": 5.1.0(rollup@3.29.4)
+      "@rollup/pluginutils": 5.1.0(rollup@4.6.1)
       "@unocss/config": 0.58.5
       "@unocss/core": 0.58.5
       "@unocss/inspector": 0.58.5
@@ -17139,71 +17139,71 @@ packages:
       - supports-color
     dev: true
 
-  /turbo-darwin-64@1.12.3:
+  /turbo-darwin-64@1.12.4:
     resolution:
-      { integrity: sha512-dDglIaux+A4jOnB9CDH69sujmrnuLJLrKw1t3J+if6ySlFuxSwC++gDq9TVuOZo2+S7lFkGh+x5ytn3wp+jE8Q== }
+      { integrity: sha512-dBwFxhp9isTa9RS/fz2gDVk5wWhKQsPQMozYhjM7TT4jTrnYn0ZJMzr7V3B/M/T8QF65TbniW7w1gtgxQgX5Zg== }
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: false
     optional: true
 
-  /turbo-darwin-arm64@1.12.3:
+  /turbo-darwin-arm64@1.12.4:
     resolution:
-      { integrity: sha512-5TqqeujEyHMoVUWGzSzUl5ERSg7HDCdbU3gBs5ziWTpFRpeJ/+Y15kYyZJcMQcubRIH3Y1hL/yA5IhlGdgXOMA== }
+      { integrity: sha512-1Uo5iI6xsJ1j9ObsqxYRsa3W26mEbUe6fnj4rQYV6kDaqYD54oAMJ6hM53q9rB8JvFxwdrUXGp3PwTw9A0qqkA== }
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: false
     optional: true
 
-  /turbo-linux-64@1.12.3:
+  /turbo-linux-64@1.12.4:
     resolution:
-      { integrity: sha512-yUreU+/gq4vlBtcdyfjz7slwz4zM1RG8sSXvyHmAS+QXqSrGkegg4qLl2fRbv/c3EyA/XbfcZuD6tcrXkejr6g== }
+      { integrity: sha512-ONg2aSqKP7LAQOg7ysmU5WpEQp4DGNxSlAiR7um+LKtbmC/UxogbR5+T+Uuq6zGuQ5kJyKjWJ4NhtvUswOqBsA== }
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /turbo-linux-arm64@1.12.3:
+  /turbo-linux-arm64@1.12.4:
     resolution:
-      { integrity: sha512-XRwAsp2eRSqZmaMVNrmHoKqofeJMuD87zmefZLTRAObh38hIwKgyl2QRsJIbteob5RN77yFbv3lAJ36UIY5h7w== }
+      { integrity: sha512-9FPufkwdgfIKg/9jj87Cdtftw8o36y27/S2vLN7FTR2pp9c0MQiTBOLVYadUr1FlShupddmaMbTkXEhyt9SdrA== }
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /turbo-windows-64@1.12.3:
+  /turbo-windows-64@1.12.4:
     resolution:
-      { integrity: sha512-CPnRfnUCtmFeShOtUdMCthySjmyHaoTyh9JueiYFvtCNeO3WfDMj63dpOQstQWHdJFYmIrIGfhAclcds9ePQYA== }
+      { integrity: sha512-2mOtxHW5Vjh/5rDVu/aFwsMzI+chs8XcEuJHlY1sYOpEymYTz+u6AXbnzRvwZFMrLKr7J7fQOGl+v96sLKbNdA== }
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: false
     optional: true
 
-  /turbo-windows-arm64@1.12.3:
+  /turbo-windows-arm64@1.12.4:
     resolution:
-      { integrity: sha512-cYA/wlzvp4vlCNHYJ2AjNS3FLXWwUC/5CJompBkTeKFFB6AviE/iLkbIhFikCVSNXZk/3AGanpMUXIkt3bdlwg== }
+      { integrity: sha512-nOY5wae9qnxPOpT1fRuYO0ks6dTwpKMPV6++VkDkamFDLFHUDVM/9kmD2UTeh1yyrKnrZksbb9zmShhmfj1wog== }
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: false
     optional: true
 
-  /turbo@1.12.3:
+  /turbo@1.12.4:
     resolution:
-      { integrity: sha512-a6q8I0TK9ohACYbkmxzG/JYPuDC4VCvfmXLTlf321qQ4BIAhoyaOj/O2g+zJ6L1vNYnZ82G4LrbMfgLLngbLsg== }
+      { integrity: sha512-yUJ7elEUSToiGwFZogXpYKJpQ0BvaMbkEuQECIWtkBLcmWzlMOt6bActsIm29oN83mRU0WbzGt4e8H1KHWedhg== }
     hasBin: true
     optionalDependencies:
-      turbo-darwin-64: 1.12.3
-      turbo-darwin-arm64: 1.12.3
-      turbo-linux-64: 1.12.3
-      turbo-linux-arm64: 1.12.3
-      turbo-windows-64: 1.12.3
-      turbo-windows-arm64: 1.12.3
+      turbo-darwin-64: 1.12.4
+      turbo-darwin-arm64: 1.12.4
+      turbo-linux-64: 1.12.4
+      turbo-linux-arm64: 1.12.4
+      turbo-windows-64: 1.12.4
+      turbo-windows-arm64: 1.12.4
     dev: false
 
   /type-check@0.4.0:
@@ -17679,7 +17679,7 @@ packages:
       { integrity: sha512-C4ZYhgj2vAj43/TpZ06XlDNP0p/7LIeYbgUYr+xG44nM++4HGX6YZBKAYpiBNgiCFUTJ6eXkRppWBrfPMevgmg== }
     engines: { node: ">=12.0.0" }
     dependencies:
-      "@rollup/pluginutils": 5.1.0(rollup@3.29.4)
+      "@rollup/pluginutils": 5.1.0(rollup@4.6.1)
       imagetools-core: 6.0.4
     transitivePeerDependencies:
       - rollup
