@@ -49,15 +49,17 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   const calculatePositionX = (newPositionX: number, currentZoom: number) => {
-    const width = checkDimensionSwitched() ? container.clientHeight : container.clientWidth
     if (newPositionX > 0) return 0
+
+    const width = container.clientWidth
     if (newPositionX + width * currentZoom < width) return -width * (currentZoom - 1)
     return newPositionX
   }
 
   const calculatePositionY = (newPositionY: number, currentZoom: number) => {
-    const height = checkDimensionSwitched() ? container.clientWidth : container.clientHeight
     if (newPositionY > 0) return 0
+
+    const height = container.clientHeight
     if (newPositionY + height * currentZoom < height) return -height * (currentZoom - 1)
     return newPositionY
   }
