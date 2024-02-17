@@ -25,7 +25,12 @@ type ZoomImageClickState = {
 }
 
 type ZoomImageClickOptions = {
-  // Zoom scale, default is 2
+  // Props for the zoomed image
+  zoomImageProps?: {
+    alt?: string
+  }
+
+  // Zoom scale, default is 4
   zoomFactor?: number
 
   // The source of zoomed image, default is the same as the original image
