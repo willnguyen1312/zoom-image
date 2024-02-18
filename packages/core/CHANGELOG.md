@@ -1,5 +1,11 @@
 # @zoom-image/core
 
+## 0.33.0
+
+### Minor Changes
+
+- [#266](https://github.com/willnguyen1312/zoom-image/pull/266) [`c623193`](https://github.com/willnguyen1312/zoom-image/commit/c623193bc0cabd55ccc6411797ccabccddde2638) Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Add zoomImageProps to zoom click, hover and move 💞
+
 ## 0.32.2
 
 ### Patch Changes
