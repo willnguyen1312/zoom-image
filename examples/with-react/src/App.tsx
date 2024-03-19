@@ -59,7 +59,7 @@ function App() {
   }
 
   const croppedImageClasses = useMemo(() => {
-    if (zoomImageWheelState.currentRotation === 90 || zoomImageWheelState.currentRotation === 270) {
+    if (zoomImageWheelState.currentRotation % 180 === 90) {
       return "h-[200px] w-[300px]"
     } else {
       return "h-[300px] w-[200px]"
