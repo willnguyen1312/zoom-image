@@ -9,6 +9,7 @@ type CropImageArg = {
 export const cropImage = async ({ image, positionX, positionY, currentZoom, rotation = 0 }: CropImageArg) => {
   const canvas = document.createElement("canvas")
   const scale = image.naturalWidth / (image.clientWidth * currentZoom)
+  const normalizedRotation = rotation % 360
   const croppedImageWidth = image.clientWidth * scale
   const croppedImageHeight = image.clientHeight * scale
   canvas.width = croppedImageWidth
@@ -38,7 +39,7 @@ export const cropImage = async ({ image, positionX, positionY, currentZoom, rota
   const rotatedCanvas = document.createElement("canvas") as HTMLCanvasElement
   const rotatedCanvasContext = rotatedCanvas.getContext("2d") as CanvasRenderingContext2D
 
-  if (rotation === 90 || rotation === 270) {
+  if (normalizedRotation === 90 || normalizedRotation === 270) {
     rotatedCanvas.width = originalImage.naturalHeight
     rotatedCanvas.height = originalImage.naturalWidth
   } else {
@@ -47,12 +48,12 @@ export const cropImage = async ({ image, positionX, positionY, currentZoom, rota
   }
 
   rotatedCanvasContext.clearRect(0, 0, canvas.width, canvas.height)
-  if (rotation === 90 || rotation === 270) {
+  if (normalizedRotation === 90 || normalizedRotation === 270) {
     rotatedCanvasContext.translate(originalImage.height / 2, originalImage.width / 2)
   } else {
     rotatedCanvasContext.translate(originalImage.width / 2, originalImage.height / 2)
   }
-  rotatedCanvasContext.rotate((rotation * Math.PI) / 180)
+  rotatedCanvasContext.rotate((normalizedRotation * Math.PI) / 180)
   rotatedCanvasContext.drawImage(originalImage, -originalImage.width / 2, -originalImage.height / 2)
 
   return rotatedCanvas.toDataURL()
