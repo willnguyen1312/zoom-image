@@ -149,13 +149,22 @@ watch(
             <img class="h-full w-full" alt="Large Pic" :src="imageURL" />
           </div>
         </div>
-        <img :src="croppedImage" v-if="!!croppedImage" :class="croppedImageClasses" alt="Cropped placeholder" />
+        <img
+          class="hidden lg:block"
+          :src="croppedImage"
+          v-if="!!croppedImage"
+          :class="croppedImageClasses"
+          alt="Cropped placeholder"
+        />
       </div>
 
       <div class="flex space-x-2">
         <button @click="zoomIn" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom in</button>
         <button @click="zoomOut" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Zoom out</button>
-        <button class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium" @click="handleCropWheelZoomImage">
+        <button
+          class="text-dark-500 hidden rounded bg-gray-100 p-2 text-sm font-medium lg:block"
+          @click="handleCropWheelZoomImage"
+        >
           Crop image
         </button>
         <button @click="rotate" class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Rotate</button>

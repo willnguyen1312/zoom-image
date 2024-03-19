@@ -4,7 +4,9 @@
 
 ### Patch Changes
 
-- [#268](https://github.com/willnguyen1312/zoom-image/pull/268) [`62b4fbb`](https://github.com/willnguyen1312/zoom-image/commit/62b4fbb0f9844da7d1064ac33fe1317b91bd3a11) Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Fix cropImage util on rotation larger than 360 💞
+- [#268](https://github.com/willnguyen1312/zoom-image/pull/268)
+  [`62b4fbb`](https://github.com/willnguyen1312/zoom-image/commit/62b4fbb0f9844da7d1064ac33fe1317b91bd3a11) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix cropImage util on rotation larger than 360 💞
 
 ## 0.33.0
 
