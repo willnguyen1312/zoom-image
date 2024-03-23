@@ -9,15 +9,15 @@
     "lint": "eslint --ext .vue ."
   },
   "dependencies": {
-    "@rushstack/eslint-patch": "^1.7.2",
+    "@rushstack/eslint-patch": "^1.8.0",
     "@vue/eslint-config-prettier": "^9.0.0",
-    "@vue/eslint-config-typescript": "^12.0.0",
+    "@vue/eslint-config-typescript": "^13.0.0",
     "@zoom-image/core": "workspace:*",
     "@zoom-image/vue": "workspace:*",
     "eslint-config-custom": "workspace:*",
-    "eslint-plugin-vue": "^9.21.1",
-    "vite": "^4.5.2",
-    "vitepress": "1.0.0-rc.45",
-    "vue": "^3.4.19"
+    "eslint-plugin-vue": "^9.23.0",
+    "vite": "^5.2.4",
+    "vitepress": "^1.0.1",
+    "vue": "^3.4.21"
   }
 }
