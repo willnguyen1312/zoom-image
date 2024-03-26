@@ -37,6 +37,7 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
   const zoomedImg = container.appendChild(document.createElement("img"))
   zoomedImg.alt = options.zoomImageProps?.alt || ""
   zoomedImg.style.maxWidth = "none"
+  zoomedImg.style.display = "none"
   zoomedImg.style.width = `${zoomedImgWidth}px`
   zoomedImg.style.height = `${zoomedImgHeight}px`
   zoomedImg.style.position = "absolute"
