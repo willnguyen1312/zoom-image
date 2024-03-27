@@ -94,10 +94,9 @@ watch(
     await nextTick()
 
     if (zoomType.value === "hover") {
-      const isMobile = window.innerWidth < 768
       createZoomImageHover(imageHoverContainerRef.value as HTMLDivElement, {
         zoomImageSource: imageURL,
-        customZoom: isMobile ? { width: 100, height: 150 } : { width: 300, height: 450 },
+        customZoom: { width: 300, height: 400 },
         zoomTarget: zoomTargetRef.value as HTMLDivElement,
         scale: 2,
       })
