@@ -4,7 +4,10 @@
 
 ### Patch Changes
 
-- [#274](https://github.com/willnguyen1312/zoom-image/pull/274) [`ec4a37b`](https://github.com/willnguyen1312/zoom-image/commit/ec4a37b2e83e19a7bca3f2cde747bafd71d9d046) Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - fix: zoomed image click cause extra border display on first render 💞
+- [#274](https://github.com/willnguyen1312/zoom-image/pull/274)
+  [`ec4a37b`](https://github.com/willnguyen1312/zoom-image/commit/ec4a37b2e83e19a7bca3f2cde747bafd71d9d046) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - fix: zoomed image click cause extra border display on first
+  render 💞
 
 ## 0.33.1
 
