@@ -5,7 +5,7 @@ export default defineConfig({
   target: "esnext",
   format: ["esm", "cjs", "iife"],
   sourcemap: true,
-  minify: true,
+  minify: false,
   globalName: "ZoomImage",
   name: "zoom-image",
   dts: true,
