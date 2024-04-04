@@ -1,5 +1,11 @@
 # @zoom-image/core
 
+## 0.33.3
+
+### Patch Changes
+
+- [#278](https://github.com/willnguyen1312/zoom-image/pull/278) [`4d5a463`](https://github.com/willnguyen1312/zoom-image/commit/4d5a463a5e688093c659bd8e44ba646c13053b8f) Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - patch: support multiple module styles 💞
+
 ## 0.33.2
 
 ### Patch Changes
