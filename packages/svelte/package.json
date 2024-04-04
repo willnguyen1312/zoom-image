@@ -28,6 +28,19 @@
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
     "dist",
     "src"
