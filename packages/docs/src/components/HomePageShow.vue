@@ -124,7 +124,7 @@ watch(
 
 <template>
   <div class="min-h-xl m-x-auto rounded-4 mt-4 flex flex-col bg-white p-4 font-sans text-black sm:container sm:px-12">
-    <nav class="mb-4 flex space-x-4" aria-label="Tabs">
+    <nav class="flex" aria-label="Tabs">
       <p
         v-for="tab in tabs"
         @click="handleTabClick(tab)"
