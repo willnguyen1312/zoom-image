@@ -4,7 +4,9 @@
 
 ### Minor Changes
 
-- [#280](https://github.com/willnguyen1312/zoom-image/pull/280) [`6793ebe`](https://github.com/willnguyen1312/zoom-image/commit/6793ebebbf31025e0a0b3e579bb0bbe8619a7534) Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - feat: beautify build 💞
+- [#280](https://github.com/willnguyen1312/zoom-image/pull/280)
+  [`6793ebe`](https://github.com/willnguyen1312/zoom-image/commit/6793ebebbf31025e0a0b3e579bb0bbe8619a7534) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - feat: beautify build 💞
 
 ## 0.33.3
 
