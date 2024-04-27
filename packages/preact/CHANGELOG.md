@@ -4,7 +4,8 @@
 
 ### Patch Changes
 
-- Updated dependencies [[`6793ebe`](https://github.com/willnguyen1312/zoom-image/commit/6793ebebbf31025e0a0b3e579bb0bbe8619a7534)]:
+- Updated dependencies
+  [[`6793ebe`](https://github.com/willnguyen1312/zoom-image/commit/6793ebebbf31025e0a0b3e579bb0bbe8619a7534)]:
   - @zoom-image/core@0.34.0
 
 ## 0.3.9
