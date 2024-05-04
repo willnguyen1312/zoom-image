@@ -1,6 +1,6 @@
 import { createStore } from "@namnode/store"
 import type { PointerPosition } from "./utils"
-import { clamp, disableScroll, enableScroll, getPointersCenter, getSourceImage, makeMaybeCallFunction } from "./utils"
+import { clamp, computeZoomGesture, disableScroll, enableScroll, getSourceImage, makeMaybeCallFunction } from "./utils"
 
 export type ZoomImageWheelOptions = {
   maxZoom?: number
@@ -64,7 +64,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     return newPositionY
   }
 
-  let prevDistance = -1
+  let prevTwoPositions: [PointerPosition, PointerPosition] | null = null
   let enabledScroll = true
   const pointerMap = new Map<number, { x: number; y: number }>()
 
@@ -202,22 +202,17 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
 
     if (pointerMap.size === 2) {
       const pointersIterator = pointerMap.values()
-      const first = pointersIterator.next().value as PointerPosition
-      const second = pointersIterator.next().value as PointerPosition
-      const curDistance = Math.sqrt(Math.pow(first.x - second.x, 2) + Math.pow(first.y - second.y, 2))
-      const { x, y } = getPointersCenter(first, second)
-      if (prevDistance > 0) {
-        if (curDistance > prevDistance) {
-          // The distance between the two pointers has increased
-          processZoomWheel({ delta: ZOOM_DELTA, x, y })
-        }
-        if (curDistance < prevDistance) {
-          // The distance between the two pointers has decreased
-          processZoomWheel({ delta: -ZOOM_DELTA, x, y })
-        }
+      const currentTwoPositions = [pointersIterator.next().value, pointersIterator.next().value] as [
+        PointerPosition,
+        PointerPosition,
+      ]
+
+      if (prevTwoPositions !== null) {
+        const { scale, center } = computeZoomGesture(prevTwoPositions, currentTwoPositions)
+        processZoomWheel({ delta: Math.log(scale) / finalOptions.wheelZoomRatio, ...center })
       }
-      // Store the distance for the next move event
-      prevDistance = curDistance
+      // Store the current two pointer positions for the next move event
+      prevTwoPositions = currentTwoPositions
       updateZoom()
       return
     }
@@ -371,7 +366,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     pointerMap.delete(event.pointerId)
 
     if (pointerMap.size === 0) {
-      prevDistance = -1
+      prevTwoPositions = null
     }
 
     if (pointerMap.size === 0 && !enabledScroll) {
@@ -387,7 +382,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   function _handlePointerLeave(event: PointerEvent) {
     event.preventDefault()
     pointerMap.delete(event.pointerId)
-    prevDistance = -1
+    prevTwoPositions = null
     if (!enabledScroll) {
       enableScroll()
       enabledScroll = true
