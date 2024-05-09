@@ -56,6 +56,34 @@ export function getPointersCenter(first: PointerPosition, second: PointerPositio
   }
 }
 
+// Given the previous and current positions of two touch inputs, compute the zoom
+// factor and the origin of the zoom gesture.
+export function computeZoomGesture(prev: [PointerPosition, PointerPosition], curr: [PointerPosition, PointerPosition]) {
+  const prevCenter = getPointersCenter(prev[0], prev[1])
+  const currCenter = getPointersCenter(curr[0], curr[1])
+  const centerDist = { x: currCenter.x - prevCenter.x, y: currCenter.y - prevCenter.y }
+
+  const prevDistance = Math.hypot(prev[0].x - prev[1].x, prev[0].y - prev[1].y)
+  const currDistance = Math.hypot(curr[0].x - curr[1].x, curr[0].y - curr[1].y)
+  let scale = currDistance / prevDistance
+
+  // avoid division by zero
+  const eps = 0.00001
+  if (Math.abs(scale - 1) < eps) {
+    scale = 1 + eps
+  }
+
+  return {
+    scale,
+    center: {
+      // We shift the zoom center away such that the translation part of the gesture
+      // is also captured by the zoom operation.
+      x: prevCenter.x + centerDist.x / (1 - scale),
+      y: prevCenter.y + centerDist.y / (1 - scale),
+    },
+  }
+}
+
 export function makeMaybeCallFunction<T>(predicateFn: () => boolean, fn: (arg: T) => void) {
   return (arg: T) => {
     if (predicateFn()) {
