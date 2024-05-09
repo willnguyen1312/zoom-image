@@ -43,6 +43,10 @@ pnpm build
 
 ## Commands
 
+Please change all versions from "latest" to "workspace\*" inside the example project you want to start, run pnpm install
+before executing one of the commands below. I wanted to keep those packages for Stackblitz usage so I use "latest",
+unfortunately pnpm doesn't understand it during local development 🙈
+
 ### With Docs
 
 ```bash
