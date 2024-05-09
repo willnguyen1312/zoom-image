@@ -64,6 +64,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     return newPositionY
   }
 
+  // last pair of coordinates of a touch with two fingers
   let prevTwoPositions: [PointerPosition, PointerPosition] | null = null
   let enabledScroll = true
   const pointerMap = new Map<number, { x: number; y: number }>()
@@ -200,23 +201,6 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       }
     }
 
-    if (pointerMap.size === 2) {
-      const pointersIterator = pointerMap.values()
-      const currentTwoPositions = [pointersIterator.next().value, pointersIterator.next().value] as [
-        PointerPosition,
-        PointerPosition,
-      ]
-
-      if (prevTwoPositions !== null) {
-        const { scale, center } = computeZoomGesture(prevTwoPositions, currentTwoPositions)
-        processZoomWheel({ delta: Math.log(scale) / finalOptions.wheelZoomRatio, ...center })
-      }
-      // Store the current two pointer positions for the next move event
-      prevTwoPositions = currentTwoPositions
-      updateZoom()
-      return
-    }
-
     if (pointerMap.size === 1) {
       const { currentZoom, currentRotation } = store.getState()
       const isDimensionSwitched = checkDimensionSwitched()
@@ -338,6 +322,26 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     }
   }
 
+  function _handleTouchMove(event: TouchEvent) {
+    event.preventDefault()
+    console.log(event.touches.length)
+    if (event.touches.length === 2) {
+      const currentTwoPositions = [...event.touches].map((t) => ({ x: t.clientX, y: t.clientY })) as [
+        PointerPosition,
+        PointerPosition,
+      ]
+
+      if (prevTwoPositions !== null) {
+        const { scale, center } = computeZoomGesture(prevTwoPositions, currentTwoPositions)
+        processZoomWheel({ delta: Math.log(scale) / finalOptions.wheelZoomRatio, ...center })
+      }
+      // Store the current two pointer positions for the next move event
+      prevTwoPositions = currentTwoPositions
+      updateZoom()
+      return
+    }
+  }
+
   function _handlePointerDown(event: PointerEvent) {
     event.preventDefault()
     if (pointerMap.size === 2) {
@@ -399,11 +403,13 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   const handlePointerMove = makeMaybeCallFunction(checkZoomEnabled, _handlePointerMove)
   const handlePointerUp = makeMaybeCallFunction(checkZoomEnabled, _handlePointerUp)
   const handleTouchStart = makeMaybeCallFunction(checkZoomEnabled, _handleTouchStart)
+  const handleTouchMove = makeMaybeCallFunction(checkZoomEnabled, _handleTouchMove)
 
   const controller = new AbortController()
   const { signal } = controller
   container.addEventListener("wheel", handleWheel, { signal })
   container.addEventListener("touchstart", handleTouchStart, { signal })
+  container.addEventListener("touchmove", handleTouchMove, { signal })
   container.addEventListener("pointerdown", handlePointerDown, { signal })
   container.addEventListener("pointerleave", handlePointerLeave, { signal })
   container.addEventListener("pointermove", handlePointerMove, { signal })
