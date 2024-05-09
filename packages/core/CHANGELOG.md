@@ -4,7 +4,9 @@
 
 ### Patch Changes
 
-- [#284](https://github.com/willnguyen1312/zoom-image/pull/284) [`3688890`](https://github.com/willnguyen1312/zoom-image/commit/36888903da995792ccdb995dd54e01806ee0e872) Thanks [@Pascal-So](https://github.com/Pascal-So)! - Make pinch zooming behaviour more intuitive
+- [#284](https://github.com/willnguyen1312/zoom-image/pull/284)
+  [`3688890`](https://github.com/willnguyen1312/zoom-image/commit/36888903da995792ccdb995dd54e01806ee0e872) Thanks
+  [@Pascal-So](https://github.com/Pascal-So)! - Make pinch zooming behaviour more intuitive
 
 ## 0.34.1
 
