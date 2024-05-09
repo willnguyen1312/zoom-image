@@ -364,7 +364,7 @@ importers:
     dependencies:
       "@zoom-image/core":
         specifier: latest
-        version: 0.34.0
+        version: 0.34.1
     devDependencies:
       "@unocss/reset":
         specifier: ^0.58.5
@@ -4860,6 +4860,10 @@ packages:
   "@zoom-image/core@0.34.0":
     resolution:
       { integrity: sha512-2gvhcxJ5J3c4ZAhTRC9opNRnPTnseM5w6IU+SbSSUOT+MN6+0/XX6Qsyebl+ADXdrgOU5Nu8wGfzeCm1QuQSNQ== }
+
+  "@zoom-image/core@0.34.1":
+    resolution:
+      { integrity: sha512-IHh5TSp/PGvBZs8plQ+ERDz2NXoZ52v+8JUMFNkvqRSYAVW87xuSup1JESKdp72qLaXWAGUfTqvqFlzmC+/37g== }
 
   "@zoom-image/preact@0.3.10":
     resolution:
@@ -15476,6 +15480,10 @@ snapshots:
       tslib: 2.6.2
 
   "@zoom-image/core@0.34.0":
+    dependencies:
+      "@namnode/store": 0.1.0
+
+  "@zoom-image/core@0.34.1":
     dependencies:
       "@namnode/store": 0.1.0
 
