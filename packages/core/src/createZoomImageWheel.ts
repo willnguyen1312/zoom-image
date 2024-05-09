@@ -67,7 +67,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   // last pair of coordinates of a touch with two fingers
   let prevTwoPositions: [PointerPosition, PointerPosition] | null = null
   let enabledScroll = true
-  const pointerMap = new Map<number, { x: number; y: number }>()
+  const pointerMap = new Map<number, PointerPosition>()
 
   let lastPositionX = 0
   let lastPositionY = 0
@@ -369,13 +369,22 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     event.preventDefault()
     pointerMap.delete(event.pointerId)
 
-    if (pointerMap.size === 0) {
+    // Reset the distance as soon as one of the pointers is released
+    if (pointerMap.size < 2) {
       prevTwoPositions = null
     }
 
     if (pointerMap.size === 0 && !enabledScroll) {
       enableScroll()
       enabledScroll = true
+    }
+
+    // Kick off the single pointer flow if there is only one pointer left
+    if (pointerMap.size === 1) {
+      const { x, y } = pointerMap.values().next().value as PointerPosition
+      const isDimensionSwitched = checkDimensionSwitched()
+      startX = isDimensionSwitched ? y : x
+      startY = isDimensionSwitched ? x : y
     }
 
     const currentState = store.getState()

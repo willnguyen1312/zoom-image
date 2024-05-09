@@ -1,5 +1,11 @@
 # @zoom-image/core
 
+## 0.34.1
+
+### Patch Changes
+
+- [#287](https://github.com/willnguyen1312/zoom-image/pull/287) [`3779615`](https://github.com/willnguyen1312/zoom-image/commit/3779615ba4f60e699afb8b1058571fcfea193c51) Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Fix zoom on wheel when going from two to one touch 💞
+
 ## 0.34.0
 
 ### Minor Changes
