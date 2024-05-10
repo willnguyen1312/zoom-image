@@ -237,78 +237,78 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     }
   }
 
-  // These variables are used for zooming on double tap
-  let touchTimer: NodeJS.Timeout | null = null
-  let startTimestamp = 0
-  let currentValue = 0
-  const endValue = 100
-  let zoomDirection: "in" | "out" = "in"
-  let x = 0
-  let y = 0
-  const durationBetweenTap = 300
-
-  function animateZoom(timestamp: number) {
-    const currentState = store.getState()
-    const containerRect = container.getBoundingClientRect()
-    const zoomPointX = x - containerRect.left
-    const zoomPointY = y - containerRect.top
-    const isDimensionSwitched = checkDimensionSwitched()
-    const zoomX = isDimensionSwitched ? currentState.currentPositionY : currentState.currentPositionX
-    const zoomY = isDimensionSwitched ? currentState.currentPositionX : currentState.currentPositionY
-    const zoomTargetX = (zoomPointX - zoomX) / currentState.currentZoom
-    const zoomTargetY = (zoomPointY - zoomY) / currentState.currentZoom
-
-    if (!startTimestamp) {
-      startTimestamp = timestamp
-      zoomDirection = currentState.currentZoom > 1 ? "out" : "in"
-    }
-
-    const progress = timestamp - startTimestamp
-    currentValue = Math.min((progress / finalOptions.dblTapAnimationDuration) * endValue, endValue)
-
-    if (zoomDirection === "in") {
-      const newCurrentZoom = clamp(1 + (finalOptions.maxZoom - 1) * (currentValue / 100), 1, finalOptions.maxZoom)
-
-      store.setState({
-        currentZoom: newCurrentZoom,
-        currentPositionX: calculatePositionX(-zoomTargetX * newCurrentZoom + zoomPointX, newCurrentZoom),
-        currentPositionY: calculatePositionY(-zoomTargetY * newCurrentZoom + zoomPointY, newCurrentZoom),
-      })
-
-      updateZoom()
-    }
-
-    if (zoomDirection === "out") {
-      const newCurrentZoom = clamp(
-        1 + (finalOptions.maxZoom - 1) - (finalOptions.maxZoom - 1) * (currentValue / 100),
-        1,
-        finalOptions.maxZoom,
-      )
-      store.setState({
-        currentZoom: newCurrentZoom,
-        currentPositionX: calculatePositionX(-zoomPointX * newCurrentZoom + zoomPointX, newCurrentZoom),
-        currentPositionY: calculatePositionY(-zoomPointY * newCurrentZoom + zoomPointY, newCurrentZoom),
-      })
-
-      updateZoom()
-    }
-
-    if (progress < finalOptions.dblTapAnimationDuration) {
-      requestAnimationFrame(animateZoom)
-    } else {
-      currentValue = 0
-      startTimestamp = 0
-    }
+  const animationState = {
+    startTimestamp: null as DOMHighResTimeStamp | null,
+    // the state at the start of the zoom animation
+    start: { x: 0, y: 0, zoom: 0 },
+    // the target state at the end of the zoom animation
+    target: { x: 0, y: 0, zoom: 0 },
   }
 
+  function animateZoom(touchCoordinate: { x: number; y: number }) {
+    // the `touchCoordinate` should be relative to the container
+
+    const currentState = store.getState()
+
+    animationState.startTimestamp = null
+    animationState.start = {
+      x: currentState.currentPositionX,
+      y: currentState.currentPositionY,
+      zoom: currentState.currentZoom,
+    }
+
+    if (currentState.currentZoom > 1) {
+      animationState.target = {
+        x: 0,
+        y: 0,
+        zoom: 1,
+      }
+    } else {
+      animationState.target = {
+        zoom: finalOptions.maxZoom,
+        x: touchCoordinate.x * (1 - finalOptions.maxZoom),
+        y: touchCoordinate.y * (1 - finalOptions.maxZoom),
+      }
+    }
+
+    function lerp(a: number, b: number, t: number): number {
+      return a * (1 - t) + b * t
+    }
+
+    function frame(timestamp: DOMHighResTimeStamp) {
+      if (animationState.startTimestamp === null) {
+        animationState.startTimestamp = timestamp
+      }
+
+      // interpolation parameter that linearly goes from 0 to 1 during the animation
+      let t = (timestamp - animationState.startTimestamp) / finalOptions.dblTapAnimationDuration
+      if (t > 1) {
+        t = 1
+      }
+
+      store.setState({
+        currentPositionX: lerp(animationState.start.x, animationState.target.x, t),
+        currentPositionY: lerp(animationState.start.y, animationState.target.y, t),
+        currentZoom: lerp(animationState.start.zoom, animationState.target.zoom, t),
+      })
+      updateZoom()
+
+      if (t < 1) {
+        requestAnimationFrame(frame)
+      }
+    }
+
+    requestAnimationFrame(frame)
+  }
+
+  // These variables are used for zooming on double tap
+  let touchTimer: NodeJS.Timeout | null = null
+  const durationBetweenTap = 300
+
   function _handleTouchStart(event: TouchEvent) {
-    event.preventDefault()
     if (event.touches.length > 1) {
       return
     }
-
-    x = event.touches[0].clientX
-    y = event.touches[0].clientY
 
     if (touchTimer === null) {
       touchTimer = setTimeout(() => {
@@ -317,7 +317,13 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     } else {
       clearTimeout(touchTimer)
       touchTimer = null
-      requestAnimationFrame(animateZoom)
+
+      const rect = container.getBoundingClientRect()
+      const touch = event.touches[0]
+      animateZoom({
+        x: touch.clientX - rect.left,
+        y: touch.clientY - rect.top,
+      })
       return
     }
   }
