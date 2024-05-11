@@ -1,5 +1,11 @@
 # @zoom-image/core
 
+## 0.34.3
+
+### Patch Changes
+
+- [#292](https://github.com/willnguyen1312/zoom-image/pull/292) [`3abc2d9`](https://github.com/willnguyen1312/zoom-image/commit/3abc2d94ca18f50f0a2936a50ceaf5996100afd5) Thanks [@Pascal-So](https://github.com/Pascal-So)! - Prevent jump when zooming out with double tap
+
 ## 0.34.2
 
 ### Patch Changes
