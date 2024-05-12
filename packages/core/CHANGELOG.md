@@ -4,7 +4,9 @@
 
 ### Patch Changes
 
-- [#294](https://github.com/willnguyen1312/zoom-image/pull/294) [`dba9209`](https://github.com/willnguyen1312/zoom-image/commit/dba92097d91e7bc6f03eb6da7f316f8fcddf3cc9) Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Update homepage url in package.json 💞
+- [#294](https://github.com/willnguyen1312/zoom-image/pull/294)
+  [`dba9209`](https://github.com/willnguyen1312/zoom-image/commit/dba92097d91e7bc6f03eb6da7f316f8fcddf3cc9) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Update homepage url in package.json 💞
 
 ## 0.34.3
 
