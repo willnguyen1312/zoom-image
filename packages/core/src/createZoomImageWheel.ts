@@ -6,6 +6,7 @@ export type ZoomImageWheelOptions = {
   maxZoom?: number
   wheelZoomRatio?: number
   dblTapAnimationDuration?: number
+  initialState?: Partial<ZoomImageWheelStateUpdate>
 }
 
 /* The delta values are not consistent across browsers.
@@ -28,21 +29,24 @@ export type ZoomImageWheelStateUpdate = Partial<{
   currentRotation: number
 }>
 
-export function createZoomImageWheel(container: HTMLElement, options: ZoomImageWheelOptions = {}) {
-  const store = createStore<ZoomImageWheelState>({
-    currentZoom: 1,
-    enable: true,
-    currentPositionX: 0,
-    currentPositionY: 0,
-    currentRotation: 0,
-  })
+const defaultInitialState: ZoomImageWheelState = {
+  currentZoom: 1,
+  enable: true,
+  currentPositionX: 0,
+  currentPositionY: 0,
+  currentRotation: 0,
+}
 
+export function createZoomImageWheel(container: HTMLElement, options: ZoomImageWheelOptions = {}) {
   const sourceImgElement = getSourceImage(container)
   const finalOptions: Required<ZoomImageWheelOptions> = {
     maxZoom: options.maxZoom || 4,
     wheelZoomRatio: options.wheelZoomRatio || 0.1,
     dblTapAnimationDuration: options.dblTapAnimationDuration || 300,
+    initialState: { ...defaultInitialState, ...options.initialState },
   }
+
+  const store = createStore<ZoomImageWheelState>(finalOptions.initialState as ZoomImageWheelState)
 
   const checkDimensionSwitched = () => {
     return [90, 270].includes(store.getState().currentRotation % 360)
@@ -64,6 +68,25 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     return newPositionY
   }
 
+  const updateStateOnNewZoom = (currentZoom: number) => {
+    const zoomPointX = container.clientWidth / 2
+    const zoomPointY = container.clientHeight / 2
+    const isDimensionSwitched = checkDimensionSwitched()
+    const currentState = store.getState()
+
+    const zoomX = isDimensionSwitched ? currentState.currentPositionY : currentState.currentPositionX
+    const zoomY = isDimensionSwitched ? currentState.currentPositionX : currentState.currentPositionY
+
+    const zoomTargetX = (zoomPointX - zoomX) / currentState.currentZoom
+    const zoomTargetY = (zoomPointY - zoomY) / currentState.currentZoom
+
+    store.setState({
+      currentZoom,
+      currentPositionX: calculatePositionX(-zoomTargetX * currentZoom + zoomPointX, currentZoom),
+      currentPositionY: calculatePositionY(-zoomTargetY * currentZoom + zoomPointY, currentZoom),
+    })
+  }
+
   // last pair of coordinates of a touch with two fingers
   let prevTwoPositions: [PointerPosition, PointerPosition] | null = null
   let enabledScroll = true
@@ -80,6 +103,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   function updateZoom() {
     const currentState = store.getState()
     sourceImgElement.style.transform = `translate(${currentState.currentPositionX}px, ${currentState.currentPositionY}px) scale(${currentState.currentZoom})`
+    container.style.rotate = `${currentState.currentRotation}deg`
   }
 
   function setState(newState: ZoomImageWheelStateUpdate) {
@@ -100,7 +124,6 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
         store.setState({
           currentRotation: newCurrentRotation,
         })
-        container.style.rotate = `${newCurrentRotation}deg`
       }
 
       if (typeof newState.currentZoom === "number" && newState.currentZoom !== currentState.currentZoom) {
@@ -110,21 +133,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
           return
         }
 
-        const zoomPointX = container.clientWidth / 2
-        const zoomPointY = container.clientHeight / 2
-        const isDimensionSwitched = checkDimensionSwitched()
-
-        const zoomX = isDimensionSwitched ? currentState.currentPositionY : currentState.currentPositionX
-        const zoomY = isDimensionSwitched ? currentState.currentPositionX : currentState.currentPositionY
-
-        const zoomTargetX = (zoomPointX - zoomX) / currentState.currentZoom
-        const zoomTargetY = (zoomPointY - zoomY) / currentState.currentZoom
-
-        store.setState({
-          currentZoom: newCurrentZoom,
-          currentPositionX: calculatePositionX(-zoomTargetX * newCurrentZoom + zoomPointX, newCurrentZoom),
-          currentPositionY: calculatePositionY(-zoomTargetY * newCurrentZoom + zoomPointY, newCurrentZoom),
-        })
+        updateStateOnNewZoom(newCurrentZoom)
       }
     })
 
@@ -428,6 +437,12 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   container.addEventListener("pointerleave", handlePointerLeave, { signal })
   container.addEventListener("pointermove", handlePointerMove, { signal })
   container.addEventListener("pointerup", handlePointerUp, { signal })
+
+  // Kick things off in case we have initial zoom other than 1
+  if (store.getState().currentZoom !== defaultInitialState.currentZoom) {
+    updateStateOnNewZoom(store.getState().currentZoom)
+    updateZoom()
+  }
 
   return {
     cleanup() {
