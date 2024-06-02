@@ -27,7 +27,11 @@ type ZoomImageWheelState = {
 }
 
 type Listener = (state: ZoomImageWheelState) => void
-type ZoomImageWheelStateUpdate = { currentZoom: number; enabled: boolean; currentRotation: number }
+type ZoomImageWheelStateUpdate = {
+  currentZoom: number
+  enabled: boolean
+  currentRotation: number
+}
 
 type ZoomImageWheelOptions = {
   // Maximum zoom scale, default is 4
@@ -38,6 +42,10 @@ type ZoomImageWheelOptions = {
 
   // Animation duration for zooming on double tap, default is 300 ms
   dblTapAnimationDuration?: number
+
+  // Partial or full initial state
+  // useful for storing previous zoomed state and re-initialize it on load
+  initialState?: Partial<ZoomImageWheelState>
 }
 
 function createZoomImageWheel(
