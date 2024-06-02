@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.35.0
+
+### Minor Changes
+
+- [#297](https://github.com/willnguyen1312/zoom-image/pull/297)
+  [`bae9692`](https://github.com/willnguyen1312/zoom-image/commit/bae9692c37153bff0346a68229d8fc285e9f4d3f) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - feat: add support for initial state of zoom wheel 💞
+
 ## 0.34.4
 
 ### Patch Changes
