@@ -6,6 +6,7 @@ import { disableScroll, enableScroll, getSourceImage } from "./utils"
 export type ZoomImageMoveOptions = {
   zoomFactor?: number
   zoomImageSource?: string
+  // @deprecated
   disableScrollLock?: boolean
   zoomImageProps?: {
     alt?: string
@@ -18,13 +19,12 @@ export type ZoomImageMoveState = {
 
 export function createZoomImageMove(container: HTMLElement, options: ZoomImageMoveOptions = {}) {
   const sourceImgElement = getSourceImage(container)
-  const finalOptions: Omit<Required<ZoomImageMoveOptions>, "zoomImageProps"> = {
+  const finalOptions: Omit<Required<ZoomImageMoveOptions>, "zoomImageProps" | "disableScrollLock"> = {
     zoomFactor: options.zoomFactor ?? 4,
     zoomImageSource: options.zoomImageSource ?? sourceImgElement.src,
-    disableScrollLock: options.disableScrollLock ?? false,
   }
 
-  const { disableScrollLock, zoomFactor, zoomImageSource } = finalOptions
+  const { zoomFactor, zoomImageSource } = finalOptions
 
   const store = createStore<ZoomImageMoveState>({
     zoomedImgStatus: "idle",
@@ -47,17 +47,19 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
 
     processZoom(event)
 
-    if (!disableScrollLock) disableScroll()
+    if (event.pointerType !== "mouse") {
+      disableScroll()
+    }
   }
 
   function handlePointerMove(event: PointerEvent) {
     processZoom(event)
   }
 
-  function handlePointerLeave() {
+  function resetZoomedImg() {
     zoomedImg.style.display = "none"
     zoomedImg.style.transform = "none"
-    if (!disableScrollLock) enableScroll()
+    enableScroll()
   }
 
   const calculatePositionX = (newPositionX: number) => {
@@ -90,7 +92,8 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   const { signal } = controller
   container.addEventListener("pointerenter", handlePointerEnter, { signal })
   container.addEventListener("pointermove", handlePointerMove, { signal })
-  container.addEventListener("pointerleave", handlePointerLeave, { signal })
+  container.addEventListener("pointerleave", resetZoomedImg, { signal })
+  container.addEventListener("pointercancel", resetZoomedImg, { signal })
 
   return {
     cleanup: () => {
