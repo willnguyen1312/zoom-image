@@ -1,5 +1,14 @@
 # @zoom-image/core
 
+## 0.36.1
+
+### Patch Changes
+
+- [#305](https://github.com/willnguyen1312/zoom-image/pull/305)
+  [`55fd0b6`](https://github.com/willnguyen1312/zoom-image/commit/55fd0b62fb420475fc7090f02f3cfd2605359ec2) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix zoom image move - zoomed image distorted on mobile phone
+  💞
+
 ## 0.36.0
 
 ### Minor Changes
