@@ -56,9 +56,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
 
     processZoom(event)
 
-    if (event.pointerType !== "mouse") {
-      disableScroll()
-    }
+    event.pointerType !== "mouse" && disableScroll()
   }
 
   function handlePointerMove(event: PointerEvent) {
@@ -103,6 +101,13 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   container.addEventListener("pointermove", handlePointerMove, { signal })
   container.addEventListener("pointerleave", resetZoomedImg, { signal })
   container.addEventListener("pointercancel", resetZoomedImg, { signal })
+  container.addEventListener(
+    "touchstart",
+    (event) => {
+      disabledContextMenu && event.preventDefault()
+    },
+    { signal },
+  )
 
   return {
     cleanup: () => {
