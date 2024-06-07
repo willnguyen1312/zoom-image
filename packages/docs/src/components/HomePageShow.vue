@@ -109,6 +109,7 @@ watch(
     if (zoomType.value === "move") {
       createZoomImageMove(imageMoveContainerRef.value as HTMLDivElement, {
         zoomImageSource: imageURL,
+        disabledContextMenu: true,
       })
     }
 
