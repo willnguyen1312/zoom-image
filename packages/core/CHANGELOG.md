@@ -1,5 +1,14 @@
 # @zoom-image/core
 
+## 0.36.0
+
+### Minor Changes
+
+- [#303](https://github.com/willnguyen1312/zoom-image/pull/303)
+  [`5aa3646`](https://github.com/willnguyen1312/zoom-image/commit/5aa3646bff991480eb4b23724b8ac9126312d07c) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add support for disabledContextMenu option on zoom image move
+  💞
+
 ## 0.35.1
 
 ### Patch Changes

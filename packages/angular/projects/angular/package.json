@@ -1,6 +1,6 @@
 {
   "name": "@zoom-image/angular",
-  "version": "0.2.16",
+  "version": "0.2.17",
   "peerDependencies": {
     "@angular/common": "^16.1.0",
     "@angular/core": "^16.1.0"
