@@ -1,5 +1,13 @@
 # @zoom-image/react
 
+## 0.4.17
+
+### Patch Changes
+
+- Updated dependencies
+  [[`5aa3646`](https://github.com/willnguyen1312/zoom-image/commit/5aa3646bff991480eb4b23724b8ac9126312d07c)]:
+  - @zoom-image/core@0.36.0
+
 ## 0.4.16
 
 ### Patch Changes
