@@ -123,7 +123,9 @@ watch(
 </script>
 
 <template>
-  <div class="min-h-xl m-x-auto rounded-4 mt-4 flex flex-col bg-white p-4 font-sans text-black sm:container sm:px-12">
+  <div
+    class="min-h-xl m-x-auto rounded-4 mt-4 flex flex-col bg-[#96BF48] p-4 font-sans text-black sm:container sm:px-12 dark:bg-white"
+  >
     <nav class="flex" aria-label="Tabs">
       <p
         v-for="tab in tabs"
