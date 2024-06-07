@@ -2,7 +2,7 @@
   "@zoom-image/core": {
     "createZoomImageWheel": "2.08 KB",
     "createZoomImageHover": "1.26 KB",
-    "createZoomImageMove": "986 B",
+    "createZoomImageMove": "991 B",
     "createZoomImageClick": "930 B",
     "cropImage": "386 B",
     "makeCalculateZoom": "132 B",
@@ -45,9 +45,9 @@
     "useZoomImageClick": "1.15 KB"
   },
   "@zoom-image/angular": {
-    "ZoomImageWheelService": "3.92 KB",
     "ZoomImageClickService": "3.92 KB",
     "ZoomImageHoverService": "3.92 KB",
-    "ZoomImageMoveService": "3.92 KB"
+    "ZoomImageMoveService": "3.92 KB",
+    "ZoomImageWheelService": "3.92 KB"
   }
 }
