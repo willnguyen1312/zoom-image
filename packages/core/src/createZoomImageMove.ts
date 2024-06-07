@@ -8,6 +8,7 @@ export type ZoomImageMoveOptions = {
   zoomImageSource?: string
   // @deprecated
   disableScrollLock?: boolean
+  disabledContextMenu?: boolean
   zoomImageProps?: {
     alt?: string
   }
@@ -22,9 +23,10 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   const finalOptions: Omit<Required<ZoomImageMoveOptions>, "zoomImageProps" | "disableScrollLock"> = {
     zoomFactor: options.zoomFactor ?? 4,
     zoomImageSource: options.zoomImageSource ?? sourceImgElement.src,
+    disabledContextMenu: options.disabledContextMenu ?? false,
   }
 
-  const { zoomFactor, zoomImageSource } = finalOptions
+  const { disabledContextMenu, zoomFactor, zoomImageSource } = finalOptions
 
   const store = createStore<ZoomImageMoveState>({
     zoomedImgStatus: "idle",
@@ -36,6 +38,13 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   zoomedImg.style.position = "absolute"
   zoomedImg.style.top = "0"
   zoomedImg.style.left = "0"
+
+  // Credit to https://stackoverflow.com/questions/19587555/disable-default-save-image-option-in-mobile/19590365#19590365
+  if (disabledContextMenu) {
+    zoomedImg.style["-webkit-user-select"] = "none"
+    zoomedImg.style["-webkit-touch-callout"] = "none"
+    zoomedImg.oncontextmenu = () => false
+  }
 
   function handlePointerEnter(event: PointerEvent) {
     zoomedImg.style.display = "block"

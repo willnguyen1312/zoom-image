@@ -35,6 +35,9 @@ type ZoomImageMoveOptions = {
 
   // The source of zoomed image, default is the same as the original image
   zoomImageSource?: string
+
+  // Whether to disable context menu on the zoomed image, default is false
+  disabledContextMenu?: boolean
 }
 
 function createZoomImageMove(
