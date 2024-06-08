@@ -1,5 +1,13 @@
 # @zoom-image/vue
 
+## 0.2.19
+
+### Patch Changes
+
+- Updated dependencies
+  [[`e43ae95`](https://github.com/willnguyen1312/zoom-image/commit/e43ae95fee0a8359359ea7a49778e5236b116fa5)]:
+  - @zoom-image/core@0.36.2
+
 ## 0.2.18
 
 ### Patch Changes
