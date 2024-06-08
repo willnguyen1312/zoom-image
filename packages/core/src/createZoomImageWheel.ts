@@ -438,7 +438,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   container.addEventListener("pointermove", handlePointerMove, { signal })
   container.addEventListener("pointerup", handlePointerUp, { signal })
   container.addEventListener(
-    "pointercancel",
+    "touchend",
     () => {
       enabledScroll = true
       enableScroll()
