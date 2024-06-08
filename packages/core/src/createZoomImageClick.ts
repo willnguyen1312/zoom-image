@@ -97,6 +97,7 @@ export function createZoomImageClick(container: HTMLElement, options: ZoomImageC
   container.addEventListener("pointerenter", disableScrollLock ? noop : disableScroll, { signal })
   container.addEventListener("pointerleave", disableScrollLock ? noop : enableScroll, { signal })
   container.addEventListener("pointermove", handlePointerMove, { signal })
+  container.addEventListener("touchend", enableScroll, { signal })
 
   return {
     cleanup: () => {

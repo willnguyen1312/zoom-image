@@ -100,7 +100,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   container.addEventListener("pointerenter", handlePointerEnter, { signal })
   container.addEventListener("pointermove", handlePointerMove, { signal })
   container.addEventListener("pointerleave", resetZoomedImg, { signal })
-  container.addEventListener("pointercancel", resetZoomedImg, { signal })
+  container.addEventListener("touchend", resetZoomedImg, { signal })
   container.addEventListener(
     "touchstart",
     (event) => {
