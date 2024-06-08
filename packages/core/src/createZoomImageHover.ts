@@ -151,6 +151,7 @@ export function createZoomImageHover(container: HTMLElement, options: ZoomImageH
     container.addEventListener("pointerenter", handlePointerEnter, { signal })
     container.addEventListener("pointerleave", handlePointerLeave, { signal })
     window.addEventListener("scroll", handleScroll, { signal })
+    container.addEventListener("pointercancel", enableScroll, { signal })
 
     // Append zoomed image wrapper to zoom target
     zoomTarget.appendChild(zoomedImgWrapper)

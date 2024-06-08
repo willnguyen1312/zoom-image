@@ -437,6 +437,14 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   container.addEventListener("pointerleave", handlePointerLeave, { signal })
   container.addEventListener("pointermove", handlePointerMove, { signal })
   container.addEventListener("pointerup", handlePointerUp, { signal })
+  container.addEventListener(
+    "pointercancel",
+    () => {
+      enabledScroll = true
+      enableScroll()
+    },
+    { signal },
+  )
 
   // Kick things off in case we have initial zoom other than 1
   if (store.getState().currentZoom !== defaultInitialState.currentZoom) {
