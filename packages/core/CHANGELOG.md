@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.36.2
+
+### Patch Changes
+
+- [#307](https://github.com/willnguyen1312/zoom-image/pull/307)
+  [`e43ae95`](https://github.com/willnguyen1312/zoom-image/commit/e43ae95fee0a8359359ea7a49778e5236b116fa5) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix scroll lock on mobile - all zoom 💞
+
 ## 0.36.1
 
 ### Patch Changes
