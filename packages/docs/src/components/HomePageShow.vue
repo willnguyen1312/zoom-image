@@ -94,9 +94,18 @@ watch(
     await nextTick()
 
     if (zoomType.value === "hover") {
+      const isMobile = window.innerWidth < 768
+      const isTablet = window.innerWidth < 1024
       createZoomImageHover(imageHoverContainerRef.value as HTMLDivElement, {
         zoomImageSource: imageURL,
-        customZoom: { width: 300, height: 400 },
+        customZoom: isMobile
+          ? {
+              width: 150,
+              height: 200,
+            }
+          : isTablet
+            ? { width: 200, height: 300 }
+            : { width: 300, height: 400 },
         zoomTarget: zoomTargetRef.value as HTMLDivElement,
         scale: 2,
       })
@@ -180,7 +189,7 @@ watch(
         class="relative mt-1 flex h-[200px] w-[133.33px] items-start sm:h-[250px] sm:w-[166.66px] lg:h-[300px] lg:w-[200px]"
       >
         <img class="h-full w-full" alt="Small Pic" :src="imageURL" />
-        <div ref="zoomTargetRef" class="absolute left-[220px] sm:left-[300px] lg:left-[350px]"></div>
+        <div ref="zoomTargetRef" class="absolute left-[150px] sm:left-[300px] lg:left-[350px]"></div>
       </div>
     </div>
 
