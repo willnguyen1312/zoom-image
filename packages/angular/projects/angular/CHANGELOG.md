@@ -1,5 +1,13 @@
 # @zoom-image/angular
 
+## 0.2.20
+
+### Patch Changes
+
+- [#311](https://github.com/willnguyen1312/zoom-image/pull/311)
+  [`261e695`](https://github.com/willnguyen1312/zoom-image/commit/261e6957b9c38ecc1d2facd6dcfe1352a5f466c9) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix angular adapter installation 💞
+
 ## 0.2.19
 
 ### Patch Changes
