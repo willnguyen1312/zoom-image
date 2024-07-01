@@ -118,7 +118,7 @@ importers:
         version: 14.1.0(eslint@8.56.0)(typescript@5.3.3)
       next:
         specifier: 14.1.0
-        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.70.0)
+        version: 14.1.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.70.0)
       postcss:
         specifier: 8.4.35
         version: 8.4.35
@@ -456,11 +456,11 @@ importers:
   packages/angular/projects/angular:
     dependencies:
       "@angular/common":
-        specifier: ^16.1.0
-        version: 16.1.8(@angular/core@16.1.8(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1)
+        specifier: ^16.0.0 || ^17.0.0 || ^18.0.0
+        version: 17.2.1(@angular/core@17.2.1(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1)
       "@angular/core":
-        specifier: ^16.1.0
-        version: 16.1.8(rxjs@7.8.1)(zone.js@0.14.4)
+        specifier: ^16.0.0 || ^17.0.0 || ^18.0.0
+        version: 17.2.1(rxjs@7.8.1)(zone.js@0.14.4)
       "@zoom-image/core":
         specifier: workspace:*
         version: link:../../../core
@@ -915,14 +915,6 @@ packages:
     engines: { node: ^18.13.0 || >=20.9.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: ">= 1.13.0" }
     hasBin: true
 
-  "@angular/common@16.1.8":
-    resolution:
-      { integrity: sha512-Zm+Ysxdf74VwG3mbAqs2v1QFUR+h9RyJBXF5VFABEpgFw7NUOBKrayjJmKjgZ0TBAmL2+nXehJgcPph3zNp3sg== }
-    engines: { node: ^16.14.0 || >=18.10.0 }
-    peerDependencies:
-      "@angular/core": 16.1.8
-      rxjs: ^6.5.3 || ^7.4.0
-
   "@angular/common@17.2.1":
     resolution:
       { integrity: sha512-ZkQwvjJhnqKulJn3kwbnodYvQf8g8hy2FUMB2MRLXKgwLPv9iqF/KRgSwcNIZnq8hyvIr6FmAntMdyCOonykDQ== }
@@ -949,14 +941,6 @@ packages:
     peerDependenciesMeta:
       "@angular/core":
         optional: true
-
-  "@angular/core@16.1.8":
-    resolution:
-      { integrity: sha512-XtOpY9HA85hPGrPwe1rgE8NJ3bFWbuJFx4SUlzB66k9B5jo8bD2Dxl/0id55RFS5gmvCe/Qhh0zoGyMpkWjMHA== }
-    engines: { node: ^16.14.0 || >=18.10.0 }
-    peerDependencies:
-      rxjs: ^6.5.3 || ^7.4.0
-      zone.js: ~0.13.0
 
   "@angular/core@17.2.1":
     resolution:
@@ -11739,12 +11723,6 @@ snapshots:
       - chokidar
       - supports-color
 
-  "@angular/common@16.1.8(@angular/core@16.1.8(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1)":
-    dependencies:
-      "@angular/core": 16.1.8(rxjs@7.8.1)(zone.js@0.14.4)
-      rxjs: 7.8.1
-      tslib: 2.6.2
-
   "@angular/common@17.2.1(@angular/core@17.2.1(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1)":
     dependencies:
       "@angular/core": 17.2.1(rxjs@7.8.1)(zone.js@0.14.4)
@@ -11771,12 +11749,6 @@ snapshots:
       tslib: 2.6.2
     optionalDependencies:
       "@angular/core": 17.2.1(rxjs@7.8.1)(zone.js@0.14.4)
-
-  "@angular/core@16.1.8(rxjs@7.8.1)(zone.js@0.14.4)":
-    dependencies:
-      rxjs: 7.8.1
-      tslib: 2.6.2
-      zone.js: 0.14.4
 
   "@angular/core@17.2.1(rxjs@7.8.1)(zone.js@0.14.4)":
     dependencies:
@@ -16840,7 +16812,7 @@ snapshots:
       eslint: 8.56.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.5.5(@typescript-eslint/parser@6.19.1(eslint@8.56.0)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.0(eslint@8.56.0))(eslint@8.56.0)
-      eslint-plugin-import: 2.29.0(@typescript-eslint/parser@6.19.1(eslint@8.56.0)(typescript@5.3.3))(eslint-import-resolver-typescript@3.5.5(@typescript-eslint/parser@6.19.1(eslint@8.56.0)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.0(eslint@8.56.0))(eslint@8.56.0))(eslint@8.56.0)
+      eslint-plugin-import: 2.29.0(@typescript-eslint/parser@6.19.1(eslint@8.56.0)(typescript@5.3.3))(eslint-import-resolver-typescript@3.5.5)(eslint@8.56.0)
       eslint-plugin-jsx-a11y: 6.7.1(eslint@8.56.0)
       eslint-plugin-react: 7.33.2(eslint@8.56.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
@@ -16899,7 +16871,7 @@ snapshots:
       enhanced-resolve: 5.15.0
       eslint: 8.56.0
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.19.1(eslint@8.56.0)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.5.5(@typescript-eslint/parser@6.19.1(eslint@8.56.0)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.0(eslint@8.56.0))(eslint@8.56.0))(eslint@8.56.0)
-      eslint-plugin-import: 2.29.0(@typescript-eslint/parser@6.19.1(eslint@8.56.0)(typescript@5.3.3))(eslint-import-resolver-typescript@3.5.5(@typescript-eslint/parser@6.19.1(eslint@8.56.0)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.0(eslint@8.56.0))(eslint@8.56.0))(eslint@8.56.0)
+      eslint-plugin-import: 2.29.0(@typescript-eslint/parser@6.19.1(eslint@8.56.0)(typescript@5.3.3))(eslint-import-resolver-typescript@3.5.5)(eslint@8.56.0)
       get-tsconfig: 4.7.2
       globby: 13.2.2
       is-core-module: 2.13.1
@@ -16977,7 +16949,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-import@2.29.0(@typescript-eslint/parser@6.19.1(eslint@8.56.0)(typescript@5.3.3))(eslint-import-resolver-typescript@3.5.5(@typescript-eslint/parser@6.19.1(eslint@8.56.0)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.0(eslint@8.56.0))(eslint@8.56.0))(eslint@8.56.0):
+  eslint-plugin-import@2.29.0(@typescript-eslint/parser@6.19.1(eslint@8.56.0)(typescript@5.3.3))(eslint-import-resolver-typescript@3.5.5)(eslint@8.56.0):
     dependencies:
       array-includes: 3.1.7
       array.prototype.findlastindex: 1.2.3
@@ -18983,7 +18955,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next@14.1.0(@babel/core@7.23.9)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.70.0):
+  next@14.1.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.70.0):
     dependencies:
       "@next/env": 14.1.0
       "@swc/helpers": 0.5.2
@@ -18993,7 +18965,7 @@ snapshots:
       postcss: 8.4.31
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      styled-jsx: 5.1.1(@babel/core@7.23.9)(react@18.2.0)
+      styled-jsx: 5.1.1(react@18.2.0)
     optionalDependencies:
       "@next/swc-darwin-arm64": 14.1.0
       "@next/swc-darwin-x64": 14.1.0
@@ -20569,12 +20541,10 @@ snapshots:
     dependencies:
       inline-style-parser: 0.1.1
 
-  styled-jsx@5.1.1(@babel/core@7.23.9)(react@18.2.0):
+  styled-jsx@5.1.1(react@18.2.0):
     dependencies:
       client-only: 0.0.1
       react: 18.2.0
-    optionalDependencies:
-      "@babel/core": 7.23.9
 
   sucrase@3.32.0:
     dependencies:
