@@ -32,7 +32,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
     zoomedImgStatus: "idle",
   })
 
-  const zoomedImg = container.appendChild(document.createElement("img"))
+  const zoomedImg = document.createElement("img")
   zoomedImg.alt = options.zoomImageProps?.alt || ""
   zoomedImg.style.maxWidth = "none"
   zoomedImg.style.position = "absolute"
@@ -47,6 +47,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   }
 
   function handlePointerEnter(event: PointerEvent) {
+    container.appendChild(zoomedImg)
     zoomedImg.style.display = "block"
     const zoomedImgWidth = sourceImgElement.clientWidth * zoomFactor
     const zoomedImgHeight = sourceImgElement.clientHeight * zoomFactor
@@ -64,6 +65,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   }
 
   function resetZoomedImg() {
+    container.contains(zoomedImg) && container.removeChild(zoomedImg)
     zoomedImg.style.display = "none"
     zoomedImg.style.transform = "none"
     enableScroll()
@@ -113,8 +115,6 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
     cleanup: () => {
       controller.abort()
       container.contains(zoomedImg) && container.removeChild(zoomedImg)
-      container.style.width = "100%"
-      container.style.height = "100%"
       store.cleanup()
     },
     subscribe: store.subscribe,
