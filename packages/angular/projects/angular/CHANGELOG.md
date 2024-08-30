@@ -1,5 +1,13 @@
 # @zoom-image/angular
 
+## 0.2.21
+
+### Patch Changes
+
+- Updated dependencies
+  [[`3488b6d`](https://github.com/willnguyen1312/zoom-image/commit/3488b6d7482588f743ddb8e9483ffd65ed239e58)]:
+  - @zoom-image/core@0.37.0
+
 ## 0.2.20
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@zoom-image/qwik",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "description": "Adapter of zoom image core for Qwik",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "license": "MIT",
