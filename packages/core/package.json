@@ -1,6 +1,6 @@
 {
   "name": "@zoom-image/core",
-  "version": "0.37.0",
+  "version": "0.37.1",
   "description": "A core implementation of zoom image",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "license": "MIT",
