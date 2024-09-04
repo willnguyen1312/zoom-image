@@ -19,6 +19,7 @@ export type ZoomImageMoveState = {
 }
 
 export function createZoomImageMove(container: HTMLElement, options: ZoomImageMoveOptions = {}) {
+  let activePointerId: number | null = null
   const sourceImgElement = getSourceImage(container)
   const finalOptions: Omit<Required<ZoomImageMoveOptions>, "zoomImageProps" | "disableScrollLock"> = {
     zoomFactor: options.zoomFactor ?? 4,
@@ -46,29 +47,41 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
     zoomedImg.oncontextmenu = () => false
   }
 
+  const checkValidPointer = (event: PointerEvent) => {
+    return activePointerId && event.pointerId === activePointerId
+  }
+
   function handlePointerEnter(event: PointerEvent) {
-    container.appendChild(zoomedImg)
-    zoomedImg.style.display = "block"
-    const zoomedImgWidth = sourceImgElement.clientWidth * zoomFactor
-    const zoomedImgHeight = sourceImgElement.clientHeight * zoomFactor
-    zoomedImg.style.width = `${zoomedImgWidth}px`
-    zoomedImg.style.height = `${zoomedImgHeight}px`
-    imageLoader.createZoomImage(zoomedImg, zoomImageSource, store)
+    if (activePointerId === null) {
+      activePointerId = event.pointerId
+      container.appendChild(zoomedImg)
+      zoomedImg.style.display = "block"
+      const zoomedImgWidth = sourceImgElement.clientWidth * zoomFactor
+      const zoomedImgHeight = sourceImgElement.clientHeight * zoomFactor
+      zoomedImg.style.width = `${zoomedImgWidth}px`
+      zoomedImg.style.height = `${zoomedImgHeight}px`
+      imageLoader.createZoomImage(zoomedImg, zoomImageSource, store)
 
-    processZoom(event)
+      processZoom(event)
 
-    event.pointerType !== "mouse" && disableScroll()
+      event.pointerType !== "mouse" && disableScroll()
+    }
   }
 
   function handlePointerMove(event: PointerEvent) {
-    processZoom(event)
+    if (checkValidPointer(event)) {
+      processZoom(event)
+    }
   }
 
-  function resetZoomedImg() {
-    container.contains(zoomedImg) && container.removeChild(zoomedImg)
-    zoomedImg.style.display = "none"
-    zoomedImg.style.transform = "none"
-    enableScroll()
+  function resetZoomedImg(event: PointerEvent) {
+    if (checkValidPointer(event)) {
+      container.contains(zoomedImg) && container.removeChild(zoomedImg)
+      zoomedImg.style.display = "none"
+      zoomedImg.style.transform = "none"
+      enableScroll()
+      activePointerId = null
+    }
   }
 
   const calculatePositionX = (newPositionX: number) => {
@@ -102,7 +115,6 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   container.addEventListener("pointerenter", handlePointerEnter, { signal })
   container.addEventListener("pointermove", handlePointerMove, { signal })
   container.addEventListener("pointerleave", resetZoomedImg, { signal })
-  container.addEventListener("touchend", resetZoomedImg, { signal })
   container.addEventListener(
     "touchstart",
     (event) => {
