@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.37.1
+
+### Patch Changes
+
+- [#318](https://github.com/willnguyen1312/zoom-image/pull/318)
+  [`91bb0f5`](https://github.com/willnguyen1312/zoom-image/commit/91bb0f5167614247638c1072363c5a784761d577) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix zoom move not working on multi-fingers usage ✨
+
 ## 0.37.0
 
 ### Minor Changes
