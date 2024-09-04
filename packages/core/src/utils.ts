@@ -16,11 +16,10 @@ function preventDefaultForScrollKeys(event: KeyboardEvent) {
   }
 }
 
-let controller: AbortController | undefined
+const controller = new AbortController()
+const signal = controller.signal
 
 export function disableScroll() {
-  controller = new AbortController()
-  const { signal } = controller
   window.addEventListener("DOMMouseScroll", preventDefault, { signal })
   window.addEventListener("wheel", preventDefault, { passive: false, signal })
   window.addEventListener("touchmove", preventDefault, { passive: false, signal })
