@@ -90,6 +90,8 @@ const croppedImageClasses = computed(() => {
 watch(
   zoomType,
   async () => {
+    const isServer = typeof window === "undefined"
+    if (isServer) return
     croppedImage.value = ""
     await nextTick()
 
