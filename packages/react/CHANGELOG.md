@@ -1,5 +1,14 @@
 # @zoom-image/react
 
+## 0.5.0
+
+### Minor Changes
+
+- [#324](https://github.com/willnguyen1312/zoom-image/pull/324)
+  [`d5d5934`](https://github.com/willnguyen1312/zoom-image/commit/d5d5934664c0bcd05f36e4547eec4f6d4ade328c) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Implement support for a getter function to retrieve the latest
+  state from the zoom image wheel ✨
+
 ## 0.4.22
 
 ### Patch Changes
