@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.38.0
+
+### Minor Changes
+
+- [#322](https://github.com/willnguyen1312/zoom-image/pull/322)
+  [`9783262`](https://github.com/willnguyen1312/zoom-image/commit/9783262dd70e4ab7ac756b7141df5760cb6bcc11) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add support for preventing zoom on single touch ✨
+
 ## 0.37.1
 
 ### Patch Changes
