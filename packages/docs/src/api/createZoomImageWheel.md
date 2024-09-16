@@ -46,6 +46,9 @@ type ZoomImageWheelOptions = {
   // Partial or full initial state
   // useful for storing previous zoomed state and re-initialize it on load
   initialState?: Partial<ZoomImageWheelState>
+
+  // Predicate function to determine if zoom should be triggered on a single touch action
+  shouldZoomOnSingleTouch?: () => boolean
 }
 
 function createZoomImageWheel(

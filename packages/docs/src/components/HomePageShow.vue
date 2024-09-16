@@ -114,7 +114,9 @@ watch(
     }
 
     if (zoomType.value === "wheel") {
-      createZoomImageWheel(imageWheelContainerRef.value as HTMLDivElement)
+      createZoomImageWheel(imageWheelContainerRef.value as HTMLDivElement, {
+        shouldZoomOnSingleTouch: () => zoomImageWheelState.currentZoom > 1,
+      })
     }
 
     if (zoomType.value === "move") {

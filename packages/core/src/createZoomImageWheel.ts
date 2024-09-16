@@ -7,6 +7,7 @@ export type ZoomImageWheelOptions = {
   wheelZoomRatio?: number
   dblTapAnimationDuration?: number
   initialState?: Partial<ZoomImageWheelStateUpdate>
+  shouldZoomOnSingleTouch?: () => boolean
 }
 
 /* The delta values are not consistent across browsers.
@@ -37,6 +38,8 @@ const defaultInitialState: ZoomImageWheelState = {
   currentRotation: 0,
 }
 
+const defaultShouldZoomOnSingleTouch = () => true
+
 export function createZoomImageWheel(container: HTMLElement, options: ZoomImageWheelOptions = {}) {
   const sourceImgElement = getSourceImage(container)
   const finalOptions: Required<ZoomImageWheelOptions> = {
@@ -44,6 +47,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     wheelZoomRatio: options.wheelZoomRatio || 0.1,
     dblTapAnimationDuration: options.dblTapAnimationDuration || 300,
     initialState: { ...defaultInitialState, ...options.initialState },
+    shouldZoomOnSingleTouch: options.shouldZoomOnSingleTouch || defaultShouldZoomOnSingleTouch,
   }
 
   const store = createStore<ZoomImageWheelState>(finalOptions.initialState as ZoomImageWheelState)
@@ -204,14 +208,14 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   function _handlePointerMove(event: PointerEvent) {
     event.preventDefault()
     const { clientX, clientY, pointerId } = event
-    for (const [cachedPointerid] of pointerMap.entries()) {
-      if (cachedPointerid === pointerId) {
-        pointerMap.set(cachedPointerid, { x: clientX, y: clientY })
+    for (const [cachedPointerId] of pointerMap.entries()) {
+      if (cachedPointerId === pointerId) {
+        pointerMap.set(cachedPointerId, { x: clientX, y: clientY })
       }
     }
 
-    if (pointerMap.size === 1) {
-      const { currentZoom, currentRotation } = store.getState()
+    const { currentZoom, currentRotation } = store.getState()
+    if (pointerMap.size === 1 && currentZoom !== 1) {
       const isDimensionSwitched = checkDimensionSwitched()
       const normalizedClientX = isDimensionSwitched ? clientY : clientX
       const normalizedClientY = isDimensionSwitched ? clientX : clientY
@@ -256,7 +260,6 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
 
   function animateZoom(touchCoordinate: { x: number; y: number }) {
     // the `touchCoordinate` should be relative to the container
-
     const currentState = store.getState()
 
     animationState.startTimestamp = null
@@ -338,8 +341,9 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function _handleTouchMove(event: TouchEvent) {
-    event.preventDefault()
+    if (finalOptions.shouldZoomOnSingleTouch()) event.preventDefault()
     if (event.touches.length === 2) {
+      event.preventDefault()
       const currentTwoPositions = [...event.touches].map((t) => ({ x: t.clientX, y: t.clientY })) as [
         PointerPosition,
         PointerPosition,
@@ -357,6 +361,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function _handlePointerDown(event: PointerEvent) {
+    if (event.pointerType === "touch" && !finalOptions.shouldZoomOnSingleTouch()) return
     event.preventDefault()
     if (pointerMap.size === 2) {
       return
