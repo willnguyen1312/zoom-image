@@ -12,6 +12,7 @@ The @zoom-image/react adapter is a wrapper around the core zoom image logic.
 function useZoomImageWheel(): {
   createZoomImage
   zoomImageState
+  getZoomImageState
   setZoomImageState
 }
 ```
