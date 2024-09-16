@@ -24,6 +24,10 @@ export function useZoomImageWheel() {
     })
   }, [])
 
+  const getZoomImageState = useCallback(() => {
+    return result.current?.getState()
+  }, [])
+
   useEffect(() => {
     return () => {
       result.current?.cleanup()
@@ -33,6 +37,7 @@ export function useZoomImageWheel() {
   return {
     createZoomImage,
     zoomImageState,
+    getZoomImageState,
     setZoomImageState: result.current?.setState ?? noop,
   }
 }

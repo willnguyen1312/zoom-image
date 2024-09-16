@@ -9,7 +9,7 @@
     "makeCalculatePercentage": "153 B"
   },
   "@zoom-image/react": {
-    "useZoomImageWheel": "2.45 KB",
+    "useZoomImageWheel": "2.46 KB",
     "useZoomImageHover": "1.56 KB",
     "useZoomImageMove": "1.26 KB",
     "useZoomImageClick": "1.18 KB"
