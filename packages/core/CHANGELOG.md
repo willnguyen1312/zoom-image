@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.39.0
+
+### Minor Changes
+
+- [#327](https://github.com/willnguyen1312/zoom-image/pull/327)
+  [`416a0be`](https://github.com/willnguyen1312/zoom-image/commit/416a0be3124340c79bdde48b17d2f915ea0e36ed) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - feat: add className option to zoom image move ✨
+
 ## 0.38.0
 
 ### Minor Changes
