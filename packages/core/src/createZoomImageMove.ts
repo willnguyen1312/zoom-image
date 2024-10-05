@@ -11,6 +11,7 @@ export type ZoomImageMoveOptions = {
   disabledContextMenu?: boolean
   zoomImageProps?: {
     alt?: string
+    className?: string
   }
 }
 
@@ -34,7 +35,8 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   })
 
   const zoomedImg = document.createElement("img")
-  zoomedImg.alt = options.zoomImageProps?.alt || ""
+  options.zoomImageProps?.alt && (zoomedImg.alt = options.zoomImageProps.alt)
+  options.zoomImageProps?.className && (zoomedImg.className = options.zoomImageProps.className)
   zoomedImg.style.maxWidth = "none"
   zoomedImg.style.position = "absolute"
   zoomedImg.style.top = "0"
