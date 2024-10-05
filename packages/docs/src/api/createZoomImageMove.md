@@ -28,6 +28,7 @@ type ZoomImageMoveOptions = {
   // Props for the zoomed image
   zoomImageProps?: {
     alt?: string
+    className?: string
   }
 
   // Zoom scale, default is 4
