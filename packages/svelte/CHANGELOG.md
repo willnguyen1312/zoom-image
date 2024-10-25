@@ -1,5 +1,13 @@
 # @zoom-image/svelte
 
+## 0.3.0
+
+### Minor Changes
+
+- [#331](https://github.com/willnguyen1312/zoom-image/pull/331)
+  [`2de0842`](https://github.com/willnguyen1312/zoom-image/commit/2de0842019a7f0e683069fb516099ad7a0c95031) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add support for Svelte 5 ✨
+
 ## 0.2.23
 
 ### Patch Changes
