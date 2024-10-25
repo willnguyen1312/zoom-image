@@ -1,9 +1,9 @@
 <script lang="ts">
   import { cropImage, type ZoomImageWheelState } from "@zoom-image/core"
   import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/svelte"
-  import { tick } from "svelte"
+  import { onMount, tick } from "svelte"
 
-  const tabs: {
+  let tabs: {
     name: string
     href: string
     current: boolean
@@ -15,26 +15,28 @@
     { name: "Click", href: "#", current: false, value: "click" },
   ]
   $: zoomType = tabs.find((tab) => tab.current)?.value as "wheel" | "hover" | "move" | "click"
-  let croppedImage: string = ""
+  $: croppedImageClasses =
+    zoomImageWheelStateValue.currentRotation % 180 === 90 ? "h-[200px] w-[300px]" : "h-[300px] w-[200px]"
 
+  let croppedImage: string = ""
   let imageWheelContainer: HTMLDivElement
   let imageMoveContainer: HTMLDivElement
   let imageHoverContainer: HTMLDivElement
   let imageClickContainer: HTMLDivElement
   let zoomTarget: HTMLDivElement
-  const {
+  let {
     createZoomImage: createZoomImageWheel,
     zoomImageState: zoomImageWheelState,
     setZoomImageState: setZoomImageWheelState,
   } = useZoomImageWheel()
-  const { createZoomImage: createZoomImageHover } = useZoomImageHover()
-  const { createZoomImage: createZoomImageMove } = useZoomImageMove()
-  const { createZoomImage: createZoomImageClick } = useZoomImageClick()
+  let { createZoomImage: createZoomImageHover } = useZoomImageHover()
+  let { createZoomImage: createZoomImageMove } = useZoomImageMove()
+  let { createZoomImage: createZoomImageClick } = useZoomImageClick()
 
-  let zoomImageWheelState_value: ZoomImageWheelState
+  let zoomImageWheelStateValue: ZoomImageWheelState
 
   zoomImageWheelState.subscribe((value) => {
-    zoomImageWheelState_value = value
+    zoomImageWheelStateValue = value
   })
 
   async function processZoom(zoomType: "wheel" | "hover" | "move" | "click") {
@@ -67,32 +69,27 @@
     }
   }
 
-  $: processZoom(zoomType)
-
-  $: croppedImageClasses =
-    zoomImageWheelState_value.currentRotation === 90 || zoomImageWheelState_value.currentRotation === 270
-      ? "h-[200px] w-[300px]"
-      : "h-[300px] w-[200px]"
-
   async function handleCropImage() {
     croppedImage = await cropImage({
-      currentZoom: zoomImageWheelState_value.currentZoom,
+      currentZoom: zoomImageWheelStateValue.currentZoom,
       image: imageWheelContainer.querySelector("img") as HTMLImageElement,
-      positionX: zoomImageWheelState_value.currentPositionX,
-      positionY: zoomImageWheelState_value.currentPositionY,
-      rotation: zoomImageWheelState_value.currentRotation,
+      positionX: zoomImageWheelStateValue.currentPositionX,
+      positionY: zoomImageWheelStateValue.currentPositionY,
+      rotation: zoomImageWheelStateValue.currentRotation,
     })
   }
 
   function rotate() {
     setZoomImageWheelState({
-      currentRotation: zoomImageWheelState_value.currentRotation + 90,
+      currentRotation: zoomImageWheelStateValue.currentRotation + 90,
     })
 
     if (croppedImage) {
       handleCropImage()
     }
   }
+
+  onMount(() => processZoom(zoomType))
 </script>
 
 <div class="p-4 font-sans">
@@ -104,6 +101,7 @@
             tab.current = false
           })
           tab.current = true
+          processZoom(tab.value)
         }}
         aria-current={tab.current ? "page" : undefined}
         href={tab.href}
@@ -116,7 +114,7 @@
 
   {#if zoomType === "wheel"}
     <div class="space-y-4">
-      <p>Current zoom: {`${Math.round(zoomImageWheelState_value.currentZoom * 100)}%`}</p>
+      <p>Current zoom: {`${Math.round(zoomImageWheelStateValue.currentZoom * 100)}%`}</p>
       <p>Scroll inside the image to see zoom in-out effect</p>
       <div class="flex items-center gap-4">
         <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
@@ -133,7 +131,7 @@
         <button
           on:click={() => {
             setZoomImageWheelState({
-              currentZoom: zoomImageWheelState_value.currentZoom + 0.5,
+              currentZoom: zoomImageWheelStateValue.currentZoom + 0.5,
             })
           }}
           class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
@@ -143,7 +141,7 @@
         <button
           on:click={() => {
             setZoomImageWheelState({
-              currentZoom: zoomImageWheelState_value.currentZoom - 0.5,
+              currentZoom: zoomImageWheelStateValue.currentZoom - 0.5,
             })
           }}
           class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"

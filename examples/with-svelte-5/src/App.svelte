@@ -28,14 +28,14 @@
   // svelte-ignore non_reactive_update
   let zoomTarget: HTMLDivElement
 
-  const {
+  let {
     createZoomImage: createZoomImageWheel,
     zoomImageState: zoomImageWheelState,
     setZoomImageState: setZoomImageWheelState,
   } = useZoomImageWheel()
-  const { createZoomImage: createZoomImageHover } = useZoomImageHover()
-  const { createZoomImage: createZoomImageMove } = useZoomImageMove()
-  const { createZoomImage: createZoomImageClick } = useZoomImageClick()
+  let { createZoomImage: createZoomImageHover } = useZoomImageHover()
+  let { createZoomImage: createZoomImageMove } = useZoomImageMove()
+  let { createZoomImage: createZoomImageClick } = useZoomImageClick()
 
   let zoomImageWheelStateValue = $state<ZoomImageWheelState>() as ZoomImageWheelState
   let croppedImageClasses = $derived(
@@ -96,9 +96,7 @@
     }
   }
 
-  onMount(() => {
-    processZoom(zoomType)
-  })
+  onMount(() => processZoom(zoomType))
 </script>
 
 <div class="p-4 font-sans">

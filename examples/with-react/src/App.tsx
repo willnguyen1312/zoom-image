@@ -34,14 +34,14 @@ function App() {
   const { createZoomImage: createZoomImageMove } = useZoomImageMove()
   const { createZoomImage: createZoomImageClick } = useZoomImageClick()
 
-  async function handleCropWheelZoomImage() {
+  async function handleCropWheelZoomImage(currentRotation: number) {
     setCroppedImage(
       await cropImage({
         currentZoom: zoomImageWheelState.currentZoom,
         image: imageWheelContainerRef.current?.querySelector("img") as HTMLImageElement,
         positionX: zoomImageWheelState.currentPositionX,
         positionY: zoomImageWheelState.currentPositionY,
-        rotation: zoomImageWheelState.currentRotation,
+        rotation: currentRotation,
       }),
     )
   }
@@ -66,6 +66,7 @@ function App() {
     }
   }, [zoomImageWheelState.currentRotation])
 
+  // We need to wait for React to render the image before we can apply zoom effect
   useEffect(() => {
     setCroppedImage("")
     if (zoomType === "wheel") {
@@ -99,12 +100,6 @@ function App() {
     }
   }, [zoomType])
 
-  useEffect(() => {
-    if (croppedImage) {
-      handleCropWheelZoomImage()
-    }
-  }, [zoomImageWheelState.currentRotation])
-
   function zoomInWheel() {
     setZoomImageWheelState({
       currentZoom: zoomImageWheelState.currentZoom + 0.5,
@@ -118,9 +113,14 @@ function App() {
   }
 
   function rotate() {
+    const currentRotation = zoomImageWheelState.currentRotation + 90
     setZoomImageWheelState({
-      currentRotation: zoomImageWheelState.currentRotation + 90,
+      currentRotation,
     })
+
+    if (croppedImage) {
+      handleCropWheelZoomImage(currentRotation)
+    }
   }
 
   return (
@@ -166,7 +166,7 @@ function App() {
             </button>
             <button
               className="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
-              onClick={handleCropWheelZoomImage}
+              onClick={() => handleCropWheelZoomImage(zoomImageWheelState.currentRotation)}
             >
               Crop image
             </button>

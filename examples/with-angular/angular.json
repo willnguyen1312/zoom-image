@@ -3,47 +3,27 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "with-angular": {
+    "vue-app": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:class": {
-          "skipTests": true
-        },
-        "@schematics/angular:component": {
-          "skipTests": true
-        },
-        "@schematics/angular:directive": {
-          "skipTests": true
-        },
-        "@schematics/angular:guard": {
-          "skipTests": true
-        },
-        "@schematics/angular:interceptor": {
-          "skipTests": true
-        },
-        "@schematics/angular:pipe": {
-          "skipTests": true
-        },
-        "@schematics/angular:resolver": {
-          "skipTests": true
-        },
-        "@schematics/angular:service": {
-          "skipTests": true
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/with-angular",
+            "outputPath": "dist/vue-app",
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "browser": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
             "styles": [],
             "scripts": []
           },
@@ -52,52 +32,55 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
                 }
               ],
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "port": 1312,
+            "open": true
+          },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "with-angular:build:production"
+              "buildTarget": "vue-app:build:production"
             },
             "development": {
-              "browserTarget": "with-angular:build:development"
+              "buildTarget": "vue-app:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "with-angular:build"
-          }
+          "builder": "@angular-devkit/build-angular:extract-i18n"
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
             "styles": [],
             "scripts": []
           }
