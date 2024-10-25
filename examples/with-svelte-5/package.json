@@ -1,0 +1,23 @@
+{
+  "name": "with-svelte-5",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host"
+  },
+  "dependencies": {
+    "@zoom-image/core": "latest",
+    "@zoom-image/svelte": "latest"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@tsconfig/svelte": "^5.0.4",
+    "@unocss/reset": "^0.63.6",
+    "svelte": "^5.1.2",
+    "svelte-check": "^4.0.5",
+    "tslib": "^2.8.0",
+    "typescript": "^5.6.3",
+    "unocss": "^0.63.6",
+    "vite": "^5.4.10"
+  }
+}

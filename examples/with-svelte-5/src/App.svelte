@@ -1,27 +1,33 @@
 <script lang="ts">
   import { cropImage, type ZoomImageWheelState } from "@zoom-image/core"
   import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/svelte"
-  import { tick } from "svelte"
+  import { onMount, tick } from "svelte"
 
-  const tabs: {
+  let tabs: {
     name: string
     href: string
     current: boolean
     value: "wheel" | "hover" | "move" | "click"
-  }[] = [
+  }[] = $state([
     { name: "Wheel", href: "#", current: true, value: "wheel" },
     { name: "Hover", href: "#", current: false, value: "hover" },
     { name: "Move", href: "#", current: false, value: "move" },
     { name: "Click", href: "#", current: false, value: "click" },
-  ]
-  $: zoomType = tabs.find((tab) => tab.current)?.value as "wheel" | "hover" | "move" | "click"
-  let croppedImage: string = ""
+  ])
+  let zoomType = $derived(tabs.find((tab) => tab.current)!.value)
+  let croppedImage = $state("")
 
+  // svelte-ignore non_reactive_update
   let imageWheelContainer: HTMLDivElement
+  // svelte-ignore non_reactive_update
   let imageMoveContainer: HTMLDivElement
+  // svelte-ignore non_reactive_update
   let imageHoverContainer: HTMLDivElement
+  // svelte-ignore non_reactive_update
   let imageClickContainer: HTMLDivElement
+  // svelte-ignore non_reactive_update
   let zoomTarget: HTMLDivElement
+
   const {
     createZoomImage: createZoomImageWheel,
     zoomImageState: zoomImageWheelState,
@@ -31,10 +37,13 @@
   const { createZoomImage: createZoomImageMove } = useZoomImageMove()
   const { createZoomImage: createZoomImageClick } = useZoomImageClick()
 
-  let zoomImageWheelState_value: ZoomImageWheelState
+  let zoomImageWheelStateValue = $state<ZoomImageWheelState>() as ZoomImageWheelState
+  let croppedImageClasses = $derived(
+    zoomImageWheelStateValue.currentRotation % 180 === 90 ? "h-[200px] w-[300px]" : "h-[300px] w-[200px]",
+  )
 
   zoomImageWheelState.subscribe((value) => {
-    zoomImageWheelState_value = value
+    zoomImageWheelStateValue = value
   })
 
   async function processZoom(zoomType: "wheel" | "hover" | "move" | "click") {
@@ -67,43 +76,41 @@
     }
   }
 
-  $: processZoom(zoomType)
-
-  $: croppedImageClasses =
-    zoomImageWheelState_value.currentRotation === 90 || zoomImageWheelState_value.currentRotation === 270
-      ? "h-[200px] w-[300px]"
-      : "h-[300px] w-[200px]"
-
   async function handleCropImage() {
     croppedImage = await cropImage({
-      currentZoom: zoomImageWheelState_value.currentZoom,
+      currentZoom: zoomImageWheelStateValue.currentZoom,
       image: imageWheelContainer.querySelector("img") as HTMLImageElement,
-      positionX: zoomImageWheelState_value.currentPositionX,
-      positionY: zoomImageWheelState_value.currentPositionY,
-      rotation: zoomImageWheelState_value.currentRotation,
+      positionX: zoomImageWheelStateValue.currentPositionX,
+      positionY: zoomImageWheelStateValue.currentPositionY,
+      rotation: zoomImageWheelStateValue.currentRotation,
     })
   }
 
   function rotate() {
     setZoomImageWheelState({
-      currentRotation: zoomImageWheelState_value.currentRotation + 90,
+      currentRotation: zoomImageWheelStateValue.currentRotation + 90,
     })
 
     if (croppedImage) {
       handleCropImage()
     }
   }
+
+  onMount(() => {
+    processZoom(zoomType)
+  })
 </script>
 
 <div class="p-4 font-sans">
   <nav class="flex space-x-4 pb-4" aria-label="Tabs">
     {#each tabs as tab (tab.name)}
       <a
-        on:click={() => {
+        onclick={() => {
           tabs.forEach((tab) => {
             tab.current = false
           })
           tab.current = true
+          processZoom(tab.value)
         }}
         aria-current={tab.current ? "page" : undefined}
         href={tab.href}
@@ -116,7 +123,7 @@
 
   {#if zoomType === "wheel"}
     <div class="space-y-4">
-      <p>Current zoom: {`${Math.round(zoomImageWheelState_value.currentZoom * 100)}%`}</p>
+      <p>Current zoom: {`${Math.round(zoomImageWheelStateValue.currentZoom * 100)}%`}</p>
       <p>Scroll inside the image to see zoom in-out effect</p>
       <div class="flex items-center gap-4">
         <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
@@ -131,9 +138,9 @@
       </div>
       <div class="flex space-x-2">
         <button
-          on:click={() => {
+          onclick={() => {
             setZoomImageWheelState({
-              currentZoom: zoomImageWheelState_value.currentZoom + 0.5,
+              currentZoom: zoomImageWheelStateValue.currentZoom + 0.5,
             })
           }}
           class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
@@ -141,19 +148,19 @@
           Zoom in
         </button>
         <button
-          on:click={() => {
+          onclick={() => {
             setZoomImageWheelState({
-              currentZoom: zoomImageWheelState_value.currentZoom - 0.5,
+              currentZoom: zoomImageWheelStateValue.currentZoom - 0.5,
             })
           }}
           class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
         >
           Zoom out
         </button>
-        <button class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium" on:click={handleCropImage}>
+        <button class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium" onclick={handleCropImage}>
           Crop image
         </button>
-        <button on:click={rotate} class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Rotate</button>
+        <button onclick={rotate} class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium">Rotate</button>
       </div>
     </div>
   {/if}
