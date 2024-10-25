@@ -66,6 +66,10 @@ export default defineConfig({
             link: "/examples/svelte",
           },
           {
+            text: "Svelte 5",
+            link: "/examples/svelte-5",
+          },
+          {
             text: "Solid",
             link: "/examples/solid",
           },
