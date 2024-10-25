@@ -2,7 +2,7 @@
 aside: false
 ---
 
-# Svelte Example
+# Svelte 5 Example
 
 <script setup>
 import Demo from '../components/DemoComp.vue'
