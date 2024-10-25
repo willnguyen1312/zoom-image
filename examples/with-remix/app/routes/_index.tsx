@@ -71,6 +71,7 @@ export default function Index() {
     }
   }, [zoomImageWheelState.currentRotation])
 
+  // We need to wait for React to render the image before we can apply zoom effect
   useEffect(() => {
     setCroppedImage("")
     if (zoomType === "wheel") {

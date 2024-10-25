@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import { cropImage } from "@zoom-image/core"
 import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/vue"
-import { computed, nextTick, ref, watch } from "vue"
+import { computed, nextTick, ref, onMounted } from "vue"
 
-const tabs = ref<
-  {
-    name: string
-    href: string
-    current: boolean
-    value: "wheel" | "hover" | "move" | "click"
-  }[]
->([
+type TabValue = "wheel" | "hover" | "move" | "click"
+type Tab = { name: string; href: string; current: boolean; value: TabValue }
+const tabs = ref<Tab[]>([
   { name: "Wheel", href: "#", current: true, value: "wheel" },
   { name: "Hover", href: "#", current: false, value: "hover" },
   { name: "Move", href: "#", current: false, value: "move" },
@@ -38,11 +33,12 @@ const imageHoverContainerRef = ref<HTMLDivElement>()
 const imageClickContainerRef = ref<HTMLDivElement>()
 const zoomTargetRef = ref<HTMLDivElement>()
 
-const handleTabClick = (tab: { name: string; href: string; current: boolean }) => {
+const handleTabClick = (tab: Tab) => {
   tabs.value.forEach((tab) => {
     tab.current = false
   })
   tab.current = true
+  processZoom(tab.value)
 }
 
 const handleCropWheelZoomImage = async () => {
@@ -83,39 +79,38 @@ const croppedImageClasses = computed(() => {
   }
 })
 
-watch(
-  zoomType,
-  async () => {
-    croppedImage.value = ""
-    await nextTick()
+const processZoom = async (zoomType: TabValue) => {
+  croppedImage.value = ""
+  debugger
+  await nextTick()
 
-    if (zoomType.value === "hover") {
-      createZoomImageHover(imageHoverContainerRef.value as HTMLDivElement, {
-        zoomImageSource: "/sample.avif",
-        customZoom: { width: 300, height: 500 },
-        zoomTarget: zoomTargetRef.value as HTMLDivElement,
-        scale: 2,
-      })
-    }
+  if (zoomType === "hover") {
+    createZoomImageHover(imageHoverContainerRef.value as HTMLDivElement, {
+      zoomImageSource: "/sample.avif",
+      customZoom: { width: 300, height: 500 },
+      zoomTarget: zoomTargetRef.value as HTMLDivElement,
+      scale: 2,
+    })
+  }
 
-    if (zoomType.value === "wheel") {
-      createZoomImageWheel(imageWheelContainerRef.value as HTMLDivElement)
-    }
+  if (zoomType === "wheel") {
+    createZoomImageWheel(imageWheelContainerRef.value as HTMLDivElement)
+  }
 
-    if (zoomType.value === "move") {
-      createZoomImageMove(imageMoveContainerRef.value as HTMLDivElement, {
-        zoomImageSource: "/sample.avif",
-      })
-    }
+  if (zoomType === "move") {
+    createZoomImageMove(imageMoveContainerRef.value as HTMLDivElement, {
+      zoomImageSource: "/sample.avif",
+    })
+  }
 
-    if (zoomType.value === "click") {
-      createZoomImageClick(imageClickContainerRef.value as HTMLDivElement, {
-        zoomImageSource: "/sample.avif",
-      })
-    }
-  },
-  { immediate: true },
-)
+  if (zoomType === "click") {
+    createZoomImageClick(imageClickContainerRef.value as HTMLDivElement, {
+      zoomImageSource: "/sample.avif",
+    })
+  }
+}
+
+onMounted(() => processZoom(zoomType.value))
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 import { cropImage } from "@zoom-image/core"
 import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/solid"
 import type { Component } from "solid-js"
-import { For, createEffect, createMemo, createSignal } from "solid-js"
+import { For, createMemo, createSignal, onMount } from "solid-js"
 
 type Tab = {
   name: string
@@ -45,6 +45,8 @@ const App: Component = () => {
         }
       }),
     )
+
+    processZoom(zoomType())
   }
 
   async function handleCropImage() {
@@ -59,9 +61,9 @@ const App: Component = () => {
     )
   }
 
-  createEffect(() => {
+  const processZoom = (zoomTypeValue: Tab["value"]) => {
     setCroppedImage("")
-    if (zoomType() === "hover") {
+    if (zoomTypeValue === "hover") {
       createZoomImageHover(imageHoverContainer, {
         zoomImageSource: "/sample.avif",
         customZoom: { width: 300, height: 500 },
@@ -70,22 +72,25 @@ const App: Component = () => {
       })
     }
 
-    if (zoomType() === "wheel") {
+    if (zoomTypeValue === "wheel") {
       createZoomImageWheel(imageWheelContainer)
     }
 
-    if (zoomType() === "move") {
+    if (zoomTypeValue === "move") {
       createZoomImageMove(imageMoveContainer, {
         zoomImageSource: "/sample.avif",
       })
     }
 
-    if (zoomType() === "click") {
+    if (zoomTypeValue === "click") {
       createZoomImageClick(imageClickContainer, {
         zoomImageSource: "/sample.avif",
       })
     }
-  })
+  }
+
+  // We need to wait for Solid to render the image before we can apply zoom effect
+  onMount(() => processZoom(zoomType()))
 
   function zoomInWheel() {
     setZoomImageWheelState({

@@ -22,7 +22,7 @@
     <div class="flex items-center gap-4">
       <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
         <div #imageWheelContainer class="h-[300px] w-[200px] cursor-crosshair duration-500">
-          <img class="h-full w-full" alt="Large Pic" src="/assets/sample.avif" />
+          <img class="h-full w-full" alt="Large Pic" src="sample.avif" />
         </div>
       </div>
       <img [src]="croppedImage" *ngIf="!!croppedImage" [class]="getCroppedImageClasses()" alt="Cropped placeholder" />
@@ -40,7 +40,7 @@
   <div class="space-y-4" *ngIf="zoomType === 'hover'">
     <p>Hover inside the image to see zoom effect</p>
     <div #imageHoverContainer class="relative mt-1 flex h-[300px] w-[200px] items-start">
-      <img class="h-full w-full" alt="Small Pic" src="../assets/sample.avif" />
+      <img class="h-full w-full" alt="Small Pic" src="sample.avif" />
       <div #zoomTarget class="absolute left-[350px]"></div>
     </div>
   </div>
@@ -48,14 +48,14 @@
   <div class="space-y-4" *ngIf="zoomType === 'move'">
     <p>Move mouse inside the image to see zoom effect</p>
     <div #imageMoveContainer class="relative mt-1 h-[300px] w-[200px] cursor-crosshair overflow-hidden">
-      <img class="h-full w-full" alt="Large Pic" src="../assets/sample.avif" />
+      <img class="h-full w-full" alt="Large Pic" src="sample.avif" />
     </div>
   </div>
 
   <div class="space-y-4" *ngIf="zoomType === 'click'">
     <p>Click inside the image to see zoom effect</p>
     <div #imageClickContainer class="relative mt-1 h-[300px] w-[200px] cursor-crosshair overflow-hidden">
-      <img class="h-full w-full" alt="Large Pic" src="../assets/sample.avif" />
+      <img class="h-full w-full" alt="Large Pic" src="sample.avif" />
     </div>
   </div>
 </div>
