@@ -88,21 +88,33 @@ const processZoom = async (zoomType: TabValue) => {
   await nextTick()
 
   if (zoomType === "hover") {
+    const isMobile = window.innerWidth < 768
+    const isTablet = window.innerWidth < 1024
     createZoomImageHover(imageHoverContainerRef.value as HTMLDivElement, {
       zoomImageSource: imageURL,
-      customZoom: { width: 300, height: 500 },
+      customZoom: isMobile
+        ? {
+            width: 150,
+            height: 200,
+          }
+        : isTablet
+          ? { width: 200, height: 300 }
+          : { width: 300, height: 400 },
       zoomTarget: zoomTargetRef.value as HTMLDivElement,
       scale: 2,
     })
   }
 
   if (zoomType === "wheel") {
-    createZoomImageWheel(imageWheelContainerRef.value as HTMLDivElement)
+    createZoomImageWheel(imageWheelContainerRef.value as HTMLDivElement, {
+      shouldZoomOnSingleTouch: () => zoomImageWheelState.currentZoom > 1,
+    })
   }
 
   if (zoomType === "move") {
     createZoomImageMove(imageMoveContainerRef.value as HTMLDivElement, {
       zoomImageSource: imageURL,
+      disabledContextMenu: true,
     })
   }
 
