@@ -14,6 +14,7 @@
   - [With Remix](#with-remix)
   - [With Next](#with-next)
   - [With Svelte](#with-svelte)
+  - [With Svelte 5](#with-svelte-5)
   - [With Vanilla JS](#with-vanilla-js)
   - [With Vue](#with-vue)
   - [With Solid](#with-solid)
@@ -81,6 +82,12 @@ pnpm start-next
 
 ```bash
 pnpm start-svelte
+```
+
+### With Svelte 5
+
+```bash
+pnpm start-svelte-5
 ```
 
 ### With Vanilla JS

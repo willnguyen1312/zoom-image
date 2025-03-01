@@ -47,6 +47,7 @@
     "start-react": "turbo run dev --filter=with-react...",
     "start-solid": "turbo run dev --filter=with-solid...",
     "start-svelte": "turbo run dev --filter=with-svelte...",
+    "start-svelte-5": "turbo run dev --filter=with-svelte-5...",
     "start-vanilla": "turbo run dev --filter=with-vanilla...",
     "start-vue": "turbo run dev --filter=with-vue...",
     "test": "turbo run test",
