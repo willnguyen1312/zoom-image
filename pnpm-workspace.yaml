@@ -1,5 +1,14 @@
 packages:
-  - "packages/**"
-  - "examples/**"
+  - packages/**
+  - examples/**
   - "!**/.next/**"
   - "!**/dist/**"
+
+onlyBuiltDependencies:
+  - "@parcel/watcher"
+  - esbuild
+  - lmdb
+  - msgpackr-extract
+  - nice-napi
+  - sharp
+  - svelte-preprocess

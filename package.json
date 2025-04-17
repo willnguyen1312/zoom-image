@@ -61,7 +61,8 @@
     "prettier": "^3.2.5",
     "prettier-plugin-svelte": "^3.2.1",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "turbo": "^1.13.3",
+    "turbo": "^2.5.0",
     "unocss": "^0.58.5"
-  }
+  },
+  "packageManager": "pnpm@10.8.1"
 }
