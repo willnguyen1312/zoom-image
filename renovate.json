@@ -22,10 +22,6 @@
     {
       "groupName": "react",
       "matchPackageNames": ["react", "react-dom"]
-    },
-    {
-      "groupName": "eslint",
-      "matchPackagePatterns": ["eslint*"]
     }
   ]
 }

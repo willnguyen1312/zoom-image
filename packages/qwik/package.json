@@ -49,13 +49,11 @@
     "dev": "run-p dev.lib dev.types",
     "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint \"src/**/*.ts*\"",
     "start": "vite --open --mode ssr",
     "qwik": "qwik"
   },
   "devDependencies": {
     "@builder.io/qwik": "1.4.5",
-    "eslint-config-custom": "workspace:*",
     "npm-run-all": "^4.1.5",
     "prettier": "3.2.5",
     "typescript": "5.3.3",
