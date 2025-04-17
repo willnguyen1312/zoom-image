@@ -49,11 +49,9 @@
   "scripts": {
     "dev": "pnpm build --watch",
     "build": "tsup src terser",
-    "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "tsup": "8.0.2",
     "typescript": "^5.3.3"

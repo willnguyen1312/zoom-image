@@ -22,7 +22,7 @@
     "strict": true,
     "stripInternal": true,
     "ignoreDeprecations": "5.0",
-    "suppressImplicitAnyIndexErrors": true,
+    "noImplicitAny": false,
     "types": []
   },
   "exclude": ["node_modules"]

@@ -96,7 +96,6 @@ const makeUpdateUIFunc = () => {
         { signal: controller.signal },
       )
 
-      // eslint-disable-next-line no-inner-declarations
       async function handleCropImage() {
         const currentState = result.getState()
         const cropImageClasses =
