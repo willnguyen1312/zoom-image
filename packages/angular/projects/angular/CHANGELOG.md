@@ -1,5 +1,13 @@
 # @zoom-image/angular
 
+## 0.2.26
+
+### Patch Changes
+
+- [#344](https://github.com/willnguyen1312/zoom-image/pull/344)
+  [`aaf07be`](https://github.com/willnguyen1312/zoom-image/commit/aaf07bef622f71f0b9665133ed28c62ac8f6a4ca) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - add support for Angular 19 🚀
+
 ## 0.2.25
 
 ### Patch Changes
