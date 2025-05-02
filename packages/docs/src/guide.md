@@ -35,9 +35,7 @@ Everything will be exposed to global as `window.ZoomImage`
 Simply importing the utilities you need from `@zoom-image/core`
 
 ```html
-<div id="container" class="imageContainer">
-  <img class="image" alt="Large Pic" src="/image.webp" />
-</div>
+<div id="container" class="imageContainer"><img class="image" alt="Large Pic" src="/image.webp" /></div>
 ```
 
 ```css
@@ -67,9 +65,7 @@ Simply importing the utilities you need from `@zoom-image/angular`
 
 ```html
 <!-- custom.component.html -->
-<div #imageWheelContainer class="imageContainer">
-  <img class="image" alt="Large Pic" src="/image.webp" />
-</div>
+<div #imageWheelContainer class="imageContainer"><img class="image" alt="Large Pic" src="/image.webp" /></div>
 ```
 
 ```css

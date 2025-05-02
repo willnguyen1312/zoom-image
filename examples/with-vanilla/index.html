@@ -2,8 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Zoom Image Demo</title>
   </head>
   <body class="p4 font-sans">
@@ -33,18 +36,18 @@
         >Click</a
       >
     </nav>
-
     <template id="image-wheel">
       <div class="space-y-4">
         <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
+
         <p id="currentZoom">Current zoom: 100%</p>
+
         <div class="flex items-center gap-4">
           <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
             <div id="image-wheel-container" class="h-[300px] w-[200px] cursor-crosshair duration-500">
               <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
             </div>
           </div>
-
           <img id="cropImg" hidden class="h-[300px] w-[200px]" alt="Cropped placeholder" />
         </div>
 
@@ -56,26 +59,22 @@
         </div>
       </div>
     </template>
-
     <template id="image-hover">
       <div id="image-hover-container" class="relative flex h-[300px] w-[200px] items-start">
         <img class="h-full w-full" alt="Small Pic" src="/sample.avif" />
         <div id="zoom-hover-target" class="absolute left-[350px]"></div>
       </div>
     </template>
-
     <template id="image-move">
       <div id="image-move-container" class="relative h-[300px] w-[200px] cursor-crosshair overflow-hidden">
         <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
       </div>
     </template>
-
     <template id="image-click">
       <div id="image-click-container" class="relative h-[300px] w-[200px] cursor-crosshair overflow-hidden">
         <img class="h-full w-full" alt="Large Pic" src="/sample.avif" />
       </div>
     </template>
-
     <div id="parent" class="mt-4"></div>
 
     <script type="module" src="./src/main.ts"></script>

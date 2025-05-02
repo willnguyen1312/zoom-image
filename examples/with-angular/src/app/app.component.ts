@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from "@angular/core"
+import { CommonModule } from "@angular/common"
 import {
   ZoomImageClickService,
   ZoomImageHoverService,
@@ -26,6 +27,7 @@ type ZoomType = "wheel" | "hover" | "move" | "click"
   selector: "app-root",
   templateUrl: "./app.component.html",
   providers: [ZoomImageClickService, ZoomImageHoverService, ZoomImageMoveService, ZoomImageWheelService],
+  imports: [CommonModule],
 })
 export class AppComponent implements AfterViewInit {
   @ViewChild("imageWheelContainer") imageWheelContainerRef?: ElementRef<HTMLDivElement>
