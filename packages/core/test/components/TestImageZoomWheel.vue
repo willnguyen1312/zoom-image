@@ -79,9 +79,7 @@ onUnmounted(() => {
       >
     </nav>
 
-    <div v-if="zoomType === 'wheel'" ref="imageWheelContainerRef">
-      <img alt="Large Pic" src="" />
-    </div>
+    <div v-if="zoomType === 'wheel'" ref="imageWheelContainerRef"><img alt="Large Pic" src="" /></div>
 
     <div v-if="zoomType === 'hover'" ref="imageHoverContainerRef">
       <img alt="Small Pic" src="" />

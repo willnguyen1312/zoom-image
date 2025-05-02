@@ -149,7 +149,9 @@ onMounted(() => processZoom(zoomType.value))
 
     <div class="space-y-4" v-if="zoomType === 'wheel'">
       <p>Scroll / Pinch inside the image to see zoom in-out effect</p>
+
       <p>Current zoom: {{ `${Math.round(zoomImageWheelState.currentZoom * 100)}%` }}</p>
+
       <div class="flex items-center gap-4">
         <div class="mt-1 grid h-[300px] w-[300px] place-content-center bg-black">
           <div ref="imageWheelContainerRef" class="h-[300px] w-[200px] cursor-crosshair duration-500">
@@ -180,6 +182,7 @@ onMounted(() => processZoom(zoomType.value))
 
     <div class="space-y-4" v-if="zoomType === 'hover'">
       <p>Hover inside the image to see zoom effect</p>
+
       <div
         ref="imageHoverContainerRef"
         class="relative mt-1 flex h-[200px] w-[133.33px] items-start sm:h-[250px] sm:w-[166.66px] lg:h-[300px] lg:w-[200px]"
@@ -191,6 +194,7 @@ onMounted(() => processZoom(zoomType.value))
 
     <div class="space-y-4" v-if="zoomType === 'move'">
       <p>Move mouse inside the image to see zoom effect</p>
+
       <div ref="imageMoveContainerRef" class="relative mt-1 h-[300px] w-[200px] cursor-crosshair overflow-hidden">
         <img class="h-full w-full" alt="Large Pic" :src="imageURL" />
       </div>
@@ -198,6 +202,7 @@ onMounted(() => processZoom(zoomType.value))
 
     <div class="space-y-4" v-if="zoomType === 'click'">
       <p>Click inside the image to see zoom effect</p>
+
       <div ref="imageClickContainerRef" class="relative mt-1 h-[300px] w-[200px] cursor-crosshair overflow-hidden">
         <img class="h-full w-full" alt="Large Pic" :src="imageURL" />
       </div>
