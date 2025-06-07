@@ -15,7 +15,7 @@
     "useZoomImageClick": "1.18 KB"
   },
   "@zoom-image/preact": {
-    "useZoomImageWheel": "3.33 KB",
+    "useZoomImageWheel": "3.32 KB",
     "useZoomImageHover": "2.46 KB",
     "useZoomImageMove": "2.19 KB",
     "useZoomImageClick": "2.1 KB"
@@ -33,7 +33,7 @@
     "useZoomImageClick": "2.43 KB"
   },
   "@zoom-image/svelte": {
-    "useZoomImageWheel": "2.92 KB",
+    "useZoomImageWheel": "2.91 KB",
     "useZoomImageHover": "2.02 KB",
     "useZoomImageMove": "1.76 KB",
     "useZoomImageClick": "1.66 KB"
@@ -48,6 +48,6 @@
     "ZoomImageClickService": "4.07 KB",
     "ZoomImageHoverService": "4.07 KB",
     "ZoomImageMoveService": "4.07 KB",
-    "ZoomImageWheelService": "4.07 KB"
+    "ZoomImageWheelService": "4.06 KB"
   }
 }
