@@ -106,7 +106,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
 
   function updateZoom() {
     const currentState = store.getState()
-    sourceImgElement.style.transform = `translate3d(${currentState.currentPositionX}px, ${currentState.currentPositionY}px, 0) scale(${currentState.currentZoom})`
+    sourceImgElement.style.transform = `translate(${currentState.currentPositionX}px, ${currentState.currentPositionY}px) scale(${currentState.currentZoom})`
     container.style.rotate = `${currentState.currentRotation}deg`
   }
 
