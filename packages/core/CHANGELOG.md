@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.40.1
+
+### Patch Changes
+
+- [#349](https://github.com/willnguyen1312/zoom-image/pull/349)
+  [`c50a9a4`](https://github.com/willnguyen1312/zoom-image/commit/c50a9a40b48e44b9996b4aa5d53856994ba11667) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - fix: Zoom Image Wheel renders in low resolution on Safari
+
 ## 0.40.0
 
 ### Minor Changes
