@@ -193,19 +193,6 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     })
   }
 
-  function updatePositionsForSinglePointerFlow() {
-    if (pointerMap.size === 1) {
-      const { x, y } = pointerMap.values().next().value as PointerPosition
-      const isDimensionSwitched = checkDimensionSwitched()
-      startX = isDimensionSwitched ? y : x
-      startY = isDimensionSwitched ? x : y
-    }
-
-    const currentState = store.getState()
-    lastPositionX = currentState.currentPositionX
-    lastPositionY = currentState.currentPositionY
-  }
-
   function _handleWheel(event: WheelEvent) {
     event.preventDefault()
 
@@ -216,8 +203,6 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     const delta = -clamp(event.deltaY, -ZOOM_DELTA, ZOOM_DELTA)
     processZoomWheel({ delta, x: event.clientX, y: event.clientY })
     updateZoom()
-
-    updatePositionsForSinglePointerFlow()
   }
 
   function _handlePointerMove(event: PointerEvent) {
@@ -413,7 +398,17 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       enabledScroll = true
     }
 
-    updatePositionsForSinglePointerFlow()
+    // Kick off the single pointer flow if there is only one pointer left
+    if (pointerMap.size === 1) {
+      const { x, y } = pointerMap.values().next().value as PointerPosition
+      const isDimensionSwitched = checkDimensionSwitched()
+      startX = isDimensionSwitched ? y : x
+      startY = isDimensionSwitched ? x : y
+    }
+
+    const currentState = store.getState()
+    lastPositionX = currentState.currentPositionX
+    lastPositionY = currentState.currentPositionY
   }
 
   function _handlePointerLeave(event: PointerEvent) {
