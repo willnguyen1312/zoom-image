@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.41.0
+
+### Minor Changes
+
+- [#356](https://github.com/willnguyen1312/zoom-image/pull/356)
+  [`9866e6b`](https://github.com/willnguyen1312/zoom-image/commit/9866e6bb967f0baddb19a8bf80ab7365560525ab) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - feat: add support for zooming with multiple fingers 🤘
+
 ## 0.40.2
 
 ### Patch Changes
