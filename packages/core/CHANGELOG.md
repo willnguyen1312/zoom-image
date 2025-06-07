@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.40.2
+
+### Patch Changes
+
+- [#354](https://github.com/willnguyen1312/zoom-image/pull/354)
+  [`37afd35`](https://github.com/willnguyen1312/zoom-image/commit/37afd35e703a67139155f7c645e5d95c0632948c) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - fix: Jumping around when zooming while panning
+
 ## 0.40.1
 
 ### Patch Changes
