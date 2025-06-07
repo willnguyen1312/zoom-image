@@ -357,7 +357,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
 
   function _handleTouchMove(event: TouchEvent) {
     if (finalOptions.shouldZoomOnSingleTouch()) event.preventDefault()
-    if (event.touches.length === 2) {
+    if (event.touches.length > 1) {
       event.preventDefault()
       const currentTwoPositions = [...event.touches].map((t) => ({ x: t.clientX, y: t.clientY })) as [
         PointerPosition,
