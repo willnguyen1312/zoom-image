@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.41.1
+
+### Patch Changes
+
+- [#360](https://github.com/willnguyen1312/zoom-image/pull/360)
+  [`a6f896f`](https://github.com/willnguyen1312/zoom-image/commit/a6f896ffb592caec66895299ffd91728972c6a1b) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - fix: zoom wheel on rotation 🚀
+
 ## 0.41.0
 
 ### Minor Changes
