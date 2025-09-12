@@ -81,7 +81,6 @@ const croppedImageClasses = computed(() => {
 
 const processZoom = async (zoomType: TabValue) => {
   croppedImage.value = ""
-  debugger
   await nextTick()
 
   if (zoomType === "hover") {
