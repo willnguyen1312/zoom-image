@@ -75,19 +75,14 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   const updateStateOnNewZoom = (currentZoom: number) => {
     const zoomPointX = container.clientWidth / 2
     const zoomPointY = container.clientHeight / 2
-    const isDimensionSwitched = checkDimensionSwitched()
     const currentState = store.getState()
-
-    const zoomX = isDimensionSwitched ? currentState.currentPositionY : currentState.currentPositionX
-    const zoomY = isDimensionSwitched ? currentState.currentPositionX : currentState.currentPositionY
-
-    const zoomTargetX = (zoomPointX - zoomX) / currentState.currentZoom
-    const zoomTargetY = (zoomPointY - zoomY) / currentState.currentZoom
+    const zoomTargetX = (zoomPointX - currentState.currentPositionX) / currentState.currentZoom
+    const zoomTargetY = (zoomPointY - currentState.currentPositionY) / currentState.currentZoom
 
     store.setState({
       currentZoom,
-      currentPositionX: calculatePositionX(-zoomTargetX * currentZoom + zoomPointX, currentZoom, isDimensionSwitched),
-      currentPositionY: calculatePositionY(-zoomTargetY * currentZoom + zoomPointY, currentZoom, isDimensionSwitched),
+      currentPositionX: calculatePositionX(-zoomTargetX * currentZoom + zoomPointX, currentZoom, false),
+      currentPositionY: calculatePositionY(-zoomTargetY * currentZoom + zoomPointY, currentZoom, false),
     })
   }
 
@@ -258,8 +253,8 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       }
 
       store.setState({
-        currentPositionX: calculatePositionX(lastPositionX + offsetX, currentZoom, isDimensionSwitched),
-        currentPositionY: calculatePositionY(lastPositionY + offsetY, currentZoom, isDimensionSwitched),
+        currentPositionX: calculatePositionX(lastPositionX + offsetX, currentZoom, false),
+        currentPositionY: calculatePositionY(lastPositionY + offsetY, currentZoom, false),
       })
       updateZoom()
     }
