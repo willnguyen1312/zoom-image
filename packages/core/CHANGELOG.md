@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.41.3
+
+### Patch Changes
+
+- [#365](https://github.com/willnguyen1312/zoom-image/pull/365)
+  [`830fa57`](https://github.com/willnguyen1312/zoom-image/commit/830fa573eb7b12182b77910daa599138e72eede6) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - fix: zoom on wheel prevents back and forward button 🚀
+
 ## 0.41.2
 
 ### Patch Changes
