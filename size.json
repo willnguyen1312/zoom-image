@@ -33,7 +33,7 @@
     "useZoomImageClick": "2.43 KB"
   },
   "@zoom-image/svelte": {
-    "useZoomImageWheel": "2.92 KB",
+    "useZoomImageWheel": "2.91 KB",
     "useZoomImageHover": "2.02 KB",
     "useZoomImageMove": "1.76 KB",
     "useZoomImageClick": "1.66 KB"
@@ -45,9 +45,9 @@
     "useZoomImageClick": "1.17 KB"
   },
   "@zoom-image/angular": {
-    "ZoomImageHoverService": "4.08 KB",
-    "ZoomImageMoveService": "4.08 KB",
-    "ZoomImageClickService": "4.07 KB",
+    "ZoomImageClickService": "4.08 KB",
+    "ZoomImageHoverService": "4.07 KB",
+    "ZoomImageMoveService": "4.07 KB",
     "ZoomImageWheelService": "4.07 KB"
   }
 }
