@@ -395,7 +395,6 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   }
 
   function _handlePointerUp(event: PointerEvent) {
-    event.preventDefault()
     pointerMap.delete(event.pointerId)
 
     // Reset the distance as soon as one of the pointers is released
