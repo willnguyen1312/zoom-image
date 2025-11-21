@@ -1,5 +1,13 @@
 # @zoom-image/angular
 
+## 0.3.0
+
+### Minor Changes
+
+- [#369](https://github.com/willnguyen1312/zoom-image/pull/369)
+  [`ba7ef5e`](https://github.com/willnguyen1312/zoom-image/commit/ba7ef5e8466a628a2e11d4fcce4135d522f1ecf3) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add Angular 20 support 🚀
+
 ## 0.2.32
 
 ### Patch Changes
