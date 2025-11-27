@@ -1,5 +1,13 @@
 # @zoom-image/core
 
+## 0.41.4
+
+### Patch Changes
+
+- [#371](https://github.com/willnguyen1312/zoom-image/pull/371)
+  [`16c7116`](https://github.com/willnguyen1312/zoom-image/commit/16c7116849b5c615373566d381dcf27260376073) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix zoom on move for Firefox 🦊
+
 ## 0.41.3
 
 ### Patch Changes
