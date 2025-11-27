@@ -50,7 +50,7 @@ export function createZoomImageMove(container: HTMLElement, options: ZoomImageMo
   }
 
   const checkValidPointer = (event: PointerEvent) => {
-    return activePointerId && event.pointerId === activePointerId
+    return event.pointerId === activePointerId
   }
 
   function handlePointerEnter(event: PointerEvent) {
