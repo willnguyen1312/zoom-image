@@ -42,6 +42,10 @@ pnpm install
 pnpm build
 ```
 
+## PR contribution
+
+Please run `pnpm changeset` and input your change before open PR
+
 ## Commands
 
 Please change all versions from "latest" to "workspace:\*" inside the example project you want to start, run pnpm
