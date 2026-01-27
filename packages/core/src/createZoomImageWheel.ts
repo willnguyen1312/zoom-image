@@ -1,6 +1,6 @@
 import { createStore } from "@namnode/store"
 import type { PointerPosition } from "./utils"
-import { clamp, computeZoomGesture, disableScroll, enableScroll, getSourceImage, makeMaybeCallFunction } from "./utils"
+import { clamp, computeZoomGesture, disableScroll, enableScroll, makeMaybeCallFunction } from "./utils"
 
 export type ZoomImageWheelOptions = {
   maxZoom?: number
@@ -8,6 +8,7 @@ export type ZoomImageWheelOptions = {
   dblTapAnimationDuration?: number
   initialState?: Partial<ZoomImageWheelStateUpdate>
   shouldZoomOnSingleTouch?: () => boolean
+  zoomTarget?: HTMLElement | null
 }
 
 /* The delta values are not consistent across browsers.
@@ -28,6 +29,7 @@ export type ZoomImageWheelStateUpdate = Partial<{
   enable: boolean
   currentZoom: number
   currentRotation: number
+  zoomTarget: HTMLElement | null
 }>
 
 const defaultInitialState: ZoomImageWheelState = {
@@ -41,13 +43,13 @@ const defaultInitialState: ZoomImageWheelState = {
 const defaultShouldZoomOnSingleTouch = () => true
 
 export function createZoomImageWheel(container: HTMLElement, options: ZoomImageWheelOptions = {}) {
-  const sourceImgElement = getSourceImage(container)
   const finalOptions: Required<ZoomImageWheelOptions> = {
     maxZoom: options.maxZoom || 4,
     wheelZoomRatio: options.wheelZoomRatio || 0.1,
     dblTapAnimationDuration: options.dblTapAnimationDuration || 300,
     initialState: { ...defaultInitialState, ...options.initialState },
     shouldZoomOnSingleTouch: options.shouldZoomOnSingleTouch || defaultShouldZoomOnSingleTouch,
+    zoomTarget: options.zoomTarget === undefined ? container.querySelector("img") : options.zoomTarget,
   }
 
   const store = createStore<ZoomImageWheelState>(finalOptions.initialState as ZoomImageWheelState)
@@ -97,15 +99,23 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
   let startY = 0
 
   container.style.overflow = "hidden"
-  sourceImgElement.style.transformOrigin = "0 0"
+
+  let zoomTarget = finalOptions.zoomTarget
 
   function updateZoom() {
     const currentState = store.getState()
-    sourceImgElement.style.transform = `translate(${currentState.currentPositionX}px, ${currentState.currentPositionY}px) scale(${currentState.currentZoom})`
-    container.style.rotate = `${currentState.currentRotation}deg`
+    if (zoomTarget) {
+      zoomTarget.style.transformOrigin = "0 0"
+      zoomTarget.style.transform = `translate(${currentState.currentPositionX}px, ${currentState.currentPositionY}px) scale(${currentState.currentZoom})`
+      container.style.rotate = `${currentState.currentRotation}deg`
+    }
   }
 
   function setState(newState: ZoomImageWheelStateUpdate) {
+    if ("zoomTarget" in newState) {
+      zoomTarget = newState.zoomTarget ?? null
+    }
+
     store.batch(() => {
       const currentState = store.getState()
       if (typeof newState.enable === "boolean" && newState.enable !== currentState.enable) {
