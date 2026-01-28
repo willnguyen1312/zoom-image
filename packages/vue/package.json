@@ -1,6 +1,6 @@
 {
   "name": "@zoom-image/vue",
-  "version": "0.2.31",
+  "version": "0.2.32",
   "description": "Adapter of zoom image core for Vue",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "license": "MIT",

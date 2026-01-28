@@ -1,5 +1,14 @@
 # @zoom-image/core
 
+## 0.42.0
+
+### Minor Changes
+
+- [#375](https://github.com/willnguyen1312/zoom-image/pull/375)
+  [`fa35b51`](https://github.com/willnguyen1312/zoom-image/commit/fa35b511937d7fe76c94c78564e2726784658d47) Thanks
+  [@midzelis](https://github.com/midzelis)! - Support custom zoom target container with dynamic element updates via
+  state
+
 ## 0.41.4
 
 ### Patch Changes
