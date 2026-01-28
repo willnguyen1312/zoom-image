@@ -28,9 +28,10 @@ type ZoomImageWheelState = {
 
 type Listener = (state: ZoomImageWheelState) => void
 type ZoomImageWheelStateUpdate = {
-  currentZoom: number
-  enabled: boolean
+  enable: boolean
   currentRotation: number
+  currentZoom: number
+  zoomTarget: HTMLElement | null
 }
 
 type ZoomImageWheelOptions = {
@@ -49,6 +50,9 @@ type ZoomImageWheelOptions = {
 
   // Predicate function to determine if zoom should be triggered on a single touch action
   shouldZoomOnSingleTouch?: () => boolean
+
+  // Zoom target element, default is the closest image element inside a container
+  zoomTarget?: HTMLElement | null
 }
 
 function createZoomImageWheel(
