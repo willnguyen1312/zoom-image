@@ -278,7 +278,7 @@ importers:
         version: 5.3.3
       unocss:
         specifier: ^0.58.5
-        version: 0.58.9(postcss@8.5.3)(rollup@4.52.3)(vite@7.1.11(@types/node@22.14.1)(jiti@2.4.2)(less@4.3.0)(sass@1.90.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))
+        version: 0.58.9(postcss@8.5.6)(rollup@4.52.3)(vite@7.1.11(@types/node@22.14.1)(jiti@2.4.2)(less@4.3.0)(sass@1.90.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))
 
   examples/with-solid:
     dependencies:
@@ -629,7 +629,7 @@ importers:
         specifier: workspace:*
         version: link:../core
       react:
-        specifier: ^18.0.0
+        specifier: ^18.0.0 || ^19.0.0
         version: 18.3.1
     devDependencies:
       "@types/react":
@@ -13464,16 +13464,6 @@ snapshots:
       magic-string: 0.30.17
       postcss: 8.4.35
 
-  "@unocss/postcss@0.58.9(postcss@8.5.3)":
-    dependencies:
-      "@unocss/config": 0.58.9
-      "@unocss/core": 0.58.9
-      "@unocss/rule-utils": 0.58.9
-      css-tree: 2.3.1
-      fast-glob: 3.3.3
-      magic-string: 0.30.17
-      postcss: 8.5.3
-
   "@unocss/postcss@0.58.9(postcss@8.5.6)":
     dependencies:
       "@unocss/config": 0.58.9
@@ -19359,35 +19349,6 @@ snapshots:
       - rollup
       - supports-color
 
-  unocss@0.58.9(postcss@8.5.3)(rollup@4.52.3)(vite@7.1.11(@types/node@22.14.1)(jiti@2.4.2)(less@4.3.0)(sass@1.90.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1)):
-    dependencies:
-      "@unocss/astro": 0.58.9(rollup@4.52.3)(vite@7.1.11(@types/node@22.14.1)(jiti@2.4.2)(less@4.3.0)(sass@1.90.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))
-      "@unocss/cli": 0.58.9(rollup@4.52.3)
-      "@unocss/core": 0.58.9
-      "@unocss/extractor-arbitrary-variants": 0.58.9
-      "@unocss/postcss": 0.58.9(postcss@8.5.3)
-      "@unocss/preset-attributify": 0.58.9
-      "@unocss/preset-icons": 0.58.9
-      "@unocss/preset-mini": 0.58.9
-      "@unocss/preset-tagify": 0.58.9
-      "@unocss/preset-typography": 0.58.9
-      "@unocss/preset-uno": 0.58.9
-      "@unocss/preset-web-fonts": 0.58.9
-      "@unocss/preset-wind": 0.58.9
-      "@unocss/reset": 0.58.9
-      "@unocss/transformer-attributify-jsx": 0.58.9
-      "@unocss/transformer-attributify-jsx-babel": 0.58.9
-      "@unocss/transformer-compile-class": 0.58.9
-      "@unocss/transformer-directives": 0.58.9
-      "@unocss/transformer-variant-group": 0.58.9
-      "@unocss/vite": 0.58.9(rollup@4.52.3)(vite@7.1.11(@types/node@22.14.1)(jiti@2.4.2)(less@4.3.0)(sass@1.90.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))
-    optionalDependencies:
-      vite: 7.1.11(@types/node@22.14.1)(jiti@2.4.2)(less@4.3.0)(sass@1.90.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1)
-    transitivePeerDependencies:
-      - postcss
-      - rollup
-      - supports-color
-
   unocss@0.58.9(postcss@8.5.6)(rollup@3.29.5)(vite@7.1.11(@types/node@22.14.1)(jiti@2.4.2)(less@4.3.0)(sass@1.90.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1)):
     dependencies:
       "@unocss/astro": 0.58.9(rollup@3.29.5)(vite@7.1.11(@types/node@22.14.1)(jiti@2.4.2)(less@4.3.0)(sass@1.90.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))
@@ -19470,6 +19431,35 @@ snapshots:
       "@unocss/vite": 0.58.9(rollup@4.52.3)(vite@4.5.13(@types/node@22.14.1)(less@4.3.0)(sass@1.90.0)(terser@5.39.0))
     optionalDependencies:
       vite: 4.5.13(@types/node@22.14.1)(less@4.3.0)(sass@1.90.0)(terser@5.39.0)
+    transitivePeerDependencies:
+      - postcss
+      - rollup
+      - supports-color
+
+  unocss@0.58.9(postcss@8.5.6)(rollup@4.52.3)(vite@7.1.11(@types/node@22.14.1)(jiti@2.4.2)(less@4.3.0)(sass@1.90.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1)):
+    dependencies:
+      "@unocss/astro": 0.58.9(rollup@4.52.3)(vite@7.1.11(@types/node@22.14.1)(jiti@2.4.2)(less@4.3.0)(sass@1.90.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))
+      "@unocss/cli": 0.58.9(rollup@4.52.3)
+      "@unocss/core": 0.58.9
+      "@unocss/extractor-arbitrary-variants": 0.58.9
+      "@unocss/postcss": 0.58.9(postcss@8.5.6)
+      "@unocss/preset-attributify": 0.58.9
+      "@unocss/preset-icons": 0.58.9
+      "@unocss/preset-mini": 0.58.9
+      "@unocss/preset-tagify": 0.58.9
+      "@unocss/preset-typography": 0.58.9
+      "@unocss/preset-uno": 0.58.9
+      "@unocss/preset-web-fonts": 0.58.9
+      "@unocss/preset-wind": 0.58.9
+      "@unocss/reset": 0.58.9
+      "@unocss/transformer-attributify-jsx": 0.58.9
+      "@unocss/transformer-attributify-jsx-babel": 0.58.9
+      "@unocss/transformer-compile-class": 0.58.9
+      "@unocss/transformer-directives": 0.58.9
+      "@unocss/transformer-variant-group": 0.58.9
+      "@unocss/vite": 0.58.9(rollup@4.52.3)(vite@7.1.11(@types/node@22.14.1)(jiti@2.4.2)(less@4.3.0)(sass@1.90.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))
+    optionalDependencies:
+      vite: 7.1.11(@types/node@22.14.1)(jiti@2.4.2)(less@4.3.0)(sass@1.90.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1)
     transitivePeerDependencies:
       - postcss
       - rollup
