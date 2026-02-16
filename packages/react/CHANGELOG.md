@@ -1,5 +1,13 @@
 # @zoom-image/react
 
+## 0.6.0
+
+### Minor Changes
+
+- [#380](https://github.com/willnguyen1312/zoom-image/pull/380)
+  [`6cc95a9`](https://github.com/willnguyen1312/zoom-image/commit/6cc95a946c62ecff314833b5df110075fe4c857c) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add support for React 19 🚀
+
 ## 0.5.10
 
 ### Patch Changes
