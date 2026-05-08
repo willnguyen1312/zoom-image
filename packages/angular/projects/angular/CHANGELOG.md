@@ -1,5 +1,13 @@
 # @zoom-image/angular
 
+## 0.4.0
+
+### Minor Changes
+
+- [#383](https://github.com/willnguyen1312/zoom-image/pull/383)
+  [`0b5949a`](https://github.com/willnguyen1312/zoom-image/commit/0b5949a087dd022887aab5eaed90cc5db1bcd082) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Add Angular 21 support 🚀
+
 ## 0.3.2
 
 ### Patch Changes
