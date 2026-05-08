@@ -478,10 +478,10 @@ importers:
   packages/angular/projects/angular:
     dependencies:
       "@angular/common":
-        specifier: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0
+        specifier: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
         version: 20.3.13(@angular/core@20.3.13(@angular/compiler@20.3.13)(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2)
       "@angular/core":
-        specifier: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0
+        specifier: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
         version: 20.3.13(@angular/compiler@20.3.13)(rxjs@7.8.2)(zone.js@0.15.0)
       "@zoom-image/core":
         specifier: workspace:*
