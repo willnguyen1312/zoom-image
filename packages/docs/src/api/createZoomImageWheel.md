@@ -38,6 +38,10 @@ type ZoomImageWheelOptions = {
   // Maximum zoom scale, default is 4
   maxZoom?: number
 
+  // Upper bound applied to the delta of a wheel event, default is 0.5
+  // Lower it to zoom slower on each scroll, raise it to zoom faster
+  maxWheelDelta?: number
+
   // Zoom ratio when scrolling, default is 0.1
   wheelZoomRatio?: number
 

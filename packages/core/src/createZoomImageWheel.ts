@@ -4,6 +4,7 @@ import { clamp, computeZoomGesture, disableScroll, enableScroll, makeMaybeCallFu
 
 export type ZoomImageWheelOptions = {
   maxZoom?: number
+  maxWheelDelta?: number
   wheelZoomRatio?: number
   dblTapAnimationDuration?: number
   initialState?: Partial<ZoomImageWheelStateUpdate>
@@ -15,7 +16,7 @@ export type ZoomImageWheelOptions = {
  * We need to normalize them to a consistent value.
  * https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaY
  */
-const ZOOM_DELTA = 0.5
+const DEFAULT_MAX_WHEEL_DELTA = 0.5
 
 export type ZoomImageWheelState = {
   currentRotation: number
@@ -45,6 +46,7 @@ const defaultShouldZoomOnSingleTouch = () => true
 export function createZoomImageWheel(container: HTMLElement, options: ZoomImageWheelOptions = {}) {
   const finalOptions: Required<ZoomImageWheelOptions> = {
     maxZoom: options.maxZoom || 4,
+    maxWheelDelta: options.maxWheelDelta || DEFAULT_MAX_WHEEL_DELTA,
     wheelZoomRatio: options.wheelZoomRatio || 0.1,
     dblTapAnimationDuration: options.dblTapAnimationDuration || 300,
     initialState: { ...defaultInitialState, ...options.initialState },
@@ -218,7 +220,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       return
     }
 
-    const delta = -clamp(event.deltaY, -ZOOM_DELTA, ZOOM_DELTA)
+    const delta = -clamp(event.deltaY, -finalOptions.maxWheelDelta, finalOptions.maxWheelDelta)
     processZoomWheel({ delta, x: event.clientX, y: event.clientY })
     updateZoom()
 
