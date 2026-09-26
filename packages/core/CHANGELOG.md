@@ -1,5 +1,16 @@
 # @zoom-image/core
 
+## 0.43.0
+
+### Minor Changes
+
+- [`1db1ff1`](https://github.com/willnguyen1312/zoom-image/commit/1db1ff1b12a858a0cd2c1a233159aadc653561fb) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Expose a `maxWheelDelta` option on `createZoomImageWheel` to
+  configure how far a single wheel event zooms
+
+  The wheel delta was previously clamped to a hardcoded `0.5`. That value is now the default of the new `maxWheelDelta`
+  option, so consumers can slow zooming down or speed it up to suit their input devices.
+
 ## 0.42.0
 
 ### Minor Changes
