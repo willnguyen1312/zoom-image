@@ -6,6 +6,7 @@ export type ZoomImageWheelOptions = {
   maxZoom?: number
   maxWheelDelta?: number
   wheelZoomRatio?: number
+  pinchZoomRatio?: number
   dblTapAnimationDuration?: number
   initialState?: Partial<ZoomImageWheelStateUpdate>
   shouldZoomOnSingleTouch?: () => boolean
@@ -48,6 +49,7 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
     maxZoom: options.maxZoom || 4,
     maxWheelDelta: options.maxWheelDelta || DEFAULT_MAX_WHEEL_DELTA,
     wheelZoomRatio: options.wheelZoomRatio || 0.1,
+    pinchZoomRatio: options.pinchZoomRatio || options.wheelZoomRatio || 0.1,
     dblTapAnimationDuration: options.dblTapAnimationDuration || 300,
     initialState: { ...defaultInitialState, ...options.initialState },
     shouldZoomOnSingleTouch: options.shouldZoomOnSingleTouch || defaultShouldZoomOnSingleTouch,
@@ -220,7 +222,10 @@ export function createZoomImageWheel(container: HTMLElement, options: ZoomImageW
       return
     }
 
-    const delta = -clamp(event.deltaY, -finalOptions.maxWheelDelta, finalOptions.maxWheelDelta)
+    const ratio = event.ctrlKey ? finalOptions.pinchZoomRatio : finalOptions.wheelZoomRatio
+    const delta =
+      (-clamp(event.deltaY, -finalOptions.maxWheelDelta, finalOptions.maxWheelDelta) * ratio) /
+      finalOptions.wheelZoomRatio
     processZoomWheel({ delta, x: event.clientX, y: event.clientY })
     updateZoom()
 
