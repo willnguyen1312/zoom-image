@@ -1,5 +1,14 @@
 # @zoom-image/core
 
+## 0.43.1
+
+### Patch Changes
+
+- [#387](https://github.com/willnguyen1312/zoom-image/pull/387)
+  [`9ce0480`](https://github.com/willnguyen1312/zoom-image/commit/9ce0480b60b4fd59fd6c7dc2cc3b7199dabd6a0a) Thanks
+  [@medienbaecker](https://github.com/medienbaecker)! - Add `pinchZoomRatio` to `createZoomImageWheel`, used when a
+  wheel event carries `ctrlKey`, which is how browsers deliver a trackpad pinch.
+
 ## 0.43.0
 
 ### Minor Changes
