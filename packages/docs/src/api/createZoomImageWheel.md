@@ -45,6 +45,9 @@ type ZoomImageWheelOptions = {
   // Zoom ratio when scrolling, default is 0.1
   wheelZoomRatio?: number
 
+  // Zoom ratio for a trackpad pinch, which arrives as ctrl + wheel, default is wheelZoomRatio
+  pinchZoomRatio?: number
+
   // Animation duration for zooming on double tap, default is 300 ms
   dblTapAnimationDuration?: number
 
