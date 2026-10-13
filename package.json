@@ -36,6 +36,7 @@
     "preview:docs": "pnpm --filter=docs preview",
     "react": "pnpm --filter=@zoom-image/react",
     "release": "pnpm check && changeset version && changeset publish",
+    "release:untagged": "esno scripts/release-untagged.ts",
     "size": "esno scripts/size.ts",
     "start-angular": "turbo run dev --filter=with-angular...",
     "start-docs": "turbo run dev --filter=docs...",
